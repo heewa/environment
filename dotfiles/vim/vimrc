@@ -28,17 +28,30 @@ set nofoldenable    " disable folding
 "nmap <F4> :cn<CR>     " next error
 
 " Jump to first line of pylint error.
-map <silent> <F5>
-    \ :echo 'running pylint...'<CR>
-    \ :let pylinterr = matchstr(system('pylint -E --disable=E1103,E1101 --msg-template={line}:{msg} --output-format=text ' . expand('%')), '\n[0-9]\+.*\n', 0, 0)<CR>
-    \ :echo pylinterr<CR>
-    \ :if len(pylinterr)<CR>
-        \ :exe matchstr(pylinterr, '\n[0-9]\+', 0, 0)<CR>
-        \ :redraw<CR>
-        \ :echomsg matchstr(pylinterr, ':.*')<CR>
-    \ :else<CR>
-        \ :echo <CR>
-    \ :endif<CR>
+function! FirstPylintError()
+    echo 'running pylint...'
+
+    " Run pylint with parsable output, grep for just relevant lines, and
+    " get 1st.
+    let all_errors = split(system(
+        \ 'pylint -E --disable=E1103,E1101 --msg-template={line}:{msg} ' .
+        \ '--output-format=text ' . expand('%')), '\n')
+    call filter(all_errors, 'v:val !~ ''\*\{6,}''')
+
+    if len(all_errors)
+        " Go to line of error.
+        exe matchstr(all_errors[0], '^[0-9]\+', 0, 0)
+
+        " Also show the error itself, but this time as a msg, so it stays in
+        " message history.
+        redraw
+        echomsg split(all_errors[0], ':')[1] . ' (' . len(all_errors) . ' errors total)'
+    else
+        redraw
+        echo len(all_errors) . ' errors'
+    endif
+endfunction
+map <silent> <F5> :call FirstPylintError()<CR>
 
 " Search highlighting (off by default)
 map <F2> :set hlsearch!<CR> 
