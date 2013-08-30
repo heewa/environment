@@ -1,0 +1,10 @@
+.git/
+.*.swp
+.*.swo
+*.[ob]
+*.pyc
+.DS_Store
+.swp
+cscope.in.out
+cscope.out
+cscope.po.out

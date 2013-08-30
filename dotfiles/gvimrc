@@ -1,0 +1,13 @@
+set go+=c
+set go-=m
+set go-=T
+set bg=dark
+if &background == "dark"
+    hi normal guibg=black
+endif
+set gcr=a:blinkon0
+colorscheme heewa
+
+macmenu &File.New\ Tab key=<nop>
+map <D-t> :CommandT<CR>
+
