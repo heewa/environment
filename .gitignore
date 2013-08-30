@@ -1,0 +1,8 @@
+*.DS_Store
+
+# editor temp file
+.*.swp
+*~
+
+# Git
+.gitignore
