@@ -24,8 +24,8 @@ colorscheme heewa
 set nofoldenable    " disable folding
 
 " Building and errors
-"nmap <F3> :cp<CR>     " previous error
-"nmap <F4> :cn<CR>     " next error
+nmap <F5> :cprev<CR>     " previous error
+nmap <F6> :cnext<CR>     " next error
 
 " Jump to first line of pylint error.
 function! FirstPylintError()
@@ -34,24 +34,29 @@ function! FirstPylintError()
     " Run pylint with parsable output, grep for just relevant lines, and
     " get 1st.
     let all_errors = split(system(
-        \ 'pylint -E --disable=E1103,E1101 --msg-template={line}:{msg} ' .
+        \ 'pylint -E --disable=E1103,E1101 ' .
+        \ '--msg-template="{path}:{line}:{msg_id} {msg}" ' .
         \ '--output-format=text ' . expand('%')), '\n')
-    call filter(all_errors, 'v:val !~ ''\*\{6,}''')
+    call filter(all_errors, 'v:val =~ ''[0-9]\+''')
 
     if len(all_errors)
+        " Set quickfix buffer for these errors.
+        cexpr all_errors
+
         " Go to line of error.
-        exe matchstr(all_errors[0], '^[0-9]\+', 0, 0)
+        "exe matchstr(all_errors[0], '^[0-9]\+', 0, 0)
+        exe split(all_errors[0], ':')[1]
 
         " Also show the error itself, but this time as a msg, so it stays in
         " message history.
         redraw
-        echomsg split(all_errors[0], ':')[1] . ' (' . len(all_errors) . ' errors total)'
+        echomsg split(all_errors[0], ':')[2] . ' (' . len(all_errors) . ' errors total)'
     else
         redraw
         echo len(all_errors) . ' errors'
     endif
 endfunction
-map <silent> <F5> :call FirstPylintError()<CR>
+nmap <silent> <F4> :call FirstPylintError()<CR>
 
 " Search highlighting (off by default)
 map <F2> :set hlsearch!<CR> 
