@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/heewa/src/nomi/web'
+let g:netrw_dirhist_2='/Users/heewa/src/nomi'
+let g:netrw_dirhist_3='/Users/heewa/src/nomi/data'
+let g:netrw_dirhist_4='/Users/heewa/src/nomi/data/api'
+let g:netrw_dirhist_5='/Users/heewa/Dropbox/Documents/LinuxEnvironment/vim/bundle/syntastic'
+let g:netrw_dirhist_6='/Users/heewa/src/nomi/ops/salt/boxes/web_db'
+let g:netrw_dirhist_7='/Users/heewa/src/nomi'

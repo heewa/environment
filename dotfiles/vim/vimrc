@@ -1,0 +1,102 @@
+set nocompatible   " Disable vi-compatibility (needed for fancy plugins)
+set laststatus=2   " Always whow the statusline
+set nohls
+set expandtab      " No tabs in output file
+set tabstop=4      " For tabbing
+set shiftwidth=4   
+"set smartindent   " Don't use smartindent, it's bad for non-c languages. Instead, let it use whatever the filetype specifies.
+set cindent        " Maybe use this? Not quite sure yet. Python files don't do well automatically.
+set autoindent
+set showmatch
+set ruler          " Shows line,column # at bottom
+set showcmd        " Display incomplete command
+set backspace=2    " Backspace in insert mode
+set whichwrap+=,h,l   " Cursor,backspace keys wrap too
+set showmode
+set wildmode=longest,list,full   " better tab complete menu
+set wildmenu                     " better tab complete menu
+set wildignore=*.pyc,*.o,*.obj,*.bak,*.exe  " tab complete ignores these!
+set ignorecase
+syntax on
+filetype on
+au BufNewFile,BufRead *.handlebars set filetype=htmldjango
+colorscheme heewa
+set nofoldenable    " disable folding
+
+" Building and errors
+"nmap <F3> :cp<CR>     " previous error
+"nmap <F4> :cn<CR>     " next error
+
+" Jump to first line of pylint error.
+"map <F5> :exe matchstr(system('pylint -E --disable=E1103,E1101 --msg-template={line} --output-format=text ' . expand('%')), '\n[0-9]\+', 0, 0)<CR>
+map <silent> <F5> :echo 'running pylint...'<CR> :let pylinterr = matchstr(system('pylint -E --disable=E1103,E1101 --msg-template={line}:{msg} --output-format=text ' . expand('%')), '\n[0-9]\+.*\n', 0, 0)<CR> :if len(pylinterr)<CR> :exe matchstr(pylinterr, '\n[0-9]\+', 0, 0)<CR> :echohl matchstr(pylinterr, ':.*')<CR> :else<CR> :echo <CR> :endif<CR>
+"map <F5> :exe matchstr(system('echo 34'), '^[0-9]\+', 0, 0)<CR>
+"map <F5> :let @a = system('echo a 34 b')<CR>:exe matchstr(@a, '[0-9]\+', 0, 0)<CR>:echom @a<CR>
+
+
+" Search highlighting (off by default)
+map <F2> :set hlsearch!<CR> 
+imap <F2> <ESC>:set hlsearch!<CR>a 
+
+" Grep for word under cursor (ignoring binary files).
+nnoremap <silent> <F3> :grep -I <cword> * <CR> <CR>
+
+" use gi + char to insert char and remain in command mode
+map gi i<space><esc>r
+
+" Syntax highlighting and some other stuff for Code files.
+autocmd BufRead * set formatoptions=tcql nocindent comments&
+autocmd BufRead *.java,*.c,*.h,*.cc set formatoptions=ctroq cindent comments=sr:/**,mb:*,elx:*/,sr:/*,mb:*,elx:*/,://
+
+" Filename as title in screen
+autocmd BufEnter * let &titlestring = expand("%:t") 
+"let &titlestring = expand("%:t")
+
+if &term == "screen"
+  set t_ts=k
+  set t_fs=\
+endif
+
+if &term == "screen" || &term == "xterm"
+  set title
+  "set notitle
+  set titleold=""
+endif
+
+" For cscope
+set splitright  " So that vertical splits start on the right
+
+" My maps
+
+" Toggle highlighing of word under cursor without searching, though it's now
+" the search term, so you can use 'n' and 'N' to jump to matches.
+nnoremap <F10> :set invhls<CR>:let @/="<C-r><C-w>"<CR>/<BS>
+
+" Open file on another machine.
+nnoremap \g :exec ":silent ! ssh $(echo heewa-dev1 -t DISPLAY=:0.0 geany $(echo $(pwd)/% \| sed -e \"s:$HOME/src:~/dev2-src:\") +" line(".") "\| sed -e 's:+ :+:')"
+
+" Pathogen, for easier plugins.  https://github.com/tpope/vim-pathogen
+call pathogen#infect()
+
+" Turn of syntastic checking a file on write (slows down writes).
+"let g:syntastic_check_on_wq=0
+" Turn off active syntastic checking by default.
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': []}
+" Python checking.
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_pylint_args = '-f parseable -r n -i y -E -d E1103'
+" Symbols for the gutter on errors/warnings.
+let g:syntastic_error_symbol = 'XX'
+let g:syntastic_style_error_symbol = 'sx'
+highlight SyntasticErrorSign ctermfg=white ctermbg=red
+let g:syntastic_warning_symbol = 'ww'
+let g:syntastic_style_warning_symbol = 'sw'
+" Only do things on errors.
+"let g:syntastic_quiet_warnings=1
+
+" Plugin list, to install on a new system (cuz it doesn't come through dropbox/git):
+" * powerline
+" * command-t
+" * a.vim - alternating between .c and .h files
+" * pathogen - easier plugin installs
+" * syntastic - syntax checking https://github.com/scrooloose/syntastic
