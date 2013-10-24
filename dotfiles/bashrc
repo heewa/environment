@@ -16,15 +16,16 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
 # set a fancy prompt (non-color, unless we know we "want" color)
+color_prompt="\[\033[01;34m\]\T \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 case "$TERM" in
 xterm-color|xterm-256color)
-    PS1='\[\033[01;34m\]\T \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1=$color_prompt
     ;;
 xterm)
-    PS1='\[\033[01;34m\]\T \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1=$color_prompt
     ;;
 screen)
-    PS1='\[\033[01;34m\]\T \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1=$color_prompt
     ;;
 *)
     PS1='\T \u@\h:\w\$ '
@@ -116,7 +117,6 @@ export CLICOLOR=1;
 
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 
 ##
 # Android SDK Development
