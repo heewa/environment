@@ -9,7 +9,7 @@ ln -vsf $PWD/dotfiles/gitconfig ~/.gitconfig
 ln -vsf $PWD/dotfiles/bashrc ~/.bashrc
 ln -vsf $PWD/dotfiles/profile ~/.profile
 
-for D in src build tmp scripts; do
+for D in src build tmp scripts .bash; do
     mkdir -v $HOME/$D
 done
 
@@ -28,3 +28,6 @@ for DBoxDir in Documents; do
         echo "~/$DBoxDir already points to Dropbox"
     fi
 done
+
+# git aware prompt
+git clone git://github.com/jimeh/git-aware-prompt.git $HOME/.bash/git-aware-prompt
