@@ -1,6 +1,7 @@
 [alias]
     ls = log --color --graph --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
     ll = log --color --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat --date=relative
+    lstags = log --date-order --graph --tags --simplify-by-decoration --pretty=format:'%ai %h %d'
 [color]
 	ui = true
 [user]
