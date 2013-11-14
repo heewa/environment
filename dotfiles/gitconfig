@@ -10,3 +10,5 @@
 	email = heewa.b@gmail.com
 [merge]
 	conflictstyle = diff3
+[push]
+	default = tracking
