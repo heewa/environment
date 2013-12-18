@@ -23,6 +23,9 @@ au BufNewFile,BufRead *.handlebars set filetype=htmldjango
 colorscheme heewa
 set nofoldenable    " disable folding
 
+" Show trailing whitespace.
+match ErrorMsg '\s\+$'
+
 " Building and errors
 nmap <F5> :cprev<CR>     " previous error
 nmap <F6> :cnext<CR>     " next error
