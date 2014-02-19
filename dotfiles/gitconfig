@@ -12,3 +12,8 @@
 	conflictstyle = diff3
 [push]
 	default = tracking
+
+# WTF is this? I don't remember putting this here:
+#[filter "media"]
+#	clean = git-media-clean %f
+#	smudge = git-media-smudge %f
