@@ -40,7 +40,7 @@ function! FirstPylintError()
         \ 'pylint -E --disable=E1103,E1101 ' .
         \ '--msg-template="{path}:{line}:{msg_id} {msg}" ' .
         \ '--output-format=text ' . expand('%')), '\n')
-    call filter(all_errors, 'v:val =~ ''[0-9]\+''')
+    call filter(all_errors, 'v:val =~ ''\.py:[0-9]\+''')
 
     if len(all_errors)
         " Set quickfix buffer for these errors.
