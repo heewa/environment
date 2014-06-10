@@ -19,7 +19,7 @@ export GITAWAREPROMPT="$HOME/.bash/git-aware-prompt"
 source $GITAWAREPROMPT/main.sh
 
 # set a fancy prompt (non-color, unless we know we "want" color)
-color_prompt="\[$bldgrn\]\u@\h\[$txtrst\]:\[$bldblu\]\w\[$txtrst\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
+color_prompt="\[$bldgrn\]\u@\h\[$txtrst\]:\[$bldblu\]\w\[$txtrst\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]"
 case "$TERM" in
 xterm-color|xterm-256color)
     export PS1="$color_prompt"
@@ -31,9 +31,29 @@ screen)
     export PS1="$color_prompt"
     ;;
 *)
-    export PS1='\u@\h:\w\$ '
+    export PS1='\u@\h:\w'
     ;;
 esac
+
+rand() {
+    printf $((  $1 *  RANDOM  / 32767   ))
+}
+
+rand_element () {
+    local -a th=("$@")
+    unset th[0]
+    printf $'%s\n' "${th[$(($(rand "${#th[*]}")+1))]}"
+}
+
+# Emoji in prompt!!!
+if [ $(uname -s) == "Darwin" ]; then
+    starts="🌊 ⚡️ ☁️ ⭐️ 🌚 🌝 🌞 🌜 🌍 🌵 🌴 🍄 🎃 💻 📺 🛀 🚽 🛁 🎨 🎬 🎤 🎧 🎶 🎵 👾 🎲 ⚽️ 🏀 🏈 🚴 🏇 🏊 🏄 🏂 ☕️ 🍵 🍺 🍷 🍸 🍕 🍔 🍟 🍣 🍱 🍙 🍜 🍳 🍦 🍧 🍰 🍭 🍒 🍋 🍉 🍑 🍌 🍍 🍆 🏩 🌇 🌆 🏯 🏰 ⛺️ 🌄 🌅 🗽 🌃 🌉 🎢 ⛵️ 🚀 ✈️ 🚁 🚎 🚌 🚕 🚛 🚲 "
+    endings="🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐗 🐵 🐒 🐴 🐑 🐘 🐼 🐧 🐦 🐤 🐥 🐣 🐔 🐍 🐢 🐛 🐝 🐜 🐞 🐌 🐙 🐠 🐟 🐬 🐳 🐋 🐄 🐏 🐀 🐃 🐅 🐇 🐉 🐎 🐐 🐓 🐕 🐖 🐁 🐂 🐲 🐡 🐊 🐫 🐪 🐆 🐈 🐩 ⛄️ 🙈 🙉 🙊 💀 👽 💩 👾 👻 🎅"
+
+    export PS1="$(rand_element $starts) $PS1$(rand_element $endings) "
+else
+    export PS1="$PS1\$ "
+fi
 
 #
 # Include private defs (not in main file cuz this one's in my public github).
