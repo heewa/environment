@@ -127,3 +127,12 @@ let g:syntastic_style_warning_symbol = 'sw'
 " * a.vim - alternating between .c and .h files
 " * pathogen - easier plugin installs
 " * syntastic - syntax checking https://github.com/scrooloose/syntastic
+
+" Go syntax highlighting:
+" Some Linux distributions set filetype in /etc/vimrc.
+" Clear filetype flags before changing runtimepath to force Vim to reload them.
+filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
+filetype plugin indent on
+syntax on
