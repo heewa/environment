@@ -105,7 +105,7 @@ for F in "$(ls ~/Dropbox/Documents/LinuxEnvironment/bash_completion/*.bash)"; do
 done
 
 export EDITOR=vim
-export PATH=~/bin:~/scripts:/usr/local/sbin:/usr/local/bin:$PATH:/build/trees/bin
+export PATH=~/bin:~/scripts:/usr/local/sbin:/usr/local/bin:$HOME/.rbenv/bin:$PATH:/build/trees/bin
 
 alias fin="if [ \$? = 0 ]; then ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send 'Done' '$USER@$HOSTNAME' -i face-smile -t 1000000\"; true; else ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send --urgency=critical 'Done FAILED' '$USER@$HOSTNAME' -i face-angry -t 1000000\"; false; fi"
 #alias done="if [ \$? = 0 ]; then echo true; else echo false; fi"
@@ -141,6 +141,10 @@ export PATH=$PATH:$GOBIN
 alias such=git
 alias very=git
 alias wow='git status -sb'
+
+
+# Something about ruby?
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 
 # Postgres DB dir
