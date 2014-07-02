@@ -141,3 +141,7 @@ export PATH=$PATH:$GOBIN
 alias such=git
 alias very=git
 alias wow='git status -sb'
+
+
+# Postgres DB dir
+export PGDATA=/usr/local/var/postgres
