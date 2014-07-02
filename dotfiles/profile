@@ -130,6 +130,12 @@ alias my-pivotal='pivotal_tools show stories --project-index=7 --for=heewabarfch
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+# Go path
+export GOROOT=/usr/local/opt/go/libexec
+export GOBIN=$GOROOT/bin/
+export GOPATH=$GOROOT/bin/
+export PATH=$PATH:$GOBIN
+
 
 # https://twitter.com/chris__martin/status/420992421673988096
 alias such=git
