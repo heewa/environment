@@ -1,12 +1,24 @@
 set nocompatible   " Disable vi-compatibility (needed for fancy plugins)
 set laststatus=2   " Always whow the statusline
 set nohls
-set expandtab      " No tabs in output file
-set tabstop=4      " For tabbing
-set shiftwidth=4   
-"set smartindent   " Don't use smartindent, it's bad for non-c languages. Instead, let it use whatever the filetype specifies.
-set cindent        " Maybe use this? Not quite sure yet. Python files don't do well automatically.
+
+" Tab/indent amounts.
+set tabstop=8      " How much a <TAB> is worth (as an actual char in the buffer)
+set expandtab      " When pressing <TAB>, instead insert spaces
+set softtabstop=4  " How many spaces a <TAB> should instead be
+set shiftwidth=4   " How much to indent by with stuff like <<, >>, etc
+
+" Indent treatment.
 set autoindent
+" Don't use smartindent or cindent, they interfere with plugin indent.`
+"set smartindent   " Don't use smartindent, it's bad for non-c languages. Instead, let it use whatever the filetype specifies.
+"set cindent        " Maybe use this? Not quite sure yet. Python files don't do well automatically.
+filetype plugin indent on
+
+" Indenting for specific file types.
+autocmd FileType html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+
 set showmatch
 set ruler          " Shows line,column # at bottom
 set showcmd        " Display incomplete command
@@ -127,12 +139,3 @@ let g:syntastic_style_warning_symbol = 'sw'
 " * a.vim - alternating between .c and .h files
 " * pathogen - easier plugin installs
 " * syntastic - syntax checking https://github.com/scrooloose/syntastic
-
-" Go syntax highlighting:
-" Some Linux distributions set filetype in /etc/vimrc.
-" Clear filetype flags before changing runtimepath to force Vim to reload them.
-filetype off
-filetype plugin indent off
-set runtimepath+=$GOROOT/misc/vim
-filetype plugin indent on
-syntax on
