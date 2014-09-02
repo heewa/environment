@@ -29,10 +29,12 @@ set wildmode=longest,list,full   " better tab complete menu
 set wildmenu                     " better tab complete menu
 set wildignore=*.pyc,*.o,*.obj,*.bak,*.exe  " tab complete ignores these!
 set ignorecase
+
+" Syntax highlighting
 syntax on
-filetype on
-au BufNewFile,BufRead *.handlebars set filetype=htmldjango
 colorscheme heewa
+filetype on           " try to detect syntax from filetype
+au BufNewFile,BufRead *.handlebars set filetype=htmldjango
 set nofoldenable    " disable folding
 
 " Show trailing whitespace.
