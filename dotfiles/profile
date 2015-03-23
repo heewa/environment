@@ -98,7 +98,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Take in all the custom completions too.
-for F in "$(ls ~/Dropbox/Documents/LinuxEnvironment/bash_completion/*.bash)"; do
+for F in "$(ls ~/Documents/LinuxEnvironment/bash_completion/*.bash)"; do
     if [ -f "$F" ]; then
         . "$F"
     fi
