@@ -148,3 +148,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Postgres DB dir
 export PGDATA=/usr/local/var/postgres
+
+
+# Fuck nose. Fuck python. Fuck everything.
+export NOSE_LOGFORMAT='[%(levelname)7s %(asctime)s %(filename)s:%(lineno)d %(funcName)s()]    %(message)s'
