@@ -37,12 +37,15 @@ filetype on           " try to detect syntax from filetype
 au BufNewFile,BufRead *.handlebars set filetype=htmldjango
 set nofoldenable    " disable folding
 
+" Quick explore
+nmap - :Explore<CR>
+
 " Show trailing whitespace.
 match ErrorMsg '\s\+$'
 
 " Building and errors
-nmap <F5> :cprev<CR>     " previous error
-nmap <F6> :cnext<CR>     " next error
+nmap <F5> :cprev<CR>
+nmap <F6> :cnext<CR>
 
 " Jump to first line of pylint error.
 function! FirstPylintError()
