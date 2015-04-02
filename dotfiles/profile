@@ -135,19 +135,18 @@ alias my-pivotal='pivotal_tools show stories --project-index=7 --for=heewabarfch
 export GOPATH=$HOME/build/go
 export PATH=$PATH:$GOPATH/bin
 
-
-# https://twitter.com/chris__martin/status/420992421673988096
-alias such=git
-alias very=git
-alias wow='git status -sb'
+# Timehop Go
+THPREFIX='env $(grep -v " *#" .env) GOPATH=$PWD/Godeps/overrides:$(echo $PWD | grep -o "$HOME/src/Timehop/[^/]*"):$PWD/Godeps/_workspace'
+alias thgo="$THPREFIX go"
+alias thvim="$THPREFIX vim"
 
 
 # Something about ruby?
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 
 # Postgres DB dir
-export PGDATA=/usr/local/var/postgres
+#export PGDATA=/usr/local/var/postgres
 
 
 # Fuck nose. Fuck python. Fuck everything.
