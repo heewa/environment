@@ -1,0 +1,15 @@
+# editor temp file
+.*.swp
+*~
+
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+
+# Go
+_testmain.go
+/Godeps/overrides
+
+# Mac
+.DS_Store

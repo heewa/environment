@@ -6,6 +6,7 @@ ln -vsf $PWD/dotfiles/vim ~/.vim
 ln -vsf $PWD/dotfiles/vim/vimrc ~/.vimrc
 ln -vsf $PWD/dotfiles/screenrc ~/.screenrc
 ln -vsf $PWD/dotfiles/gitconfig ~/.gitconfig
+ln -vsf $PWD/dotfiles/gitignore ~/.gitignore
 ln -vsf $PWD/dotfiles/bashrc ~/.bashrc
 ln -vsf $PWD/dotfiles/profile ~/.profile
 
