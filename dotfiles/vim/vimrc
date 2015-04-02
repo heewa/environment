@@ -3,7 +3,7 @@ set laststatus=2   " Always whow the statusline
 set nohls
 
 " Tab/indent amounts.
-set tabstop=8      " How much a <TAB> is worth (as an actual char in the buffer)
+set tabstop=4      " How much a <TAB> is worth (as an actual char in the buffer)
 set expandtab      " When pressing <TAB>, instead insert spaces
 set softtabstop=4  " How many spaces a <TAB> should instead be
 set shiftwidth=4   " How much to indent by with stuff like <<, >>, etc
@@ -39,6 +39,10 @@ set nofoldenable    " disable folding
 
 " Quick explore
 nmap - :Explore<CR>
+
+" Go settings
+autocmd FileType go map gs <Plug>(go-def-split)
+autocmd FileType go map gv <Plug>(go-def-vertical)
 
 " Show trailing whitespace.
 match ErrorMsg '\s\+$'
