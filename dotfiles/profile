@@ -136,17 +136,19 @@ export GOPATH=$HOME/build/go
 export PATH=$PATH:$GOPATH/bin
 
 # Timehop Go
-THPREFIX='env $(grep -v " *#" .env) GOPATH=$PWD/Godeps/overrides:$(echo $PWD | grep -o "$HOME/src/Timehop/[^/]*"):$PWD/Godeps/_workspace'
+THPREFIX='env $(grep -shv " *#" .env .local_env) GOPATH=$(echo $PWD | grep -o "$HOME/src/Timehop/[^/]*"):$PWD/Godeps/_workspace:~/go/test'
 alias thgo="$THPREFIX go"
 alias thvim="$THPREFIX vim"
+alias gogrep='grep -IR --include "*.go" --exclude "./Godeps/*" --exclude ".git/*"'
 
 
 # Something about ruby?
 #if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 
-# Postgres DB dir
-#export PGDATA=/usr/local/var/postgres
+# Postgres DB
+export PG_DATA_DIR=/usr/local/var/postgres
+alias pgstart='/usr/local/bin/postgres -D $PG_DATA_DIR -r /usr/local/var/postgres/server.log'
 
 
 # Fuck nose. Fuck python. Fuck everything.
