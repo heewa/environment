@@ -1,5 +1,6 @@
 # editor temp file
 .*.swp
+.*.swo
 *~
 
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
@@ -13,3 +14,6 @@ _testmain.go
 
 # Mac
 .DS_Store
+
+# Timehop
+/.local_env
