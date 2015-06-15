@@ -134,14 +134,16 @@ alias my-pivotal='pivotal_tools show stories --project-index=7 --for=heewabarfch
 
 # Go path
 #export GOBIN=$(brew --prefix go)/libexec/bin/
-export GOPATH=$HOME/build/go
+export GOPATH=$HOME/go/global
 export PATH=$PATH:$GOPATH/bin
 
 # Timehop Go
-THPREFIX='env $(grep -shv " *#" .env .local_env) GOPATH=$(echo $PWD | grep -o "$HOME/src/Timehop/[^/]*"):$(echo $PWD | grep -o "$HOME/src/Timehop/[^/]*/src/github.com/timehop/[^/]*")/Godeps/_workspace:~/go/test'
-alias thgo="$THPREFIX go"
-alias thvim="$THPREFIX vim"
-alias thginkgo="$THPREFIX ~/go/test/bin/ginkgo"
+TH_ENV='env $(grep -shv " *#" .env .local_env)'
+TH_GOPATH='$(echo $PWD | grep -o "$HOME/src/Timehop/[^/]*"):$(echo $PWD | grep -o "$HOME/src/Timehop/[^/]*/src/github.com/timehop/[^/]*")/Godeps/_workspace:~/go/test'
+alias thgo="$TH_ENV GOPATH=$TH_GOPATH go"
+alias thvim="$TH_ENV GOPATH=$TH_GOPATH:~/go/vim vim"
+alias thgvim="$TH_ENV GOPATH=$TH_GOPATH:~/go/vim gvim"
+alias thginkgo="$TH_ENV GOPATH=$TH_GOPATH ~/go/test/bin/ginkgo"
 alias gogrep='grep -IR --include "*.go" --exclude "./Godeps/*" --exclude ".git/*"'
 
 
