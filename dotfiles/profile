@@ -110,6 +110,8 @@ export PATH=~/bin:~/scripts:/usr/local/sbin:/usr/local/bin:$HOME/.rbenv/bin:$PAT
 alias fin="if [ \$? = 0 ]; then ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send 'Done' '$USER@$HOSTNAME' -i face-smile -t 1000000\"; true; else ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send --urgency=critical 'Done FAILED' '$USER@$HOSTNAME' -i face-angry -t 1000000\"; false; fi"
 #alias done="if [ \$? = 0 ]; then echo true; else echo false; fi"
 
+alias macvim='open -a MacVim.app'
+
 #
 # Aliases for remoting
 #
