@@ -4,6 +4,7 @@
     lstags = log --date-order --graph --tags --simplify-by-decoration --pretty=format:'%ai %h %d'
     stat = status -sb
     pr = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
+    amend = commit --amend --no-edit
 [color]
 	ui = true
 [user]
