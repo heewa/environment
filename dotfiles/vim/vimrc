@@ -126,6 +126,9 @@ endif
 " For cscope
 set splitright  " So that vertical splits start on the right
 
+" Enable neocomplete
+"let g:neocomplete#enable_at_startup = 1
+
 " My maps
 
 " Toggle highlighing of word under cursor without searching, though it's now
@@ -165,3 +168,4 @@ filetype plugin indent on
 " * a.vim - alternating between .c and .h files
 " * pathogen - easier plugin installs
 " * syntastic - syntax checking https://github.com/scrooloose/syntastic
+" * neocomplete - better autocomplete. In plugins dir: git clone https://github.com/Shougo/neocomplete.vim.git
