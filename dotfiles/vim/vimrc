@@ -123,10 +123,7 @@ set splitright  " So that vertical splits start on the right
 nnoremap <F10> :set invhls<CR>:let @/="<C-r><C-w>"<CR>/<BS>
 
 " Open file on another machine.
-nnoremap \g :exec ":silent ! ssh $(echo heewa-dev1 -t DISPLAY=:0.0 geany $(echo $(pwd)/% \| sed -e \"s:$HOME/src:~/dev2-src:\") +" line(".") "\| sed -e 's:+ :+:')"
-
-" Pathogen, for easier plugins.  https://github.com/tpope/vim-pathogen
-call pathogen#infect()
+"nnoremap \g :exec ":silent ! ssh $(echo heewa-dev1 -t DISPLAY=:0.0 geany $(echo $(pwd)/% \| sed -e \"s:$HOME/src:~/dev2-src:\") +" line(".") "\| sed -e 's:+ :+:')"
 
 " Turn of syntastic checking a file on write (slows down writes).
 "let g:syntastic_check_on_wq=0
