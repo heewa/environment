@@ -2,6 +2,8 @@ set nocompatible   " Disable vi-compatibility (needed for fancy plugins)
 set laststatus=2   " Always whow the statusline
 set nohls
 
+set mouse=a  " MOUSE SUPPORT, FUCK YEA!
+
 " Pathogen, for easier plugins.  https://github.com/tpope/vim-pathogen
 " NOTE: need to load these first, before indent stuff, espcially the
 " filetype plugin indent on # line
