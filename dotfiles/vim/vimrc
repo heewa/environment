@@ -2,6 +2,14 @@ set nocompatible   " Disable vi-compatibility (needed for fancy plugins)
 set laststatus=2   " Always whow the statusline
 set nohls
 
+" Pathogen, for easier plugins.  https://github.com/tpope/vim-pathogen
+" NOTE: need to load these first, before indent stuff, espcially the
+" filetype plugin indent on # line
+" Options for pathogen ~/.bundle plugins:
+let g:jsx_pragma_required = 0
+" Load Pathogen plugins:
+execute pathogen#infect()
+
 " Tab/indent amounts.
 set tabstop=4      " How much a <TAB> is worth (as an actual char in the buffer)
 set expandtab      " When pressing <TAB>, instead insert spaces
@@ -140,6 +148,14 @@ let g:syntastic_warning_symbol = 'ww'
 let g:syntastic_style_warning_symbol = 'sw'
 " Only do things on errors.
 "let g:syntastic_quiet_warnings=1
+
+
+" Just, fuck, fuck Pathogen, fuck plugins, fuck everything.
+filetype off
+syntax on
+filetype plugin indent on
+
+
 
 " Plugin list, to install on a new system (cuz it doesn't come through dropbox/git):
 " * powerline
