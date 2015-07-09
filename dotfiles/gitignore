@@ -1,19 +1,13 @@
-# editor temp file
+# Personal todo list
+/todo
+
+# Temp files
+*.DS_Store
 .*.swp
+.swp
 .*.swo
 *~
+/tmp
 
-# Compiled Object files, Static and Dynamic libs (Shared Objects)
-*.o
-*.a
-*.so
-
-# Go
-_testmain.go
-/Godeps/overrides
-
-# Mac
-.DS_Store
-
-# Timehop
+# Timehop stuff
 /.local_env
