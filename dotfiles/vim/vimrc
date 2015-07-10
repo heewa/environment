@@ -39,7 +39,7 @@ set showmode
 set wildmode=longest,list,full   " better tab complete menu
 set wildmenu                     " better tab complete menu
 set wildignore=*.pyc,*.o,*.obj,*.bak,*.exe  " tab complete ignores these!
-let g:netrw_list_hide= '.*\.pyc$,.*\.o$,.*\.obj$,.*\.bak$,.*\.exe$,.*\.swp$'   " Files to ignore in Explorer
+let g:netrw_list_hide= '^.DS_Store$,.*\.pyc$,.*\.o$,.*\.obj$,.*\.bak$,.*\.exe$,.*\.swp$'   " Files to ignore in Explorer
 set ignorecase
 
 " Syntax highlighting
