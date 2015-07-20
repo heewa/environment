@@ -144,7 +144,7 @@ alias thgo="$TH_ENV GOPATH=$TH_GOPATH go"
 alias thvim="$TH_ENV GOPATH=$TH_GOPATH:~/go/vim vim"
 alias thgvim="$TH_ENV GOPATH=$TH_GOPATH:~/go/vim gvim"
 alias thginkgo="$TH_ENV GOPATH=$TH_GOPATH ~/go/test/bin/ginkgo"
-alias gogrep='grep -IR --include "*.go" --exclude "./Godeps/*" --exclude ".git/*"'
+alias gogrep='grep -IR --include "*.go" --exclude-dir "Godeps" --exclude-dir ".git"'
 
 
 # Something about ruby?
