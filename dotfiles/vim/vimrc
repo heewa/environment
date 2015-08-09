@@ -8,7 +8,7 @@ set mouse=a  " MOUSE SUPPORT, FUCK YEA!
 " NOTE: need to load these first, before indent stuff, espcially the
 " filetype plugin indent on # line
 " Options for pathogen ~/.bundle plugins:
-let g:jsx_pragma_required = 0
+"let g:jsx_pragma_required = 0
 " Load Pathogen plugins:
 execute pathogen#infect()
 
@@ -159,13 +159,3 @@ let g:syntastic_style_warning_symbol = 'sw'
 filetype off
 syntax on
 filetype plugin indent on
-
-
-
-" Plugin list, to install on a new system (cuz it doesn't come through dropbox/git):
-" * powerline
-" * command-t
-" * a.vim - alternating between .c and .h files
-" * pathogen - easier plugin installs
-" * syntastic - syntax checking https://github.com/scrooloose/syntastic
-" * neocomplete - better autocomplete. In plugins dir: git clone https://github.com/Shougo/neocomplete.vim.git
