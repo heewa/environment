@@ -10,4 +10,7 @@
 /tmp
 
 # Timehop stuff
-/.local_env
+/.local_env*
+
+# Python
+*.pyc
