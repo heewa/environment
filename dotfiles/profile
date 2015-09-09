@@ -181,6 +181,10 @@ alias gogrep='grep -IR --include "*.go" --exclude-dir "Godeps" --exclude-dir ".g
 export PG_DATA_DIR=/usr/local/var/postgres
 alias pgstart='/usr/local/bin/postgres -D $PG_DATA_DIR -r /usr/local/var/postgres/server.log'
 
+# Node / io.js / nvm shit
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 
 # Fuck nose. Fuck python. Fuck everything.
 export NOSE_LOGFORMAT='[%(levelname)7s %(asctime)s %(filename)s:%(lineno)d %(funcName)s()]    %(message)s'
