@@ -48,9 +48,6 @@ rand_element () {
 # Emoji in prompt!!!
 starts="🌊 ⚡️ ☁️ ⭐️ 🌚 🌝 🌞 🌜 🌍 🌵 🌴 🍄 🎃 💻 📺 🛀 🚽 🛁 🎨 🎬 🎤 🎧 🎶 🎵 👾 🎲 ⚽️ 🏀 🏈 🚴 🏇 🏊 🏄 🏂 ☕️ 🍵 🍺 🍷 🍸 🍕 🍔 🍟 🍣 🍱 🍙 🍜 🍳 🍦 🍧 🍰 🍭 🍒 🍋 🍉 🍑 🍌 🍍 🍆 🏩 🌇 🌆 🏯 🏰 ⛺️ 🌄 🌅 🗽 🌃 🌉 🎢 ⛵️ 🚀 ✈️ 🚁 🚎 🚌 🚕 🚛 🚲 "
 endings="🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐗 🐵 🐒 🐴 🐑 🐘 🐼 🐧 🐦 🐤 🐥 🐣 🐔 🐍 🐢 🐛 🐝 🐜 🐞 🐌 🐙 🐠 🐟 🐬 🐳 🐋 🐄 🐏 🐀 🐃 🐅 🐇 🐉 🐎 🐐 🐓 🐕 🐖 🐁 🐂 🐲 🐡 🐊 🐫 🐪 🐆 🐈 🐩 ⛄️ 🙈 🙉 🙊 💀 👽 💩 👾 👻 🎅"
-local EMOJI_END="$"
-EMOJI_END="$(rand_element $endings). "
-# Need this?  #if [ $(uname -s) == "Darwin" ]; then ; fi
 
 function __prompt_command() {
     local EXIT="$?"             # This needs to be first
@@ -74,6 +71,7 @@ function __prompt_command() {
     fi
 
     local EMOJI_START=""
+    local EMOJI_END="$"
     EMOJI_START="$(rand_element $starts) "
     EMOJI_END="$(rand_element $endings). "
     # Need this?  #if [ $(uname -s) == "Darwin" ]; then ; fi
