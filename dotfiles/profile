@@ -48,11 +48,9 @@ rand_element () {
 # Emoji in prompt!!!
 starts="🌊 ⚡️ ☁️ ⭐️ 🌚 🌝 🌞 🌜 🌍 🌵 🌴 🍄 🎃 💻 📺 🛀 🚽 🛁 🎨 🎬 🎤 🎧 🎶 🎵 👾 🎲 ⚽️ 🏀 🏈 🚴 🏇 🏊 🏄 🏂 ☕️ 🍵 🍺 🍷 🍸 🍕 🍔 🍟 🍣 🍱 🍙 🍜 🍳 🍦 🍧 🍰 🍭 🍒 🍋 🍉 🍑 🍌 🍍 🍆 🏩 🌇 🌆 🏯 🏰 ⛺️ 🌄 🌅 🗽 🌃 🌉 🎢 ⛵️ 🚀 ✈️ 🚁 🚎 🚌 🚕 🚛 🚲 "
 endings="🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐗 🐵 🐒 🐴 🐑 🐘 🐼 🐧 🐦 🐤 🐥 🐣 🐔 🐍 🐢 🐛 🐝 🐜 🐞 🐌 🐙 🐠 🐟 🐬 🐳 🐋 🐄 🐏 🐀 🐃 🐅 🐇 🐉 🐎 🐐 🐓 🐕 🐖 🐁 🐂 🐲 🐡 🐊 🐫 🐪 🐆 🐈 🐩 ⛄️ 🙈 🙉 🙊 💀 👽 💩 👾 👻 🎅"
-if [ $(uname -s) == "Darwin" ]; then
-    export PS1="$(rand_element $starts) $PS1$(rand_element $endings). "
-else
-    export PS1="$PS1\$ "
-fi
+local EMOJI_END="$"
+EMOJI_END="$(rand_element $endings). "
+# Need this?  #if [ $(uname -s) == "Darwin" ]; then ; fi
 
 function __prompt_command() {
     local EXIT="$?"             # This needs to be first
@@ -74,11 +72,17 @@ function __prompt_command() {
     if [ $EXIT != 0 ]; then
         EXIT_STATE="${Red}^-- $EXIT${RCol} "
     fi
+
+    local EMOJI_START=""
+    EMOJI_START="$(rand_element $starts) "
+    EMOJI_END="$(rand_element $endings). "
+    # Need this?  #if [ $(uname -s) == "Darwin" ]; then ; fi
+
     local USER_HOST="${Gre}\u${RCol}@${BBlu}\h${RCol}"
     local DIR_PATH="${BBlu}\w${RCol}"
     local GIT_STATE="${Pur}\$git_branch${Red}\$git_dirty${RCol}"
 
-    PS1="$EXIT_STATE $USER_HOST:$DIR_PATH $GIT_STATE$ "
+    PS1="$EMOJI_START$EXIT_STATE$USER_HOST:$DIR_PATH $GIT_STATE $EMOJI_END"
 }
 export PROMPT_COMMAND="__prompt_command"
 
