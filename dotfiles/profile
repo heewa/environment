@@ -57,6 +57,11 @@ fi
 function __prompt_command() {
     local EXIT="$?"             # This needs to be first
 
+    # Need to call the git branch and dirty fns ourselves, so exit code remains
+    # clean.
+    find_git_branch
+    find_git_dirty
+
     local RCol='\[\e[0m\]'
 
     local Red='\[\e[0;31m\]'
@@ -65,9 +70,9 @@ function __prompt_command() {
     local BBlu='\[\e[1;34m\]'
     local Pur='\[\e[0;35m\]'
 
-    local EXIT_STATE="$EXIT"
+    local EXIT_STATE=""
     if [ $EXIT != 0 ]; then
-        EXIT_STATE="${Red}^-- $EXIT${RCol}"
+        EXIT_STATE="${Red}^-- $EXIT${RCol} "
     fi
     local USER_HOST="${Gre}\u${RCol}@${BBlu}\h${RCol}"
     local DIR_PATH="${BBlu}\w${RCol}"
@@ -76,9 +81,6 @@ function __prompt_command() {
     PS1="$EXIT_STATE $USER_HOST:$DIR_PATH $GIT_STATE$ "
 }
 export PROMPT_COMMAND="__prompt_command"
-
-export GITAWAREPROMPT="$HOME/.bash/git-aware-prompt"
-source $GITAWAREPROMPT/main.sh
 
 #
 # Include private defs (not in main file cuz this one's in my public github).
