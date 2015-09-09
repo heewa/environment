@@ -188,3 +188,6 @@ source $(brew --prefix nvm)/nvm.sh
 
 # Fuck nose. Fuck python. Fuck everything.
 export NOSE_LOGFORMAT='[%(levelname)7s %(asctime)s %(filename)s:%(lineno)d %(funcName)s()]    %(message)s'
+
+# Preeeetty
+archey -c
