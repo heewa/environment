@@ -73,10 +73,10 @@ function __prompt_command() {
 
     local EMOJI_START=""
     local EMOJI_END="$"
-    # Need this?  #if [ $(uname -s) == "Darwin" ]; then ; fi
-    EMOJI_START="$(rand_element $starts) "
-    # Append a black printable ascii char to emoji cuz weird spacing issues
-    EMOJI_END=" $(rand_element $endings)${Blk}¸${RCol}"
+    if [ $(uname -s) == "Darwin" ]; then
+        EMOJI_START="$(rand_element $starts) "
+        EMOJI_END=" $(rand_element $endings)${Blk}¸${RCol}"
+    fi
 
     local USER_HOST="${Gre}\u${RCol}@${BBlu}\h${RCol}"
     local DIR_PATH="${BBlu}\w${RCol}"
@@ -89,7 +89,9 @@ export PROMPT_COMMAND="__prompt_command"
 #
 # Include private defs (not in main file cuz this one's in my public github).
 #
-source $HOME/.private_profile
+if [ -f ~/.private_profile ]; then
+    source $HOME/.private_profile
+fi
 
 # Comment in the above and uncomment this below for a color prompt
 #PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -176,6 +178,15 @@ alias thgo="$TH_ENV GOPATH=$TH_GOPATH go"
 alias thvim="GOPATH=~/go/vim:$TH_GOPATH vim"
 alias thgvim="GOPATH=~/go/vim:$TH_GOPATH gvim"
 alias thginkgo="$TH_ENV GOPATH=$TH_GOPATH ~/go/test/bin/ginkgo"
+
+# DB Go
+MY_GOPATH='$(echo $PWD | grep -o "$HOME/src/[^/]*"):$(echo $PWD | grep -o "$HOME/src/[^/]*/src/github.com/[^/]*/[^/]*")/Godeps/_workspace:~/go/test'
+alias mygo="GOPATH=$MY_GOPATH go"
+alias myvim="GOPATH=~/go/vim:$MY_GOPATH vim"
+alias mygvim="GOPATH=~/go/vim:$MY_GOPATH gvim"
+alias myginkgo="GOPATH=$MY_GOPATH ~/go/test/bin/ginkgo"
+
+# General Go
 alias gogrep='grep -IR --include "*.go" --exclude-dir "Godeps" --exclude-dir ".git"'
 
 
@@ -189,11 +200,17 @@ alias pgstart='/usr/local/bin/postgres -D $PG_DATA_DIR -r /usr/local/var/postgre
 
 # Node / io.js / nvm shit
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+if [ $(uname -s) == "Darwin" ]; then
+    source $(brew --prefix nvm)/nvm.sh
+fi
 
 
 # Fuck nose. Fuck python. Fuck everything.
 export NOSE_LOGFORMAT='[%(levelname)7s %(asctime)s %(filename)s:%(lineno)d %(funcName)s()]    %(message)s'
 
 # Preeeetty
-archey -c
+if [ $(uname -s) == "Darwin" ]; then
+    archey -c
+else
+    archey
+fi
