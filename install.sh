@@ -39,9 +39,16 @@ for DBoxDir in Documents; do
 done
 
 # git aware prompt
-git clone git://github.com/jimeh/git-aware-prompt.git $HOME/.bash/git-aware-prompt
 echo
 echo '==] Creating/Updating git aware prompt from git repo'
+BASH_GIT_DIR="$HOME/.bash/git-aware-prompt"
+if [[ ! -e "$BASH_GIT_DIR" ]]; then
+    git clone git://github.com/jimeh/git-aware-prompt.git $BASH_GIT_DIR
+else
+    pushd $BASH_GIT_DIR
+    git checkout master && git pull
+    popd
+fi
 
 echo
 echo '==] Done'
