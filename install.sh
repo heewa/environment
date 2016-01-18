@@ -2,6 +2,11 @@
 #
 # Set up symlinks to dotfiles & make sure directories I want are there.
 
+# XDG Config goes straight into ~/.config/ without rename
+echo
+echo '==] SymLinking XDG Config in ~/.config/'
+mkdir -p ~/.config/
+ln -vsf $PWD/config/* $HOME/.config/
 
 # .rc files need to be renamed individually
 echo
