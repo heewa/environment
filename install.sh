@@ -2,6 +2,12 @@
 #
 # Set up symlinks to dotfiles & make sure directories I want are there.
 
+echo
+echo '==] Creating home dirs'
+for D in src build tmp scripts bin .bash; do
+    mkdir -v $HOME/$D
+done
+
 # XDG Config goes straight into ~/.config/ without rename
 echo
 echo '==] SymLinking XDG Config in ~/.config/'
@@ -11,19 +17,19 @@ ln -vsf $PWD/config/* $HOME/.config/
 # .rc files need to be renamed individually
 echo
 echo '==] SymLinking ~/.rc files'
-ln -vsf $PWD/dotfiles/vim ~/.vim
-ln -vsf $PWD/dotfiles/vim/vimrc ~/.vimrc
 ln -vsf $PWD/dotfiles/screenrc ~/.screenrc
 ln -vsf $PWD/dotfiles/gitconfig ~/.gitconfig
 ln -vsf $PWD/dotfiles/gitignore ~/.gitignore
 ln -vsf $PWD/dotfiles/bashrc ~/.bashrc
 ln -vsf $PWD/dotfiles/profile ~/.profile
 
+# Link legacy vim confs to nvim's, and the binary
 echo
-echo '==] Creating home dirs'
-for D in src build tmp scripts .bash; do
-    mkdir -v $HOME/$D
-done
+echo '==] SymLinking vim -> nvim'
+ln -vsf $HOME/.config/nvim ~/.vim
+ln -vsf $HOME/.config/nvim/init.vim ~/.vimrc
+ln -vsf /usr/local/bin/nvim $HOME/bin/vim
+ln -vsf /usr/local/bin/vim $HOME/bin/oldvim
 
 # Create dropbox symlinks, even if Dropbox isn't updated yet.
 echo
