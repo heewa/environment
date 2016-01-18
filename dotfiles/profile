@@ -208,6 +208,9 @@ fi
 # Fuck nose. Fuck python. Fuck everything.
 export NOSE_LOGFORMAT='[%(levelname)7s %(asctime)s %(filename)s:%(lineno)d %(funcName)s()]    %(message)s'
 
+# Fuck node and JS as well. Fuck all the things.
+export NODE_REPL_HISTORY_FILE=$HOME/.node_repl_history
+
 # Preeeetty
 if [ $(uname -s) == "Darwin" ]; then
     archey -c
