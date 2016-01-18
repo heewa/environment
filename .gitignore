@@ -1,3 +1,6 @@
+# vim's autogen files
+/config/nvim/.netrwhist
+
 *.DS_Store
 
 # editor temp file
