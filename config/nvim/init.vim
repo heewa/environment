@@ -93,6 +93,9 @@ if has('nvim')
     " Switching between .c & .h with 'A'
     Plug 'vim-scripts/a.vim'
 
+    " Go development
+    Plug 'fatih/vim-go'
+
     " Nice status line
     Plug 'vim-airline/vim-airline'
 
