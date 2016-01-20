@@ -108,6 +108,7 @@ if has('nvim')
     " Syntax Checkers & Autocompleters
     Plug 'Valloric/YouCompleteMe'
     Plug 'benekastah/neomake'
+    Plug 'majutsushi/tagbar'
     "Plug 'scrooloose/syntastic'
     "Plug 'myint/syntastic-extras'
 
@@ -117,6 +118,15 @@ if has('nvim')
     autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
     " YouCompelteMe - don't ask for confirmation to load python conf file (.ycm_extra_conf.py)
     let g:ycm_confirm_extra_conf = 0
+
+    " Persistent undo, across exits. Only do this in neovim cuz it has better
+    " default dir for this.
+    if has('persistent_undo')
+        " For files in my source repo, keep undo files in a shared location
+        set undofile
+    endif
+
+    nmap <F8> :TagbarToggle<CR>
 
 else " regular old vim
 
