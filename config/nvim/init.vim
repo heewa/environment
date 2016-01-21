@@ -134,6 +134,9 @@ if has('nvim')
     " Run Neomake on save
     autocmd BufWritePost *.go,*.c,*.cpp,*.h,*.py,*.js,*.jsx Neomake
 
+    " Use a patched powerline font for nice symbols
+    let g:airline_powerline_fonts = 1
+
 else " regular old vim
 
     set nocompatible   " Disable vi-compatibility (needed for fancy plugins)
