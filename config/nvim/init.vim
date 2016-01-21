@@ -87,6 +87,9 @@ if has('nvim')
 
     call plug#begin()
 
+    " For opening files more easily
+    Plug 'ctrlpvim/ctrlp.vim'
+
     " Switching between .c & .h with 'A'
     Plug 'vim-scripts/a.vim'
 
