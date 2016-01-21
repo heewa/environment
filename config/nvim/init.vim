@@ -128,6 +128,9 @@ if has('nvim')
 
     nmap <F8> :TagbarToggle<CR>
 
+    " Don't fuck with GOPATH
+    let g:go_autodetect_gopath = 0
+
     " Run Neomake on save
     autocmd BufWritePost *.go,*.c,*.cpp,*.h,*.py,*.js,*.jsx Neomake
 
