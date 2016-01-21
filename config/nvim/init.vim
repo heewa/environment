@@ -83,9 +83,6 @@ set splitright  " So that vertical splits start on the right
 " the search term, so you can use 'n' and 'N' to jump to matches.
 nnoremap <F10> :set invhls<CR>:let @/="<C-r><C-w>"<CR>/<BS>
 
-" Run Neomake on save
-autocmd BufWritePost *.py,*.js,*.jsx Neomake
-
 if has('nvim')
 
     call plug#begin()
@@ -127,6 +124,9 @@ if has('nvim')
     endif
 
     nmap <F8> :TagbarToggle<CR>
+
+    " Run Neomake on save
+    autocmd BufWritePost *.go,*.c,*.cpp,*.h,*.py,*.js,*.jsx Neomake
 
 else " regular old vim
 
