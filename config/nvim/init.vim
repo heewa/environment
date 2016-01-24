@@ -118,6 +118,7 @@ if has('nvim')
     autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
     " YouCompelteMe - don't ask for confirmation to load python conf file (.ycm_extra_conf.py)
     let g:ycm_confirm_extra_conf = 0
+    let g:ycm_autoclose_preview_window_after_insertion = 1
 
     " Persistent undo, across exits. Only do this in neovim cuz it has better
     " default dir for this.
