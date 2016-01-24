@@ -196,7 +196,7 @@ alias gdgvim="GOPATH=~/go/vim:$GD_GOPATH gvim"
 alias gdginkgo="GOPATH=$GD_GOPATH ~/go/test/bin/ginkgo"
 
 # Vendor Based Go
-VENDOR_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):.vendor_for_old:~/go/test'
+VENDOR_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):$PWD/.vendor_for_old:~/go/test'
 alias set_vendor_gopath="export GOPATH=$VENDOR_GOPATH"
 alias govim="GOPATH=~/go/vim:$VENDOR_GOPATH vim"
 
