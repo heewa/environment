@@ -1,6 +1,7 @@
 # vim's autogen files
 /config/nvim/.netrwhist
 /config/nvim/plugged/
+/config/nvim/nvim
 
 *.DS_Store
 
