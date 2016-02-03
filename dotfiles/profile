@@ -172,12 +172,13 @@ alias my-pivotal='pivotal_tools show stories --project-index=7 --for=heewabarfch
 export GOROOT=/usr/local/opt/go/libexec
 #export GOBIN=$(brew --prefix go)/libexec/bin/
 export GOPATH=$HOME/go/global
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:~/go/test/bin
 
 # General Go
 MY_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):~/go/test'
 alias set_my_gopath="export GOPATH=$MY_GOPATH"
 alias gogrep='grep -IR --include "*.go" --exclude-dir "vendor" --exclude-dir "Godeps" --exclude-dir ".git"'
+alias gotest='~/go/test/bin/ginkgo -notify -race --randomizeAllSpecs -p'
 
 # Timehop Go
 TH_ENV='env $(grep -shv " *#" .env .local_env)'
