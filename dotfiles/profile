@@ -179,6 +179,8 @@ MY_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):~/go/tes
 alias set_my_gopath="export GOPATH=$MY_GOPATH"
 alias gogrep='grep -IR --include "*.go" --exclude-dir "vendor" --exclude-dir "Godeps" --exclude-dir ".git"'
 alias gotest='~/go/test/bin/ginkgo -notify -race --randomizeAllSpecs -p'
+alias gomake='make -f $HOME/.golang.Makefile'
+gorun() { gomake RUN_ARGS="$*" run ;}
 
 # Timehop Go
 TH_ENV='env $(grep -shv " *#" .env .local_env)'
