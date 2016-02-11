@@ -23,6 +23,7 @@ ln -vsf $PWD/dotfiles/gitignore ~/.gitignore
 ln -vsf $PWD/dotfiles/bashrc ~/.bashrc
 ln -vsf $PWD/dotfiles/profile ~/.profile
 ln -vsf $PWD/dotfiles/git-prompt-colors.sh ~/.git-prompt-colors.sh
+ln -vsf $PWD/dotfiles/bash_completion ~/.bash_completion
 
 # Link legacy vim confs to nvim's, and the binary
 echo
