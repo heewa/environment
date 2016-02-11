@@ -22,6 +22,7 @@ ln -vsf $PWD/dotfiles/gitconfig ~/.gitconfig
 ln -vsf $PWD/dotfiles/gitignore ~/.gitignore
 ln -vsf $PWD/dotfiles/bashrc ~/.bashrc
 ln -vsf $PWD/dotfiles/profile ~/.profile
+ln -vsf $PWD/dotfiles/git-prompt-colors.sh ~/.git-prompt-colors.sh
 
 # Link legacy vim confs to nvim's, and the binary
 echo
@@ -79,7 +80,16 @@ done
 
 # git aware prompt
 echo
-echo '==] Creating/Updating git aware prompt from git repo'
+echo '==] Installing HEAD-version homebrew packages'
+for package in "bash-git-prompt"; do
+    if [[ "$(brew info --versions $package)" == "" ]]; then
+        brew install --HEAD $pacakage
+    fi
+done
+
+# a backup implementation
+echo
+echo '==] Creating/Updating a different git aware prompt from git repo'
 BASH_GIT_DIR="$HOME/.bash/git-aware-prompt"
 if [[ ! -e "$BASH_GIT_DIR" ]]; then
     git clone git://github.com/jimeh/git-aware-prompt.git $BASH_GIT_DIR
