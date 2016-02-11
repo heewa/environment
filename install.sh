@@ -17,18 +17,19 @@ ln -vsf $PWD/config/* $HOME/.config/
 # .rc files need to be renamed individually
 echo
 echo '==] SymLinking ~/.rc files'
+ln -vsf $PWD/dotfiles/bash_profile ~/.bash_profile
+ln -vsf $PWD/dotfiles/profile ~/.profile
+ln -vsf $PWD/dotfiles/bashrc ~/.bashrc
+ln -vsfh $PWD/dotfiles/bash_completion ~/.bash_completion
 ln -vsf $PWD/dotfiles/screenrc ~/.screenrc
 ln -vsf $PWD/dotfiles/gitconfig ~/.gitconfig
 ln -vsf $PWD/dotfiles/gitignore ~/.gitignore
-ln -vsf $PWD/dotfiles/bashrc ~/.bashrc
-ln -vsf $PWD/dotfiles/profile ~/.profile
 ln -vsf $PWD/dotfiles/git-prompt-colors.sh ~/.git-prompt-colors.sh
-ln -vsf $PWD/dotfiles/bash_completion ~/.bash_completion
 
 # Link legacy vim confs to nvim's, and the binary
 echo
 echo '==] SymLinking vim -> nvim'
-ln -vsf $HOME/.config/nvim ~/.vim
+ln -vsfh $HOME/.config/nvim ~/.vim
 ln -vsf $HOME/.config/nvim/init.vim ~/.vimrc
 ln -vsf /usr/local/bin/nvim $HOME/bin/vim
 ln -vsf /usr/local/bin/vim $HOME/bin/oldvim

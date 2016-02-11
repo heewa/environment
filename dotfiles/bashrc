@@ -1,9 +1,98 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# According to:
+# http://superuser.com/questions/789448/choosing-between-bashrc-profile-bash-profile-etc
+#
+#   * ~/.bashrc has anything you'd want at an interactive command line.
+#     Command prompt, EDITOR variable, bash aliases for my use
+#   * ~/.bashrc must not output anything
 
+# TODO: need this?
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+#[ -z "$PS1" ] && return
+
+#
+# Prompt
+#
+
+rand() {
+    printf $((  $1 *  RANDOM  / 32767   ))
+}
+
+rand_element () {
+    local -a th=("$@")
+    unset th[0]
+    printf $'%s\n' "${th[$(($(rand "${#th[*]}")+1))]}"
+}
+
+# Emoji in prompt!!!
+starts="🌊 ⚡️ ☁️ ⭐️ 🌚 🌝 🌞 🌜 🌍 🌵 🌴 🍄 🎃 💻 📺 🛀 🚽 🛁 🎨 🎬 🎤 🎧 🎶 🎵 👾 🎲 ⚽️ 🏀 🏈 🚴 🏇 🏊 🏄 🏂 ☕️ 🍵 🍺 🍷 🍸 🍕 🍔 🍟 🍣 🍱 🍙 🍜 🍳 🍦 🍧 🍰 🍭 🍒 🍋 🍉 🍑 🍌 🍍 🍆 🏩 🌇 🌆 🏯 🏰 ⛺️ 🌄 🌅 🗽 🌃 🌉 🎢 ⛵️ 🚀 ✈️ 🚁 🚎 🚌 🚕 🚛 🚲 "
+endings="🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐗 🐵 🐒 🐴 🐑 🐘 🐼 🐧 🐦 🐤 🐥 🐣 🐔 🐍 🐢 🐛 🐝 🐜 🐞 🐌 🐙 🐠 🐟 🐬 🐳 🐋 🐄 🐏 🐀 🐃 🐅 🐇 🐉 🐎 🐐 🐓 🐕 🐖 🐁 🐂 🐲 🐡 🐊 🐫 🐪 🐆 🐈 🐩 ⛄️ 🙈 🙉 🙊 💀 👽 💩 👾 👻 🎅"
+
+if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+    source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+else
+    if [ -f "$HOME/.bash/git-aware-prompt" ]; then
+        export GITAWAREPROMPT="$HOME/.bash/git-aware-prompt"
+        source $GITAWAREPROMPT/main.sh
+    fi
+
+    # set a fancy prompt (non-color, unless we know we "want" color)
+    color_prompt="\[$bldgrn\]\u@\h\[$txtrst\]:\[$bldblu\]\w\[$txtrst\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]"
+    case "$TERM" in
+    xterm-color|xterm-256color)
+        export PS1="$color_prompt"
+        ;;
+    xterm)
+        export PS1="$color_prompt"
+        ;;
+    screen)
+        export PS1="$color_prompt"
+        ;;
+    *)
+        export PS1='\u@\h:\w'
+        ;;
+    esac
+
+    function __prompt_command() {
+        local EXIT="$?"             # This needs to be first
+
+        # Need to call the git branch and dirty fns ourselves, so exit code remains
+        # clean.
+        find_git_branch
+        find_git_dirty
+
+        local RCol='\[\e[0m\]'
+
+        local Red='\[\e[0;31m\]'
+        local Gre='\[\e[0;32m\]'
+        local BYel='\[\e[1;33m\]'
+        local BBlu='\[\e[1;34m\]'
+        local Pur='\[\e[0;35m\]'
+        local Blk='\[\e[0;30m\]'
+
+        local EXIT_STATE=""
+        if [ $EXIT != 0 ]; then
+            EXIT_STATE="${Red}^-- $EXIT${RCol} "
+        fi
+
+        local EMOJI_START=""
+        local EMOJI_END="$"
+        if [ $(uname -s) == "Darwin" ]; then
+            EMOJI_START="$(rand_element $starts) "
+            EMOJI_END=" $(rand_element $endings)${Blk}¸${RCol}"
+        fi
+
+        local USER_HOST="${Gre}\u${RCol}@${BBlu}\h${RCol}"
+        local DIR_PATH="${BBlu}\w${RCol}"
+
+        local GIT_STATE=""
+        if [ -f "$HOME/.bash/git-aware-prompt" ]; then
+            GIT_STATE="${Pur}\$git_branch${Red}\$git_dirty${RCol}"
+        fi
+
+        PS1="$EMOJI_START$EXIT_STATE$USER_HOST:$DIR_PATH $GIT_STATE$EMOJI_END "
+    }
+    export PROMPT_COMMAND="__prompt_command"
+fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
@@ -15,51 +104,13 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-export GITAWAREPROMPT="$HOME/.bash/git-aware-prompt"
-source $GITAWAREPROMPT/main.sh
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-color_prompt="\[$bldgrn\]\u@\h\[$txtrst\]:\[$bldblu\]\w\[$txtrst\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
-case "$TERM" in
-xterm-color|xterm-256color)
-    export PS1="$color_prompt"
-    ;;
-xterm)
-    export PS1="$color_prompt"
-    ;;
-screen)
-    export PS1="$color_prompt"
-    ;;
-*)
-    PS1='\T \u@\h:\w\$ '
-    ;;
-esac
-
 #
 # Include private defs (not in main file cuz this one's in my public github).
 #
-source $HOME/.private_profile
+if [ -f ~/.private_bashrc ]; then
+    source $HOME/.private_bashrc
+fi
 
-
-# Comment in the above and uncomment this below for a color prompt
-#PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-#if [ -f ~/.bash_aliases ]; then
-#    . ~/.bash_aliases
-#fi
-
-# enable color support of ls and also add handy aliases
-#if [ "$TERM" != "dumb" ]; then
-    #eval "`dircolors -b`"
-    #alias ls='ls --color=always'
-    #alias dir='ls --color=auto --format=vertical'
-    #alias vdir='ls --color=auto --format=long'
-#fi
 
 # some more ls aliases
 if [ $(uname) = "Darwin" ] ; then
@@ -67,62 +118,80 @@ if [ $(uname) = "Darwin" ] ; then
 else
    alias ls='ls --color'
 fi
-alias ll='ls -l'
-alias llh='ll -h'
-#alias la='ls -A'
-#alias l='ls -CF'
 
 alias screen="screen -T xterm-color"
+
+# Git Grep
+alias ggrep='grep -IR --exclude-dir ".git"'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+    source /etc/bash_completion
 fi
 
 # Take in all the custom completions too.
-if [ -f ~/Dropbox/Documents/LinuxEnvironment/bash_completion ]; then
-    for F in "$(ls ~/Dropbox/Documents/LinuxEnvironment/bash_completion/*.bash)"; do
-        if [ -f "$F" ]; then
-            . "$F"
-        fi
+if [ -f ~/.bash_completion ]; then
+    for F in "$(ls ~/.bash_completion/*.bash)"; do
+        source "$F"
     done
 fi
 
-export EDITOR=vim
-export PATH=$PATH:~/bin:~/scripts:/usr/local/bin:/usr/local/sbin
-
-alias grepsource="find . -name *.[ch] | xargs grep -n "
-
-alias sync_betascore="rsync -avz --exclude-from=/Users/heewa/src/betascout/config/rsync_excludes "
-
-#alias fin="if [ \$? = 0 ]; then ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send 'Done' '$USER@$HOSTNAME' -i face-smile -t 1000000\"; true; else ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send --urgency=critical 'Done FAILED' '$USER@$HOSTNAME' -i face-angry -t 1000000\"; false; fi"
+alias fin="if [ \$? = 0 ]; then ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send 'Done' '$USER@$HOSTNAME' -i face-smile -t 1000000\"; true; else ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send --urgency=critical 'Done FAILED' '$USER@$HOSTNAME' -i face-angry -t 1000000\"; false; fi"
 #alias done="if [ \$? = 0 ]; then echo true; else echo false; fi"
 
-# On mac, there are files in /etc/paths.d/ that contain more paths. Add them manually for screen's benefit.
-if [[ $IN_SCREEN && $(uname) == 'Darwin' ]]; then
-    export PATH=$PATH:$(cat /etc/paths.d/* | tr \\n : | sed 's/:\s*$//')
-fi
+alias macvim='open -a MacVim.app'
 
-alias my-pivotal='pivotal_tools show stories --project-index=7 --for=heewabarfchin'
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-#####
-##### Git
-#####
-alias gitfiles="git status -s | grep '^ M ' | sed -e 's:^...::'"
+# General Go
+MY_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):~/go/test'
+alias set_my_gopath="export GOPATH=$MY_GOPATH"
+alias gogrep='grep -IR --include "*.go" --exclude-dir "vendor" --exclude-dir ".vendor_for_old" --exclude-dir "Godeps" --exclude-dir ".git"'
+alias gotest='~/go/test/bin/ginkgo -notify -race --randomizeAllSpecs -p'
+alias gomake='make -f $HOME/.golang.Makefile'
+gorun() { gomake RUN_ARGS="$*" run ;}
 
+# Timehop Go
+TH_ENV='env $(grep -shv " *#" .env .local_env)'
+TH_GOPATH='$(echo $PWD | grep -o "$HOME/src/Timehop/[^/]*"):$(echo $PWD | grep -o "$HOME/src/Timehop/[^/]*/src/github.com/timehop/[^/]*")/Godeps/_workspace:~/go/test'
+alias thgo="$TH_ENV GOPATH=$TH_GOPATH go"
+alias thvim="GOPATH=~/go/vim:$TH_GOPATH vim"
+alias thgvim="GOPATH=~/go/vim:$TH_GOPATH gvim"
+alias thginkgo="$TH_ENV GOPATH=$TH_GOPATH ~/go/test/bin/ginkgo"
+
+# GoDep Based Go
+GD_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):Godeps/_workspace:~/go/test'
+alias set_godep_gopath="export GOPATH=$GD_GOPATH"
+alias gdgo="GOPATH=$GD_GOPATH go"
+alias gdvim="GOPATH=~/go/vim:$GD_GOPATH vim"
+alias gdgvim="GOPATH=~/go/vim:$GD_GOPATH gvim"
+alias gdginkgo="GOPATH=$GD_GOPATH ~/go/test/bin/ginkgo"
+
+# Vendor Based Go
+VENDOR_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):$PWD/.vendor_for_old:~/go/test'
+alias set_vendor_gopath="export GOPATH=$VENDOR_GOPATH"
+alias govim="GOPATH=~/go/vim:$VENDOR_GOPATH vim"
 
 # Colorize the Terminal for Mac
 export CLICOLOR=1;
 
+# Something about ruby?
+#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# Postgres DB
+alias pgstart='/usr/local/bin/postgres -D $PG_DATA_DIR -r /usr/local/var/postgres/server.log'
 
-##
-# Android SDK Development
-##
-export PATH=$PATH:~/src/android/sdk/tools
-export PATH=$PATH:~/src/android/sdk/platform-tools
-export ANDROID_HOME=$PATH:~/src/android/sdk
+# Node / io.js / nvm shit
+export NVM_DIR=~/.nvm
+if [ $(uname -s) == "Darwin" ]; then
+    source $(brew --prefix nvm)/nvm.sh
+fi
 
+# Preeeetty
+if [ $(uname -s) == "Darwin" ]; then
+    archey -c
+else
+    archey
+fi
