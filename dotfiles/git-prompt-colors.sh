@@ -65,12 +65,10 @@ override_git_prompt_colors() {
   # GIT_PROMPT_UPSTREAM=" {${Blue}_UPSTREAM_${ResetColor}}"
 
   ## _LAST_COMMAND_INDICATOR_ will be replaced by the appropriate GIT_PROMPT_COMMAND_OK OR GIT_PROMPT_COMMAND_FAIL
-  # Heewa: remove space between indicator & next, so empty success isn't a space
-  GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_${Yellow}${PathShort}${ResetColor}"
+  GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_\$(time_emoji)${Black}¸${White}${Time12a}${Yellow}${PathShort}${ResetColor}"
   GIT_PROMPT_START_ROOT="_LAST_COMMAND_INDICATOR_${GIT_PROMPT_START_USER}"
-  # Heewa: add time-based emoji
-  GIT_PROMPT_END_USER=" \n\$(time_emoji)${Black}¸${White}${Time12a}${ResetColor} $ "
-  # GIT_PROMPT_END_ROOT=" \n${White}${Time12a}${ResetColor} # "
+  GIT_PROMPT_END_USER="${ResetColor} $ "
+  GIT_PROMPT_END_ROOT=" ${Red}#${ResetColor} "
 
   ## Please do not add colors to these symbols
   # GIT_PROMPT_SYMBOLS_AHEAD="↑·"             # The symbol for "n versions ahead of origin"
