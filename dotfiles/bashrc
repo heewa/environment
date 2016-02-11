@@ -14,21 +14,33 @@
 #
 
 rand() {
-    printf $((  $1 *  RANDOM  / 32767   ))
+    echo $((  $1 *  RANDOM  / 32767   ))
 }
 
 rand_element () {
-    local -a th=("$@")
+    local -a th=(x "$@")
     unset th[0]
-    printf $'%s\n' "${th[$(($(rand "${#th[*]}")+1))]}"
+    echo "${th[$(($(rand "${#th[*]}")+1))]}"
 }
 
 # Emoji in prompt!!!
 starts="🌊 ⚡️ ☁️ ⭐️ 🌚 🌝 🌞 🌜 🌍 🌵 🌴 🍄 🎃 💻 📺 🛀 🚽 🛁 🎨 🎬 🎤 🎧 🎶 🎵 👾 🎲 ⚽️ 🏀 🏈 🚴 🏇 🏊 🏄 🏂 ☕️ 🍵 🍺 🍷 🍸 🍕 🍔 🍟 🍣 🍱 🍙 🍜 🍳 🍦 🍧 🍰 🍭 🍒 🍋 🍉 🍑 🍌 🍍 🍆 🏩 🌇 🌆 🏯 🏰 ⛺️ 🌄 🌅 🗽 🌃 🌉 🎢 ⛵️ 🚀 ✈️ 🚁 🚎 🚌 🚕 🚛 🚲 "
 endings="🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐗 🐵 🐒 🐴 🐑 🐘 🐼 🐧 🐦 🐤 🐥 🐣 🐔 🐍 🐢 🐛 🐝 🐜 🐞 🐌 🐙 🐠 🐟 🐬 🐳 🐋 🐄 🐏 🐀 🐃 🐅 🐇 🐉 🐎 🐐 🐓 🐕 🐖 🐁 🐂 🐲 🐡 🐊 🐫 🐪 🐆 🐈 🐩 ⛄️ 🙈 🙉 🙊 💀 👽 💩 👾 👻 🎅"
 
+# Pick a random emoji per category, consistent for a term session
+morning_emoji="$(rand_element 🌄 ☀️ ☕️ 🍳 🍞 🐓 🐔 )"
+day_emoji="$(rand_element 🌲 🌳 🌴 🌵 🌷 🌺 🌸 🌹 🌻 🌼 💐 🌾 🌿 🍀 🍁 🍂 🍃 🍄 ☀️ ⛅️ ☁️ ☔️ 🌈 🌊 🗻 🌍 🌞 💻 🚽 📚 ✂️ 🔪 )"
+food_emoji="$(rand_element 🍔 🍕 🍖 🍗 🍘 🍙 🍚 🍛 🍜 🍝 🍞 🍟 🍣 🍤 🍥 🍱 🍲 🍳 🍴 )"
+snack_emoji="$(rand_element 🍏 🍇 🍉 🍊 🍌 🍍 🍑 🍒 🍓 🍡 🍢 🍦 🍧 🍨 🍩 🍪 🍫 🍬 🍭 🍮 🍰 )"
+drink_emoji="$(rand_element 🍷 🍸 🍶 🍹 🍺 🍻 )"
+night_emoji="$(rand_element 😴 🌠 🌑 🌒 🌔 🌖 🌘 🌚 🌝 🌛 🌜 ⛺️ 🌃 🌉 🌌 )"
+
+
 if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
     source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+
+    # Don't fetch remote every prompt!
+    export GIT_PROMPT_FETCH_REMOTE_STATUS=0
 else
     if [ -f "$HOME/.bash/git-aware-prompt" ]; then
         export GITAWAREPROMPT="$HOME/.bash/git-aware-prompt"

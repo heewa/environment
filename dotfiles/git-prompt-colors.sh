@@ -1,3 +1,27 @@
+time_emoji() {
+    now=$(date +%k%M)
+
+    if [ $now -lt 600 ]; then
+        TE="$night_emoji"
+    elif [ $now -lt 1000 ]; then
+        TE="$morning_emoji"
+    elif [ $now -lt 1200 ]; then
+        TE="$day_emoji"
+    elif [ $now -lt 1330 ]; then
+        TE="$food_emoji"
+    elif [ $now -lt 1700 ]; then
+        TE="$day_emoji"
+    elif [ $now -lt 1900 ]; then
+        TE="$snack_emoji"
+    elif [ $now -lt 2200 ]; then
+        TE="$drink_emoji"
+    else
+        TE="$night_emoji"
+    fi
+
+    echo "$TE"
+}
+
 override_git_prompt_colors() {
   GIT_PROMPT_THEME_NAME="Default"
 
@@ -44,7 +68,8 @@ override_git_prompt_colors() {
   # Heewa: remove space between indicator & next, so empty success isn't a space
   GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_${Yellow}${PathShort}${ResetColor}"
   GIT_PROMPT_START_ROOT="_LAST_COMMAND_INDICATOR_${GIT_PROMPT_START_USER}"
-  # GIT_PROMPT_END_USER=" \n${White}${Time12a}${ResetColor} $ "
+  # Heewa: add time-based emoji
+  GIT_PROMPT_END_USER=" \n\$(time_emoji)${Black}¸${White}${Time12a}${ResetColor} $ "
   # GIT_PROMPT_END_ROOT=" \n${White}${Time12a}${ResetColor} # "
 
   ## Please do not add colors to these symbols
