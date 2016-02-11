@@ -104,7 +104,7 @@ fi
 # Golang Makefile
 echo
 echo '==] Getting Golang Makefile from git gist'
-curl -L 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/9fe626c566ba71bec13d581b6aa75e4a19470562/Makefile' > $HOME/.golang.Makefile
+curl -sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
 
 echo
 echo '==] Done'
