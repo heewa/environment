@@ -54,8 +54,7 @@ done
 #
 
 # Homebrew
-if [[ "$(which brew)" ]]; then
-else
+if [[ "$(which brew)" == "" ]]; then
     echo
     echo '==] Installing homebrew'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -64,7 +63,19 @@ fi
 # Homebrew packages
 echo
 echo '==] Installing homebrew packages'
-brew install archey curl git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch
+for package in "archey curl git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch"; do
+    if [[ "$(brew info --versions $package)" == "" ]]; then
+        brew install $pacakage
+    fi
+done
+
+echo
+echo '==] Installing devel-version homebrew packages'
+for package in "go"; do
+    if [[ "$(brew info --versions $package)" == "" ]]; then
+        brew install --devel $pacakage
+    fi
+done
 
 # git aware prompt
 echo
