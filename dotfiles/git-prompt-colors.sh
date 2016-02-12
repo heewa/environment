@@ -19,7 +19,7 @@ time_emoji() {
         TE="$night_emoji"
     fi
 
-    echo "$TE"
+    echo "$(rand_element_by_time $TE)"
 }
 
 override_git_prompt_colors() {
