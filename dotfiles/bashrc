@@ -71,13 +71,13 @@ endings="🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐗 🐵 �
 
 # NOTE: it's important that emojis are separated by space, and the last one
 # isn't followed by a space.
-HOURS_IN_YEAR=$(( 24 * 31 * 12 ))
-MORNING_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🌄 ☀️ ☕️ 🍳 🍞 🐓 🐔)
-DAY_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🌲 🌳 🌴 🌵 🌷 🌺 🌸 🌹 🌻 🌼 💐 🌾 🌿 🍀 🍁 🍂 🍃 🍄 ☀️ ⛅️ ☁️ ☔️ 🌈 🌊 🗻 🌍 🌞 💻 🚽 📚 ✂️ 🔪)
-FOOD_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🍔 🍕 🍖 🍗 🍘 🍙 🍚 🍛 🍜 🍝 🍞 🍟 🍣 🍤 🍥 🍱 🍲 🍳 🍴)
-SNACK_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🍏 🍇 🍉 🍊 🍌 🍍 🍑 🍒 🍓 🍡 🍢 🍦 🍧 🍨 🍩 🍪 🍫 🍬 🍭 🍮 🍰)
-DRINK_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🍷 🍸 🍶 🍹 🍺 🍻)
-NIGHT_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 😴 🌠 🌑 🌒 🌔 🌖 🌘 🌚 🌝 🌛 🌜 ⛺️ 🌃 🌉 🌌)
+HOURS_IN_MONTH=$(( 24 * 31 ))
+MORNING_EMOJI=$(SHUFFLE_LIST $HOURS_IN_MONTH 🌄 ☀️ ☕️ 🍳 🍞 🐓 🐔)
+DAY_EMOJI=$(SHUFFLE_LIST $HOURS_IN_MONTH 🌲 🌳 🌴 🌵 🌷 🌺 🌸 🌹 🌻 🌼 💐 🌾 🌿 🍀 🍁 🍂 🍃 🍄 ☀️ ⛅️ ☁️ ☔️ 🌈 🌊 🗻 🌍 🌞 💻 🚽 📚 ✂️ 🔪)
+FOOD_EMOJI=$(SHUFFLE_LIST $HOURS_IN_MONTH 🍔 🍕 🍖 🍗 🍘 🍙 🍚 🍛 🍜 🍝 🍞 🍟 🍣 🍤 🍥 🍱 🍲 🍳 🍴)
+SNACK_EMOJI=$(SHUFFLE_LIST $HOURS_IN_MONTH 🍏 🍇 🍉 🍊 🍌 🍍 🍑 🍒 🍓 🍡 🍢 🍦 🍧 🍨 🍩 🍪 🍫 🍬 🍭 🍮 🍰)
+DRINK_EMOJI=$(SHUFFLE_LIST $HOURS_IN_MONTH 🍷 🍸 🍶 🍹 🍺 🍻)
+NIGHT_EMOJI=$(SHUFFLE_LIST $HOURS_IN_MONTH 😴 🌠 🌑 🌒 🌔 🌖 🌘 🌚 🌝 🌛 🌜 ⛺️ 🌃 🌉 🌌)
 
 
 if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
@@ -199,7 +199,8 @@ alias fin="if [ \$? = 0 ]; then ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/
 
 alias macvim='open -a MacVim.app'
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# Disabled cuz slow:
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # General Go
 MY_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):~/go/test'
@@ -233,17 +234,15 @@ alias govim="GOPATH=~/go/vim:$VENDOR_GOPATH vim"
 # Colorize the Terminal for Mac
 export CLICOLOR=1;
 
-# Something about ruby?
-#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 # Postgres DB
 alias pgstart='/usr/local/bin/postgres -D $PG_DATA_DIR -r /usr/local/var/postgres/server.log'
 
+# Disabled cuz slow:
 # Node / io.js / nvm shit
-export NVM_DIR=~/.nvm
-if [ $(uname -s) == "Darwin" ]; then
-    source $(brew --prefix nvm)/nvm.sh
-fi
+#export NVM_DIR=~/.nvm
+#if [ $(uname -s) == "Darwin" ]; then
+#    source $(brew --prefix nvm)/nvm.sh
+#fi
 
 # Preeeetty
 if [ $(uname -s) == "Darwin" ]; then
