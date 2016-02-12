@@ -1,25 +1,24 @@
 time_emoji() {
-    now=$(date +%k%M)
+    local now=$(date +%k%M)
+    local TE="$night_emoji"
 
     if [ $now -lt 600 ]; then
-        TE="$night_emoji"
+        TE="$NIGHT_EMOJI"
     elif [ $now -lt 1000 ]; then
-        TE="$morning_emoji"
+        TE="$MORNING_EMOJI"
     elif [ $now -lt 1200 ]; then
-        TE="$day_emoji"
+        TE="$DAY_EMOJI"
     elif [ $now -lt 1330 ]; then
-        TE="$food_emoji"
+        TE="$FOOD_EMOJI"
     elif [ $now -lt 1700 ]; then
-        TE="$day_emoji"
+        TE="$DAY_EMOJI"
     elif [ $now -lt 1900 ]; then
-        TE="$snack_emoji"
+        TE="$SNACK_EMOJI"
     elif [ $now -lt 2200 ]; then
-        TE="$drink_emoji"
-    else
-        TE="$night_emoji"
+        TE="$DRINK_EMOJI"
     fi
 
-    echo "$(rand_element_by_time $TE)"
+    echo "$(RAND_ELEMENT_BY_TIME $TE)"
 }
 
 override_git_prompt_colors() {

@@ -23,28 +23,61 @@ rand_element () {
     echo "${th[$(($(rand "${#th[*]}")+1))]}"
 }
 
+# Return a list of repeated shuffles of the input list by building and
+# running a python script. The length of the result is the first argument
+# to the fn.
+SHUFFLE_LIST() {
+    local num=$(( 0 + $1 ))  # error here, not python
+    shift
+
+    local things=($@)
+    if (( ${#things[@]} == 0 )); then
+        echo ''
+    else
+        echo $(python << EOF
+# -*- coding: UTF-8 -*-
+import random
+e='${things[@]}'.strip().split()
+all=[]
+while len(all) < $num:
+    random.shuffle(e)
+    all += e
+print ' '.join(all[:$num])
+EOF)
+    fi
+}
+
 # Pick an element based on time & pid of current shell ($$). It changes every
 # hour, and is different for each shell.
-rand_element_by_time () {
-    local -a th=("$@")
-    unset th[0]
-    index_by_hour=$(( ${#th[*]} * $(date +%k) / 24 + $$ % 24))
-    echo "${th[$(($index_by_hour))]}"
+RAND_ELEMENT_BY_TIME () {
+    # Put the args into a named list, so we can use it as an array
+    local things=($@)
+
+    local len=${#things[@]}
+    if (( $len == 0 )); then
+        echo ''
+    else
+        # Indx by hour, day, month, to avoid loops. But that's best if list is
+        # long or the repeat-sequence is jittered.
+        local hour_of_year=$(date '+ ( %H + 24*(%d-1) + 24*31*(%m-1) )' | bc)
+        local index=$(( $hour_of_year % $len ))
+        echo "${things[$index]}"
+    fi
 }
 
 # Emoji in prompt!!!
 starts="🌊 ⚡️ ☁️ ⭐️ 🌚 🌝 🌞 🌜 🌍 🌵 🌴 🍄 🎃 💻 📺 🛀 🚽 🛁 🎨 🎬 🎤 🎧 🎶 🎵 👾 🎲 ⚽️ 🏀 🏈 🚴 🏇 🏊 🏄 🏂 ☕️ 🍵 🍺 🍷 🍸 🍕 🍔 🍟 🍣 🍱 🍙 🍜 🍳 🍦 🍧 🍰 🍭 🍒 🍋 🍉 🍑 🍌 🍍 🍆 🏩 🌇 🌆 🏯 🏰 ⛺️ 🌄 🌅 🗽 🌃 🌉 🎢 ⛵️ 🚀 ✈️ 🚁 🚎 🚌 🚕 🚛 🚲 "
 endings="🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐗 🐵 🐒 🐴 🐑 🐘 🐼 🐧 🐦 🐤 🐥 🐣 🐔 🐍 🐢 🐛 🐝 🐜 🐞 🐌 🐙 🐠 🐟 🐬 🐳 🐋 🐄 🐏 🐀 🐃 🐅 🐇 🐉 🐎 🐐 🐓 🐕 🐖 🐁 🐂 🐲 🐡 🐊 🐫 🐪 🐆 🐈 🐩 ⛄️ 🙈 🙉 🙊 💀 👽 💩 👾 👻 🎅"
 
-# Pick a random emoji per category, consistent for a term session.
 # NOTE: it's important that emojis are separated by space, and the last one
 # isn't followed by a space.
-morning_emoji="🌄 ☀️ ☕️ 🍳 🍞 🐓 🐔"
-day_emoji="🌲 🌳 🌴 🌵 🌷 🌺 🌸 🌹 🌻 🌼 💐 🌾 🌿 🍀 🍁 🍂 🍃 🍄 ☀️ ⛅️ ☁️ ☔️ 🌈 🌊 🗻 🌍 🌞 💻 🚽 📚 ✂️ 🔪"
-food_emoji="🍔 🍕 🍖 🍗 🍘 🍙 🍚 🍛 🍜 🍝 🍞 🍟 🍣 🍤 🍥 🍱 🍲 🍳 🍴"
-snack_emoji="🍏 🍇 🍉 🍊 🍌 🍍 🍑 🍒 🍓 🍡 🍢 🍦 🍧 🍨 🍩 🍪 🍫 🍬 🍭 🍮 🍰"
-drink_emoji="🍷 🍸 🍶 🍹 🍺 🍻"
-night_emoji="😴 🌠 🌑 🌒 🌔 🌖 🌘 🌚 🌝 🌛 🌜 ⛺️ 🌃 🌉 🌌"
+HOURS_IN_YEAR=$(( 24 * 31 * 12 ))
+MORNING_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🌄 ☀️ ☕️ 🍳 🍞 🐓 🐔)
+DAY_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🌲 🌳 🌴 🌵 🌷 🌺 🌸 🌹 🌻 🌼 💐 🌾 🌿 🍀 🍁 🍂 🍃 🍄 ☀️ ⛅️ ☁️ ☔️ 🌈 🌊 🗻 🌍 🌞 💻 🚽 📚 ✂️ 🔪)
+FOOD_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🍔 🍕 🍖 🍗 🍘 🍙 🍚 🍛 🍜 🍝 🍞 🍟 🍣 🍤 🍥 🍱 🍲 🍳 🍴)
+SNACK_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🍏 🍇 🍉 🍊 🍌 🍍 🍑 🍒 🍓 🍡 🍢 🍦 🍧 🍨 🍩 🍪 🍫 🍬 🍭 🍮 🍰)
+DRINK_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 🍷 🍸 🍶 🍹 🍺 🍻)
+NIGHT_EMOJI=$(SHUFFLE_LIST $HOURS_IN_YEAR 😴 🌠 🌑 🌒 🌔 🌖 🌘 🌚 🌝 🌛 🌜 ⛺️ 🌃 🌉 🌌)
 
 
 if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
