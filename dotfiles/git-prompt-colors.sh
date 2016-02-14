@@ -1,6 +1,6 @@
 time_emoji() {
     local now=$(date +%k%M)
-    local TE="$night_emoji"
+    local TE="$NIGHT_EMOJI"
 
     if [ $now -lt 600 ]; then
         TE="$NIGHT_EMOJI"
