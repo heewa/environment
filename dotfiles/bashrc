@@ -80,7 +80,7 @@ DRINK_EMOJI=$(SHUFFLE_LIST $HOURS_IN_MONTH 🍷 🍸 🍶 🍹 🍺 🍻)
 NIGHT_EMOJI=$(SHUFFLE_LIST $HOURS_IN_MONTH 😴 🌠 🌑 🌒 🌔 🌖 🌘 🌚 🌝 🌛 🌜 ⛺️ 🌃 🌉 🌌)
 
 
-if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+if [[ $(which brew) != "" && -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
     source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 
     # Don't fetch remote every prompt!
