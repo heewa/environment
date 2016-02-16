@@ -34,7 +34,8 @@ SHUFFLE_LIST() {
     if (( ${#things[@]} == 0 )); then
         echo ''
     else
-        echo $(python << EOF
+        local PY
+        read -d '' PY <<EOF
 # -*- coding: UTF-8 -*-
 import random
 e='${things[@]}'.strip().split()
@@ -43,7 +44,8 @@ while len(all) < $num:
     random.shuffle(e)
     all += e
 print ' '.join(all[:$num])
-EOF)
+EOF
+        echo $(echo "$PY" | python)
     fi
 }
 
