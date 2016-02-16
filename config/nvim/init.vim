@@ -30,7 +30,7 @@ set ignorecase
 
 " Syntax highlighting
 syntax on
-colorscheme heewa
+silent! colorscheme heewa " Only load 'heewa' colorscheme if it exists (ignore errors)
 filetype on           " try to detect syntax from filetype
 au BufNewFile,BufRead *.handlebars set filetype=htmldjango
 set nofoldenable    " disable folding
