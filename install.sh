@@ -20,7 +20,7 @@ echo '==] SymLinking ~/.rc files'
 ln -vsf $PWD/dotfiles/bash_profile ~/.bash_profile
 ln -vsf $PWD/dotfiles/profile ~/.profile
 ln -vsf $PWD/dotfiles/bashrc ~/.bashrc
-ln -vsfh $PWD/dotfiles/bash_completion ~/.bash_completion
+ln -vsfh $PWD/dotfiles/bash_completion.d ~/.bash_completion.d
 ln -vsf $PWD/dotfiles/screenrc ~/.screenrc
 ln -vsf $PWD/dotfiles/gitconfig ~/.gitconfig
 ln -vsf $PWD/dotfiles/gitignore ~/.gitignore

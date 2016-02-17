@@ -190,8 +190,8 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Take in all the custom completions too.
-if [ -d ~/.bash_completion ]; then
-    for F in $(ls ~/.bash_completion/*.bash); do
+if [ -d ~/.bash_completion.d ]; then
+    for F in $(ls ~/.bash_completion.d/*.bash); do
         source $F
     done
 fi
