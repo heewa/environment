@@ -189,6 +189,11 @@ if [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
 fi
 
+# Homebrew's completions
+if [[ $(which brew) != "" && -f $(brew --prefix)/etc/bash_completion ]]; then
+    source $(brew --prefix)/etc/bash_completion
+fi
+
 # Take in all the custom completions too.
 if [ -d ~/.bash_completion.d ]; then
     for F in $(ls ~/.bash_completion.d/*.bash); do

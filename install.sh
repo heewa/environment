@@ -66,7 +66,7 @@ fi
 # Homebrew packages
 echo
 echo '==] Installing homebrew packages'
-for package in "archey curl git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch"; do
+for package in "archey curl git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch bash-completion"; do
     if [[ "$(brew info --versions $package)" == "" ]]; then
         brew install $pacakage
     fi
