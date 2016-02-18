@@ -80,6 +80,10 @@ for package in "go"; do
     fi
 done
 
+echo
+echo '==] Installing python packages'
+pip install --upgrade awscli
+
 # git aware prompt
 echo
 echo '==] Installing HEAD-version homebrew packages'

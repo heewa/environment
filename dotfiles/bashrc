@@ -201,6 +201,11 @@ if [ -d ~/.bash_completion.d ]; then
     done
 fi
 
+# Ugh, manual completions
+if [[ $(which aws_completer) != "" ]]; then
+    complete -C aws_completer aws
+fi
+
 alias fin="if [ \$? = 0 ]; then ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send 'Done' '$USER@$HOSTNAME' -i face-smile -t 1000000\"; true; else ssh heewa@heewa-dev1 -t \"DISPLAY=:0.0 /usr/bin/notify-send --urgency=critical 'Done FAILED' '$USER@$HOSTNAME' -i face-angry -t 1000000\"; false; fi"
 #alias done="if [ \$? = 0 ]; then echo true; else echo false; fi"
 
