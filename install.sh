@@ -66,7 +66,7 @@ fi
 # Homebrew packages
 echo
 echo '==] Installing homebrew packages'
-for package in "archey curl git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch bash-completion"; do
+for package in "archey git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch bash-completion"; do
     if [[ "$(brew info --versions $package)" == "" ]]; then
         brew install $pacakage
     fi
@@ -79,6 +79,12 @@ for package in "go"; do
         brew install --devel $pacakage
     fi
 done
+
+echo
+echo '==] Installing homebrew packages with options'
+if [[ "$(brew info --versions curl)" == "" ]]; then
+    brew install --with-openssl --with-nghttp2 curl
+fi
 
 echo
 echo '==] Installing python packages'
