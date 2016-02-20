@@ -52,6 +52,16 @@ for DBoxDir in Documents; do
     fi
 done
 
+echo
+echo '==] Pretty, pretty emoji prompts'
+if [ -f "$HOME/src/Heewa/emoji-prompt/emoji-prompt.sh" ]; then
+    echo 'Linking from git repo'
+    ln -vsf $HOME/src/Heewa/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh
+else
+    echo 'Downloading from git repo'
+    curl 'https://github.com/heewa/emoji-prompt/blob/master/emoji-prompt.sh' > ~/.emoji-prompt.sh
+fi
+
 #
 # External additions
 #
