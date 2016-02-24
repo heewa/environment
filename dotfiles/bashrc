@@ -164,7 +164,7 @@ alias macvim='open -a MacVim.app'
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # General Go
-MY_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):~/go/test'
+MY_GOPATH='$(echo $PWD | sed "s:\($HOME/src/[^/]*/[^/]*\)/src/.*:\1:"):~/go/test'
 alias set_my_gopath="export GOPATH=$MY_GOPATH"
 alias gogrep='grep -IR --include "*.go" --exclude-dir "vendor" --exclude-dir ".vendor_for_old" --exclude-dir "Godeps" --exclude-dir ".git"'
 alias gotest='~/go/test/bin/ginkgo -notify -race --randomizeAllSpecs -p'
