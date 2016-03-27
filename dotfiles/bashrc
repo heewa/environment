@@ -27,6 +27,10 @@ rand_element () {
 starts="🌊 ⚡️ ☁️ ⭐️ 🌚 🌝 🌞 🌜 🌍 🌵 🌴 🍄 🎃 💻 📺 🛀 🚽 🛁 🎨 🎬 🎤 🎧 🎶 🎵 👾 🎲 ⚽️ 🏀 🏈 🚴 🏇 🏊 🏄 🏂 ☕️ 🍵 🍺 🍷 🍸 🍕 🍔 🍟 🍣 🍱 🍙 🍜 🍳 🍦 🍧 🍰 🍭 🍒 🍋 🍉 🍑 🍌 🍍 🍆 🏩 🌇 🌆 🏯 🏰 ⛺️ 🌄 🌅 🗽 🌃 🌉 🎢 ⛵️ 🚀 ✈️ 🚁 🚎 🚌 🚕 🚛 🚲 "
 endings="🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐗 🐵 🐒 🐴 🐑 🐘 🐼 🐧 🐦 🐤 🐥 🐣 🐔 🐍 🐢 🐛 🐝 🐜 🐞 🐌 🐙 🐠 🐟 🐬 🐳 🐋 🐄 🐏 🐀 🐃 🐅 🐇 🐉 🐎 🐐 🐓 🐕 🐖 🐁 🐂 🐲 🐡 🐊 🐫 🐪 🐆 🐈 🐩 ⛄️ 🙈 🙉 🙊 💀 👽 💩 👾 👻 🎅"
 
+if [ -f ~/.emoji_vars.sh ]; then
+    source ~/.emoji_vars.sh
+fi
+
 if [ -f ~/.emoji-prompt.sh ]; then
     source ~/.emoji-prompt.sh
 fi

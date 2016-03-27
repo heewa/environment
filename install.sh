@@ -59,7 +59,17 @@ if [ -f "$HOME/src/Heewa/emoji-prompt/emoji-prompt.sh" ]; then
     ln -vsf $HOME/src/Heewa/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh
 else
     echo 'Downloading from git repo'
-    curl 'https://github.com/heewa/emoji-prompt/blob/master/emoji-prompt.sh' > ~/.emoji-prompt.sh
+    curl 'https://raw.githubusercontent.com/heewa/emoji-prompt/master/emoji-prompt.sh' > ~/.emoji-prompt.sh
+fi
+
+echo
+echo '==] Pretty, pretty emoji env vars'
+if [ -f "$HOME/src/Heewa/bae/emoji_vars.sh" ]; then
+    echo 'Linking from git repo'
+    ln -vsf $HOME/src/Heewa/bae/emoji_vars.sh $HOME/.emoji_vars.sh
+else
+    echo 'Downloading from git repo'
+    curl 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > ~/.emoji_vars.sh
 fi
 
 #
