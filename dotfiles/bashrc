@@ -196,6 +196,9 @@ VENDOR_GOPATH='$(echo $PWD | sed "s:\($HOME/src/.*\)/src/github.com.*:\1:"):$PWD
 alias set_vendor_gopath="export GOPATH=$VENDOR_GOPATH"
 alias govim="GOPATH=~/go/vim:$VENDOR_GOPATH vim"
 
+# AMG
+alias psql_redshift='psql -d amg -h mordor.amg.sh -p 5439 -U heewa'
+
 # Colorize the Terminal for Mac
 export CLICOLOR=1;
 
