@@ -221,3 +221,6 @@ if [ $(uname -s) == "Darwin" ]; then
 elif [[ $(which archey) != "" ]]; then
     archey
 fi
+
+# Fine, rmv, I guess... ugh...
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
