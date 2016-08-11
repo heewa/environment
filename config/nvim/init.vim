@@ -111,6 +111,7 @@ if has('nvim')
     Plug 'majutsushi/tagbar'
     "Plug 'scrooloose/syntastic'
     "Plug 'myint/syntastic-extras'
+    Plug 'editorconfig/editorconfig-vim'
 
     call plug#end()
 
