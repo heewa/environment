@@ -68,8 +68,10 @@ else
 
         # Need to call the git branch and dirty fns ourselves, so exit code remains
         # clean.
-        find_git_branch
-        find_git_dirty
+        if [ -f "$HOME/.bash/git-aware-prompt/main.sh" ]; then
+            find_git_branch
+            find_git_dirty
+        fi
 
         local RCol='\[\e[0m\]'
 
