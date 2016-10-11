@@ -117,6 +117,9 @@ if has('nvim')
 
     call plug#end()
 
+    " Use flake8 & pep8 for python checking, mainly cuz pylint is annoying
+    let g:neomake_python_enabled_makers = ['flake8', 'pep8']
+
     " YouCompleteMe symbol jumping for C files
     autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
     " YouCompelteMe - don't ask for confirmation to load python conf file (.ycm_extra_conf.py)
