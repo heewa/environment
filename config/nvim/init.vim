@@ -106,7 +106,7 @@ if has('nvim')
     Plug 'tpope/vim-fugitive'
 
     " Syntax Checkers & Autocompleters
-    Plug 'Valloric/YouCompleteMe'
+    "Plug 'Valloric/YouCompleteMe'
     Plug 'benekastah/neomake'
     Plug 'majutsushi/tagbar'
     "Plug 'scrooloose/syntastic'
