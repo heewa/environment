@@ -113,6 +113,8 @@ if has('nvim')
     "Plug 'myint/syntastic-extras'
     Plug 'editorconfig/editorconfig-vim'
 
+    Plug 'ternjs/tern_for_vim'
+
     call plug#end()
 
     " YouCompleteMe symbol jumping for C files
