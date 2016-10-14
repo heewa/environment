@@ -134,8 +134,9 @@ fi
 
 alias screen="screen -T xterm-color"
 
-# Git Grep
+# Grep helpers, to filter out common dirs
 alias ggrep='grep -IR --exclude-dir ".git"'
+alias jsgrep='ggrep --exclude-dir "node_modules"'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
