@@ -3,7 +3,14 @@
     ll = log --color --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat --date=relative
     lstags = log --date-order --graph --tags --simplify-by-decoration --pretty=format:'%ai %h %d'
     stat = status -sb
-    pr = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
+    pr = "!f() { \
+            pr_num=$1; \
+            local_branch=$2; \
+            if [ -z $local_branch ]; then \
+                local_branch=pr/$1; \
+            fi; \
+            git fetch origin refs/pull/$pr_num/head:$local_branch; \
+        }; f"
     amend = commit --amend --no-edit
 [color]
 	ui = true
