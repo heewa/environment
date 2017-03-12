@@ -1,3 +1,6 @@
+# Fix their ResetColor, via: http://unix.stackexchange.com/questions/217479/bash-doesnt-calculate-prompt-length-correctly
+ResetColor=$(tput sgr0)
+
 override_git_prompt_colors() {
   GIT_PROMPT_THEME_NAME="Default"
 
