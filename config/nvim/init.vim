@@ -118,6 +118,11 @@ if has('nvim')
 
     Plug 'ternjs/tern_for_vim'
 
+    Plug 'mxw/vim-jsx'
+    Plug 'pangloss/vim-javascript'
+    Plug 'othree/javascript-libraries-syntax.vim'
+    "Plug 'kien/rainbow_parentheses.vim'
+
     " Colors, yay!
     Plug 'tssm/fairyfloss.vim'
     Plug 'romainl/flattened'
