@@ -222,11 +222,11 @@ alias list_ec2="aws ec2 describe-instances --output text --query 'Reservations[*
 eval "$(rbenv init -)"
 
 # Preeeetty
-if [ $(uname -s) == "Darwin" ]; then
-    archey -c
-elif [[ $(which archey) != "" ]]; then
-    archey
-fi
+#if [ $(uname -s) == "Darwin" ]; then
+#    archey -c
+#elif [[ $(which archey) != "" ]]; then
+#    archey
+#fi
 
 # Fine, rmv, I guess... ugh...
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
