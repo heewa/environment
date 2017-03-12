@@ -128,6 +128,10 @@ if has('nvim')
     " Use flake8 & pep8 for python checking, mainly cuz pylint is annoying
     let g:neomake_python_enabled_makers = ['flake8', 'pep8']
 
+    " Use only eslint for js, cuz jshint doesn't work well for jsx (unless
+    " you can figure out how to only target jsx files)
+    let g:neomake_javascript_enabled_makers = ['eslint']
+
     " YouCompleteMe symbol jumping for C files
     autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
     " YouCompelteMe - don't ask for confirmation to load python conf file (.ycm_extra_conf.py)
