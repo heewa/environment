@@ -28,9 +28,12 @@ set wildignore=*.pyc,*.o,*.obj,*.bak,*.exe  " tab complete ignores these!
 let g:netrw_list_hide= '^.DS_Store$,.*\.pyc$,.*\.o$,.*\.obj$,.*\.bak$,.*\.exe$,.*\.swp$'   " Files to ignore in Explorer
 set ignorecase
 
-" Syntax highlighting
+" Color Syntax highlighting
 syntax on
-silent! colorscheme heewa " Only load 'heewa' colorscheme if it exists (ignore errors)
+set termguicolors  " True Color support
+silent! colorscheme heewa " Only load colorscheme if it exists (ignore errors)
+"silent! colorscheme fairyfloss " Only load colorscheme if it exists (ignore errors)
+
 filetype on           " try to detect syntax from filetype
 au BufNewFile,BufRead *.handlebars set filetype=htmldjango
 set nofoldenable    " disable folding
@@ -114,6 +117,11 @@ if has('nvim')
     Plug 'editorconfig/editorconfig-vim'
 
     Plug 'ternjs/tern_for_vim'
+
+    " Colors, yay!
+    Plug 'tssm/fairyfloss.vim'
+    Plug 'romainl/flattened'
+    Plug 'morhetz/gruvbox'
 
     call plug#end()
 
