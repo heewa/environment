@@ -130,6 +130,14 @@ if has('nvim')
     Plug 'romainl/flattened'
     Plug 'morhetz/gruvbox'
 
+    " Load local .lvimrc files from root up to current dir
+    Plug 'embear/vim-localvimrc'
+
+    " Remember permission for .lvimrc files across sessions if answered with
+    " capital Y/N/A
+    let g:localvimrc_persistent = 1
+
+
     call plug#end()
 
     " Use flake8 & pep8 for python checking, mainly cuz pylint is annoying
