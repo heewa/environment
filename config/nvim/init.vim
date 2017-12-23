@@ -86,6 +86,8 @@ set splitright  " So that vertical splits start on the right
 " the search term, so you can use 'n' and 'N' to jump to matches.
 nnoremap <F10> :set invhls<CR>:let @/="<C-r><C-w>"<CR>/<BS>
 
+set mouse=a  " MOUSE SUPPORT, FUCK YEA!
+
 if has('nvim')
 
     call plug#begin()
@@ -179,7 +181,6 @@ else " regular old vim
     set nocompatible   " Disable vi-compatibility (needed for fancy plugins)
     set autoindent
     set backspace=2    " Backspace in insert mode
-    set mouse=a  " MOUSE SUPPORT, FUCK YEA!
     set wildmenu                     " better tab complete menu
 
     " Pathogen, for easier plugins.  https://github.com/tpope/vim-pathogen
