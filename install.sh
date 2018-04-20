@@ -38,7 +38,7 @@ ln -vsf /usr/local/bin/vim $HOME/bin/oldvim
 # Create dropbox symlinks, even if Dropbox isn't updated yet.
 echo
 echo '==] SymLinking Dropbox Dirs'
-for DBoxDir in Documents; do
+for DBoxDir in ''; do
     if [[ ! -e "$HOME/$DBoxDir" && ! -L "$HOME/$DBoxDir" ]]; then
         ln -vs $HOME/Dropbox/$DBoxDir $HOME/
     elif [[ ! -L "$HOME/$DBoxDir" ]]; then
@@ -87,7 +87,7 @@ fi
 # Homebrew packages
 echo
 echo '==] Installing homebrew packages'
-for package in "archey git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch bash-completion"; do
+for package in "archey git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch bash-completion bash-git-prompt"; do
     if [[ "$(brew info --versions $package)" == "" ]]; then
         brew install $pacakage
     fi
