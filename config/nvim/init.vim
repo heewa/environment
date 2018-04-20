@@ -120,6 +120,10 @@ if has('nvim')
 
     Plug 'ternjs/tern_for_vim'
 
+    " Elixir
+    Plug 'elixir-editors/vim-elixir'
+    Plug 'slashmili/alchemist.vim'
+
     Plug 'mxw/vim-jsx'
     Plug 'pangloss/vim-javascript'
     Plug 'othree/javascript-libraries-syntax.vim'
