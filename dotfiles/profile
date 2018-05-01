@@ -46,4 +46,4 @@ export NOSE_LOGFORMAT='[%(levelname)7s %(asctime)s %(filename)s:%(lineno)d %(fun
 export NODE_REPL_HISTORY_FILE=$HOME/.node_repl_history
 
 # Fine.. rvm, I guess... ugh...
-export PATH="$PATH:$HOME/.rvm/bin"
+#export PATH="$PATH:$HOME/.rvm/bin"
