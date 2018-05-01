@@ -47,3 +47,7 @@ export NODE_REPL_HISTORY_FILE=$HOME/.node_repl_history
 
 # Fine.. rvm, I guess... ugh...
 #export PATH="$PATH:$HOME/.rvm/bin"
+
+# 2U - Vault
+export VAULT_ADDR=https://vault.prod.2u.com:8200/
+export VAULT_CACERT=$HOME/.certs/vault-ca.pem
