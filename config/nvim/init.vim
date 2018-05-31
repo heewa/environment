@@ -127,12 +127,16 @@ if has('nvim')
     Plug 'mxw/vim-jsx'
     Plug 'pangloss/vim-javascript'
     Plug 'othree/javascript-libraries-syntax.vim'
+    Plug 'othree/html5-syntax.vim'
+    Plug 'digitaltoad/vim-pug'
+    Plug 'kchmck/vim-coffee-script'
     "Plug 'kien/rainbow_parentheses.vim'
 
     " Colors, yay!
     Plug 'tssm/fairyfloss.vim'
     Plug 'romainl/flattened'
     Plug 'morhetz/gruvbox'
+    Plug 'flazz/vim-colorschemes'
 
     " Load local .lvimrc files from root up to current dir
     Plug 'embear/vim-localvimrc'
