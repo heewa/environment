@@ -118,6 +118,9 @@ if has('nvim')
     "Plug 'myint/syntastic-extras'
     Plug 'editorconfig/editorconfig-vim'
 
+    " Formatting
+    Plug 'sbdchd/neoformat'
+
     Plug 'ternjs/tern_for_vim'
 
     " Elixir
@@ -265,3 +268,9 @@ endif
 
 " Project-specific settings
 autocmd BufNewFile,BufRead ~/src/Polaroid/**/*.js,~/src/Polaroid/**/*.jsx setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+" Project-specific settings
+augroup fmtRedlight
+  autocmd!
+  autocmd BufWritePre ~/src/2u/redlight3/**/*.js undojoin | Neoformat
+augroup END
