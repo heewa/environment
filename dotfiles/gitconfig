@@ -3,6 +3,18 @@
     ll = log --color --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat --date=relative
     lstags = log --date-order --graph --tags --simplify-by-decoration --pretty=format:'%ai %h %d'
     stat = status -sb
+    open = "!f() {\
+		file=$1;\
+        repo=$(git remote -v | grep fetch | awk '{print $2}');\
+        url=$(sed -e 's|.*:\\(.*\\)\\.git|https://github.com/\\1|' <<< $repo);\
+		branch=$(git symbolic-ref --short HEAD);\
+        if [ ! -z $file ]; then\
+		  url=$url/blob/$branch/$file;\
+        elif [ $branch != 'master'  ]; then\
+		  url=$url/tree/$branch;\
+		fi;\
+		open $url;\
+        }; f"
     pr = "!f() { \
             pr_num=$1; \
             local_branch=$2; \
