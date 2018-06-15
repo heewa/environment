@@ -5,11 +5,15 @@
     stat = status -sb
     open = "!f() {\
 		file=$1;\
+        line=$2;\
         repo=$(git remote -v | grep fetch | awk '{print $2}');\
         url=$(sed -e 's|.*:\\(.*\\)\\.git|https://github.com/\\1|' <<< $repo);\
 		branch=$(git symbolic-ref --short HEAD);\
         if [ ! -z $file ]; then\
 		  url=$url/blob/$branch/$file;\
+          if [ ! -z $line ]; then\
+            url=$url#L$line;\
+          fi;\
         elif [ $branch != 'master'  ]; then\
 		  url=$url/tree/$branch;\
 		fi;\
