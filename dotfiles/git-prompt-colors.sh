@@ -1,8 +1,5 @@
-# Fix their ResetColor, via: http://unix.stackexchange.com/questions/217479/bash-doesnt-calculate-prompt-length-correctly
-ResetColor=$(tput sgr0)
-
 override_git_prompt_colors() {
-  GIT_PROMPT_THEME_NAME="Default"
+  GIT_PROMPT_THEME_NAME="Emoji"
 
   # Heewa: show seconds in time
   Time12a="\$(date +%H:%M:%S)"
@@ -31,7 +28,7 @@ override_git_prompt_colors() {
 
   # Heewa: don't show anything on successful command
   GIT_PROMPT_COMMAND_OK=""    # indicator if the last command returned with an exit code of 0
-  GIT_PROMPT_COMMAND_FAIL="${Red}✘-_LAST_COMMAND_STATE_ "    # indicator if the last command returned with an exit code of other than 0
+  GIT_PROMPT_COMMAND_FAIL="${Red}✘-_LAST_COMMAND_STATE_${ResetColor} "    # indicator if the last command returned with an exit code of other than 0
 
   ## template for displaying the current virtual environment
   ## use the placeholder _VIRTUALENV_ will be replaced with 
@@ -56,4 +53,4 @@ override_git_prompt_colors() {
   # GIT_PROMPT_SYMBOLS_NO_REMOTE_TRACKING="L" # This symbol is written after the branch, if the branch is not tracked 
 }
 
-reload_git_prompt_colors "Default"
+reload_git_prompt_colors "Emoji"
