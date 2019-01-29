@@ -211,12 +211,10 @@ alias pgstart='/usr/local/bin/postgres -D $PG_DATA_DIR -r /usr/local/var/postgre
 # List EC2 Instances
 alias list_ec2="aws ec2 describe-instances --output text --query 'Reservations[*].Instances[?State.Name==\`running\`].[Tags[?Key==\`Name\`].Value,NetworkInterfaces[*].PrivateIpAddresses[*].Association.PublicIp]'"
 
-# Disabled cuz slow:
 # Node / io.js / nvm shit
-#export NVM_DIR=~/.nvm
-#if [ $(uname -s) == "Darwin" ]; then
-#    source $(brew --prefix nvm)/nvm.sh
-#fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Ruby
 #eval "$(rbenv init -)"
@@ -230,3 +228,4 @@ alias list_ec2="aws ec2 describe-instances --output text --query 'Reservations[*
 
 # Fine, rmv, I guess... ugh...
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
