@@ -50,3 +50,5 @@
 	smudge = git-media-smudge %f
 [core]
 	excludesfile = ~/.gitignore
+[url "ssh://git@heroku.com/"]
+	insteadOf = https://git.heroku.com/
