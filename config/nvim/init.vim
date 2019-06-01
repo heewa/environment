@@ -24,8 +24,9 @@ set showcmd        " Display incomplete command
 set whichwrap+=,h,l   " Cursor,backspace keys wrap too
 set showmode
 set wildmode=longest,list,full   " better tab complete menu
-set wildignore=*.pyc,*.o,*.obj,*.bak,*.exe  " tab complete ignores these!
-let g:netrw_list_hide= '^.DS_Store$,.*\.pyc$,.*\.o$,.*\.obj$,.*\.bak$,.*\.exe$,.*\.swp$'   " Files to ignore in Explorer
+set wildignore=*.pyc,*.o,*.obj,*.bak,*.exe,__pycache__/  " tab complete ignores these!
+let g:netrw_list_hide= '^.DS_Store$,.*\.pyc$,.*\.o$,.*\.obj$,.*\.bak$,.*\.exe$,.*\.swp$,.*__pycache__/$'   " Files to ignore in Explorer
+let g:netrw_preview = 1  " Use a vertical split for previewing files from explorer
 set ignorecase
 
 " Color Syntax highlighting
@@ -95,6 +96,12 @@ if has('nvim')
     " For opening files more easily
     Plug 'ctrlpvim/ctrlp.vim'
 
+    " Cool!
+    Plug 'terryma/vim-multiple-cursors'
+
+    " Fuzzy File Finder integration
+    Plug '/usr/local/opt/fzf'
+
     " Switching between .c & .h with 'A'
     Plug 'vim-scripts/a.vim'
 
@@ -121,12 +128,14 @@ if has('nvim')
     " Formatting
     Plug 'sbdchd/neoformat'
 
-    Plug 'ternjs/tern_for_vim'
+    " NOTE: disabling cuz can't make work at Twine
+    "Plug 'ternjs/tern_for_vim'
 
     " Elixir
     Plug 'elixir-editors/vim-elixir'
     Plug 'slashmili/alchemist.vim'
 
+    Plug 'benjie/local-npm-bin.vim'
     Plug 'mxw/vim-jsx'
     Plug 'pangloss/vim-javascript'
     Plug 'othree/javascript-libraries-syntax.vim'
@@ -143,6 +152,9 @@ if has('nvim')
 
     " Load local .lvimrc files from root up to current dir
     Plug 'embear/vim-localvimrc'
+
+    " Split resizing
+    Plug 'wellle/visual-split.vim'
 
     " Remember permission for .lvimrc files across sessions if answered with
     " capital Y/N/A
@@ -268,6 +280,18 @@ endif
 
 " Project-specific settings
 autocmd BufNewFile,BufRead ~/src/Polaroid/**/*.js,~/src/Polaroid/**/*.jsx setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+augroup twine
+  autocmd!
+
+  autocmd BufNewFile,BufRead ~/src/Twine/**/*.py let b:neomake_python_enabled_makers = ['pylint']
+  autocmd BufNewFile,BufRead ~/src/Twine/**/*.py let g:neoformat_enabled_python = ['black']
+  autocmd BufWritePre ~/src/Twine/**/*.py undojoin | Neoformat
+
+  autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let b:neomake_javascript_enabled_makers = ['eslint']
+  autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let g:neoformat_enabled_python = ['prettier']
+  autocmd BufWritePre ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx undojoin | Neoformat
+augroup END
 
 " Project-specific settings
 augroup fmtRedlight
