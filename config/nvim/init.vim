@@ -127,6 +127,7 @@ if has('nvim')
 
     " Formatting
     Plug 'sbdchd/neoformat'
+    let g:neoformat_only_msg_on_error = 1
 
     " NOTE: disabling cuz can't make work at Twine
     "Plug 'ternjs/tern_for_vim'
