@@ -83,10 +83,6 @@ endif
 " For cscope
 set splitright  " So that vertical splits start on the right
 
-" Toggle highlighing of word under cursor without searching, though it's now
-" the search term, so you can use 'n' and 'N' to jump to matches.
-nnoremap <F10> :set invhls<CR>:let @/="<C-r><C-w>"<CR>/<BS>
-
 set mouse=a  " MOUSE SUPPORT, FUCK YEA!
 
 if has('nvim')
@@ -136,8 +132,8 @@ if has('nvim')
     Plug 'elixir-editors/vim-elixir'
     Plug 'slashmili/alchemist.vim'
 
+    Plug 'maxmellon/vim-jsx-pretty'
     Plug 'benjie/local-npm-bin.vim'
-    Plug 'mxw/vim-jsx'
     Plug 'pangloss/vim-javascript'
     Plug 'othree/javascript-libraries-syntax.vim'
     Plug 'othree/html5-syntax.vim'
