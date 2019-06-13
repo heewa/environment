@@ -40,6 +40,11 @@ if [[ $(which brew) != "" && -f "$(brew --prefix)/opt/bash-git-prompt/share/gitp
 
     # Don't fetch remote every prompt!
     export GIT_PROMPT_FETCH_REMOTE_STATUS=0
+elif [[ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]]; then
+    source "$HOME/.bash-git-prompt/gitprompt.sh"
+
+    # Don't fetch remote every prompt!
+    export GIT_PROMPT_FETCH_REMOTE_STATUS=0
 else
     if [ -f "$HOME/.bash/git-aware-prompt/main.sh" ]; then
         export GITAWAREPROMPT="$HOME/.bash/git-aware-prompt"

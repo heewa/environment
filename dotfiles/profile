@@ -19,7 +19,7 @@ if [ -f ~/.private_profile ]; then
 fi
 
 export EDITOR=vim
-export PATH=~/bin:~/scripts:/usr/local/sbin:/usr/local/bin:$HOME/.rbenv/bin:$PATH:/build/trees/bin
+export PATH=~/bin:~/scripts:/usr/local/sbin:/usr/local/bin:/usr/local/opt/python/libexec/bin:$HOME/Library/Python/3.7/bin/:$HOME/.rbenv/bin:$PATH:/build/trees/bin
 
 # On mac, there are files in /etc/paths.d/ that contain more paths. Add them manually for screen's benefit.
 if [[ $IN_SCREEN && $(uname) == 'Darwin' ]]; then
