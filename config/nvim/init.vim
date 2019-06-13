@@ -42,6 +42,9 @@ set nofoldenable    " disable folding
 " Quick explore
 nmap - :Explore<CR>
 
+" Search for last yanked text
+nmap <silent> <nowait> <Leader>* /\<<C-r>0\><CR>
+
 " Go settings
 autocmd FileType go map gs <Plug>(go-def-split)
 autocmd FileType go map gv <Plug>(go-def-vertical)
