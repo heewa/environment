@@ -21,13 +21,19 @@ fi
 export EDITOR=vim
 export PATH=~/bin:~/scripts:/usr/local/sbin:/usr/local/bin:/usr/local/opt/python/libexec/bin:$HOME/Library/Python/3.7/bin/:$HOME/.rbenv/bin:$PATH:/build/trees/bin
 
-# On mac, there are files in /etc/paths.d/ that contain more paths. Add them manually for screen's benefit.
-if [[ $IN_SCREEN && $(uname) == 'Darwin' ]]; then
-    export PATH=$PATH:$(cat /etc/paths.d/* | tr \\n : | sed 's/:\s*$//')
-fi
+# Mac specific conf
+if [[ $(uname) == 'Darwin' ]]; then
 
-# AWS Tools need JAVA_HOME set to dir that contains the bin/java binary path.
-export JAVA_HOME='/usr'
+    # On mac, there are files in /etc/paths.d/ that contain more paths. Add
+    # them manually for screen's benefit.
+    if [[ $IN_SCREEN ]]; then
+        export PATH=$PATH:$(cat /etc/paths.d/* | tr \\n : | sed 's/:\s*$//')
+    fi
+
+    # AWS Tools need JAVA_HOME set to dir that contains the bin/java binary path.
+    export JAVA_HOME='/usr'
+
+fi  # Darwin
 
 # Go path
 export GOPATH=$HOME/go/global
@@ -45,9 +51,6 @@ export NOSE_LOGFORMAT='[%(levelname)7s %(asctime)s %(filename)s:%(lineno)d %(fun
 # Fuck node and JS as well. Fuck all the things.
 export NODE_REPL_HISTORY_FILE=$HOME/.node_repl_history
 
-# Fine.. rvm, I guess... ugh...
-#export PATH="$PATH:$HOME/.rvm/bin"
-
 # 2U - Vault
-export VAULT_ADDR=https://vault.prod.2u.com:8200/
-export VAULT_CACERT=$HOME/.certs/vault-ca.pem
+# export VAULT_ADDR=https://vault.prod.2u.com:8200/
+# export VAULT_CACERT=$HOME/.certs/vault-ca.pem
