@@ -2,6 +2,14 @@
 " not how you exit vim, so I can use it in all modes the same
 nnoremap <C-c> <Esc>
 
+" Also use <Tab> as <Esc>
+nnoremap <Tab> <Esc>
+vnoremap <Tab> <Esc>gV
+onoremap <Tab> <Esc>
+"cnoremap <Tab> <C-C><Esc>
+inoremap <Tab> <Esc>`^
+inoremap <Leader><Tab> <Tab>
+
 set laststatus=2   " Always whow the statusline
 set nohls
 
