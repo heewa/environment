@@ -152,6 +152,7 @@ if has('nvim')
     Plug 'othree/html5-syntax.vim'
     Plug 'digitaltoad/vim-pug'
     Plug 'kchmck/vim-coffee-script'
+    Plug 'tpope/vim-surround'
     "Plug 'kien/rainbow_parentheses.vim'
 
     " Colors, yay!
