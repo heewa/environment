@@ -1,3 +1,7 @@
+" Use <C-c> as <Esc> in normal mode, mainly so it doesn't complain that that's
+" not how you exit vim, so I can use it in all modes the same
+nnoremap <C-c> <Esc>
+
 set laststatus=2   " Always whow the statusline
 set nohls
 
