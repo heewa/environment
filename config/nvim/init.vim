@@ -95,9 +95,6 @@ if has('nvim')
     " For opening files more easily
     Plug 'ctrlpvim/ctrlp.vim'
 
-    " Cool!
-    Plug 'terryma/vim-multiple-cursors'
-
     " Fuzzy File Finder integration
     Plug '/usr/local/opt/fzf'
 
@@ -155,6 +152,10 @@ if has('nvim')
 
     " Split resizing
     Plug 'wellle/visual-split.vim'
+
+    " Load the icons plugin last, so it picks up other plugins to know what
+    " settings to use
+    Plug 'ryanoasis/vim-devicons'
 
     " Remember permission for .lvimrc files across sessions if answered with
     " capital Y/N/A
