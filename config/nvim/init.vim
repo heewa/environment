@@ -10,6 +10,11 @@ onoremap <Tab> <Esc>
 inoremap <Tab> <Esc>`^
 inoremap <Leader><Tab> <Tab>
 
+" Unbind <Esc> in a few modes, to force myself to change
+nnoremap <Esc> <Nop>
+vnoremap <Esc> <Nop>
+inoremap <Esc> <Nop>
+
 set laststatus=2   " Always whow the statusline
 set nohls
 
