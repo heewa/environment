@@ -140,10 +140,6 @@ if has('nvim')
     " NOTE: disabling cuz can't make work at Twine
     "Plug 'ternjs/tern_for_vim'
 
-    " Elixir
-    Plug 'elixir-editors/vim-elixir'
-    Plug 'slashmili/alchemist.vim'
-
     Plug 'maxmellon/vim-jsx-pretty'
     Plug 'benjie/local-npm-bin.vim'
     Plug 'pangloss/vim-javascript'
