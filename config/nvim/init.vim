@@ -121,9 +121,6 @@ if has('nvim')
     " Go development
     Plug 'fatih/vim-go'
 
-    " Nice status line
-    Plug 'vim-airline/vim-airline'
-
     " Git +/-/~ in gutter
     Plug 'airblade/vim-gitgutter'
 
@@ -166,6 +163,12 @@ if has('nvim')
 
     " Split resizing
     Plug 'wellle/visual-split.vim'
+
+    " Nice status line
+    Plug 'vim-airline/vim-airline'
+    let g:airline#extensions#tagbar#flags = 'f' " Full tag info
+    Plug 'vim-airline/vim-airline-themes'
+    let g:airline_theme='bubblegum'
 
     " Load the icons plugin last, so it picks up other plugins to know what
     " settings to use
