@@ -67,7 +67,7 @@ autocmd FileType go noremap gs <Plug>(go-def-split)
 autocmd FileType go noremap gv <Plug>(go-def-vertical)
 
 " Show trailing whitespace.
-match ErrorMsg '\s\+$'
+match ColorColumn /\s\+$/
 
 " Building and errors
 nnoremap <F5> :cprev<CR>
