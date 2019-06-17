@@ -43,7 +43,7 @@ if ! shopt -oq posix; then
 
     # Take in all the custom completions too.
     if [[ -d "$HOME/.bash_completion.d" ]]; then
-        for F in $(ls "$HOME/.bash_completion.d/*.bash"); do
+        for F in $(ls "$HOME"/.bash_completion.d/*.bash); do
             source $F
         done
     fi
