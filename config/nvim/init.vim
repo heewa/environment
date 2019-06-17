@@ -15,6 +15,19 @@ nnoremap <Esc> <Nop>
 vnoremap <Esc> <Nop>
 inoremap <Esc> <Nop>
 
+" Map <esc> to escape from terminal mode
+tnoremap <Esc> <C-\><C-n>
+
+" Map <alt>+{h,j,k,l} to move splits whether in cmd or terminal mode
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
 set laststatus=2   " Always whow the statusline
 set nohls
 
@@ -75,9 +88,6 @@ nnoremap <F6> :cnext<CR>
 
 " Search highlighting (off by default)
 nnoremap <F2> :set hlsearch!<CR>
-
-" Grep for word under cursor (ignoring binary files).
-nnoremap <silent> <F3> :grep -I <cword> * <CR> <CR>
 
 " Syntax highlighting and some other stuff for Code files.
 autocmd BufRead * set formatoptions=tcql nocindent comments&
@@ -207,19 +217,6 @@ if has('nvim')
 
     " Use a patched powerline font for nice symbols
     let g:airline_powerline_fonts = 1
-
-    " Map <esc> to escape from terminal mode
-    tnoremap <Esc> <C-\><C-n>
-
-    " Map <alt>+{h,j,k,l} to move splits whether in cmd or terminal mode
-    tnoremap <A-h> <C-\><C-n><C-w>h
-    tnoremap <A-j> <C-\><C-n><C-w>j
-    tnoremap <A-k> <C-\><C-n><C-w>k
-    tnoremap <A-l> <C-\><C-n><C-w>l
-    nnoremap <A-h> <C-w>h
-    nnoremap <A-j> <C-w>j
-    nnoremap <A-k> <C-w>k
-    nnoremap <A-l> <C-w>l
 
 else " regular old vim
 
