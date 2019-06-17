@@ -57,31 +57,27 @@ au BufNewFile,BufRead *.handlebars set filetype=htmldjango
 set nofoldenable    " disable folding
 
 " Quick explore
-nmap - :Explore<CR>
+nnoremap - :Explore<CR>
 
 " Search for last yanked text
-nmap <silent> <nowait> <Leader>* /\<<C-r>0\><CR>
+nnoremap <silent> <nowait> <Leader>* /\<<C-r>0\><CR>
 
 " Go settings
-autocmd FileType go map gs <Plug>(go-def-split)
-autocmd FileType go map gv <Plug>(go-def-vertical)
+autocmd FileType go noremap gs <Plug>(go-def-split)
+autocmd FileType go noremap gv <Plug>(go-def-vertical)
 
 " Show trailing whitespace.
 match ErrorMsg '\s\+$'
 
 " Building and errors
-nmap <F5> :cprev<CR>
-nmap <F6> :cnext<CR>
+nnoremap <F5> :cprev<CR>
+nnoremap <F6> :cnext<CR>
 
 " Search highlighting (off by default)
-map <F2> :set hlsearch!<CR> 
-imap <F2> <ESC>:set hlsearch!<CR>a 
+nnoremap <F2> :set hlsearch!<CR>
 
 " Grep for word under cursor (ignoring binary files).
 nnoremap <silent> <F3> :grep -I <cword> * <CR> <CR>
-
-" use gi + char to insert char and remain in command mode
-map gi i<space><esc>r
 
 " Syntax highlighting and some other stuff for Code files.
 autocmd BufRead * set formatoptions=tcql nocindent comments&
@@ -201,7 +197,7 @@ if has('nvim')
         set undofile
     endif
 
-    nmap <F8> :TagbarToggle<CR>
+    nnoremap <F8> :TagbarToggle<CR>
 
     " Don't fuck with GOPATH
     let g:go_autodetect_gopath = 0
@@ -271,7 +267,7 @@ else " regular old vim
             echo len(all_errors) . ' errors'
         endif
     endfunction
-    nmap <silent> <F4> :call FirstPylintError()<CR>
+    nnoremap <silent> <F4> :call FirstPylintError()<CR>
 
     " Turn of syntastic checking a file on write (slows down writes).
     "let g:syntastic_check_on_wq=0
