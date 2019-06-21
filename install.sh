@@ -73,69 +73,79 @@ else
     curl 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > ~/.emoji_vars.sh
 fi
 
-#
-# External additions
-#
-
-# Homebrew
-if [[ "$(which brew)" == "" ]]; then
-    echo
-    echo '==] Installing homebrew'
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
-# Homebrew packages
 echo
-echo '==] Installing homebrew packages'
-for package in "archey git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch bash-completion bash-git-prompt"; do
-    if [[ "$(brew info --versions $package)" == "" ]]; then
-        brew install $pacakage
-    fi
-done
+echo '==] Vim stuff'
+# Vim Plug for vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# Vim plug for neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-echo
-echo '==] Installing devel-version homebrew packages'
-for package in "go"; do
-    if [[ "$(brew info --versions $package)" == "" ]]; then
-        brew install --devel $pacakage
-    fi
-done
+# Mac Specific
+if [[ "$(uname)" = "Darwin" ]]; then
 
-echo
-echo '==] Installing homebrew packages with options'
-if [[ "$(brew info --versions curl)" == "" ]]; then
-    brew install --with-openssl --with-nghttp2 curl
-fi
+	# Homebrew
+	if [[ "$(which brew)" == "" ]]; then
+	    echo
+	    echo '==] Installing homebrew'
+	    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
 
-echo
-echo '==] Installing python packages'
-pip install --upgrade awscli
+	# Homebrew packages
+	echo
+	echo '==] Installing homebrew packages'
+	for package in "archey git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch bash-completion bash-git-prompt"; do
+	    if [[ "$(brew info --versions $package)" == "" ]]; then
+		brew install $pacakage
+	    fi
+	done
 
-# git aware prompt
-echo
-echo '==] Installing HEAD-version homebrew packages'
-for package in "bash-git-prompt"; do
-    if [[ "$(brew info --versions $package)" == "" ]]; then
-        brew install --HEAD $pacakage
-    fi
-done
+	echo
+	echo '==] Installing devel-version homebrew packages'
+	for package in "go"; do
+	    if [[ "$(brew info --versions $package)" == "" ]]; then
+		brew install --devel $pacakage
+	    fi
+	done
 
-# a backup implementation
-echo
-echo '==] Creating/Updating a different git aware prompt from git repo'
-BASH_GIT_DIR="$HOME/.bash/git-aware-prompt"
-if [[ ! -e "$BASH_GIT_DIR" ]]; then
-    git clone git://github.com/jimeh/git-aware-prompt.git $BASH_GIT_DIR
-else
-    pushd $BASH_GIT_DIR
-    git checkout master && git pull
-    popd
-fi
+	echo
+	echo '==] Installing homebrew packages with options'
+	if [[ "$(brew info --versions curl)" == "" ]]; then
+	    brew install --with-openssl --with-nghttp2 curl
+	fi
 
-# Golang Makefile
-echo
-echo '==] Getting Golang Makefile from git gist'
-curl -sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
+	echo
+	echo '==] Installing python packages'
+	pip install --upgrade awscli
+
+	# git aware prompt
+	echo
+	echo '==] Installing HEAD-version homebrew packages'
+	for package in "bash-git-prompt"; do
+	    if [[ "$(brew info --versions $package)" == "" ]]; then
+		brew install --HEAD $pacakage
+	    fi
+	done
+
+	# a backup implementation
+	echo
+	echo '==] Creating/Updating a different git aware prompt from git repo'
+	BASH_GIT_DIR="$HOME/.bash/git-aware-prompt"
+	if [[ ! -e "$BASH_GIT_DIR" ]]; then
+	    git clone git://github.com/jimeh/git-aware-prompt.git $BASH_GIT_DIR
+	else
+	    pushd $BASH_GIT_DIR
+	    git checkout master && git pull
+	    popd
+	fi
+
+	# Golang Makefile
+	echo
+	echo '==] Getting Golang Makefile from git gist'
+	curl -sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
+
+else # Mac Specific
+    true
+fi # Mac Specific
 
 echo
 echo '==] Done'
