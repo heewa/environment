@@ -11,22 +11,26 @@ inoremap <Tab> <Esc>`^
 inoremap <Leader><Tab> <Tab>
 
 " Unbind <Esc> in a few modes, to force myself to change
-nnoremap <Esc> <Nop>
+"nnoremap <Esc> <Nop>
 vnoremap <Esc> <Nop>
 inoremap <Esc> <Nop>
 
 " Map <esc> to escape from terminal mode
-tnoremap <Esc> <C-\><C-n>
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+endif
 
 " Map <alt>+{h,j,k,l} to move splits whether in cmd or terminal mode
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+if has('nvim')
+    tnoremap <A-h> <C-\><C-n><C-w>h
+    tnoremap <A-j> <C-\><C-n><C-w>j
+    tnoremap <A-k> <C-\><C-n><C-w>k
+    tnoremap <A-l> <C-\><C-n><C-w>l
+endif
 
 set laststatus=2   " Always whow the statusline
 set nohls
@@ -61,12 +65,13 @@ set ignorecase
 
 " Color Syntax highlighting
 syntax on
-set termguicolors  " True Color support
+if has('nvim')
+    set termguicolors  " True Color support
+endif
 silent! colorscheme heewa " Only load colorscheme if it exists (ignore errors)
 "silent! colorscheme fairyfloss " Only load colorscheme if it exists (ignore errors)
 
 filetype on           " try to detect syntax from filetype
-au BufNewFile,BufRead *.handlebars set filetype=htmldjango
 set nofoldenable    " disable folding
 
 " Quick explore
@@ -93,19 +98,6 @@ nnoremap <F2> :set hlsearch!<CR>
 autocmd BufRead * set formatoptions=tcql nocindent comments&
 autocmd BufRead *.java,*.c,*.h,*.cc set formatoptions=ctroq cindent comments=sr:/**,mb:*,elx:*/,sr:/*,mb:*,elx:*/,://
 
-" Filename as title in screen
-autocmd BufEnter * let &titlestring = expand("%:t") 
-"let &titlestring = expand("%:t")
-if &term == "screen"
-  set t_ts=k
-  set t_fs=\
-endif
-if &term == "screen" || &term == "xterm"
-  set title
-  "set notitle
-  set titleold=""
-endif
-
 " For cscope
 set splitright  " So that vertical splits start on the right
 
@@ -113,7 +105,23 @@ set mouse=a  " MOUSE SUPPORT, FUCK YEA!
 
 if has('nvim')
 
-    call plug#begin()
+    " Persistent undo, across exits. Only do this in neovim cuz it has better
+    " default dir for this.
+    if has('persistent_undo')
+        " For files in my source repo, keep undo files in a shared location
+        set undofile
+    endif
+
+else " regular old vim
+
+"    set nocompatible   " Disable vi-compatibility (needed for fancy plugins)
+"    set autoindent
+"    set backspace=2    " Backspace in insert mode
+"    set wildmenu                     " better tab complete menu
+
+endif
+
+call plug#begin()
 
     " For opening files more easily
     Plug 'ctrlpvim/ctrlp.vim'
@@ -184,9 +192,6 @@ if has('nvim')
     " capital Y/N/A
     let g:localvimrc_persistent = 1
 
-
-    call plug#end()
-
     " Use flake8 & pep8 for python checking, mainly cuz pylint is annoying
     let g:neomake_python_enabled_makers = ['flake8', 'pep8']
 
@@ -200,13 +205,6 @@ if has('nvim')
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_autoclose_preview_window_after_insertion = 1
 
-    " Persistent undo, across exits. Only do this in neovim cuz it has better
-    " default dir for this.
-    if has('persistent_undo')
-        " For files in my source repo, keep undo files in a shared location
-        set undofile
-    endif
-
     nnoremap <F8> :TagbarToggle<CR>
 
     " Don't fuck with GOPATH
@@ -218,79 +216,7 @@ if has('nvim')
     " Use a patched powerline font for nice symbols
     let g:airline_powerline_fonts = 1
 
-else " regular old vim
-
-    set nocompatible   " Disable vi-compatibility (needed for fancy plugins)
-    set autoindent
-    set backspace=2    " Backspace in insert mode
-    set wildmenu                     " better tab complete menu
-
-    " Pathogen, for easier plugins.  https://github.com/tpope/vim-pathogen
-    " NOTE: need to load these first, before indent stuff, espcially the
-    " filetype plugin indent on # line
-    " Options for pathogen ~/.bundle plugins:
-    "let g:jsx_pragma_required = 0
-    " Load Pathogen plugins:
-    if has('pathogen')
-        execute pathogen#infect()
-    endif
-
-    " Jump to first line of pylint error.
-    function! FirstPylintError()
-        echo 'running pylint...'
-
-        " Run pylint with parsable output, grep for just relevant lines, and
-        " get 1st.
-        let all_errors = split(system(
-            \ 'pylint -E --disable=E1103,E1101 ' .
-            \ '--msg-template="{path}:{line}:{msg_id} {msg}" ' .
-            \ '--output-format=text ' . expand('%')), '\n')
-        call filter(all_errors, 'v:val =~ ''\.py:[0-9]\+''')
-
-        if len(all_errors)
-            " Set quickfix buffer for these errors.
-            cexpr all_errors
-
-            " Go to line of error.
-            "exe matchstr(all_errors[0], '^[0-9]\+', 0, 0)
-            exe split(all_errors[0], ':')[1]
-
-            " Also show the error itself, but this time as a msg, so it stays in
-            " message history.
-            redraw
-            echomsg split(all_errors[0], ':')[2] . ' (' . len(all_errors) . ' errors total)'
-        else
-            redraw
-            echo len(all_errors) . ' errors'
-        endif
-    endfunction
-    nnoremap <silent> <F4> :call FirstPylintError()<CR>
-
-    " Turn of syntastic checking a file on write (slows down writes).
-    "let g:syntastic_check_on_wq=0
-    " Turn off active syntastic checking by default.
-    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': []}
-    " Python checking.
-    let g:syntastic_python_checkers = ['pylint']
-    let g:syntastic_python_pylint_args = '-f parseable -r n -i y -E -d E1103'
-    " Symbols for the gutter on errors/warnings.
-    let g:syntastic_error_symbol = 'XX'
-    let g:syntastic_style_error_symbol = 'sx'
-    highlight SyntasticErrorSign ctermfg=white ctermbg=red
-    let g:syntastic_warning_symbol = 'ww'
-    let g:syntastic_style_warning_symbol = 'sw'
-    " Only do things on errors.
-    "let g:syntastic_quiet_warnings=1
-
-    " Just, fuck, fuck Pathogen, fuck plugins, fuck everything.
-    filetype off
-    syntax on
-    filetype plugin indent on
-
-endif
-
-" Project-specific settings
-autocmd BufNewFile,BufRead ~/src/Polaroid/**/*.js,~/src/Polaroid/**/*.jsx setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+call plug#end()
 
 augroup twine
   autocmd!
@@ -302,10 +228,4 @@ augroup twine
   autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let b:neomake_javascript_enabled_makers = ['eslint']
   autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let g:neoformat_enabled_python = ['prettier']
   autocmd BufWritePre ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx undojoin | Neoformat
-augroup END
-
-" Project-specific settings
-augroup fmtRedlight
-  autocmd!
-  autocmd BufWritePre ~/src/2u/redlight3/**/*.js undojoin | Neoformat
 augroup END
