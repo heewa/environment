@@ -66,7 +66,8 @@ autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
 set showmatch
 set ruler          " Shows line,column # at bottom
 set showcmd        " Display incomplete command
-set whichwrap+=,h,l   " Cursor,backspace keys wrap too
+set whichwrap+=,h,l   " Wrap arrows
+set backspace=indent,eol,start  " Wrap backspace
 set showmode
 set wildmode=longest,list,full   " better tab complete menu
 set wildignore=*.pyc,*.o,*.obj,*.bak,*.exe,__pycache__/  " tab complete ignores these!
