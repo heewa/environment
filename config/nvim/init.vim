@@ -133,7 +133,9 @@ call plug#begin()
     Plug 'vim-scripts/a.vim'
 
     " Go development
-    Plug 'fatih/vim-go'
+    if has('nvim')
+        Plug 'fatih/vim-go'
+    endif
 
     " Git +/-/~ in gutter
     Plug 'airblade/vim-gitgutter'
