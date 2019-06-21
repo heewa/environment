@@ -1,3 +1,14 @@
+if has("multi_byte")
+    if &termencoding == ""
+        if $LANG =~ '\.UTF-8'
+            set termencoding=utf-8
+        else
+            let &termencoding = &encoding
+        endif
+    endif
+    set encoding=utf-8
+endif
+
 " Use <C-c> as <Esc> in normal mode, mainly so it doesn't complain that that's
 " not how you exit vim, so I can use it in all modes the same
 nnoremap <C-c> <Esc>
