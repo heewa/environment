@@ -26,6 +26,7 @@ ln -vsf $PWD/dotfiles/gitconfig ~/.gitconfig
 ln -vsf $PWD/dotfiles/gitignore ~/.gitignore
 ln -vsf $PWD/dotfiles/git-prompt-colors.sh ~/.git-prompt-colors.sh
 ln -vsf $PWD/dotfiles/rmvrc ~/.rvmrc
+ln -vsf $PWD/dotfiles/tmux.conf ~/.tmux.conf
 
 # Link legacy vim confs to nvim's, and the binary
 echo
