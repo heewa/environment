@@ -2,10 +2,13 @@
 #
 # Set up symlinks to dotfiles & make sure directories I want are there.
 
+# Exit on errors, to force myself to fix this script
+set -e
+
 echo
 echo '==] Creating home dirs'
 for D in src build tmp scripts bin .bash; do
-    mkdir -v $HOME/$D
+    mkdir -pv $HOME/$D
 done
 
 # XDG Config goes straight into ~/.config/ without rename
@@ -17,42 +20,36 @@ ln -vsf $PWD/config/* $HOME/.config/
 # .rc files need to be renamed individually
 echo
 echo '==] SymLinking ~/.rc files'
-ln -vsf $PWD/dotfiles/bash_profile ~/.bash_profile
-ln -vsf $PWD/dotfiles/profile ~/.profile
-ln -vsf $PWD/dotfiles/bashrc ~/.bashrc
-ln -vsfh $PWD/dotfiles/bash_completion.d ~/.bash_completion.d
-ln -vsf $PWD/dotfiles/screenrc ~/.screenrc
-ln -vsf $PWD/dotfiles/gitconfig ~/.gitconfig
-ln -vsf $PWD/dotfiles/gitignore ~/.gitignore
-ln -vsf $PWD/dotfiles/git-prompt-colors.sh ~/.git-prompt-colors.sh
-ln -vsf $PWD/dotfiles/rmvrc ~/.rvmrc
-ln -vsf $PWD/dotfiles/tmux.conf ~/.tmux.conf
+for F in $(ls dotfiles); do
+    ln -vsf $PWD/dotfiles/$F ~/.$F
+done
 
 # Link legacy vim confs to nvim's, and the binary
 echo
 echo '==] SymLinking vim -> nvim'
-ln -vsfh $HOME/.config/nvim ~/.vim
+ln -vsf $HOME/.config/nvim ~/.vim
 ln -vsf $HOME/.config/nvim/init.vim ~/.vimrc
 ln -vsf /usr/local/bin/nvim $HOME/bin/vim
 ln -vsf /usr/local/bin/vim $HOME/bin/oldvim
 
-# Create dropbox symlinks, even if Dropbox isn't updated yet.
 echo
 echo '==] SymLinking Dropbox Dirs'
-for DBoxDir in ''; do
-    if [[ ! -e "$HOME/$DBoxDir" && ! -L "$HOME/$DBoxDir" ]]; then
-        ln -vs $HOME/Dropbox/$DBoxDir $HOME/
-    elif [[ ! -L "$HOME/$DBoxDir" ]]; then
-        echo "~/$DBoxDir exists, but is not a symlink"
-        ln -vsFi $HOME/Dropbox/$DBoxDir $HOME/
-    elif [[ $(readlink $HOME/$DBoxDir) != "$HOME/Dropbox/$DBoxDir" &&
-            $(readlink $HOME/$DBoxDir) != "Dropbox/$DBoxDir" ]]; then
-        echo "~/$DBoxDir currently points to $(readlink $HOME/$DBoxDir)"
-        ln -vsFi $HOME/Dropbox/$DBoxDir $HOME/
-    else
-        echo "~/$DBoxDir already points to Dropbox"
+RELINK_DIR() {
+    local SRC="$HOME/Dropbox/$1"
+    local DST="$HOME/${2:-$1}"
+    local NAME=${2:-$1}
+
+    if [[ ! -e "$DST" && ! -L "$DST" ]]; then
+        ln -vs $SRC $DST
+    elif [[ ! -L "$DST" ]]; then
+        rmdir $DST && ln -vs $SRC $DST
+    elif [[ $(readlink "$DST") != "$SRC" ]]; then
+        echo "$NAME currently points to $(readlink $DST), relinking..."
+        ln -vsf $SRC $DST
     fi
-done
+}
+RELINK_DIR Documents
+RELINK_DIR Photos Pictures
 
 echo
 echo '==] Pretty, pretty emoji prompts'
@@ -75,7 +72,7 @@ else
 fi
 
 echo
-echo '==] Vim stuff'
+echo '==] Vim'
 # Vim Plug for vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # Vim plug for neovim
