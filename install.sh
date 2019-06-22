@@ -21,7 +21,7 @@ ln -vsf $PWD/config/* $HOME/.config/
 echo
 echo '==] SymLinking ~/.rc files'
 for F in $(ls dotfiles); do
-    ln -vsf $PWD/dotfiles/$F ~/.$F
+    ln -vsfT $PWD/dotfiles/$F ~/.$F
 done
 
 # Link legacy vim confs to nvim's, and the binary
@@ -45,7 +45,7 @@ RELINK_DIR() {
         rmdir $DST && ln -vs $SRC $DST
     elif [[ $(readlink "$DST") != "$SRC" ]]; then
         echo "$NAME currently points to $(readlink $DST), relinking..."
-        ln -vsf $SRC $DST
+        ln -vsfT $SRC $DST
     fi
 }
 RELINK_DIR Documents
@@ -73,7 +73,7 @@ fi
 
 echo
 echo '==] Tmux'
-ln -vsf $HOME/.config/tmux/tmux.conf ~/.tmux.conf
+ln -vsf $HOME/.tmux.conf $HOME/.config/tmux/tmux.conf
 if [[ ! -e $HOME/.tmux/plugins/tpm ]]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
