@@ -7,7 +7,7 @@ set -e
 
 echo
 echo '==] Creating home dirs'
-for D in src build tmp scripts bin .bash; do
+for D in src build tmp scripts bin .bash .config/tmux .config/nvim; do
     mkdir -pv $HOME/$D
 done
 
@@ -150,10 +150,17 @@ if [[ "$(uname)" = "Darwin" ]]; then
 
 elif [[ $(uname) == "Linux" ]]; then # Linux
 
-    if [[ ! $(which xsel) ]]; then
-        echo
-        echo '==] xsel, for clipboard stuff'
-        sudo apt install xsel
+    # Avoid all sudo things if don't have password yet
+    sudo --non-interactive echo
+    if [[ $? ]]; then
+        echo '==] Installing linux packages'
+        if [[ ! $(which xsel) ]]; then
+            echo
+            echo '==] xsel, for clipboard stuff'
+            sudo apt install xsel
+        fi
+    else
+        echo '**** Need sudo to install linux packages'
     fi
 
 fi # Mac Specific
