@@ -58,7 +58,7 @@ if [ -f "$HOME/src/Heewa/emoji-prompt/emoji-prompt.sh" ]; then
     ln -vsf $HOME/src/Heewa/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh
 else
     echo 'Downloading from git repo'
-    curl 'https://raw.githubusercontent.com/heewa/emoji-prompt/master/emoji-prompt.sh' > ~/.emoji-prompt.sh
+    curl -# 'https://raw.githubusercontent.com/heewa/emoji-prompt/master/emoji-prompt.sh' > ~/.emoji-prompt.sh
 fi
 
 echo
@@ -68,15 +68,22 @@ if [ -f "$HOME/src/Heewa/bae/emoji_vars.sh" ]; then
     ln -vsf $HOME/src/Heewa/bae/emoji_vars.sh $HOME/.emoji_vars.sh
 else
     echo 'Downloading from git repo'
-    curl 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > ~/.emoji_vars.sh
+    curl -# 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > ~/.emoji_vars.sh
+fi
+
+echo
+echo '==] Tmux'
+ln -vsf $HOME/.config/tmux/tmux.conf ~/.tmux.conf
+if [[ ! -e $HOME/.tmux/plugins/tpm ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
 echo
 echo '==] Vim'
 # Vim Plug for vim
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -#fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # Vim plug for neovim
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -#fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Mac Specific
 if [[ "$(uname)" = "Darwin" ]]; then
@@ -85,7 +92,7 @@ if [[ "$(uname)" = "Darwin" ]]; then
 	if [[ "$(which brew)" == "" ]]; then
 	    echo
 	    echo '==] Installing homebrew'
-	    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	    /usr/bin/ruby -e "$(curl -#fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	fi
 
 	# Homebrew packages
@@ -139,10 +146,16 @@ if [[ "$(uname)" = "Darwin" ]]; then
 	# Golang Makefile
 	echo
 	echo '==] Getting Golang Makefile from git gist'
-	curl -sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
+	curl -#sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
 
-else # Mac Specific
-    true
+elif [[ $(uname) == "Linux" ]]; then # Linux
+
+    if [[ ! $(which xsel) ]]; then
+        echo
+        echo '==] xsel, for clipboard stuff'
+        sudo apt install xsel
+    fi
+
 fi # Mac Specific
 
 echo

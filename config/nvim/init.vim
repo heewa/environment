@@ -192,6 +192,21 @@ call plug#begin()
     " Split resizing
     Plug 'wellle/visual-split.vim'
 
+    " Something about fixing some vim-in-tmux issue
+    Plug 'tmux-plugins/vim-tmux-focus-events'
+    " Mirror vim's airline for tmux
+    let g:airline#extensions#tmuxline#enabled = 0
+    let g:tmuxline_theme = 'jellybeans'
+    let g:tmuxline_preset = 'powerline'
+    Plug 'edkolev/tmuxline.vim'
+    " Tmux/Vim split navigation
+    Plug 'christoomey/vim-tmux-navigator'
+    let g:tmux_navigator_no_mappings = 1
+    nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+    nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+    nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+    nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+
     " Nice status line
     Plug 'vim-airline/vim-airline'
     let g:airline#extensions#tagbar#flags = 'f' " Full tag info
