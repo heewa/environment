@@ -309,12 +309,16 @@ set -g history-limit 10000
 #set -g status-keys vi
 #set -g mode-keys vi
 
-# Use only C-b
+# Prefix
 set -gu prefix2
 unbind C-a
 unbind C-b
-set -g prefix C-b
-bind C-b send-prefix
+set -g prefix C-space
+bind C-space send-prefix
+
+# Mirror vim's split maps
+bind-key v split-window -h
+bind-key s split-window -v
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/.tmux/plugins/tpm/tpm'
