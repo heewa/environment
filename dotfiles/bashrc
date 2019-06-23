@@ -108,3 +108,7 @@ if [[ "$_GIT_PROMPT_DIR" != "" ]]; then
 else
     export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\] $ "
 fi
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PATH:$PYENV_ROOT/bin"

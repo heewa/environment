@@ -165,5 +165,11 @@ elif [[ $(uname) == "Linux" ]]; then # Linux
 
 fi # Mac Specific
 
+    if [[ ! -e "$HOME/.pyenv" ]]; then
+        echo
+        echo '==] Pyenv'
+        git clone --depth 1 git@github.com:pyenv/pyenv.git ~/.pyenv
+    fi
+
 echo
 echo '==] Done'
