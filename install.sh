@@ -73,9 +73,12 @@ fi
 
 echo
 echo '==] Tmux'
-ln -vsf $HOME/.tmux.conf $HOME/.config/tmux/tmux.conf
+if [[ ! -e $HOME/.tmux.gpakosz ]]; then
+    git clone --depth 1 git@github.com:gpakosz/.tmux.git ~/.tmux.gpakosz
+fi
+ln -vsf $HOME/.tmux.gpakosz/.tmux.conf $HOME/
 if [[ ! -e $HOME/.tmux/plugins/tpm ]]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
 echo
