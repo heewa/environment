@@ -80,8 +80,6 @@ syntax on
 if has('nvim')
     set termguicolors  " True Color support
 endif
-silent! colorscheme heewa " Only load colorscheme if it exists (ignore errors)
-"silent! colorscheme fairyfloss " Only load colorscheme if it exists (ignore errors)
 
 filetype on           " try to detect syntax from filetype
 set nofoldenable    " disable folding
@@ -135,15 +133,6 @@ endif
 
 call plug#begin()
 
-    " For opening files more easily
-    Plug 'ctrlpvim/ctrlp.vim'
-
-    " Fuzzy File Finder integration
-    Plug '/usr/local/opt/fzf'
-
-    " Switching between .c & .h with 'A'
-    Plug 'vim-scripts/a.vim'
-
     " Go development
     if has('nvim')
         Plug 'fatih/vim-go'
@@ -178,12 +167,12 @@ call plug#begin()
     Plug 'digitaltoad/vim-pug'
     Plug 'kchmck/vim-coffee-script'
     Plug 'tpope/vim-surround'
-    "Plug 'kien/rainbow_parentheses.vim'
 
     " Colors, yay!
     Plug 'tssm/fairyfloss.vim'
     Plug 'romainl/flattened'
     Plug 'morhetz/gruvbox'
+    Plug 'icymind/NeoSolarized'
     Plug 'flazz/vim-colorschemes'
 
     " Load local .lvimrc files from root up to current dir
@@ -194,11 +183,6 @@ call plug#begin()
 
     " Something about fixing some vim-in-tmux issue
     Plug 'tmux-plugins/vim-tmux-focus-events'
-    " Mirror vim's airline for tmux
-    let g:airline#extensions#tmuxline#enabled = 0
-    let g:tmuxline_theme = 'jellybeans'
-    let g:tmuxline_preset = 'powerline'
-    Plug 'edkolev/tmuxline.vim'
     " Tmux/Vim split navigation
     Plug 'christoomey/vim-tmux-navigator'
     let g:tmux_navigator_no_mappings = 1
@@ -246,6 +230,16 @@ call plug#begin()
     let g:airline_powerline_fonts = 1
 
 call plug#end()
+
+" Some options need to be placed after plug#end() so the plugins are loaded
+" when they're called
+
+"colorscheme heewa
+let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
+"colorscheme fairyfloss
+"colorscheme solarized
+"colorscheme flattened_dark
+"let g:neosolarized_contrast = 'high' | let g:neosolarized_visibility = 'high' | colorscheme NeoSolarized
 
 augroup twine
   autocmd!
