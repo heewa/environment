@@ -89,6 +89,7 @@ nnoremap - :Explore<CR>
 
 " Search for last yanked text
 nnoremap <silent> <nowait> <Leader>* /\<<C-r>0\><CR>
+nnoremap <Leader><Leader>* :vimgrep /\<<C-r><C-w>\>/ **
 
 " Go settings
 autocmd FileType go noremap gs <Plug>(go-def-split)
