@@ -174,6 +174,7 @@ call plug#begin()
     Plug 'morhetz/gruvbox'
     Plug 'icymind/NeoSolarized'
     Plug 'flazz/vim-colorschemes'
+    Plug 'chriskempson/base16-vim'
 
     " Load local .lvimrc files from root up to current dir
     Plug 'embear/vim-localvimrc'
@@ -235,7 +236,8 @@ call plug#end()
 " when they're called
 
 "colorscheme heewa
-let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
+"let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
+colorscheme base16-chalk
 "colorscheme fairyfloss
 "colorscheme solarized
 "colorscheme flattened_dark
