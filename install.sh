@@ -21,7 +21,14 @@ ln -vsf $PWD/config/* $HOME/.config/
 echo
 echo '==] SymLinking ~/.rc files'
 for F in $(ls dotfiles); do
-    ln -vsfT $PWD/dotfiles/$F ~/.$F
+    SRC="$PWD/dotfiles/$F"
+    DST="$HOME/.$F"
+
+    if [[ -d "$SRC" && ( ! -L $"DST" || "$(readlink $DST)" != "$SRC" ) ]]; then
+        echo "!!!! $DST already exists"
+    else
+        ln -vsf $SRC $DST
+    fi
 done
 
 # Link legacy vim confs to nvim's, and the binary
@@ -34,22 +41,26 @@ ln -vsf /usr/local/bin/vim $HOME/bin/oldvim
 
 echo
 echo '==] SymLinking Dropbox Dirs'
-RELINK_DIR() {
-    local SRC="$HOME/Dropbox/$1"
-    local DST="$HOME/${2:-$1}"
-    local NAME=${2:-$1}
+if [[ ! -d "$HOME/Dropbox" ]]; then
+    echo '!!!! Dropbox dir does not exist - skipping related symlinks'
+else
+    RELINK_DIR() {
+        local SRC="$HOME/Dropbox/$1"
+        local DST="$HOME/${2:-$1}"
+        local NAME=${2:-$1}
 
-    if [[ ! -e "$DST" && ! -L "$DST" ]]; then
-        ln -vs $SRC $DST
-    elif [[ ! -L "$DST" ]]; then
-        rmdir $DST && ln -vs $SRC $DST
-    elif [[ $(readlink "$DST") != "$SRC" ]]; then
-        echo "$NAME currently points to $(readlink $DST), relinking..."
-        ln -vsfT $SRC $DST
-    fi
-}
-RELINK_DIR Documents
-RELINK_DIR Photos Pictures
+        if [[ ! -e "$DST" && ! -L "$DST" ]]; then
+            ln -vs $SRC $DST
+        elif [[ ! -L "$DST" ]]; then
+            rmdir $DST && ln -vs $SRC $DST
+        elif [[ $(readlink "$DST") != "$SRC" ]]; then
+            echo "$NAME currently points to $(readlink $DST), relinking..."
+            ln -vsfT $SRC $DST
+        fi
+    }
+    RELINK_DIR Documents
+    RELINK_DIR Photos Pictures
+fi
 
 echo
 echo '==] Pretty, pretty emoji prompts'
@@ -101,50 +112,29 @@ if [[ "$(uname)" = "Darwin" ]]; then
 	# Homebrew packages
 	echo
 	echo '==] Installing homebrew packages'
-	for package in "archey git htop memcached mongodb nginx pstree python redis terminal-notifier tree vim w3m watch bash-completion bash-git-prompt"; do
-	    if [[ "$(brew info --versions $package)" == "" ]]; then
-		brew install $pacakage
-	    fi
+	for package in htop pstree tree watch bash-completion; do
+		brew ls --versions $package || brew install $package
 	done
 
+    #echo
+    #echo '==] Installing devel-version homebrew packages'
+    #for package in go; do
+    #    brew ls --versions $package || brew install --devel $package
+    #done
+
 	echo
-	echo '==] Installing devel-version homebrew packages'
-	for package in "go"; do
-	    if [[ "$(brew info --versions $package)" == "" ]]; then
-		brew install --devel $pacakage
-	    fi
+	echo '==] Installing HEAD-version homebrew packages'
+	for package in bash-git-prompt; do
+        brew ls --versions $package || brew install --HEAD $package
 	done
 
 	echo
 	echo '==] Installing homebrew packages with options'
-	if [[ "$(brew info --versions curl)" == "" ]]; then
-	    brew install --with-openssl --with-nghttp2 curl
-	fi
+    brew ls --versions curl || brew install --with-openssl --with-nghttp2 curl
 
 	echo
 	echo '==] Installing python packages'
 	pip install --upgrade awscli
-
-	# git aware prompt
-	echo
-	echo '==] Installing HEAD-version homebrew packages'
-	for package in "bash-git-prompt"; do
-	    if [[ "$(brew info --versions $package)" == "" ]]; then
-		brew install --HEAD $pacakage
-	    fi
-	done
-
-	# a backup implementation
-	echo
-	echo '==] Creating/Updating a different git aware prompt from git repo'
-	BASH_GIT_DIR="$HOME/.bash/git-aware-prompt"
-	if [[ ! -e "$BASH_GIT_DIR" ]]; then
-	    git clone git://github.com/jimeh/git-aware-prompt.git $BASH_GIT_DIR
-	else
-	    pushd $BASH_GIT_DIR
-	    git checkout master && git pull
-	    popd
-	fi
 
 	# Golang Makefile
 	echo
