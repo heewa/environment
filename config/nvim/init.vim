@@ -249,8 +249,8 @@ call plug#end()
 " when they're called
 
 "colorscheme heewa
-"let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
-colorscheme base16-chalk
+let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
+"colorscheme base16-chalk
 "colorscheme fairyfloss
 "colorscheme solarized
 "colorscheme flattened_dark
