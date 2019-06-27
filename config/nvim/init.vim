@@ -32,15 +32,20 @@ if has('nvim')
 endif
 
 " Map <alt>+{h,j,k,l} to move splits whether in cmd or terminal mode
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
 if has('nvim')
-    tnoremap <A-h> <C-\><C-n><C-w>h
-    tnoremap <A-j> <C-\><C-n><C-w>j
-    tnoremap <A-k> <C-\><C-n><C-w>k
-    tnoremap <A-l> <C-\><C-n><C-w>l
+    nnoremap <M-h> <C-w>h
+    nnoremap <M-j> <C-w>j
+    nnoremap <M-k> <C-w>k
+    nnoremap <M-l> <C-w>l
+    tnoremap <M-h> <C-\><C-n><C-w>h
+    tnoremap <M-j> <C-\><C-n><C-w>j
+    tnoremap <M-k> <C-\><C-n><C-w>k
+    tnoremap <M-l> <C-\><C-n><C-w>l
+else
+    nnoremap <Esc>h <C-w>h
+    nnoremap <Esc>j <C-w>j
+    nnoremap <Esc>k <C-w>k
+    nnoremap <Esc>l <C-w>l
 endif
 
 set laststatus=2   " Always whow the statusline
@@ -188,10 +193,17 @@ call plug#begin()
     " Tmux/Vim split navigation
     Plug 'christoomey/vim-tmux-navigator'
     let g:tmux_navigator_no_mappings = 1
-    nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-    nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-    nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-    nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+    if has('nvim')
+        nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+        nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+        nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+        nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+    else
+        nnoremap <silent> <Esc>h :TmuxNavigateLeft<cr>
+        nnoremap <silent> <Esc>j :TmuxNavigateDown<cr>
+        nnoremap <silent> <Esc>k :TmuxNavigateUp<cr>
+        nnoremap <silent> <Esc>l :TmuxNavigateRight<cr>
+    endif
 
     " Nice status line
     Plug 'vim-airline/vim-airline'
