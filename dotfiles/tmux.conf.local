@@ -326,15 +326,5 @@ bind C-space send-prefix
 bind-key v split-window -h
 bind-key s split-window -v
 
-# Version-specific commands (from stackoverflow)
-run-shell 'tmux setenv -g TMUX_VERSION $(tmux -V sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-
-# UTF8 is autodetected in 2.2 onwards, but errors if explicitly set
-if-shell -b '[ "$(echo "$TMUX_VERSION < 2.2" | bc)" = 1 ]' \
-    "set -g utf8 on; set -g status-utf8 on; set -g mouse-utf8 on"
-
-# Attempt true color support
-set-option -ga terminal-overrides ",xterm-256color:Tc"
-
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/.tmux/plugins/tpm/tpm'
