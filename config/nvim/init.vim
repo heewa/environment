@@ -82,7 +82,7 @@ set ignorecase
 
 " Color Syntax highlighting
 syntax on
-if has('nvim')
+if has('termguicolors')
     set termguicolors  " True Color support
 endif
 
