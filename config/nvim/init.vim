@@ -65,8 +65,8 @@ filetype plugin indent on
 
 " Indenting for specific file types.
 autocmd FileType html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType javascript,json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 
 set showmatch
 set ruler          " Shows line,column # at bottom
@@ -142,6 +142,7 @@ call plug#begin()
     " Go development
     if has('nvim')
         Plug 'fatih/vim-go'
+        let g:go_autodetect_gopath = 0 " Don't fuck with GOPATH
     endif
 
     " Git +/-/~ in gutter
@@ -150,21 +151,46 @@ call plug#begin()
     " Git commands, like Gblame
     Plug 'tpope/vim-fugitive'
 
-    " Syntax Checkers & Autocompleters
     "Plug 'Valloric/YouCompleteMe'
-    Plug 'benekastah/neomake'
+
     Plug 'majutsushi/tagbar'
-    "Plug 'scrooloose/syntastic'
-    "Plug 'myint/syntastic-extras'
+    nnoremap <F8> :TagbarToggle<CR>
+
     Plug 'editorconfig/editorconfig-vim'
 
-    " Formatting
+    Plug 'benekastah/neomake'
+    let g:neomake_python_enabled_makers = ['flake8']
+    let g:neomake_javascript_enabled_makers = ['eslint']
+    autocmd BufWritePost *.go,*.c,*.cpp,*.h,*.py,*.js,*.jsx Neomake
+
     Plug 'sbdchd/neoformat'
     let g:neoformat_only_msg_on_error = 1
+    let g:neoformat_enabled_python = ['black']
+    let g:neoformat_enabled_javascript = ['prettier-eslint', 'prettier']
+
+    " Autoformatting
+    augroup fmtheewa
+      autocmd!
+      autocmd BufWritePre ~/src/Heewa/**/*.py undojoin | Neoformat
+      autocmd BufWritePre ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx undojoin | Neoformat
+    augroup END
+
+    augroup twine
+      autocmd!
+
+      autocmd BufNewFile,BufRead ~/src/Twine/**/*.py let b:neomake_python_enabled_makers = ['pylint']
+      autocmd BufNewFile,BufRead ~/src/Twine/**/*.py let g:neoformat_enabled_python = ['black']
+      autocmd BufWritePre ~/src/Twine/**/*.py undojoin | Neoformat
+
+      autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let b:neomake_javascript_enabled_makers = ['eslint']
+      autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let g:neoformat_enabled_python = ['prettier']
+      autocmd BufWritePre ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx undojoin | Neoformat
+    augroup END
 
     " NOTE: disabling cuz can't make work at Twine
     "Plug 'ternjs/tern_for_vim'
 
+    " Javascript
     Plug 'maxmellon/vim-jsx-pretty'
     Plug 'benjie/local-npm-bin.vim'
     Plug 'pangloss/vim-javascript'
@@ -184,12 +210,14 @@ call plug#begin()
 
     " Load local .lvimrc files from root up to current dir
     Plug 'embear/vim-localvimrc'
+    let g:localvimrc_persistent = 1 " Remember permission for .lvimrc files across sessions
 
     " Split resizing
     Plug 'wellle/visual-split.vim'
 
     " Something about fixing some vim-in-tmux issue
     Plug 'tmux-plugins/vim-tmux-focus-events'
+
     " Tmux/Vim split navigation
     Plug 'christoomey/vim-tmux-navigator'
     let g:tmux_navigator_no_mappings = 1
@@ -210,39 +238,11 @@ call plug#begin()
     let g:airline#extensions#tagbar#flags = 'f' " Full tag info
     Plug 'vim-airline/vim-airline-themes'
     let g:airline_theme='bubblegum'
+    let g:airline_powerline_fonts = 1 " Use a patched powerline font for nice symbols
 
     " Load the icons plugin last, so it picks up other plugins to know what
     " settings to use
     Plug 'ryanoasis/vim-devicons'
-
-    " Remember permission for .lvimrc files across sessions if answered with
-    " capital Y/N/A
-    let g:localvimrc_persistent = 1
-
-    " Use flake8 & pep8 for python checking, mainly cuz pylint is annoying
-    let g:neomake_python_enabled_makers = ['flake8', 'pep8']
-
-    " Use only eslint for js, cuz jshint doesn't work well for jsx (unless
-    " you can figure out how to only target jsx files)
-    let g:neomake_javascript_enabled_makers = ['eslint']
-
-    " YouCompleteMe symbol jumping for C files
-    autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
-    " YouCompelteMe - don't ask for confirmation to load python conf file (.ycm_extra_conf.py)
-    let g:ycm_confirm_extra_conf = 0
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-
-    nnoremap <F8> :TagbarToggle<CR>
-
-    " Don't fuck with GOPATH
-    let g:go_autodetect_gopath = 0
-
-    " Run Neomake on save
-    autocmd BufWritePost *.go,*.c,*.cpp,*.h,*.py,*.js,*.jsx Neomake
-
-    " Use a patched powerline font for nice symbols
-    let g:airline_powerline_fonts = 1
-
 call plug#end()
 
 " Some options need to be placed after plug#end() so the plugins are loaded
@@ -255,15 +255,3 @@ let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
 "colorscheme solarized
 "colorscheme flattened_dark
 "let g:neosolarized_contrast = 'high' | let g:neosolarized_visibility = 'high' | colorscheme NeoSolarized
-
-augroup twine
-  autocmd!
-
-  autocmd BufNewFile,BufRead ~/src/Twine/**/*.py let b:neomake_python_enabled_makers = ['pylint']
-  autocmd BufNewFile,BufRead ~/src/Twine/**/*.py let g:neoformat_enabled_python = ['black']
-  autocmd BufWritePre ~/src/Twine/**/*.py undojoin | Neoformat
-
-  autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let b:neomake_javascript_enabled_makers = ['eslint']
-  autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let g:neoformat_enabled_python = ['prettier']
-  autocmd BufWritePre ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx undojoin | Neoformat
-augroup END
