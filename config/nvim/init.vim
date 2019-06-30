@@ -166,7 +166,7 @@ call plug#begin()
     Plug 'editorconfig/editorconfig-vim'
 
     Plug 'benekastah/neomake'
-    let g:neomake_python_enabled_makers = ['flake8']
+    let g:neomake_python_enabled_makers = ['flake8', 'pyflakes']
     let g:neomake_javascript_enabled_makers = ['eslint']
     autocmd BufWritePost *.go,*.c,*.cpp,*.h,*.py,*.js,*.jsx Neomake
 
