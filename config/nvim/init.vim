@@ -48,6 +48,13 @@ else
     nnoremap <Esc>l <C-w>l
 endif
 
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" replace selected text with default register without yanking
+vnoremap <leader>p "_dP
+
 set laststatus=2   " Always whow the statusline
 set nohls
 
