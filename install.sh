@@ -14,8 +14,13 @@ done
 # XDG Config goes straight into ~/.config/ without rename
 echo
 echo '==] SymLinking XDG Config in ~/.config/'
-mkdir -p ~/.config/
-ln -vsf $PWD/config/* $HOME/.config/
+# These need to be treaded indivudually (unless you can bash more cleverly)
+echo '  ] nvim'
+SRC="$PWD/config/nvim"
+DST="$HOME/.config/nvim"
+mkdir -p "$DST/autoload"
+ln -vsf $SRC/init.vim $DST/
+ln -vsf $SRC/autoload/plug.vim $DST/autoload/
 
 # .rc files need to be renamed individually
 echo
