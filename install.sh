@@ -107,19 +107,19 @@ curl -#fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.
 # Mac Specific
 if [[ "$(uname)" = "Darwin" ]]; then
 
-	# Homebrew
-	if [[ "$(which brew)" == "" ]]; then
-	    echo
-	    echo '==] Installing homebrew'
-	    /usr/bin/ruby -e "$(curl -#fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	fi
+    # Homebrew
+    if [[ "$(which brew)" == "" ]]; then
+        echo
+        echo '==] Installing homebrew'
+        /usr/bin/ruby -e "$(curl -#fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
 
-	# Homebrew packages
-	echo
-	echo '==] Installing homebrew packages'
-	for package in htop pstree tree watch bash-completion; do
-		brew ls --versions $package || brew install $package
-	done
+    # Homebrew packages
+    echo
+    echo '==] Installing homebrew packages'
+    for package in htop pstree tree watch bash-completion; do
+        brew ls --versions $package || brew install $package
+    done
 
     #echo
     #echo '==] Installing devel-version homebrew packages'
@@ -127,24 +127,24 @@ if [[ "$(uname)" = "Darwin" ]]; then
     #    brew ls --versions $package || brew install --devel $package
     #done
 
-	echo
-	echo '==] Installing HEAD-version homebrew packages'
-	for package in bash-git-prompt; do
+    echo
+    echo '==] Installing HEAD-version homebrew packages'
+    for package in bash-git-prompt; do
         brew ls --versions $package || brew install --HEAD $package
-	done
+    done
 
-	echo
-	echo '==] Installing homebrew packages with options'
+    echo
+    echo '==] Installing homebrew packages with options'
     brew ls --versions curl || brew install --with-openssl --with-nghttp2 curl
 
-	echo
-	echo '==] Installing python packages'
-	pip install --upgrade awscli
+    echo
+    echo '==] Installing python packages'
+    pip install --upgrade awscli
 
-	# Golang Makefile
-	echo
-	echo '==] Getting Golang Makefile from git gist'
-	curl -#sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
+    # Golang Makefile
+    echo
+    echo '==] Getting Golang Makefile from git gist'
+    curl -#sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
 
 elif [[ $(uname) == "Linux" ]]; then # Linux
 
