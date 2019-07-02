@@ -255,6 +255,9 @@ call plug#end()
 " Some options need to be placed after plug#end() so the plugins are loaded
 " when they're called
 
+" Regardless of colorscheme, let vim know we're using a dark background
+set background=dark
+
 "colorscheme heewa
 let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
 "colorscheme base16-chalk
