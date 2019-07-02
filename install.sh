@@ -148,6 +148,13 @@ if [[ "$(uname)" = "Darwin" ]]; then
 
 elif [[ $(uname) == "Linux" ]]; then # Linux
 
+    echo
+    echo '==] bash git prompt'
+    BGP_DIR="$HOME/.bash-git-prompt"
+    if [[ ! -e $BGP_DIR ]]; then
+        git clone --depth 1 git@github.com:magicmonty/bash-git-prompt.git $BGP_DIR
+    fi
+
     # Avoid all sudo things if don't have password yet
     sudo --non-interactive echo
     if [[ $? ]]; then
