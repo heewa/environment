@@ -19,8 +19,8 @@ echo '  ] nvim'
 SRC="$PWD/config/nvim"
 DST="$HOME/.config/nvim"
 mkdir -p "$DST/autoload"
-ln -vsf $SRC/init.vim $DST/
-ln -vsf $SRC/autoload/plug.vim $DST/autoload/
+ln -vsf "$SRC/init.vim" "$DST/"
+ln -vsf "$SRC/autoload/plug.vim" "$DST/autoload/"
 
 # .rc files need to be renamed individually
 echo
