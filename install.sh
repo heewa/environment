@@ -104,6 +104,28 @@ curl -#fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.
 # Vim plug for neovim
 curl -#fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+echo
+echo '==] Downloading nerd fonts'
+FONTS=( \
+    'Noto/Mono/complete/Noto%20Mono%20Nerd%20Font%20Complete%20Mono.ttf' \
+    'UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete%20Mono.ttf' \
+    'SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete%20Mono.ttf' \
+)
+URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/"
+if [[ "$(uname)" = "Darwin" ]]; then
+    DIR="$HOME/Library/Fonts"
+else
+    DIR="$HOME/.local/share/fonts"
+fi
+mkdir -p "$DIR"
+(
+    cd "$DIR"
+    for FONT in ${FONTS[@]}; do
+        echo "    $FONT"
+        curl -fOLs "$URL$FONT"
+    done
+)
+
 # Mac Specific
 if [[ "$(uname)" = "Darwin" ]]; then
 
