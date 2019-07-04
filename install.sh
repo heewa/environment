@@ -23,7 +23,7 @@ link_config() {
     for FILE in $FILES; do
         local SRC="$PWD/config/$APP/$FILE"
         local DST="$HOME/.config/$APP/$FILE"
-        mkdir -p "$(dirname \"$DST\")"
+        mkdir -p "$(dirname $DST)"
         ln -vsf "$SRC" "$DST"
     done
 }
@@ -117,9 +117,9 @@ curl -#fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.
 echo
 echo '==] Downloading nerd fonts'
 FONTS=( \
-    'Noto/Mono/complete/Noto%20Mono%20Nerd%20Font%20Complete%20Mono.ttf' \
-    'UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete%20Mono.ttf' \
-    'SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete%20Mono.ttf' \
+    'Noto/Mono/complete/Noto%20Mono%20Nerd%20Font%20Complete.ttf' \
+    'UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete.ttf' \
+    'SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf' \
 )
 URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/"
 if [[ "$(uname)" = "Darwin" ]]; then
@@ -135,6 +135,12 @@ mkdir -p "$DIR"
         curl -fOLs "$URL$FONT"
     done
 )
+
+if [[ ! -e "$HOME/.pyenv" ]]; then
+    echo
+    echo '==] Pyenv'
+    git clone --depth 1 git@github.com:pyenv/pyenv.git ~/.pyenv
+fi
 
 # Mac Specific
 if [[ "$(uname)" = "Darwin" ]]; then
@@ -195,24 +201,20 @@ elif [[ $(uname) == "Linux" ]]; then # Linux
 
     # Avoid all sudo things if don't have password yet
     sudo --non-interactive echo
-    if [[ $? ]]; then
-        echo '==] Installing linux packages'
-        if [[ ! $(which xsel) ]]; then
-            echo
-            echo '==] xsel, for clipboard stuff'
-            sudo apt install xsel
-        fi
-    else
+    if [[ ! $? ]]; then
         echo '**** Need sudo to install linux packages'
+    else
+        echo '==] Rebuilding fonts'
+        sudo fc-cache -f ~/.local/share/fonts
+
+        echo '==] Adding apt repos'
+        sudo add-apt-repository ppa:mmstick76/alacritty
+
+        echo '==] Installing linux packages'
+        sudo apt install xsel alacritty kitty
     fi
 
 fi # Mac Specific
-
-    if [[ ! -e "$HOME/.pyenv" ]]; then
-        echo
-        echo '==] Pyenv'
-        git clone --depth 1 git@github.com:pyenv/pyenv.git ~/.pyenv
-    fi
 
 echo
 echo '==] Done'
