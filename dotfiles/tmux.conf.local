@@ -42,7 +42,7 @@ tmux_conf_new_session_prompt=false
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
 #  - false (default)
-tmux_conf_theme_24b_colour=false
+tmux_conf_theme_24b_colour=true
 
 # window style
 tmux_conf_theme_window_fg='default'
@@ -150,10 +150,14 @@ tmux_conf_theme_window_status_last_attr='none'
 #tmux_conf_theme_left_separator_sub='|'
 #tmux_conf_theme_right_separator_main=''
 #tmux_conf_theme_right_separator_sub='|'
-tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
-tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
-tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
-tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
+#tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
+#tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
+#tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
+#tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
+tmux_conf_theme_left_separator_main='\ue0b4'   # Circle
+tmux_conf_theme_left_separator_sub='\ue0b5'    # Circle
+tmux_conf_theme_right_separator_main='\ue0b6'  # Circle
+tmux_conf_theme_right_separator_sub='\ue0b7'   # Circle
 
 # status left/right content:
 #   - separate main sections with '|'
@@ -179,8 +183,11 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,} '
-tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %I:%M , %a %b %d | #{username}#{root} | #{hostname} '
+#tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,} '
+#tmux_conf_theme_status_left=' \ufb8a #S | \uf0e7 #{loadavg} '
+tmux_conf_theme_status_left=' \ufb8a #S | #{?battery_status, #{battery_status},} #{?battery_bar, #{battery_hbar},} '
+#tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_hbar},}#{?battery_percentage, #{battery_percentage},} , %I:%M , %a %b %d | #{username}#{root} | #{hostname} '
+tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} \uf0e7 #{loadavg} , %I:%M , %a %b %d | #{username}#{root} | #{hostname} '
 
 # status left style
 #tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white
@@ -197,13 +204,14 @@ tmux_conf_theme_status_right_bg='#282828,#cc281d,#ebdbb2' # dark gray, red, whit
 tmux_conf_theme_status_right_attr='none,none,bold'
 
 # pairing indicator
-tmux_conf_theme_pairing='👓 '          # U+1F453
+tmux_conf_theme_pairing='\uf707'
 tmux_conf_theme_pairing_fg='none'
 tmux_conf_theme_pairing_bg='none'
 tmux_conf_theme_pairing_attr='none'
 
 # prefix indicator
-tmux_conf_theme_prefix='⌨ '            # U+2328
+#tmux_conf_theme_prefix='⌨ '            # U+2328
+tmux_conf_theme_prefix='*'
 tmux_conf_theme_prefix_fg='none'
 tmux_conf_theme_prefix_bg='none'
 tmux_conf_theme_prefix_attr='none'
@@ -215,7 +223,7 @@ tmux_conf_theme_root_bg='none'
 tmux_conf_theme_root_attr='bold,blink'
 
 # synchronized indicator
-tmux_conf_theme_synchronized='🔒'     # U+1F512
+tmux_conf_theme_synchronized='\uf023'
 tmux_conf_theme_synchronized_fg='none'
 tmux_conf_theme_synchronized_bg='none'
 tmux_conf_theme_synchronized_attr='none'
@@ -225,8 +233,12 @@ tmux_conf_theme_synchronized_attr='none'
 #tmux_conf_battery_bar_symbol_empty='◻'
 #tmux_conf_battery_bar_symbol_full='♥'
 #tmux_conf_battery_bar_symbol_empty='·'
-tmux_conf_battery_bar_symbol_full='='
-tmux_conf_battery_bar_symbol_empty='-'
+#tmux_conf_battery_bar_symbol_full='='
+#tmux_conf_battery_bar_symbol_empty='-'
+#tmux_conf_battery_bar_symbol_full='\uf240'  # full battery
+#tmux_conf_battery_bar_symbol_empty='\uf244' # empty battery
+tmux_conf_battery_bar_symbol_full='\uf004'  # full heart
+tmux_conf_battery_bar_symbol_empty='\uf7d4' # empty heart
 
 # battery bar length (in number of symbols), possible values are:
 #   - auto
@@ -237,29 +249,34 @@ tmux_conf_battery_bar_length='auto'
 #   - gradient (default)
 #   - heat
 #   - 'colour_full_fg,colour_empty_fg,colour_bg'
-tmux_conf_battery_bar_palette='gradient'
+tmux_conf_battery_bar_palette='heat'
 #tmux_conf_battery_bar_palette='#d70000,#e4e4e4,#000000'   # red, white, black
 
 # battery hbar palette, possible values are:
 #   - gradient (default)
 #   - heat
 #   - 'colour_low,colour_half,colour_full'
-tmux_conf_battery_hbar_palette='gradient'
+tmux_conf_battery_hbar_palette='#cc281d,#d5c4a1,#282828'
 #tmux_conf_battery_hbar_palette='#d70000,#ff5f00,#5fff00'  # red, orange, green
 
 # battery vbar palette, possible values are:
 #   - gradient (default)
 #   - heat
 #   - 'colour_low,colour_half,colour_full'
-tmux_conf_battery_vbar_palette='gradient'
+#tmux_conf_battery_vbar_palette='heat'
+tmux_conf_battery_vbar_palette='#cc281d,#d5c4a1,#282828'
 #tmux_conf_battery_vbar_palette='#d70000,#ff5f00,#5fff00'  # red, orange, green
 
 # symbols used to indicate whether battery is charging or discharging
+tmux_conf_battery_status_charging='\uf004'     # full heart
+tmux_conf_battery_status_discharging='\uf08a'  # empty heart
+#tmux_conf_battery_status_charging='\uf1e6'     # plug
+#tmux_conf_battery_status_discharging='\uf58b'  # battery with minus
 #tmux_conf_battery_status_charging='↑'       # U+2191
 #tmux_conf_battery_status_discharging='↓'    # U+2193
 #tmux_conf_battery_status_charging='⚡ '    # U+26A1
-tmux_conf_battery_status_charging='🔌 '    # U+1F50C
-tmux_conf_battery_status_discharging='🔋 ' # U+1F50B
+#tmux_conf_battery_status_charging='🔌 '    # U+1F50C
+#tmux_conf_battery_status_discharging='🔋 ' # U+1F50B
 
 # clock style (when you hit <prefix> + t)
 # you may want to use %I:%M %p in place of %R in tmux_conf_theme_status_right
