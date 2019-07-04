@@ -14,13 +14,23 @@ done
 # XDG Config goes straight into ~/.config/ without rename
 echo
 echo '==] SymLinking XDG Config in ~/.config/'
-# These need to be treaded indivudually (unless you can bash more cleverly)
-echo '  ] nvim'
-SRC="$PWD/config/nvim"
-DST="$HOME/.config/nvim"
-mkdir -p "$DST/autoload"
-ln -vsf "$SRC/init.vim" "$DST/"
-ln -vsf "$SRC/autoload/plug.vim" "$DST/autoload/"
+
+link_config() {
+    local APP="$1"
+    shift
+    local FILES="$*"
+
+    for FILE in $FILES; do
+        local SRC="$PWD/config/$APP/$FILE"
+        local DST="$HOME/.config/$APP/$FILE"
+        mkdir -p "$(dirname \"$DST\")"
+        ln -vsf "$SRC" "$DST"
+    done
+}
+
+link_config 'nvim' 'init.vim autoload/plug.vim'
+link_config 'alacritty' 'alacritty.yml'
+link_config 'kitty' 'kitty.conf'
 
 # .rc files need to be renamed individually
 echo
@@ -148,6 +158,12 @@ if [[ "$(uname)" = "Darwin" ]]; then
     #for package in go; do
     #    brew ls --versions $package || brew install --devel $package
     #done
+
+    echo
+    echo '==] Installing cask homebrew packages'
+    for package in alacritty kitty; do
+        brew ls --versions $package || brew cask install $package
+    done
 
     echo
     echo '==] Installing HEAD-version homebrew packages'
