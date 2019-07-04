@@ -19,7 +19,6 @@ vnoremap <Tab> <Esc>gV
 onoremap <Tab> <Esc>
 "cnoremap <Tab> <C-C><Esc>
 inoremap <Tab> <Esc>`^
-inoremap <Leader><Tab> <Tab>
 
 " Unbind <Esc> in a few modes, to force myself to change
 "nnoremap <Esc> <Nop>
