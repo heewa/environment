@@ -15,7 +15,7 @@ override_git_prompt_colors() {
   NF_DOTTED_VERT=$'\ue621'
 
   # Heewa: show seconds in time
-  Time12a="\$(date +%H:%M:%S)"
+  #Time12a="\$(date +%H:%M:%S)"
   # PathShort="\w";
 
   ## These are the color definitions used by gitprompt.sh
@@ -58,7 +58,8 @@ override_git_prompt_colors() {
   # GIT_PROMPT_UPSTREAM=" {${Blue}_UPSTREAM_${ResetColor}}"
 
   ## _LAST_COMMAND_INDICATOR_ will be replaced by the appropriate GIT_PROMPT_COMMAND_OK OR GIT_PROMPT_COMMAND_FAIL
-  GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_${White}${Time12a} ${Yellow}${PathShort}${ResetColor}"
+  GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_${White}${Yellow}${PathShort}${ResetColor}"
+  #GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_${White}${Time12a} ${Yellow}${PathShort}${ResetColor}"
   #GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_\$(CURRENT_EMOJI_RAW)$EMOJI_SUFFIX${White}${Time12a}${Yellow}${PathShort}${ResetColor}"
   GIT_PROMPT_START_ROOT="_LAST_COMMAND_INDICATOR_${GIT_PROMPT_START_USER}"
   GIT_PROMPT_END_USER="${ResetColor}${NF_CURVED_CLOSE} "
