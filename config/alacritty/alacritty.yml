@@ -1,17 +1,36 @@
 # Send ESC (\x1b) before characters when alt is pressed.
 alt_send_esc: true
 
+window:
+    decorations: none
+    dimensions:
+        columns: 84
+        lines: 24
+    padding:
+        x: 0
+        y: 0
+
+background_opacity: 0.98
+
+mouse:
+    hide_when_typing: true
+    url:
+        launcher:
+            program: None
+
 font:
     normal:
-        family: SauceCodePro Nerd Font Mono
-    size: 12.0
+        style: Regular
+        #family: FuraCode Nerd Font
+        #family: SauceCodePro Nerd Font
+        #family: Noto Mono Nerd Font Complete
+        family: UbuntuMono Nerd Font
+    size: 11.0
 
 visual_bell:
     animation: EaseOutExpo
     duration: 0
     color: '0xffffff'
-
-background_opacity: 0.9
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
@@ -20,17 +39,13 @@ selection:
   save_to_clipboard: false
 
 cursor:
-  # Cursor style
-  #
-  # Values for `style`:
-  #   - ▇ Block
-  #   - _ Underline
-  #   - | Beam
   style: Block
-
-  # If this is `true`, the cursor will be rendered as a hollow box when the
-  # window is not focused.
   unfocused_hollow: true
+
+key_bindings:
+    - { key: Return, mods: Super, action: ToggleFullscreen }
+    - { key: C, mods: Super, action: Copy }
+    - { key: V, mods: Super, action: Paste }
 
 #
 # Colors
