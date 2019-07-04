@@ -149,7 +149,7 @@ if [[ "$(uname)" = "Darwin" ]]; then
     # Homebrew packages
     echo
     echo '==] Installing homebrew packages'
-    for package in htop pstree tree watch bash-completion; do
+    for package in bash htop pstree tree watch bash-completion; do
         brew ls --versions $package || brew install $package
     done
 
