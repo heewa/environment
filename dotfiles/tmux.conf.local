@@ -1,8 +1,82 @@
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# Tmux/Vim split navigation
+#set -g @plugin 'christoomey/vim-tmux-navigator'
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+bind-key -n M-h if-shell "$is_vim" "send-keys M-h"  "select-pane -L"
+bind-key -n M-j if-shell "$is_vim" "send-keys M-j"  "select-pane -D"
+bind-key -n M-k if-shell "$is_vim" "send-keys M-k"  "select-pane -U"
+bind-key -n M-l if-shell "$is_vim" "send-keys M-l"  "select-pane -R"
+#bind-key -n M-\ if-shell "$is_vim" "send-keys M-\\" "select-pane -l"
+bind-key -T copy-mode-vi M-h select-pane -L
+bind-key -T copy-mode-vi M-j select-pane -D
+bind-key -T copy-mode-vi M-k select-pane -U
+bind-key -T copy-mode-vi M-l select-pane -R
+#bind-key -T copy-mode-vi M-\ select-pane -l
+
+# Move windows
+bind-key -n M-Left previous-window
+bind-key -n M-Right next-window
+
+set-option -g mouse on
+
+set -g default-terminal "xterm-256color"
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+# increase history size
+set -g history-limit 10000
+
+# force Vi mode
+#   really you should export VISUAL or EDITOR environment variable, see manual
+#set -g status-keys vi
+#set -g mode-keys vi
+
+# Prefix
+set -g prefix C-space
+set -gu prefix2
+unbind C-b
+unbind C-a
+bind C-space send-prefix
+
+# Remove some default bindings
+unbind -n C-l
+unbind -
+unbind _
+
+# Mirror vim's split maps
+bind-key v split-window -h
+bind-key s split-window -v
+
+# Refresh without reload
+bind C-r refresh-client -S
+
+# Choose session
+bind C-s choose-tree
+
+# Toggle "off" mode to handle nested tmux sessions.
+# source: https://www.freecodecamp.org/news/tmux-in-practice-local-and-nested-remote-tmux-sessions-4f7ba5db8795/
+bind -T root F12 \
+  set -g @keys_off 1 \;\
+  set prefix None \;\
+  set key-table off \;\
+  if -F '#{pane_in_mode}' 'send-keys -X cancel' \;\
+  refresh-client -S
+
+bind -T off F12 \
+  set -ug @keys_off \;\
+  set -u prefix \;\
+  set -u key-table \;\
+  refresh-client -S
+
+#wg_is_keys_off="#[fg=$color_light,bg=$color_window_off_indicator]#([ $(tmux show-option -qv key-table) = 'off' ] && echo 'OFF')#[default]"
+#set -g status-right "$wg_is_keys_off #{sysstat_cpu} | #{sysstat_mem} | #{sysstat_loadavg} | $wg_user_host"
+
 # https://github.com/gpakosz/.tmux
 # (‑●‑●)> dual licensed under the WTFPL v2 license and the MIT license,
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
-
 
 # -- navigation ----------------------------------------------------------------
 
@@ -185,9 +259,9 @@ tmux_conf_theme_right_separator_sub='\ue0b7'   # Circle
 #     - #{username_ssh}
 #tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,} '
 #tmux_conf_theme_status_left=' \ufb8a #S | \uf0e7 #{loadavg} '
-tmux_conf_theme_status_left=' \ufb8a #S | #{?battery_status, #{battery_status},} #{?battery_bar, #{battery_vbar},} '
+tmux_conf_theme_status_left=' #{?@keys_off,#[fg=#a89984]\uf8e3,\ufb8a} #S | #{?@keys_off,#[fg=#a89984],}#{?battery_status, #{battery_status},\uf004} #{?battery_bar, #{battery_vbar},} '
 #tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_hbar},}#{?battery_percentage, #{battery_percentage},} , %I:%M , %a %b %d | #{username}#{root} | #{hostname} '
-tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} \ue266  #{loadavg} , %I:%M , %a %b %d | #{username}#{root} | #{hostname} '
+tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} \ue266  #{loadavg} , #{username}#{root} , #{hostname} | %a %b %d | %I:%M '
 
 # status left style
 #tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white
@@ -199,8 +273,8 @@ tmux_conf_theme_status_left_attr='bold,none,none'
 # status right style
 #tmux_conf_theme_status_right_fg='#8a8a8a,#e4e4e4,#000000' # light gray, white, black
 #tmux_conf_theme_status_right_bg='#080808,#d70000,#e4e4e4' # dark gray, red, white
-tmux_conf_theme_status_right_fg='#a89984,#e4e4e4,#000000' # light gray, white, black
-tmux_conf_theme_status_right_bg='#282828,#cc281d,#ebdbb2' # dark gray, red, white
+tmux_conf_theme_status_right_fg='#a89984,#000000,#e4e4e4' # light gray, black, white
+tmux_conf_theme_status_right_bg='#282828,#ebdbb2,#cc281d' # dark gray, white, red
 tmux_conf_theme_status_right_attr='none,none,bold'
 
 # pairing indicator
@@ -214,7 +288,7 @@ tmux_conf_theme_pairing_attr='none'
 tmux_conf_theme_prefix='*'
 tmux_conf_theme_prefix_fg='none'
 tmux_conf_theme_prefix_bg='none'
-tmux_conf_theme_prefix_attr='none'
+tmux_conf_theme_prefix_attr='bold'
 
 # root indicator
 tmux_conf_theme_root='!'
@@ -283,7 +357,6 @@ tmux_conf_battery_status_discharging='\uf08a'  # empty heart
 tmux_conf_theme_clock_colour='#00afff'  # light blue
 tmux_conf_theme_clock_style='12'
 
-
 # -- clipboard -----------------------------------------------------------------
 
 # in copy mode, copying selection also copies to the OS clipboard
@@ -292,56 +365,6 @@ tmux_conf_theme_clock_style='12'
 # on macOS, this requires installing reattach-to-user-namespace, see README.md
 # on Linux, this requires xsel or xclip
 tmux_conf_copy_to_os_clipboard=true
-
-
-# -- user customizations -------------------------------------------------------
-# this is the place to override or undo settings
-
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-
-# Tmux/Vim split navigation
-#set -g @plugin 'christoomey/vim-tmux-navigator'
-is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-bind-key -n M-h if-shell "$is_vim" "send-keys M-h"  "select-pane -L"
-bind-key -n M-j if-shell "$is_vim" "send-keys M-j"  "select-pane -D"
-bind-key -n M-k if-shell "$is_vim" "send-keys M-k"  "select-pane -U"
-bind-key -n M-l if-shell "$is_vim" "send-keys M-l"  "select-pane -R"
-#bind-key -n M-\ if-shell "$is_vim" "send-keys M-\\" "select-pane -l"
-bind-key -T copy-mode-vi M-h select-pane -L
-bind-key -T copy-mode-vi M-j select-pane -D
-bind-key -T copy-mode-vi M-k select-pane -U
-bind-key -T copy-mode-vi M-l select-pane -R
-#bind-key -T copy-mode-vi M-\ select-pane -l
-
-# Move windows
-bind-key -n M-Left previous-window
-bind-key -n M-Right next-window
-
-set-option -g mouse on
-
-set -g default-terminal "xterm-256color"
-set-option -ga terminal-overrides ",xterm-256color:Tc"
-
-# increase history size
-set -g history-limit 10000
-
-# force Vi mode
-#   really you should export VISUAL or EDITOR environment variable, see manual
-#set -g status-keys vi
-#set -g mode-keys vi
-
-# Prefix
-set -gu prefix2
-unbind C-a
-unbind C-b
-set -g prefix C-space
-bind C-space send-prefix
-
-# Mirror vim's split maps
-bind-key v split-window -h
-bind-key s split-window -v
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/.tmux/plugins/tpm/tpm'
