@@ -54,6 +54,8 @@ vnoremap <leader>d "_d
 " replace selected text with default register without yanking
 vnoremap <leader>p "_dP
 
+set updatetime=1000  " Speed up vim's swap sync & when plugins update (improved responsiveness)
+
 set laststatus=2   " Always whow the statusline
 set nohls
 
