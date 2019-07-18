@@ -58,6 +58,33 @@ vnoremap <leader>p "_dP
 nnoremap <leader>s :%s/\C\<<C-r><C-w>\>/
 vnoremap <leader>s :s/\C\<<C-r><C-w>\>/
 
+" Swap splits
+function! SwapSplits(dir)
+    " Remeber current (source) buffer
+    let srcBuf = winbufnr(0)
+
+    " Move to dest window
+    exe 'wincmd ' . a:dir
+
+    " Remeber dest  window & buffer
+    let dstBuf = winbufnr(0)
+
+    " Open src buffer in dst window
+    exe srcBuf . 'buf'
+
+    " Move back to src window, and open dst buffer there
+    exe 'wincmd p'
+    exe dstBuf . 'buf'
+
+    " Move back to dst window, so we end up in final location
+    exe 'wincmd p'
+endfunction
+
+nnoremap <leader>h :call SwapSplits('h')<CR>
+nnoremap <leader>j :call SwapSplits('j')<CR>
+nnoremap <leader>k :call SwapSplits('k')<CR>
+nnoremap <leader>l :call SwapSplits('l')<CR>
+
 set updatetime=1000  " Speed up vim's swap sync & when plugins update (improved responsiveness)
 
 set laststatus=2   " Always whow the statusline
