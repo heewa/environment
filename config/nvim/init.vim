@@ -260,6 +260,7 @@ call plug#begin()
     " Tmux/Vim split navigation
     Plug 'christoomey/vim-tmux-navigator'
     let g:tmux_navigator_no_mappings = 1
+    let g:tmux_navigator_no_wrap = 1
     if has('nvim')
         nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
         nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
