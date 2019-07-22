@@ -58,6 +58,10 @@ vnoremap <leader>p "_dP
 nnoremap <leader>s :%s/\C\<<C-r><C-w>\>/
 vnoremap <leader>s :s/\C\<<C-r><C-w>\>/
 
+" Search for last yanked text
+nnoremap <silent> <nowait> <Leader>* /\C\<<C-r>0\><CR>
+nnoremap <Leader><Leader>* :vimgrep /\C\<<C-r><C-w>\>/ **
+
 " Swap splits
 function! SwapSplits(dir)
     " Remeber current (source) buffer
@@ -130,10 +134,6 @@ set nofoldenable    " disable folding
 
 " Quick explore
 nnoremap - :Explore<CR>
-
-" Search for last yanked text
-nnoremap <silent> <nowait> <Leader>* /\<<C-r>0\><CR>
-nnoremap <Leader><Leader>* :vimgrep /\<<C-r><C-w>\>/ **
 
 " Go settings
 autocmd FileType go noremap gs <Plug>(go-def-split)
