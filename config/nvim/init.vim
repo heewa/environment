@@ -58,6 +58,10 @@ vnoremap <leader>p "_dP
 nnoremap <leader>s :%s/\C\<<C-r><C-w>\>/
 vnoremap <leader>s :s/\C\<<C-r><C-w>\>/
 
+" substitute yanked word
+nnoremap <leader>sy :%s/\C\<<C-r>0\>/
+vnoremap <leader>sy :s/\C\<<C-r>0\>/
+
 " Search for last yanked text
 nnoremap <silent> <nowait> <Leader>* /\C\<<C-r>0\><CR>
 nnoremap <Leader><Leader>* :vimgrep /\C\<<C-r><C-w>\>/ **
