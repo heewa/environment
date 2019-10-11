@@ -15,6 +15,14 @@ bind-key -n M-l if-shell "$is_vim" "send-keys M-l"  "if-shell 'expr #{window_wid
 bind-key -n M-Left previous-window
 bind-key -n M-Right next-window
 
+# Move windows in sub-tmux
+bind-key -n S-M-Left send-keys M-Left
+bind-key -n S-M-Right send-keys M-Right
+bind-key -n M-H send-keys M-h
+bind-key -n M-J send-keys M-j
+bind-key -n M-K send-keys M-k
+bind-key -n M-L send-keys M-l
+
 set-option -g mouse on
 
 set -g default-terminal "xterm-256color"
