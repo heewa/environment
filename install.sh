@@ -207,11 +207,11 @@ elif [[ $(uname) == "Linux" ]]; then # Linux
         echo '==] Rebuilding fonts'
         sudo fc-cache -f ~/.local/share/fonts
 
-        echo '==] Adding apt repos'
-        sudo add-apt-repository ppa:mmstick76/alacritty
-
         echo '==] Installing linux packages'
-        sudo apt install xsel alacritty kitty
+        sudo apt install xsel
+
+        echo '==] Installing alacritty'
+        sudo add-apt-repository ppa:mmstick76/alacritty && sudo apt install alacritty || true
     fi
 
 fi # Mac Specific
