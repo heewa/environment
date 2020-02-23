@@ -7,7 +7,7 @@ set -e
 
 echo
 echo '==] Creating home dirs'
-for D in src build tmp scripts bin .bash .config/tmux .config/nvim; do
+for D in src build tmp scripts bin .bash .config/tmux .config/nvim .npm-global; do
     mkdir -pv $HOME/$D
 done
 
@@ -141,6 +141,8 @@ if [[ ! -e "$HOME/.pyenv" ]]; then
     echo '==] Pyenv'
     git clone --depth 1 git@github.com:pyenv/pyenv.git ~/.pyenv
 fi
+
+which npm && npm config set prefix "$HOME/.npm-global" || echo '!!!! NPM not installed, skipping conf'
 
 # Mac Specific
 if [[ "$(uname)" = "Darwin" ]]; then

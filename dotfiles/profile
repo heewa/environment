@@ -21,6 +21,9 @@ fi
 export EDITOR=vim
 export PATH=$HOME/.local/bin:$HOME/Library/Python/3.7/bin/:$HOME/.rbenv/bin:$HOME/bin:$HOME/scripts:/usr/local/sbin:/usr/local/bin:/usr/local/opt/python/libexec/bin:$PATH:/build/trees/bin
 
+# NPM global installs
+export PATH=$HOME/.npm-global/bin:$PATH
+
 # Mac specific conf
 if [[ $(uname) == 'Darwin' ]]; then
 
