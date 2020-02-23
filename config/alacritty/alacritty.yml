@@ -1,6 +1,14 @@
 # Send ESC (\x1b) before characters when alt is pressed.
 alt_send_esc: true
 
+shell:
+    program: /usr/bin/tmux
+    args:
+        - new-session
+        - -A
+        - -s
+        - main
+
 window:
     decorations: none
     dimensions:
