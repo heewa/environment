@@ -218,6 +218,13 @@ call plug#begin()
       autocmd BufWritePre ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx undojoin | Neoformat
     augroup END
 
+    augroup tildaresearch
+      autocmd!
+
+      autocmd BufWritePre ~/src/TildaResearch/**/*.py undojoin | Neoformat
+      autocmd BufWritePre ~/src/TildaResearch/**/*.js,~/src/TildaResearch/**/*.jsx undojoin | Neoformat
+    augroup END
+
     augroup twine
       autocmd!
 
