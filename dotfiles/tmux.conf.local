@@ -23,6 +23,14 @@ bind-key -n M-J send-keys M-j
 bind-key -n M-K send-keys M-k
 bind-key -n M-L send-keys M-l
 
+# Swap current window left/right
+bind-key Left swap-window -s : -t {previous}
+bind-key Right swap-window -s : -t {next}
+
+# Move current window into a new vertical pane in the window to its left/right
+bind-key M-Left join-pane -h -s : -t :{previous}
+bind-key M-Right join-pane -h -s : -t :{next}
+
 set-option -g mouse on
 
 set -g default-terminal "xterm-256color"
