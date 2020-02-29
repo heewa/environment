@@ -6,7 +6,7 @@ shell:
     args:
         - new-session
         - -A
-        - -s
+        - -t
         - main
 
 window:
