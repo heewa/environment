@@ -157,7 +157,7 @@ if [[ "$(uname)" = "Darwin" ]]; then
     # Homebrew packages
     echo
     echo '==] Installing homebrew packages'
-    for package in bash htop pstree tree watch bash-completion; do
+    for package in bash htop pstree tree watch bash-completion curl; do
         brew ls --versions $package || brew install $package
     done
 
@@ -178,10 +178,6 @@ if [[ "$(uname)" = "Darwin" ]]; then
     for package in bash-git-prompt; do
         brew ls --versions $package || brew install --HEAD $package
     done
-
-    echo
-    echo '==] Installing homebrew packages with options'
-    brew ls --versions curl || brew install --with-openssl --with-nghttp2 curl
 
     echo
     echo '==] Installing python packages'

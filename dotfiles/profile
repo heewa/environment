@@ -19,7 +19,11 @@ if [ -f ~/.private_profile ]; then
 fi
 
 export EDITOR=vim
-export PATH=$HOME/.local/bin:$HOME/Library/Python/3.7/bin/:$HOME/.rbenv/bin:$HOME/bin:$HOME/scripts:/usr/local/sbin:/usr/local/bin:/usr/local/opt/python/libexec/bin:$PATH:/build/trees/bin
+
+
+_HOMEBREW_DIR=$HOME/homebrew
+
+export PATH=$HOME/.local/bin:$_HOMEBREW_DIR/bin:$_HOMEBREW_DIR/sbin:$HOME/Library/Python/3.7/bin/:$HOME/.rbenv/bin:$HOME/bin:$HOME/scripts:/usr/local/sbin:/usr/local/bin:$PATH:/build/trees/bin
 
 # NPM global installs
 export PATH=$HOME/.npm-global/bin:$PATH
