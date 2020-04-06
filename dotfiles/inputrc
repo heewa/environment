@@ -1,0 +1,9 @@
+set blink-matching-paren on
+set colored-completion-prefix on
+set colored-stats on
+set completion-ignore-case on
+set enable-bracketed-paste on
+
+# prefix match when cycling history
+"\e[A":history-search-backward
+"\e[B":history-search-forward

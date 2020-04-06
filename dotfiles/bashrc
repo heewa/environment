@@ -103,7 +103,9 @@ elif [[ $(which brew) != "" && -f "$(brew --prefix)/opt/bash-git-prompt/share/gi
     _GIT_PROMPT_DIR="$(brew --prefix)/opt/bash-git-prompt/share"
 fi
 
-if [[ "$_GIT_PROMPT_DIR" != "" ]]; then
+# TEMP DISABLE
+#if [[ "$_GIT_PROMPT_DIR" != "" ]]; then
+if false; then
     # Don't fetch remote every prompt!
     export GIT_PROMPT_FETCH_REMOTE_STATUS=0
 
