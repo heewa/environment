@@ -12,8 +12,11 @@
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoredups # don't put duplicate lines in the history. See bash(1) for more options
+export HISTFILESIZE=-1 # unlimited history file size
+export HISTSIZE=1000000 # 1 million history items
+export HISTFILE=~/.bash_history_actual # protect history file by using a non-standard name
+shopt -s histappend # append history items to fil0e instead of overwriting
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [[ -x /usr/bin/lesspipe ]] && eval "$(lesspipe)"
