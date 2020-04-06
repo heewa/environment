@@ -98,18 +98,20 @@ fi
 
 _GIT_PROMPT_DIR=''
 if [[ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]]; then
-    _GIT_PROMPT_DIR="$HOME/.bash-git-prompt/gitprompt.sh"
+    _GIT_PROMPT_DIR="$HOME/.bash-git-prompt"
 elif [[ $(which brew) != "" && -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
-    _GIT_PROMPT_DIR="$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+    _GIT_PROMPT_DIR="$(brew --prefix)/opt/bash-git-prompt/share"
 fi
 
 if [[ "$_GIT_PROMPT_DIR" != "" ]]; then
-    source $_GIT_PROMPT_DIR
-
     # Don't fetch remote every prompt!
     export GIT_PROMPT_FETCH_REMOTE_STATUS=0
+
+    source $_GIT_PROMPT_DIR/gitprompt.sh
 else
-    export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\] $ "
+    _where="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]"
+    declare -f _scm_prompt > /dev/null && _scm='$(_scm_prompt) ' || _scm=' '
+    export PS1="$_where$_scm\$ "
 fi
 
 # pyenv
