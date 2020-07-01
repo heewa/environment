@@ -61,3 +61,7 @@ export NODE_REPL_HISTORY_FILE=$HOME/.node_repl_history
 # 2U - Vault
 # export VAULT_ADDR=https://vault.prod.2u.com:8200/
 # export VAULT_CACERT=$HOME/.certs/vault-ca.pem
+
+# Ubuntu Launchpad
+export DEBFULLNAME="Heewa Barfchin"
+export DEBEMAIL="heewa.b@gmail.com"
