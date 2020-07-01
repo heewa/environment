@@ -39,6 +39,8 @@ run -b 'tmux bind -T copy-mode-vi L send -X bottom-line 2> /dev/null || true'
 
 set-option -g mouse on
 
+set-option -g aggressive-resize on
+
 set -g default-terminal "xterm-256color"
 set-option -ga terminal-overrides ",xterm-256color:Tc"
 
