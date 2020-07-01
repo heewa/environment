@@ -19,7 +19,8 @@ if [ -f ~/.private_profile ]; then
 fi
 
 export EDITOR=vim
-
+export VISUAL=vim
+export TZ=/usr/share/zoneinfo/America/New_York
 
 _HOMEBREW_DIR=$HOME/homebrew
 
