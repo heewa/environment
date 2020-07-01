@@ -1,3 +1,9 @@
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+
 if has("multi_byte")
     if &termencoding == ""
         if $LANG =~ '\.UTF-8'
@@ -7,27 +13,6 @@ if has("multi_byte")
         endif
     endif
     set encoding=utf-8
-endif
-
-" Use <C-c> as <Esc> in normal mode, mainly so it doesn't complain that that's
-" not how you exit vim, so I can use it in all modes the same
-nnoremap <C-c> <Esc>
-
-" Also use <Tab> as <Esc>
-nnoremap <Tab> <Esc>
-vnoremap <Tab> <Esc>gV
-onoremap <Tab> <Esc>
-"cnoremap <Tab> <C-C><Esc>
-inoremap <Tab> <Esc>`^
-
-" Unbind <Esc> in a few modes, to force myself to change
-"nnoremap <Esc> <Nop>
-vnoremap <Esc> <Nop>
-inoremap <Esc> <Nop>
-
-" Map <esc> to escape from terminal mode
-if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
 endif
 
 " Map <alt>+{h,j,k,l} to move splits whether in cmd or terminal mode
@@ -104,10 +89,7 @@ set expandtab      " When pressing <TAB>, instead insert spaces
 set softtabstop=4  " How many spaces a <TAB> should instead be
 set shiftwidth=4   " How much to indent by with stuff like <<, >>, etc
 
-" Indent treatment.
-" Don't use smartindent or cindent, they interfere with plugin indent.`
-"set smartindent   " Don't use smartindent, it's bad for non-c languages. Instead, let it use whatever the filetype specifies.
-"set cindent        " Maybe use this? Not quite sure yet. Python files don't do well automatically.
+filetype off
 filetype plugin indent on
 
 " Indenting for specific file types.
@@ -133,7 +115,6 @@ if has('termguicolors')
     set termguicolors  " True Color support
 endif
 
-filetype on           " try to detect syntax from filetype
 set nofoldenable    " disable folding
 
 " Quick explore
@@ -161,6 +142,15 @@ autocmd BufRead *.java,*.c,*.h,*.cc set formatoptions=ctroq cindent comments=sr:
 set splitright  " So that vertical splits start on the right
 
 set mouse=a  " MOUSE SUPPORT, FUCK YEA!
+set ttymouse=xterm2
+
+" Completion options
+"   * show menu for more than 1 option
+"   * show menu for only 1 option
+"   * show popup for selected item with more info
+"   * don't auto select an item
+"   * don't auto insert an item
+set completeopt=menu,menuone,noselect,noinsert
 
 if has('nvim')
 
@@ -180,8 +170,28 @@ else " regular old vim
 
 endif
 
-call plug#begin()
+" Use <C-c> as <Esc> in normal mode, mainly so it doesn't complain that that's
+" not how you exit vim, so I can use it in all modes the same
+nnoremap <C-c> <Esc>
 
+" Also use <Tab> as <Esc>
+nnoremap <Tab> <Esc>
+vnoremap <Tab> <Esc>gV
+onoremap <Tab> <Esc>
+"cnoremap <Tab> <C-C><Esc>
+inoremap <Tab> <Esc>`^
+
+" Unbind <Esc> in a few modes, to force myself to change
+"nnoremap <Esc> <Nop>
+"vnoremap <Esc> <Nop>
+"inoremap <Esc> <Nop>
+
+" Map <esc> to escape from terminal mode
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+endif
+
+call plug#begin()
     " Go development
     if has('nvim')
         Plug 'fatih/vim-go'
@@ -204,7 +214,6 @@ call plug#begin()
     Plug 'benekastah/neomake'
     let g:neomake_python_enabled_makers = ['flake8', 'pyflakes']
     let g:neomake_javascript_enabled_makers = ['eslint']
-    autocmd BufWritePost *.go,*.c,*.cpp,*.h,*.py,*.js,*.jsx Neomake
 
     Plug 'sbdchd/neoformat'
     let g:neoformat_only_msg_on_error = 1
@@ -212,29 +221,11 @@ call plug#begin()
     let g:neoformat_enabled_javascript = ['prettier-eslint', 'prettier']
 
     " Autoformatting
-    augroup fmtheewa
+    augroup heewa
       autocmd!
       autocmd BufWritePre ~/src/Heewa/**/*.py undojoin | Neoformat
       autocmd BufWritePre ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx undojoin | Neoformat
-    augroup END
-
-    augroup tildaresearch
-      autocmd!
-
-      autocmd BufWritePre ~/src/TildaResearch/**/*.py undojoin | Neoformat
-      autocmd BufWritePre ~/src/TildaResearch/**/*.js,~/src/TildaResearch/**/*.jsx undojoin | Neoformat
-    augroup END
-
-    augroup twine
-      autocmd!
-
-      autocmd BufNewFile,BufRead ~/src/Twine/**/*.py let b:neomake_python_enabled_makers = ['pylint']
-      autocmd BufNewFile,BufRead ~/src/Twine/**/*.py let g:neoformat_enabled_python = ['black']
-      autocmd BufWritePre ~/src/Twine/**/*.py undojoin | Neoformat
-
-      autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let b:neomake_javascript_enabled_makers = ['eslint']
-      autocmd BufNewFile,BufRead ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx let g:neoformat_enabled_python = ['prettier']
-      autocmd BufWritePre ~/src/Twine/**/*.js,~/src/Twine/**/*.jsx undojoin | Neoformat
+      autocmd BufWritePost ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx *.go,*.c,*.cpp,*.h,*.py,*.js,*.jsx Neomake
     augroup END
 
     " NOTE: disabling cuz can't make work at Twine
