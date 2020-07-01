@@ -31,6 +31,12 @@ bind-key Right swap-window -d -s : -t :+
 bind-key M-Left join-pane -h -s : -t :-
 bind-key M-Right join-pane -h -s : -t :+
 
+# Revert overriding vi-mode H & L commands
+run -b 'tmux bind -t vi-copy H top-line 2> /dev/null || true'
+run -b 'tmux bind -T copy-mode-vi H send -X top-line 2> /dev/null || true'
+run -b 'tmux bind -t vi-copy L bottom-line 2> /dev/null || true'
+run -b 'tmux bind -T copy-mode-vi L send -X bottom-line 2> /dev/null || true'
+
 set-option -g mouse on
 
 set -g default-terminal "xterm-256color"
