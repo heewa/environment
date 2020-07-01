@@ -28,7 +28,7 @@ link_config() {
     done
 }
 
-link_config 'nvim' 'init.vim autoload/plug.vim'
+link_config 'nvim' 'init.vim'
 link_config 'alacritty' 'alacritty.yml'
 link_config 'kitty' 'kitty.conf'
 
@@ -108,11 +108,10 @@ if [[ ! -e $HOME/.tmux/plugins/tpm ]]; then
 fi
 
 echo
-echo '==] Vim'
-# Vim Plug for vim
-curl -#fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-# Vim plug for neovim
-curl -#fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+echo '==] Downloading and installing vim plug & plugins'
+VIM_PLUG_URL='https://github.com/junegunn/vim-plug/raw/master/plug.vim'
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs "$VIM_PLUG_URL"
+vim -c 'PlugInstall | qa' | true
 
 echo
 echo '==] Downloading nerd fonts'
