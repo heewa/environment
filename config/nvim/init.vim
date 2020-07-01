@@ -142,7 +142,9 @@ autocmd BufRead *.java,*.c,*.h,*.cc set formatoptions=ctroq cindent comments=sr:
 set splitright  " So that vertical splits start on the right
 
 set mouse=a  " MOUSE SUPPORT, FUCK YEA!
-set ttymouse=xterm2
+if has("unix") && system("uname") == "Darwin\n"
+    set ttymouse=xterm2
+endif
 
 " Completion options
 "   * show menu for more than 1 option
