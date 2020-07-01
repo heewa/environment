@@ -2,12 +2,10 @@
 alt_send_esc: true
 
 shell:
-    program: /usr/bin/tmux
+    program: /bin/bash
     args:
-        - new-session
-        - -A
-        - -t
-        - main
+        - -lc
+        - if (( $(/usr/bin/tmux lsc | wc -l) > 0 )); then exec /usr/bin/tmux new-session; else exec /usr/bin/tmux new-session -A -t main -s main; fi
 
 window:
     decorations: none

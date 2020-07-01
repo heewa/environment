@@ -24,12 +24,12 @@ bind-key -n M-K send-keys M-k
 bind-key -n M-L send-keys M-l
 
 # Swap current window left/right
-bind-key Left swap-window -s : -t {previous}
-bind-key Right swap-window -s : -t {next}
+bind-key Left swap-window -d -s : -t :-
+bind-key Right swap-window -d -s : -t :+
 
 # Move current window into a new vertical pane in the window to its left/right
-bind-key M-Left join-pane -h -s : -t :{previous}
-bind-key M-Right join-pane -h -s : -t :{next}
+bind-key M-Left join-pane -h -s : -t :-
+bind-key M-Right join-pane -h -s : -t :+
 
 set-option -g mouse on
 
@@ -40,7 +40,7 @@ set-option -ga terminal-overrides ",xterm-256color:Tc"
 set -g history-limit 10000
 
 # After a session ends, switch to another one instead of exiting
-set-option -g detach-on-destroy off
+set-option -g detach-on-destroy on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
