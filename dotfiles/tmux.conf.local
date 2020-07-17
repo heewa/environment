@@ -1,6 +1,12 @@
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 
+# Switch session & kill existing if nothing else attached
+bind-key C-k \
+  if-shell "(($(tmux display -p '#{session_many_attached}') > 0))" \
+    choose-tree \
+    "run-shell \"tmux choose-tree \\\"switch-client -t '%%'; kill-session -t '$(tmux display -p '#S')'\\\"\""
+
 # Tmux/Vim split navigation
 #set -g @plugin 'christoomey/vim-tmux-navigator'
 is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
