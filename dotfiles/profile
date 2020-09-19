@@ -22,6 +22,8 @@ export EDITOR=vim
 export VISUAL=vim
 export TZ=/usr/share/zoneinfo/America/New_York
 
+export MANPAGER='vim -c "set ft=man ts=8 nomod nolist nonu noma" -c "noremap q :q<CR>" -'
+
 _HOMEBREW_DIR=$HOME/homebrew
 
 export PATH=$HOME/.local/bin:$_HOMEBREW_DIR/bin:$_HOMEBREW_DIR/sbin:$HOME/Library/Python/3.7/bin/:$HOME/.rbenv/bin:$HOME/bin:$HOME/scripts:/usr/local/sbin:/usr/local/bin:$PATH:/build/trees/bin
