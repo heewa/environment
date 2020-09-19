@@ -271,6 +271,8 @@ call plug#begin()
     let g:airline_theme='bubblegum'
     let g:airline_powerline_fonts = 1 " Use a patched powerline font for nice symbols
 
+    Plug '~/src/Heewa/vim-blist'
+
     " Load the icons plugin last, so it picks up other plugins to know what
     " settings to use
     Plug 'ryanoasis/vim-devicons'
