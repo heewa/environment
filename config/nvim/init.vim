@@ -118,8 +118,9 @@ nnoremap <F4> :lnext<CR>
 nnoremap <F5> :cprev<CR>
 nnoremap <F6> :cnext<CR>
 
-" Search highlighting (off by default)
-nnoremap <F2> :set hlsearch!<CR>
+" Search highlighting
+set nohlsearch
+nnoremap <F2> :set hlsearch<CR>*``
 
 " Syntax highlighting and some other stuff for Code files.
 autocmd BufRead * set formatoptions=tcql nocindent comments&
