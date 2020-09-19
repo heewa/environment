@@ -15,23 +15,6 @@ if has("multi_byte")
     set encoding=utf-8
 endif
 
-" Map <alt>+{h,j,k,l} to move splits whether in cmd or terminal mode
-if has('nvim')
-    nnoremap <M-h> <C-w>h
-    nnoremap <M-j> <C-w>j
-    nnoremap <M-k> <C-w>k
-    nnoremap <M-l> <C-w>l
-    tnoremap <M-h> <C-\><C-n><C-w>h
-    tnoremap <M-j> <C-\><C-n><C-w>j
-    tnoremap <M-k> <C-\><C-n><C-w>k
-    tnoremap <M-l> <C-\><C-n><C-w>l
-else
-    nnoremap <Esc>h <C-w>h
-    nnoremap <Esc>j <C-w>j
-    nnoremap <Esc>k <C-w>k
-    nnoremap <Esc>l <C-w>l
-endif
-
 " delete without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
@@ -121,13 +104,17 @@ set nofoldenable    " disable folding
 nnoremap - :Explore<CR>
 
 " Go settings
-autocmd FileType go noremap gs <Plug>(go-def-split)
-autocmd FileType go noremap gv <Plug>(go-def-vertical)
+autocmd FileType go noremap gsd <Plug>(go-def-split)
+autocmd FileType go noremap gvd <Plug>(go-def-vertical)
 
 " Show trailing whitespace.
 match ColorColumn /\s\+$/
 
-" Building and errors
+" Location list navigation
+nnoremap <F3> :lprev<CR>
+nnoremap <F4> :lnext<CR>
+
+" Error list navigation
 nnoremap <F5> :cprev<CR>
 nnoremap <F6> :cnext<CR>
 
@@ -142,6 +129,7 @@ autocmd BufRead *.java,*.c,*.h,*.cc set formatoptions=ctroq cindent comments=sr:
 set splitright  " So that vertical splits start on the right
 
 set mouse=a  " MOUSE SUPPORT, FUCK YEA!
+set mousemodel=popup_setpos
 if has("unix") && system("uname") == "Darwin\n"
     set ttymouse=xterm2
 endif
@@ -154,22 +142,9 @@ endif
 "   * don't auto insert an item
 set completeopt=menu,menuone,noselect,noinsert
 
-if has('nvim')
-
-    " Persistent undo, across exits. Only do this in neovim cuz it has better
-    " default dir for this.
-    if has('persistent_undo')
-        " For files in my source repo, keep undo files in a shared location
-        set undofile
-    endif
-
-else " regular old vim
-
-"    set nocompatible   " Disable vi-compatibility (needed for fancy plugins)
-"    set autoindent
-"    set backspace=2    " Backspace in insert mode
-"    set wildmenu                     " better tab complete menu
-
+" Persistent undo, across exits
+if has('persistent_undo')
+    set undofile
 endif
 
 " Use <C-c> as <Esc> in normal mode, mainly so it doesn't complain that that's
@@ -182,6 +157,10 @@ vnoremap <Tab> <Esc>gV
 onoremap <Tab> <Esc>
 "cnoremap <Tab> <C-C><Esc>
 inoremap <Tab> <Esc>`^
+
+" Map <esc> to escape from terminal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-\><Esc> <Esc>
 
 " Unbind <Esc> in a few modes, to force myself to change
 "nnoremap <Esc> <Nop>
@@ -265,17 +244,6 @@ call plug#begin()
     Plug 'https://github.com/heewa/vim-tmux-navigator.git', {'branch': 'add-no-wrap-option'}
     let g:tmux_navigator_no_mappings = 1
     let g:tmux_navigator_no_wrap = 1
-    if has('nvim')
-        nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-        nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-        nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-        nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-    else
-        nnoremap <silent> <Esc>h :TmuxNavigateLeft<cr>
-        nnoremap <silent> <Esc>j :TmuxNavigateDown<cr>
-        nnoremap <silent> <Esc>k :TmuxNavigateUp<cr>
-        nnoremap <silent> <Esc>l :TmuxNavigateRight<cr>
-    endif
 
     " Nice status line
     Plug 'vim-airline/vim-airline'
@@ -291,6 +259,30 @@ call plug#end()
 
 " Some options need to be placed after plug#end() so the plugins are loaded
 " when they're called
+
+" Map <alt>+{h,j,k,l} to move splits in most modes
+function! s:mapWindowNavigation()
+    for [l:motion, l:dir] in items({'j': 'Down', 'h': 'Left', 'l': 'Right', 'k': 'Up'})
+        for l:mode in ['v', 'i', 't', 'o', 'n']
+            let l:from = has('nvim') ? '<M-'.l:motion.'>' : '<Esc>'.l:motion
+
+            if has('nvim')
+                let l:escape = match('oi', l:mode) != -1 ? '<Esc>' : ''
+            else
+                let l:escape = l:mode == 'n' ? '' : '<C-\><C-n>'
+            endif
+
+            "if exists('g:loaded_tmux_navigator') && g:loaded_tmux_navigator
+            let l:to = (has('nvim') ? '<Cmd>' : ':').'TmuxNavigate'.l:dir.'<CR>'
+            "else
+            "    let l:to = '<C-w>'.l:motion
+            "endif
+
+            exe l:mode.'noremap <silent>' l:from l:escape.l:to
+        endfor
+    endfor
+endfunction
+call s:mapWindowNavigation()
 
 " Regardless of colorscheme, let vim know we're using a dark background
 set background=dark
