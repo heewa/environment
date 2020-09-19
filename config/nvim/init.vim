@@ -188,10 +188,25 @@ call plug#begin()
     " Git commands, like Gblame
     Plug 'tpope/vim-fugitive'
 
+    Plug 'liuchengxu/vim-which-key', {'on': ['WhichKey', 'WhichKey!']}
+    nnoremap <silent> <Leader> :WhichKey '<Leader>'<CR>
+    set timeoutlen=500
+
+    Plug 'mbbill/undotree'
+    nnoremap <Leader>u <Cmd>UndotreeToggle<CR>
+
+    Plug 'vim-scripts/matchit.zip'
+
+    Plug 'tpope/vim-vinegar'
+
     "Plug 'Valloric/YouCompleteMe'
 
-    Plug 'majutsushi/tagbar'
-    nnoremap <F8> :TagbarToggle<CR>
+    " Disabled: slow startup
+    "Plug 'majutsushi/tagbar'
+    "nnoremap <F8> :TagbarToggle<CR>
+
+    " Vim Unit Testing
+    Plug 'junegunn/vader.vim'
 
     Plug 'editorconfig/editorconfig-vim'
 
@@ -232,6 +247,7 @@ call plug#begin()
     Plug 'icymind/NeoSolarized'
     Plug 'flazz/vim-colorschemes'
     Plug 'chriskempson/base16-vim'
+    Plug 'reedes/vim-colors-pencil'
 
     " Load local .lvimrc files from root up to current dir
     Plug 'embear/vim-localvimrc'
