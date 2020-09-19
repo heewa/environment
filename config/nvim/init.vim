@@ -1,9 +1,4 @@
-function! SourceIfExists(file)
-  if filereadable(expand(a:file))
-    exe 'source' a:file
-  endif
-endfunction
-
+" Set encoding early
 if has("multi_byte")
     if &termencoding == ""
         if $LANG =~ '\.UTF-8'
@@ -15,167 +10,206 @@ if has("multi_byte")
     set encoding=utf-8
 endif
 
-let g:mapleader = ' '
+function! s:applyConfig()
+    call s:basicSettings()
+    call s:styleSettings()
+    call s:indentSettings()
+    call s:filetypeSettings()
 
-" delete without yanking
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
+    call s:basicMaps()
+    call s:mapEscape()
+    call s:filetypeMaps()
 
-" replace selected text with default register without yanking
-vnoremap <leader>p "_dP
+    call plug#begin()
+        call s:plugins()
+    call plug#end()
 
-" substitute word under cursor
-nnoremap <leader>s :%s/\C\<<C-r><C-w>\>/
-vnoremap <leader>s :s/\C\<<C-r><C-w>\>/
-
-" substitute yanked word
-nnoremap <leader>sy :%s/\C\<<C-r>0\>/
-vnoremap <leader>sy :s/\C\<<C-r>0\>/
-
-" Search for last yanked text
-nnoremap <silent> <nowait> <Leader>* /\C\<<C-r>0\><CR>
-nnoremap <Leader><Leader>* :vimgrep /\C\<<C-r><C-w>\>/ **
-
-" Swap splits
-function! SwapSplits(dir)
-    " Remeber current (source) buffer
-    let srcBuf = winbufnr(0)
-
-    " Move to dest window
-    exe 'wincmd ' . a:dir
-
-    " Remeber dest  window & buffer
-    let dstBuf = winbufnr(0)
-
-    " Open src buffer in dst window
-    exe srcBuf . 'buf'
-
-    " Move back to src window, and open dst buffer there
-    exe 'wincmd p'
-    exe dstBuf . 'buf'
-
-    " Move back to dst window, so we end up in final location
-    exe 'wincmd p'
+    call s:postPlugins()
+    call s:mapWindowNavigation()
 endfunction
 
-nnoremap <leader>h :call SwapSplits('h')<CR>
-nnoremap <leader>j :call SwapSplits('j')<CR>
-nnoremap <leader>k :call SwapSplits('k')<CR>
-nnoremap <leader>l :call SwapSplits('l')<CR>
+function! s:basicSettings()
+    set updatetime=1000  " Speed up vim's swap sync & when plugins update (improved responsiveness)
 
-set updatetime=1000  " Speed up vim's swap sync & when plugins update (improved responsiveness)
+    set ignorecase
 
-set laststatus=2   " Always whow the statusline
-set nohls
+    set splitright  " So that vertical splits start on the right
 
-" Tab/indent amounts.
-set tabstop=4      " How much a <TAB> is worth (as an actual char in the buffer)
-set expandtab      " When pressing <TAB>, instead insert spaces
-set softtabstop=4  " How many spaces a <TAB> should instead be
-set shiftwidth=4   " How much to indent by with stuff like <<, >>, etc
+    set mouse=a
+    set mousemodel=popup_setpos
+    if has("unix") && system("uname") == "Darwin\n"
+        set ttymouse=xterm2
+    endif
 
-filetype off
-filetype plugin indent on
+    " Completion options
+    "   * show menu for more than 1 option
+    "   * show menu for only 1 option
+    "   * show popup for selected item with more info
+    "   * don't auto select an item
+    "   * don't auto insert an item
+    set completeopt=menu,menuone,noselect,noinsert
+    set wildmode=longest,list,full   " better tab complete menu
+    set wildignore=*.pyc,*.o,*.obj,*.bak,*.exe,__pycache__/  " tab complete ignores these!
+    let g:netrw_list_hide= '^.DS_Store$,.*\.pyc$,.*\.o$,.*\.obj$,.*\.bak$,.*\.exe$,.*\.swp$,.*__pycache__/$'   " Files to ignore in Explorer
+    let g:netrw_preview = 1  " Use a vertical split for previewing files from explorer
 
-" Indenting for specific file types.
-autocmd FileType html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType javascript,json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+    " Persistent undo, across exits
+    if has('persistent_undo')
+        set undofile
+    endif
+endfunction
 
-set showmatch
-set ruler          " Shows line,column # at bottom
-set showcmd        " Display incomplete command
-set whichwrap+=,h,l   " Wrap arrows
-set backspace=indent,eol,start  " Wrap backspace
-set showmode
-set wildmode=longest,list,full   " better tab complete menu
-set wildignore=*.pyc,*.o,*.obj,*.bak,*.exe,__pycache__/  " tab complete ignores these!
-let g:netrw_list_hide= '^.DS_Store$,.*\.pyc$,.*\.o$,.*\.obj$,.*\.bak$,.*\.exe$,.*\.swp$,.*__pycache__/$'   " Files to ignore in Explorer
-let g:netrw_preview = 1  " Use a vertical split for previewing files from explorer
-set ignorecase
+function! s:indentSettings()
+    " Tab/indent amounts.
+    set tabstop=4      " How much a <TAB> is worth (as an actual char in the buffer)
+    set expandtab      " When pressing <TAB>, instead insert spaces
+    set softtabstop=4  " How many spaces a <TAB> should instead be
+    set shiftwidth=4   " How much to indent by with stuff like <<, >>, etc
+    set nocindent
 
-" Color Syntax highlighting
-syntax on
-if has('termguicolors')
-    set termguicolors  " True Color support
-endif
+    autocmd FileType html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType javascript,json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+endfunction
 
-set nofoldenable    " disable folding
+function! s:filetypeSettings()
+    autocmd BufRead *.java,*.c,*.h,*.cc setlocal
+        \ formatoptions=ctroq cindent comments=sr:/**,mb:*,elx:*/,sr:/*,mb:*,elx:*/,://
+endfunction
 
-" Quick explore
-nnoremap - :Explore<CR>
+function! s:styleSettings()
+    set ruler          " Shows line,column # at bottom
+    set laststatus=2   " Always whow the statusline
+    set showcmd        " Display incomplete command
+    set showmode
 
-" Go settings
-autocmd FileType go noremap gsd <Plug>(go-def-split)
-autocmd FileType go noremap gvd <Plug>(go-def-vertical)
+    set nohls
+    set showmatch
 
-" Show trailing whitespace.
-match ColorColumn /\s\+$/
+    set whichwrap+=,h,l   " Wrap arrows
+    set backspace=indent,eol,start  " Wrap backspace
 
-" Location list navigation
-nnoremap <F3> :lprev<CR>
-nnoremap <F4> :lnext<CR>
+    " Color Syntax highlighting
+    syntax on
+    if has('termguicolors')
+        set termguicolors  " True Color support
+    endif
+    filetype off
+    filetype plugin indent on
 
-" Error list navigation
-nnoremap <F5> :cprev<CR>
-nnoremap <F6> :cnext<CR>
+    " Show trailing whitespace.
+    match ColorColumn /\s\+$/
 
-" Search highlighting
-set nohlsearch
-nnoremap <F2> :set hlsearch<CR>*``
+    set nofoldenable    " Disable folding
 
-" Syntax highlighting and some other stuff for Code files.
-autocmd BufRead * set formatoptions=tcql nocindent comments&
-autocmd BufRead *.java,*.c,*.h,*.cc set formatoptions=ctroq cindent comments=sr:/**,mb:*,elx:*/,sr:/*,mb:*,elx:*/,://
+    set formatoptions=tcql
+endfunction
 
-" For cscope
-set splitright  " So that vertical splits start on the right
+function! s:mapEscape()
+    " Use <C-c> as <Esc> in normal mode, mainly so it doesn't complain that that's
+    " not how you exit vim, so I can use it in all modes the same
+    nnoremap <C-c> <Esc>
 
-set mouse=a  " MOUSE SUPPORT, FUCK YEA!
-set mousemodel=popup_setpos
-if has("unix") && system("uname") == "Darwin\n"
-    set ttymouse=xterm2
-endif
+    " Also use <Tab> as <Esc>
+    nnoremap <Tab> <Esc>
+    vnoremap <Tab> <Esc>gV
+    onoremap <Tab> <Esc>
+    "cnoremap <Tab> <C-C><Esc>
+    inoremap <Tab> <Esc>`^
 
-" Completion options
-"   * show menu for more than 1 option
-"   * show menu for only 1 option
-"   * show popup for selected item with more info
-"   * don't auto select an item
-"   * don't auto insert an item
-set completeopt=menu,menuone,noselect,noinsert
-
-" Persistent undo, across exits
-if has('persistent_undo')
-    set undofile
-endif
-
-" Use <C-c> as <Esc> in normal mode, mainly so it doesn't complain that that's
-" not how you exit vim, so I can use it in all modes the same
-nnoremap <C-c> <Esc>
-
-" Also use <Tab> as <Esc>
-nnoremap <Tab> <Esc>
-vnoremap <Tab> <Esc>gV
-onoremap <Tab> <Esc>
-"cnoremap <Tab> <C-C><Esc>
-inoremap <Tab> <Esc>`^
-
-" Map <esc> to escape from terminal mode
-tnoremap <Esc> <C-\><C-n>
-tnoremap <C-\><Esc> <Esc>
-
-" Unbind <Esc> in a few modes, to force myself to change
-"nnoremap <Esc> <Nop>
-"vnoremap <Esc> <Nop>
-"inoremap <Esc> <Nop>
-
-" Map <esc> to escape from terminal mode
-if has('nvim')
+    " Map <esc> to escape from terminal mode
     tnoremap <Esc> <C-\><C-n>
-endif
+    tnoremap <C-\><Esc> <Esc>
 
-call plug#begin()
+    " Unbind <Esc> in a few modes, to force myself to change
+    "nnoremap <Esc> <Nop>
+    "vnoremap <Esc> <Nop>
+    "inoremap <Esc> <Nop>
+
+    " Map <esc> to escape from terminal mode
+    if has('nvim')
+        tnoremap <Esc> <C-\><C-n>
+    endif
+endfunction
+
+function! s:basicMaps()
+    let g:mapleader = ' '
+
+    " delete without yanking
+    nnoremap <leader>d "_d
+    vnoremap <leader>d "_d
+
+    " replace selected text with default register without yanking
+    vnoremap <leader>p "_dP
+
+    " substitute word under cursor
+    nnoremap <leader>s :%s/\C\<<C-r><C-w>\>/
+    vnoremap <leader>s :s/\C\<<C-r><C-w>\>/
+
+    " substitute yanked word
+    nnoremap <leader>sy :%s/\C\<<C-r>0\>/
+    vnoremap <leader>sy :s/\C\<<C-r>0\>/
+
+    " Search for last yanked text
+    nnoremap <silent> <nowait> <Leader>* /\C\<<C-r>0\><CR>
+    nnoremap <Leader><Leader>* :vimgrep /\C\<<C-r><C-w>\>/ **
+
+    nnoremap <leader>h :call SwapSplits('h')<CR>
+    nnoremap <leader>j :call SwapSplits('j')<CR>
+    nnoremap <leader>k :call SwapSplits('k')<CR>
+    nnoremap <leader>l :call SwapSplits('l')<CR>
+
+    " Quick explore
+    nnoremap - :Explore<CR>
+
+    " Location list navigation
+    nnoremap <F3> :lprev<CR>
+    nnoremap <F4> :lnext<CR>
+
+    " Error list navigation
+    nnoremap <F5> :cprev<CR>
+    nnoremap <F6> :cnext<CR>
+
+    " Search highlighting
+    set nohlsearch
+    nnoremap <F2> :set hlsearch<CR>*``
+endfunction
+
+function! s:filetypeMaps()
+    autocmd FileType go noremap gsd <Plug>(go-def-split)
+    autocmd FileType go noremap gvd <Plug>(go-def-vertical)
+endfunction
+
+" Map <alt>+{h,j,k,l} to move splits in most modes
+function! s:mapWindowNavigation()
+    for [l:motion, l:dir] in items({'j': 'Down', 'h': 'Left', 'l': 'Right', 'k': 'Up'})
+        for l:mode in ['v', 'i', 't', 'o', 'n']
+            let l:from = has('nvim') ? '<M-'.l:motion.'>' : '<Esc>'.l:motion
+
+            if has('nvim')
+                let l:escape = match('oi', l:mode) != -1 ? '<Esc>' : ''
+            else
+                let l:escape = l:mode == 'n' ? '' : '<C-\><C-n>'
+            endif
+
+            "if exists('g:loaded_tmux_navigator') && g:loaded_tmux_navigator
+            let l:to = (has('nvim') ? '<Cmd>' : ':').'TmuxNavigate'.l:dir.'<CR>'
+            "else
+            "    let l:to = '<C-w>'.l:motion
+            "endif
+
+            exe l:mode.'noremap <silent>' l:from l:escape.l:to
+        endfor
+    endfor
+endfunction
+
+function! s:postPlugins()
+    " Regardless of colorscheme, let vim know we're using a dark background
+    set background=dark
+    let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
+endfunction
+
+function! s:plugins()
     " Go development
     if has('nvim')
         Plug 'fatih/vim-go'
@@ -276,42 +310,41 @@ call plug#begin()
     " Load the icons plugin last, so it picks up other plugins to know what
     " settings to use
     Plug 'ryanoasis/vim-devicons'
-call plug#end()
-
-" Some options need to be placed after plug#end() so the plugins are loaded
-" when they're called
-
-" Map <alt>+{h,j,k,l} to move splits in most modes
-function! s:mapWindowNavigation()
-    for [l:motion, l:dir] in items({'j': 'Down', 'h': 'Left', 'l': 'Right', 'k': 'Up'})
-        for l:mode in ['v', 'i', 't', 'o', 'n']
-            let l:from = has('nvim') ? '<M-'.l:motion.'>' : '<Esc>'.l:motion
-
-            if has('nvim')
-                let l:escape = match('oi', l:mode) != -1 ? '<Esc>' : ''
-            else
-                let l:escape = l:mode == 'n' ? '' : '<C-\><C-n>'
-            endif
-
-            "if exists('g:loaded_tmux_navigator') && g:loaded_tmux_navigator
-            let l:to = (has('nvim') ? '<Cmd>' : ':').'TmuxNavigate'.l:dir.'<CR>'
-            "else
-            "    let l:to = '<C-w>'.l:motion
-            "endif
-
-            exe l:mode.'noremap <silent>' l:from l:escape.l:to
-        endfor
-    endfor
 endfunction
-call s:mapWindowNavigation()
 
-" Regardless of colorscheme, let vim know we're using a dark background
-set background=dark
+"
+" Helpers and custom funcs
+"
 
-"colorscheme heewa
-let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
-"colorscheme base16-chalk
-"colorscheme fairyfloss
-"colorscheme solarized
-"colorscheme flattened_dark
-"let g:neosolarized_contrast = 'high' | let g:neosolarized_visibility = 'high' | colorscheme NeoSolarized
+function! SwapSplits(dir)
+    " Remeber current (source) buffer
+    let srcBuf = winbufnr(0)
+
+    " Move to dest window
+    exe 'wincmd ' . a:dir
+
+    " Remeber dest  window & buffer
+    let dstBuf = winbufnr(0)
+
+    " Open src buffer in dst window
+    exe srcBuf . 'buf'
+
+    " Move back to src window, and open dst buffer there
+    exe 'wincmd p'
+    exe dstBuf . 'buf'
+
+    " Move back to dst window, so we end up in final location
+    exe 'wincmd p'
+endfunction
+
+function! s:sourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+
+"
+" After defining everything, run it all
+"
+
+call s:applyConfig()
