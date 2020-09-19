@@ -15,6 +15,8 @@ if has("multi_byte")
     set encoding=utf-8
 endif
 
+let g:mapleader = ' '
+
 " delete without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
