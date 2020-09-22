@@ -173,6 +173,10 @@ function! s:basicMaps()
     " Search highlighting
     set nohlsearch
     nnoremap <F2> :set hlsearch<CR>*``
+
+    " Insert date
+    noremap <silent> <Leader>id "=strftime('%Y-%m-%d')<CR>p
+    command! InsertDate :normal <Leader>id<CR>
 endfunction
 
 function! s:filetypeMaps()
@@ -217,7 +221,8 @@ function! s:plugins()
     endif
 
     " Git +/-/~ in gutter
-    Plug 'airblade/vim-gitgutter'
+    "Plug 'airblade/vim-gitgutter'
+    Plug 'mhinz/vim-signify'
 
     " Git commands, like Gblame
     Plug 'tpope/vim-fugitive'
