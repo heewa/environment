@@ -40,7 +40,7 @@ if ! shopt -oq posix; then
     fi
 
     # Homebrew's completions
-    if [[ "$(which brew)" != "" && -f "$(brew --prefix)/etc/bash_completion" ]]; then
+    if [[ "$(command -v brew)" != "" && -f "$(brew --prefix)/etc/bash_completion" ]]; then
         source "$(brew --prefix)/etc/bash_completion"
     fi
 
@@ -52,36 +52,20 @@ if ! shopt -oq posix; then
     fi
 
     # Ugh, manual completions
-    if [[ $(which aws_completer) != "" ]]; then
+    if [[ $(command -v aws_completer) != "" ]]; then
         complete -C aws_completer aws
     fi
 fi
 
 # OS X specific confs
 if [[ "$(uname)" = "Darwin" ]]; then
-    alias ls='ls -G'
-
-    # gnu sed on osx
-    export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-
-    # Colorize the Terminal for Mac
-    export CLICOLOR=1;
+    export CLICOLOR=1
 else
-    alias ls='ls --color'
+    alias ls='ls --color=auto'
 fi
 
-alias screen="screen -T xterm-color"
-
-# General Go
-# MY_GOPATH='$(echo $PWD | sed "s:\($HOME/src/[^/]*/[^/]*\)/src/.*:\1:"):~/go/test'
-# alias set_my_gopath="export GOPATH=$MY_GOPATH"
-# alias gogrep='grep -IR --include "*.go" --exclude-dir "vendor" --exclude-dir ".vendor_for_old" --exclude-dir "Godeps" --exclude-dir ".git"'
-# alias gotest='~/go/test/bin/ginkgo -notify -race --randomizeAllSpecs -p'
-# alias gomake='make -f $HOME/.golang.Makefile'
-# gorun() { gomake RUN_ARGS="$*" run ;}
-
-# Postgres DB
-# alias pgstart='/usr/local/bin/postgres -D $PG_DATA_DIR -r /usr/local/var/postgres/server.log'
+# Filename compatible, lexically ordered datestamp
+alias ds="date '+%Y-%m-%d'"
 
 # Node / io.js / nvm shit
 export NVM_DIR="$HOME/.nvm"
@@ -103,9 +87,7 @@ elif [[ $(which brew) != "" && -f "$(brew --prefix)/opt/bash-git-prompt/share/gi
     _GIT_PROMPT_DIR="$(brew --prefix)/opt/bash-git-prompt/share"
 fi
 
-# TEMP DISABLE
 if [[ "$_GIT_PROMPT_DIR" != "" ]]; then
-#if false; then
     # Don't fetch remote every prompt!
     export GIT_PROMPT_FETCH_REMOTE_STATUS=0
 
