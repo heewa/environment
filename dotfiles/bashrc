@@ -67,38 +67,40 @@ fi
 # Filename compatible, lexically ordered datestamp
 alias ds="date '+%Y-%m-%d'"
 
-# Node / io.js / nvm shit
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 if [[ -f "$HOME/.emoji_vars.sh" ]]; then
     source "$HOME/.emoji_vars.sh"
 fi
 
-if [[ -f "$HOME/.emoji-prompt.sh" ]]; then
-    source "$HOME/.emoji-prompt.sh"
+if [[ "$HB_ENV" == "HOME" ]]; then
+    # Node / io.js / nvm shit
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+    if [[ -f "$HOME/.emoji-prompt.sh" ]]; then
+        source "$HOME/.emoji-prompt.sh"
+    fi
+
+    _GIT_PROMPT_DIR=''
+    if [[ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]]; then
+        _GIT_PROMPT_DIR="$HOME/.bash-git-prompt"
+    elif [[ $(command -v brew) != "" && -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
+        _GIT_PROMPT_DIR="$(brew --prefix)/opt/bash-git-prompt/share"
+    fi
+
+    if [[ "$_GIT_PROMPT_DIR" != "" ]]; then
+        # Don't fetch remote every prompt!
+        export GIT_PROMPT_FETCH_REMOTE_STATUS=0
+
+        source $_GIT_PROMPT_DIR/gitprompt.sh
+    else
+        _where="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]"
+        declare -f _scm_prompt > /dev/null && _scm='$(_scm_prompt) ' || _scm=' '
+        export PS1="$_where$_scm\$ "
+    fi
+
+    # pyenv
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PATH:$PYENV_ROOT/bin"
+    if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 fi
-
-_GIT_PROMPT_DIR=''
-if [[ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]]; then
-    _GIT_PROMPT_DIR="$HOME/.bash-git-prompt"
-elif [[ $(which brew) != "" && -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
-    _GIT_PROMPT_DIR="$(brew --prefix)/opt/bash-git-prompt/share"
-fi
-
-if [[ "$_GIT_PROMPT_DIR" != "" ]]; then
-    # Don't fetch remote every prompt!
-    export GIT_PROMPT_FETCH_REMOTE_STATUS=0
-
-    source $_GIT_PROMPT_DIR/gitprompt.sh
-else
-    _where="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]"
-    declare -f _scm_prompt > /dev/null && _scm='$(_scm_prompt) ' || _scm=' '
-    export PS1="$_where$_scm\$ "
-fi
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PATH:$PYENV_ROOT/bin"
-if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
