@@ -210,7 +210,7 @@ endfunction
 function! s:postPlugins()
     " Regardless of colorscheme, let vim know we're using a dark background
     set background=dark
-    let g:gruvbox_contrast_dark = 'hard' | colorscheme gruvbox
+    colorscheme base16-tomorrow-night
 endfunction
 
 function! s:plugins()
