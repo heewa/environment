@@ -309,6 +309,33 @@ function! s:plugins()
     Plug 'vim-airline/vim-airline-themes'
     let g:airline_theme='bubblegum'
     let g:airline_powerline_fonts = 1 " Use a patched powerline font for nice symbols
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
+    let g:airline_symbols.linenr = '' " Skip unecessary decoration
+    let g:airline_symbols.maxlinenr = '' " Skip unecessary decoration
+    let g:airline#extensions#branch#displayed_head_limit = 10 " Truncate long branch names
+    let g:airline#extensions#branch#format = 2 " Shorten branch paths
+    let g:airline_mode_map = {
+        \ '__' : '-',
+        \ 'c'  : 'CMD',
+        \ 'i'  : 'I',
+        \ 'ic' : 'I:C',
+        \ 'ix' : 'I:X',
+        \ 'multi' : 'MULTI',
+        \ 'n'  : 'N',
+        \ 'ni' : 'N:I',
+        \ 'no' : 'N:OP',
+        \ 'R'  : 'REPLACE',
+        \ 'Rv' : 'REPLACE:V',
+        \ 's'  : 'SELECT',
+        \ 'S'  : 'S:LINE',
+        \ '' : 'S:BLOCK',
+        \ 't'  : 'TERM',
+        \ 'v'  : 'V',
+        \ 'V'  : 'V:L',
+        \ '' : 'V:B',
+        \ }
 
     Plug 'heewa/vim-blist'
 
