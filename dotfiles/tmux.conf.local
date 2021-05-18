@@ -29,6 +29,10 @@ bind-key -n M-J send-keys M-j
 bind-key -n M-K send-keys M-k
 bind-key -n M-L send-keys M-l
 
+# Mark pane & swap with marked
+bind-key m select-pane -m
+bind-key s swap-pane
+
 # Swap current window left/right
 bind-key Left swap-window -d -s : -t :-
 bind-key Right swap-window -d -s : -t :+
