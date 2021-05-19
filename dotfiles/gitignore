@@ -9,6 +9,8 @@
 *~
 /tmp
 
+.gdb_history
+
 # Timehop stuff
 /.local_env*
 
