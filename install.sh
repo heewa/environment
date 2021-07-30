@@ -7,9 +7,23 @@ set -e
 
 echo
 echo '==] Creating home dirs'
-for D in src build tmp scripts bin .bash .config/tmux .config/nvim .npm-global; do
+for D in src build tmp bin .bash .config/tmux .config/nvim .npm-global; do
     mkdir -pv $HOME/$D
 done
+
+LINKED_DIRS='scripts'
+echo
+echo "==] SymLinking dirs: $LINKED_DIRS"
+for D in $LINKED_DIRS; do
+    SRC="$PWD/$D"
+    DST="$HOME/$D"
+
+    if [[ ! -L "$DST" || "$(readlink $DST)" != "$SRC" ]]; then
+        ln -vs $SRC $DST || echo "!!!! $DST already exists"
+    fi
+done
+
+exit
 
 # XDG Config goes straight into ~/.config/ without rename
 echo
@@ -39,7 +53,7 @@ for F in $(ls dotfiles); do
     SRC="$PWD/dotfiles/$F"
     DST="$HOME/.$F"
 
-    if [[ -d "$SRC" && ( ! -L $"DST" || "$(readlink $DST)" != "$SRC" ) ]]; then
+    if [[ -d "$SRC" && ( ! -L "$DST" || "$(readlink $DST)" != "$SRC" ) ]]; then
         echo "!!!! $DST already exists"
     else
         ln -vsf $SRC $DST
