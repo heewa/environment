@@ -14,7 +14,7 @@
 #
 # Include private defs (not in main file cuz this one's in my public github).
 #
-if [ -f ~/.private_profile ]; then
+if [ -f $HOME/.private_profile ]; then
     source $HOME/.private_profile
 fi
 
@@ -28,11 +28,20 @@ export TZ=/usr/share/zoneinfo/America/New_York
 export MANPAGER='vim -c "set ft=man ts=8 nomod nolist nonu noma" -c "noremap q :q<CR>" -'
 
 _HOMEBREW_DIR=$HOME/homebrew
+export GOPATH=$HOME/go/global
 
-export PATH=$HOME/.local/bin:$_HOMEBREW_DIR/bin:$_HOMEBREW_DIR/sbin:$HOME/Library/Python/3.7/bin/:$HOME/.rbenv/bin:$HOME/bin:$HOME/scripts:/usr/local/sbin:/usr/local/bin:$PATH:/build/trees/bin
+# Path Prefixes, in reverse order
+export PATH=$HOME/.local/bin:$HOME/bin:$HOME/scripts:$PATH
+export PATH=$_HOMEBREW_DIR/bin:$_HOMEBREW_DIR/sbin:$PATH
+export PATH=$HOME/Library/Python/3.7/bin/:$PATH
+export PATH=$HOME/.rbenv/bin:$PATH
+export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 
-# NPM global installs
-export PATH=$HOME/.npm-global/bin:$PATH
+# Path Postfixes, in order
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.npm-global/bin
+export PATH=$PATH:$GOPATH/bin:$HOME/go/test/bin
+export PATH=$PATH:/build/trees/bin
 
 # Mac specific conf
 if [[ $(uname) == 'Darwin' ]]; then
@@ -47,10 +56,6 @@ if [[ $(uname) == 'Darwin' ]]; then
     export JAVA_HOME='/usr'
 
 fi  # Darwin
-
-# Go path
-export GOPATH=$HOME/go/global
-export PATH=$PATH:$GOPATH/bin:~/go/test/bin
 
 # Use Go 1.5 vendoring experiment
 export GO15VENDOREXPERIMENT=1
