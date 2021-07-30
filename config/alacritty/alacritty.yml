@@ -20,9 +20,6 @@ background_opacity: 0.98
 
 mouse:
     hide_when_typing: true
-    url:
-        launcher:
-            program: None
 
 font:
     normal:
