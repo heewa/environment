@@ -29,14 +29,18 @@ echo '==] SymLinking XDG Config in ~/.config/'
 
 # Only symlink the files in each app dir, so any additional ones the
 # app might create won't end up in this repo
-for APP in $(find config -maxdepth 1 -mindepth 1 -type d); do
-    for FILE in $(find $APP -type f); do
+for APP in $(cd config; find . -maxdepth 1 -mindepth 1 -type d); do
+    for FILE in $(cd config/$APP; find . -type f); do
         SRC="$PWD/config/$APP/$FILE"
         DST="$HOME/.config/$APP/$FILE"
         mkdir -p "$(dirname $DST)"
         ln -vsf "$SRC" "$DST"
     done
 done
+
+echo
+echo '==] SymLinking legacy dirs to ~/.config'
+ln -vsf $HOME/.config/FreeCAD $HOME/.FreeCAD
 
 # .rc files need to be renamed individually
 echo
