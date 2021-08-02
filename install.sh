@@ -23,8 +23,6 @@ for D in $LINKED_DIRS; do
     fi
 done
 
-exit
-
 # XDG Config goes straight into ~/.config/ without rename
 echo
 echo '==] SymLinking XDG Config in ~/.config/'
