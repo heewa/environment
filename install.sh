@@ -27,22 +27,16 @@ done
 echo
 echo '==] SymLinking XDG Config in ~/.config/'
 
-link_config() {
-    local APP="$1"
-    shift
-    local FILES="$*"
-
-    for FILE in $FILES; do
-        local SRC="$PWD/config/$APP/$FILE"
-        local DST="$HOME/.config/$APP/$FILE"
+# Only symlink the files in each app dir, so any additional ones the
+# app might create won't end up in this repo
+for APP in $(find config -maxdepth 1 -mindepth 1 -type d); do
+    for FILE in $(find $APP -type f); do
+        SRC="$PWD/config/$APP/$FILE"
+        DST="$HOME/.config/$APP/$FILE"
         mkdir -p "$(dirname $DST)"
         ln -vsf "$SRC" "$DST"
     done
-}
-
-link_config 'nvim' 'init.vim'
-link_config 'alacritty' 'alacritty.yml'
-link_config 'kitty' 'kitty.conf'
+done
 
 # .rc files need to be renamed individually
 echo
