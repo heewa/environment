@@ -32,18 +32,18 @@
     "edge_line_width": 0.12,
     "fab_line_width": 0.09999999999999999,
     "fab_text_italic": false,
-    "fab_text_size_h": 1.0,
-    "fab_text_size_v": 1.0,
+    "fab_text_size_h": 1,
+    "fab_text_size_v": 1,
     "fab_text_thickness": 0.15,
     "others_line_width": 0.12,
     "others_text_italic": false,
-    "others_text_size_h": 1.0,
-    "others_text_size_v": 1.0,
+    "others_text_size_h": 1,
+    "others_text_size_v": 1,
     "others_text_thickness": 0.15,
     "silk_line_width": 0.12,
     "silk_text_italic": false,
-    "silk_text_size_h": 1.0,
-    "silk_text_size_v": 1.0,
+    "silk_text_size_h": 1,
+    "silk_text_size_v": 1,
     "silk_text_thickness": 0.15
   },
   "editing": {
@@ -65,13 +65,6 @@
     },
     "use_45_degree_graphic_segments": false
   },
-  "find_replace": {
-    "find_history": [],
-    "find_string": "",
-    "flags": 1,
-    "replace_history": [],
-    "replace_string": ""
-  },
   "graphics": {
     "canvas_type": 1,
     "high_contrast_factor": 0.3499999940395355,
@@ -86,7 +79,7 @@
     "version": 1
   },
   "pcb_display": {
-    "active_layer_preset": "",
+    "active_layer_preset": "All Layers",
     "footprint_text": true,
     "graphic_items_fill": true,
     "layer_presets": [],
@@ -108,73 +101,16 @@
       47
     ],
     "monochrome": true,
-    "scale": 1.0,
+    "scale": 1,
     "title_block": false,
     "use_theme": false
   },
   "system": {
-    "file_history": [
-      "/home/heewa/src/Hardware/keyboards/kaj34/pcb/half/kaj34-half/kaj34-half.kicad_pcb"
-    ],
     "first_run_shown": false,
     "last_imperial_units": 0,
     "last_import_export_path": "",
     "last_metric_units": 1,
     "max_undo_items": 0,
     "units": 1
-  },
-  "window": {
-    "cursor": {
-      "always_show_cursor": true,
-      "fullscreen_cursor": false
-    },
-    "display": 0,
-    "footprint_text_shown_columns": "0 1 2 3 4 5 6",
-    "grid": {
-      "axes_enabled": true,
-      "fast_grid_1": 0,
-      "fast_grid_2": 0,
-      "last_size": 17,
-      "line_width": 1.0,
-      "min_spacing": 10.0,
-      "show": true,
-      "sizes": [
-        "1000 mil",
-        "500 mil",
-        "250 mil",
-        "200 mil",
-        "100 mil",
-        "50 mil",
-        "25 mil",
-        "20 mil",
-        "10 mil",
-        "5 mil",
-        "2 mil",
-        "1 mil",
-        "5.0 mm",
-        "2.5 mm",
-        "1.0 mm",
-        "0.5 mm",
-        "0.25 mm",
-        "0.2 mm",
-        "0.1 mm",
-        "0.05 mm",
-        "0.025 mm",
-        "0.01 mm"
-      ],
-      "snap": 0,
-      "style": 0,
-      "user_grid_x": "0.254",
-      "user_grid_y": "0.254"
-    },
-    "lib_width": 398,
-    "maximized": true,
-    "mru_path": "/home/heewa",
-    "perspective": "layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=982;besth=40;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=36;besth=366;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Footprints;caption=Libraries;state=2044;dir=4;layer=1;row=0;pos=0;prop=100000;bestw=398;besth=-1;minw=250;minh=400;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=1;row=0;pos=0;prop=100000;bestw=36;besth=418;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=LayersManager;caption=Layers Manager;state=1532;dir=2;layer=3;row=0;pos=0;prop=100000;bestw=196;besth=32;minw=196;minh=32;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=196;floath=32|name=DrawFrame;caption=;state=1022;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=383;besth=141;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrameGal;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=1108;besth=727;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=40|dock_size(3,6,0)=34|dock_size(4,3,0)=36|dock_size(4,1,0)=400|dock_size(2,1,0)=36|dock_size(2,3,0)=196|dock_size(5,0,0)=576|",
-    "pos_x": 0,
-    "pos_y": 38,
-    "size_x": 1920,
-    "size_y": 1042,
-    "zoom_factors": []
   }
 }

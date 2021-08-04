@@ -1,0 +1,2 @@
+* filter=kicadconf
+5.99/*.json filter=kicadjsonconf

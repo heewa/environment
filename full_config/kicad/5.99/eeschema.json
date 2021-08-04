@@ -133,14 +133,14 @@
     "field_names": "(templatefields)",
     "hv_lines_only": true,
     "junction_size_choice": 3,
-    "junction_size_mult": 4.0,
+    "junction_size_mult": 4,
     "junction_size_mult_list": [
-      0.0,
+      0,
       1.7,
-      4.0,
-      6.0,
-      9.0,
-      12.0
+      4,
+      6,
+      9,
+      12
     ],
     "pin_symbol_size": 25,
     "repeat_label_increment": 1,
@@ -157,13 +157,6 @@
     "fields_show": {
       "Reference": true
     }
-  },
-  "find_replace": {
-    "find_history": [],
-    "find_string": "",
-    "flags": 1,
-    "replace_history": [],
-    "replace_string": ""
   },
   "graphics": {
     "canvas_type": 1,
@@ -234,7 +227,7 @@
     "color_theme": "",
     "layers": [],
     "monochrome": true,
-    "scale": 1.0,
+    "scale": 1,
     "title_block": false,
     "use_theme": false
   },
@@ -271,9 +264,6 @@
     "width": -1
   },
   "system": {
-    "file_history": [
-      "/home/heewa/src/Hardware/keyboards/kaj34/pcb/alpha/kaj34-alpha.kicad_sch"
-    ],
     "first_run_shown": true,
     "last_imperial_units": 0,
     "last_metric_units": 1,
@@ -281,64 +271,5 @@
     "max_undo_items": 0,
     "never_show_rescue_dialog": false,
     "units": 1
-  },
-  "window": {
-    "cursor": {
-      "always_show_cursor": false,
-      "fullscreen_cursor": false
-    },
-    "display": 0,
-    "grid": {
-      "axes_enabled": false,
-      "fast_grid_1": 1,
-      "fast_grid_2": 2,
-      "last_size": 1,
-      "line_width": 1.0,
-      "min_spacing": 10.0,
-      "show": true,
-      "sizes": [
-        "100 mil",
-        "50 mil",
-        "25 mil",
-        "10 mil",
-        "5 mil",
-        "2 mil",
-        "1 mil"
-      ],
-      "snap": 0,
-      "style": 2,
-      "user_grid_x": "10 mil",
-      "user_grid_y": "10 mil"
-    },
-    "maximized": true,
-    "mru_path": "/home/heewa",
-    "perspective": "layout2|name=InfoBar;caption=;state=131454;dir=1;layer=1;row=0;pos=0;prop=100000;bestw=20;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MainToolbar;caption=;state=139632;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=1140;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=232;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=602;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=383;besth=141;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=34|dock_size(4,3,0)=34|dock_size(2,2,0)=34|dock_size(5,0,0)=385|dock_size(3,6,0)=34|",
-    "pos_x": 0,
-    "pos_y": 38,
-    "size_x": 1920,
-    "size_y": 826,
-    "zoom_factors": [
-      0.05,
-      0.07,
-      0.1,
-      0.15,
-      0.2,
-      0.3,
-      0.5,
-      0.7,
-      1.0,
-      1.5,
-      2.0,
-      3.0,
-      4.5,
-      6.5,
-      10.0,
-      15.0,
-      20.0,
-      30.0,
-      45.0,
-      65.0,
-      100.0
-    ]
   }
 }

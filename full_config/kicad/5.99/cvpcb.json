@@ -11,13 +11,6 @@
     "zoom_to_fit": true
   },
   "filter_footprint": 7,
-  "find_replace": {
-    "find_history": [],
-    "find_string": "",
-    "flags": 1,
-    "replace_history": [],
-    "replace_string": ""
-  },
   "footprint_viewer": {
     "auto_zoom": true,
     "cursor": {
@@ -32,8 +25,8 @@
       "fast_grid_1": 0,
       "fast_grid_2": 0,
       "last_size": 1,
-      "line_width": 1.0,
-      "min_spacing": 10.0,
+      "line_width": 1,
+      "min_spacing": 10,
       "show": true,
       "sizes": [
         "1000 mil",
@@ -95,68 +88,15 @@
     "color_theme": "",
     "layers": [],
     "monochrome": true,
-    "scale": 1.0,
+    "scale": 1,
     "title_block": false,
     "use_theme": false
   },
   "system": {
-    "file_history": [],
     "first_run_shown": false,
     "last_imperial_units": 0,
     "last_metric_units": 1,
     "max_undo_items": 0,
     "units": 1
-  },
-  "window": {
-    "cursor": {
-      "always_show_cursor": true,
-      "fullscreen_cursor": false
-    },
-    "display": 0,
-    "grid": {
-      "axes_enabled": false,
-      "fast_grid_1": 1,
-      "fast_grid_2": 2,
-      "last_size": 1,
-      "line_width": 1.0,
-      "min_spacing": 10.0,
-      "show": true,
-      "sizes": [
-        "1000 mil",
-        "500 mil",
-        "250 mil",
-        "200 mil",
-        "100 mil",
-        "50 mil",
-        "25 mil",
-        "20 mil",
-        "10 mil",
-        "5 mil",
-        "2 mil",
-        "1 mil",
-        "5.0 mm",
-        "2.5 mm",
-        "1.0 mm",
-        "0.5 mm",
-        "0.25 mm",
-        "0.2 mm",
-        "0.1 mm",
-        "0.05 mm",
-        "0.025 mm",
-        "0.01 mm"
-      ],
-      "snap": 0,
-      "style": 0,
-      "user_grid_x": "10 mil",
-      "user_grid_y": "10 mil"
-    },
-    "maximized": true,
-    "mru_path": "/home/heewa",
-    "perspective": "layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=684;besth=40;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Libraries;caption=Footprint Libraries;state=2044;dir=4;layer=1;row=0;pos=0;prop=100000;bestw=384;besth=1042;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Symbols;caption=Symbol : Footprint Assignments;state=2044;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=400;besth=170;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Footprints;caption=Filtered Footprints;state=2044;dir=2;layer=1;row=0;pos=0;prop=100000;bestw=576;besth=1042;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Buttons;caption=;state=139644;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=493;besth=102;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=40|dock_size(4,1,0)=386|dock_size(5,0,0)=402|dock_size(2,1,0)=576|dock_size(3,6,0)=102|",
-    "pos_x": 0,
-    "pos_y": 38,
-    "size_x": 1920,
-    "size_y": 1006,
-    "zoom_factors": []
   }
 }

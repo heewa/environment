@@ -1,11 +1,10 @@
 UseIconsInMenus=1
 IconScale=-1
 MousewheelPAN=0
-ZoomNoCenter=0
+ZoomNoCenter=1
 AutoPAN=1
 OpenGLAntialiasingMode=3
 CairoAntialiasingMode=3
-WorkingDir=/home/heewa
 ShowEnvVarWarningDialog=1
 Editor=vim
 AutoSaveInterval=0
