@@ -1,0 +1,26 @@
+$hotkey list
+# Gerbview Hotkeys
+[gerbview]
+shortcut   "Ctrl+F1":    "List Hotkeys"
+shortcut   "Ctrl+,":    "Preferences"
+shortcut   "F1":    "Zoom In"
+shortcut   "F2":    "Zoom Out"
+shortcut   "F3":    "Zoom Redraw"
+shortcut   "F4":    "Zoom Center"
+shortcut   "Home":    "Zoom Auto"
+shortcut   "Ctrl+F5":    "Zoom to Selection"
+shortcut   "U":    "Switch Units"
+shortcut   "Space":    "Reset Local Coordinates"
+shortcut   "L":    "Gbr Lines Display Mode"
+shortcut   "F":    "Gbr Flashed Display Mode"
+shortcut   "P":    "Gbr Polygons Display Mode"
+shortcut   "D":    "DCodes Display Mode"
+shortcut   "N":    "Gbr Negative Obj Display Mode"
+shortcut   "Ctrl+H":    "Toggle High Contrast Mode"
+shortcut   "+":    "Switch to Next Layer"
+shortcut   "-":    "Switch to Previous Layer"
+shortcut   "F9":    "Switch to Legacy Toolset"
+shortcut   "F11":    "Switch to Modern Toolset with hardware-accelerated graphics (recommended)"
+shortcut   "F12":    "Switch to Modern Toolset with software graphics (fall-back)"
+shortcut   "Ctrl+Shift+M":    "Measure Distance (Modern Toolset only)"
+$Endlist

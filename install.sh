@@ -23,14 +23,26 @@ for D in $LINKED_DIRS; do
     fi
 done
 
+LINKED_DIRS="$(find full_config  -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' ')"
+echo
+echo "==] SymLinking full config dirs: $LINKED_DIRS"
+for D in $LINKED_DIRS; do
+    SRC="$PWD/full_config/$D"
+    DST="$HOME/.config/$D"
+
+    if [[ ! -L "$DST" || "$(readlink $DST)" != "$SRC" ]]; then
+        ln -vs $SRC $HOME/.config/
+    fi
+done
+
 # XDG Config goes straight into ~/.config/ without rename
 echo
 echo '==] SymLinking XDG Config in ~/.config/'
 
 # Only symlink the files in each app dir, so any additional ones the
 # app might create won't end up in this repo
-for APP in $(cd config; find . -maxdepth 1 -mindepth 1 -type d); do
-    for FILE in $(cd config/$APP; find . -type f); do
+for APP in $(find config -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' '); do
+    for FILE in $(find config/$APP -type f | xargs basename -a | tr '\n' ' '); do
         SRC="$PWD/config/$APP/$FILE"
         DST="$HOME/.config/$APP/$FILE"
         mkdir -p "$(dirname $DST)"
