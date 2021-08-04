@@ -1,0 +1,48 @@
+{
+  "appearance": {
+    "color_theme": "_builtin_default"
+  },
+  "black_background": false,
+  "color_picker": {
+    "default_tab": 0
+  },
+  "corner_origin": 0,
+  "cross_probing": {
+    "auto_highlight": true,
+    "center_on_items": true,
+    "zoom_to_fit": true
+  },
+  "graphics": {
+    "canvas_type": 1,
+    "high_contrast_factor": 0.3499999940395355,
+    "highlight_factor": 0.5,
+    "select_factor": 0.75
+  },
+  "last_custom_height": 11000,
+  "last_custom_width": 17000,
+  "last_paper_size": "A3",
+  "last_was_portrait": false,
+  "lib_tree": {
+    "column_width": 360
+  },
+  "meta": {
+    "version": 0
+  },
+  "printing": {
+    "background": false,
+    "color_theme": "",
+    "layers": [],
+    "monochrome": true,
+    "scale": 1,
+    "title_block": false,
+    "use_theme": false
+  },
+  "properties_frame_width": 150,
+  "system": {
+    "first_run_shown": true,
+    "last_imperial_units": 0,
+    "last_metric_units": 1,
+    "max_undo_items": 0,
+    "units": 1
+  }
+}

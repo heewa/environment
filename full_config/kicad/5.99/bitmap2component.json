@@ -1,0 +1,48 @@
+{
+  "appearance": {
+    "color_theme": "_builtin_default"
+  },
+  "bitmap_file_name": "",
+  "color_picker": {
+    "default_tab": 0
+  },
+  "converted_file_name": "",
+  "cross_probing": {
+    "auto_highlight": true,
+    "center_on_items": true,
+    "zoom_to_fit": true
+  },
+  "graphics": {
+    "canvas_type": 2,
+    "high_contrast_factor": 0.3499999940395355,
+    "highlight_factor": 0.5,
+    "select_factor": 0.75
+  },
+  "last_format": 0,
+  "last_mod_layer": 0,
+  "lib_tree": {
+    "column_width": 360
+  },
+  "meta": {
+    "version": 0
+  },
+  "negative": false,
+  "printing": {
+    "background": false,
+    "color_theme": "",
+    "layers": [],
+    "monochrome": true,
+    "scale": 1,
+    "title_block": false,
+    "use_theme": false
+  },
+  "system": {
+    "first_run_shown": false,
+    "last_imperial_units": 0,
+    "last_metric_units": 1,
+    "max_undo_items": 0,
+    "units": 1
+  },
+  "threshold": 50,
+  "units": 0
+}
