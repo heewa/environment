@@ -40,11 +40,6 @@
 	default = tracking
 [diff]
     compactionHeuristic = true
-
-# WTF is this? I don't remember putting this here:
-#[filter "media"]
-#	clean = git-media-clean %f
-#	smudge = git-media-smudge %f
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
@@ -52,3 +47,8 @@
 	excludesfile = ~/.gitignore
 [url "ssh://git@heroku.com/"]
 	insteadOf = https://git.heroku.com/
+[filter "kicadconf"]
+    clean = grep -v '^file[0-9]\\|MostRecentlyUsedPath\\|^WorkingDir=\\|^LibeditFrame\\(Pos\\|Size\\)'
+    required
+[filter "kicadjsonconf"]
+    clean = jq 'delpaths([[\"window\"], [\"system\", \"file_history\"], [\"system\", \"open_projects\"], [\"find_replace\"]])'
