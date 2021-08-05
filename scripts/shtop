@@ -1,0 +1,2 @@
+#!/bin/bash -e
+sudo HTOPRC="$HOME/.config/htop/htoprc" /usr/bin/htop
