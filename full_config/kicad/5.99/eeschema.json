@@ -29,12 +29,12 @@
   "bom": {
     "plugins": [
       {
-        "command": "",
+        "command": "/usr/bin/python3 \"/usr/share/kicad-nightly/plugins/bom_csv_grouped_by_value.py\" \"%I\" \"%O.csv\"",
         "name": "bom_csv_grouped_by_value",
         "path": "bom_csv_grouped_by_value.py"
       },
       {
-        "command": "",
+        "command": "/usr/bin/python3 \"/usr/share/kicad-nightly/plugins/bom_csv_grouped_by_value_with_fp.py\" \"%I\" \"%O.csv\"",
         "name": "bom_csv_grouped_by_value_with_fp",
         "path": "bom_csv_grouped_by_value_with_fp.py"
       },
@@ -256,12 +256,12 @@
     }
   },
   "symbol_chooser": {
-    "height": -1,
+    "height": 638,
     "keep_symbol": false,
     "place_all_units": true,
-    "sash_pos_h": -1,
-    "sash_pos_v": -1,
-    "width": -1
+    "sash_pos_h": 495,
+    "sash_pos_v": 489,
+    "width": 878
   },
   "system": {
     "first_run_shown": true,

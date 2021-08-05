@@ -227,7 +227,7 @@
     "version": 0
   },
   "netlist": {
-    "associate_by_ref_sch": false,
+    "associate_by_ref_sch": true,
     "delete_extra_footprints": true,
     "delete_shorting_tracks": false,
     "delete_single_pad_nets": false,
@@ -313,7 +313,7 @@
   },
   "system": {
     "first_run_shown": true,
-    "last_footprint3d_dir": "",
+    "last_footprint3d_dir": "/usr/share/kicad-nightly/3dmodels/",
     "last_footprint_lib_dir": "",
     "last_imperial_units": 0,
     "last_metric_units": 1,
