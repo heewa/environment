@@ -1,4 +1,5 @@
 [alias]
+    cached = diff --cached
     ls = log --color --graph --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --date=relative
     ll = log --color --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat --date=relative
     lstags = log --date-order --graph --tags --simplify-by-decoration --pretty=format:'%ai %h %d'
