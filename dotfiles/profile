@@ -76,3 +76,6 @@ export NODE_REPL_HISTORY_FILE=$HOME/.node_repl_history
 # Ubuntu Launchpad
 export DEBFULLNAME="Heewa Barfchin"
 export DEBEMAIL="heewa.b@gmail.com"
+
+# Slightly nicer ninja build status
+export NINJA_STATUS='[%u/%r/%f]'
