@@ -148,23 +148,22 @@ FONTS=( \
     'SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf' \
 )
 URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/"
+GOT_NEW_FONTS=0
 if [[ "$(uname)" = "Darwin" ]]; then
     DIR="$HOME/Library/Fonts"
 else
     DIR="$HOME/.local/share/fonts"
 fi
 mkdir -p "$DIR"
-(
-    cd "$DIR"
-    for FONT in ${FONTS[@]}; do
-        if [[ -f $(basename $FONT) ]]; then
-            echo "  already have $FONT"
-        else
-            echo "       getting $FONT"
-            curl -fOLs "$URL$FONT"
-        fi
-    done
-)
+for FONT in ${FONTS[@]}; do
+    if [[ -f "$DIR/$(basename $FONT)" ]]; then
+        echo "  already have $FONT"
+    else
+        echo "       getting $FONT"
+        curl --output-dir "$DIR" -fOLs "$URL$FONT"
+        GOT_NEW_FONTS=1
+    fi
+done
 
 if [[ ! -e "$HOME/.pyenv" ]]; then
     echo
@@ -172,7 +171,9 @@ if [[ ! -e "$HOME/.pyenv" ]]; then
     git clone --depth 1 git@github.com:pyenv/pyenv.git ~/.pyenv
 fi
 
-which npm && npm config set prefix "$HOME/.npm-global" || echo '!!!! NPM not installed, skipping conf'
+echo
+echo '==] Setting up npm'
+which npm && npm config set prefix "$HOME/.npm-global" || echo 'npm not installed, skipping conf'
 
 # Mac Specific
 if [[ "$(uname)" = "Darwin" ]]; then
@@ -223,24 +224,24 @@ elif [[ $(uname) == "Linux" ]]; then # Linux
     echo
     echo '==] bash git prompt'
     BGP_DIR="$HOME/.bash-git-prompt"
-    if [[ ! -e $BGP_DIR ]]; then
+    if [[ -e $BGP_DIR ]]; then
+        echo 'already have, skipping'
+    else
         git clone --depth 1 git@github.com:magicmonty/bash-git-prompt.git $BGP_DIR
     fi
 
     # Avoid all sudo things if don't have password yet
-    sudo --non-interactive echo
-    if [[ ! $? ]]; then
-        echo '**** Need sudo to install linux packages'
+    echo
+    echo '==] Rebuilding fonts'
+    if [[ $GOT_NEW_FONTS == 0 ]]; then
+        echo 'skipping'
     else
-        echo '==] Rebuilding fonts'
-        sudo fc-cache -f ~/.local/share/fonts
-
-        echo '==] Installing linux packages'
-        sudo apt install xsel
-
-        echo '==] Installing alacritty'
-        sudo add-apt-repository ppa:mmstick76/alacritty && sudo apt install alacritty || true
+        sudo --non-interactive fc-cache -f ~/.local/share/fonts || echo '!!!!'
     fi
+
+    echo
+    echo '==] Installing linux packages'
+    sudo --non-interactive apt install xsel profile-sync-daemon || echo '!!!!'
 
 fi # Mac Specific
 
