@@ -99,6 +99,19 @@ else
     RELINK_DIR Photos Pictures
 fi
 
+# Install some things before using curl, git, etc
+if [[ $(uname) == "Linux" ]]; then
+    echo
+    echo '==] Enabling broader ubuntu repos'
+    sudo --non-interactive add-apt-repository --no-update universe
+    sudo --non-interactive add-apt-repository --no-update multiverse
+    sudo --non-interactive apt update
+
+    echo
+    echo '==] Installing linux packages'
+    sudo --non-interactive apt install git curl nvim tmux xsel profile-sync-daemon jq
+fi
+
 echo
 echo '==] Pretty, pretty emoji prompts'
 if [ -f "$HOME/src/Heewa/emoji-prompt/emoji-prompt.sh" ]; then
@@ -122,7 +135,7 @@ fi
 echo
 echo '==] Tmux'
 if [[ ! -e $HOME/.tmux.gpakosz ]]; then
-    git clone --depth 1 git@github.com:gpakosz/.tmux.git ~/.tmux.gpakosz
+    git clone --depth 1 https://github.com/gpakosz/.tmux ~/.tmux.gpakosz
 fi
 ln -vsf $HOME/.tmux.gpakosz/.tmux.conf $HOME/
 if [[ ! -e $HOME/.tmux/plugins/tpm ]]; then
@@ -136,7 +149,7 @@ PLUG_FILE="$HOME/.config/nvim/autoload/plug.vim"
 if [[ -f $PLUG_FILE ]]; then
     echo 'already have, skipping'
 else
-    curl -fLo  --create-dirs "$VIM_PLUG_URL"
+    curl --create-dirs -fL -o "$PLUG_FILE" "$VIM_PLUG_URL"
     vim -c 'PlugInstall | qa' | true
 fi
 
@@ -168,7 +181,7 @@ done
 if [[ ! -e "$HOME/.pyenv" ]]; then
     echo
     echo '==] Pyenv'
-    git clone --depth 1 git@github.com:pyenv/pyenv.git ~/.pyenv
+    git clone --depth 1 https://github.com/pyenv/pyenv ~/.pyenv
 fi
 
 echo
@@ -227,7 +240,7 @@ elif [[ $(uname) == "Linux" ]]; then # Linux
     if [[ -e $BGP_DIR ]]; then
         echo 'already have, skipping'
     else
-        git clone --depth 1 git@github.com:magicmonty/bash-git-prompt.git $BGP_DIR
+        git clone --depth 1 https://github.com/magicmonty/bash-git-prompt $BGP_DIR
     fi
 
     # Avoid all sudo things if don't have password yet
@@ -238,10 +251,6 @@ elif [[ $(uname) == "Linux" ]]; then # Linux
     else
         sudo --non-interactive fc-cache -f ~/.local/share/fonts || echo '!!!!'
     fi
-
-    echo
-    echo '==] Installing linux packages'
-    sudo --non-interactive apt install xsel profile-sync-daemon || echo '!!!!'
 
 fi # Mac Specific
 
