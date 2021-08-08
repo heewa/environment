@@ -130,10 +130,15 @@ if [[ ! -e $HOME/.tmux/plugins/tpm ]]; then
 fi
 
 echo
-echo '==] Downloading and installing vim plug & plugins'
+echo '==] vim plug & plugins'
 VIM_PLUG_URL='https://github.com/junegunn/vim-plug/raw/master/plug.vim'
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs "$VIM_PLUG_URL"
-vim -c 'PlugInstall | qa' | true
+PLUG_FILE="$HOME/.config/nvim/autoload/plug.vim"
+if [[ -f $PLUG_FILE ]]; then
+    echo 'already have, skipping'
+else
+    curl -fLo  --create-dirs "$VIM_PLUG_URL"
+    vim -c 'PlugInstall | qa' | true
+fi
 
 echo
 echo '==] Downloading nerd fonts'
@@ -152,8 +157,12 @@ mkdir -p "$DIR"
 (
     cd "$DIR"
     for FONT in ${FONTS[@]}; do
-        echo "    $FONT"
-        curl -fOLs "$URL$FONT"
+        if [[ -f $(basename $FONT) ]]; then
+            echo "  already have $FONT"
+        else
+            echo "       getting $FONT"
+            curl -fOLs "$URL$FONT"
+        fi
     done
 )
 
