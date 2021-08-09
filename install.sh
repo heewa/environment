@@ -1,173 +1,124 @@
 #!/bin/bash
 #
-# Set up symlinks to dotfiles & make sure directories I want are there.
+# Set up environment.
 
-# Exit on errors, to force myself to fix this script
 set -e
 
-echo
-echo '==] Creating home dirs'
-for D in src build tmp bin .bash .config/tmux .config/nvim .npm-global; do
-    mkdir -pv $HOME/$D
-done
+ENVDIR=$(dirname $(realpath "$0"))
 
-LINKED_DIRS='scripts'
-echo
-echo "==] SymLinking dirs: $LINKED_DIRS"
-for D in $LINKED_DIRS; do
-    SRC="$PWD/$D"
-    DST="$HOME/$D"
+HEADER () {
+    echo
+    echo "   [===]  $*  [===]"
+    echo
+}
+
+SYMLINK() {
+    local SRC="$1"
+    local DST=${2:-$HOME/$(basename $SRC)}
+    local DSTDIR=$(dirname $DST)
+
+    if [[ ! -d "$DSTDIR" ]]; then
+        mkdir -p "$DSTDIR"
+    fi
 
     if [[ ! -L "$DST" || "$(readlink $DST)" != "$SRC" ]]; then
-        ln -vs $SRC $DST || echo "!!!! $DST already exists"
+        ln -svT "$SRC" "$DST"
+    else
+        echo "$SRC -> $DST"
     fi
-done
+}
 
-LINKED_DIRS="$(find full_config  -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' ')"
-echo
-echo "==] SymLinking full config dirs: $LINKED_DIRS"
+HEADER 'Basic Dirs'
+mkdir -pv $HOME/{src,build,bak,.mem/tmp,.mem/cache,.config,.local/bin}
+SYMLINK $HOME/.mem/tmp
+SYMLINK $HOME/.mem/cache $HOME/.cache
+
+HEADER 'Configs & Scripts'
+SYMLINK $ENVDIR/scripts
+SYMLINK $HOME/.config/FreeCAD $HOME/.FreeCAD
+LINKED_DIRS="$(find $ENVDIR/full_config  -maxdepth 1 -mindepth 1 -type d)"
 for D in $LINKED_DIRS; do
-    SRC="$PWD/full_config/$D"
-    DST="$HOME/.config/$D"
-
-    if [[ ! -L "$DST" || "$(readlink $DST)" != "$SRC" ]]; then
-        ln -vs $SRC $HOME/.config/
-    fi
+    SYMLINK $D $HOME/.config/$(basename $D)
 done
-
-# XDG Config goes straight into ~/.config/ without rename
-echo
-echo '==] SymLinking XDG Config in ~/.config/'
 
 # Only symlink the files in each app dir, so any additional ones the
 # app might create won't end up in this repo
-for APP in $(find config -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' '); do
-    for FILE in $(find config/$APP -type f | xargs basename -a | tr '\n' ' '); do
-        SRC="$PWD/config/$APP/$FILE"
-        DST="$HOME/.config/$APP/$FILE"
-        mkdir -p "$(dirname $DST)"
-        ln -vsf "$SRC" "$DST"
+for APP in $(find $ENVDIR/config -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' '); do
+    for FILE in $(find $ENVDIR/config/$APP -type f | xargs basename -a | tr '\n' ' '); do
+        SYMLINK $ENVDIR/config/$APP/$FILE $HOME/.config/$APP/$FILE
     done
 done
 
-echo
-echo '==] SymLinking legacy dirs to ~/.config'
-ln -vsf $HOME/.config/FreeCAD $HOME/.FreeCAD
+HEADER 'Neovim & Vim'
+if [[ -f /usr/local/bin/nvim ]]; then
+    SYMLINK /usr/local/bin/nvim $HOME/.local/bin/vim
+    SYMLINK /usr/local/bin/vim $HOME/.local/bin/oldvim
+fi
+SYMLINK $HOME/.config/nvim $HOME/.vim
+SYMLINK $HOME/.config/nvim/init.vim $HOME/.vimrc
 
-# .rc files need to be renamed individually
-echo
-echo '==] SymLinking ~/.rc files'
-for F in $(ls dotfiles); do
-    SRC="$PWD/dotfiles/$F"
-    DST="$HOME/.$F"
-
-    if [[ -d "$SRC" && ( ! -L "$DST" || "$(readlink $DST)" != "$SRC" ) ]]; then
-        echo "!!!! $DST already exists"
-    else
-        ln -vsf $SRC $DST
-    fi
+HEADER '~/.rc Files'
+for F in $(ls $ENVDIR/dotfiles); do
+    SYMLINK $ENVDIR/dotfiles/$F $HOME/.$F
 done
 
-# Link legacy vim confs to nvim's, and the binary
-echo
-echo '==] SymLinking vim -> nvim'
-ln -vsf $HOME/.config/nvim ~/.vim
-ln -vsf $HOME/.config/nvim/init.vim ~/.vimrc
-ln -vsf /usr/local/bin/nvim $HOME/bin/vim
-ln -vsf /usr/local/bin/vim $HOME/bin/oldvim
-
-echo
-echo '==] SymLinking Dropbox Dirs'
+HEADER 'Dropbox Dirs'
 if [[ ! -d "$HOME/Dropbox" ]]; then
     echo '!!!! Dropbox dir does not exist - skipping related symlinks'
 else
-    RELINK_DIR() {
-        local SRC="$HOME/Dropbox/$1"
-        local DST="$HOME/${2:-$1}"
-        local NAME=${2:-$1}
-
-        if [[ ! -e "$DST" && ! -L "$DST" ]]; then
-            ln -vs $SRC $DST
-        elif [[ ! -L "$DST" ]]; then
-            rmdir $DST && ln -vs $SRC $DST
-        elif [[ $(readlink "$DST") != "$SRC" ]]; then
-            echo "$NAME currently points to $(readlink $DST), relinking..."
-            ln -vsfT $SRC $DST
-        fi
-    }
-    RELINK_DIR Documents
-    RELINK_DIR Photos Pictures
+    SYMLINK $HOME/Dropbox/Documents $HOME/Documents
+    SYMLINK $HOME/Dropbox/Photos $HOME/Pictures
 fi
 
-# Install some things before using curl, git, etc
-if [[ $(uname) == "Linux" ]]; then
-    echo
-    echo '==] Enabling broader ubuntu repos'
-    sudo --non-interactive add-apt-repository --no-update universe
-    sudo --non-interactive add-apt-repository --no-update multiverse
-    sudo --non-interactive apt update
-
-    echo
-    echo '==] Installing linux packages'
-    sudo --non-interactive apt install git curl nvim tmux xsel profile-sync-daemon jq
-fi
-
-echo
-echo '==] Pretty, pretty emoji prompts'
+HEADER 'Emoji Prompt'
 if [ -f "$HOME/src/Heewa/emoji-prompt/emoji-prompt.sh" ]; then
-    echo 'Linking from git repo'
-    ln -vsf $HOME/src/Heewa/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh
+    SYMLINK $HOME/src/Heewa/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh
 else
-    echo 'Downloading from git repo'
-    curl -# 'https://raw.githubusercontent.com/heewa/emoji-prompt/master/emoji-prompt.sh' > ~/.emoji-prompt.sh
+    curl -# 'https://raw.githubusercontent.com/heewa/emoji-prompt/master/emoji-prompt.sh' > $HOME/.emoji-prompt.sh
 fi
 
-echo
-echo '==] Pretty, pretty emoji env vars'
+HEADER 'Emoji Env Vars'
 if [ -f "$HOME/src/Heewa/bae/emoji_vars.sh" ]; then
-    echo 'Linking from git repo'
-    ln -vsf $HOME/src/Heewa/bae/emoji_vars.sh $HOME/.emoji_vars.sh
+    SYMLINK $HOME/src/Heewa/bae/emoji_vars.sh $HOME/.emoji_vars.sh
 else
-    echo 'Downloading from git repo'
-    curl -# 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > ~/.emoji_vars.sh
+    curl -# 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > $HOME/.emoji_vars.sh
 fi
 
-echo
-echo '==] Tmux'
+HEADER 'Tmux'
 if [[ ! -e $HOME/.tmux.gpakosz ]]; then
-    git clone --depth 1 https://github.com/gpakosz/.tmux ~/.tmux.gpakosz
+    git clone --depth 1 https://github.com/gpakosz/.tmux $HOME/.tmux.gpakosz
 fi
-ln -vsf $HOME/.tmux.gpakosz/.tmux.conf $HOME/
+SYMLINK $HOME/.tmux.gpakosz/.tmux.conf $HOME/.tmux.conf
+
 if [[ ! -e $HOME/.tmux/plugins/tpm ]]; then
-    git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    git clone --depth 1 https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
-echo
-echo '==] vim plug & plugins'
+HEADER 'VimPlug & Plugins'
 VIM_PLUG_URL='https://github.com/junegunn/vim-plug/raw/master/plug.vim'
 PLUG_FILE="$HOME/.config/nvim/autoload/plug.vim"
 if [[ -f $PLUG_FILE ]]; then
-    echo 'already have, skipping'
+    vim -c 'PlugUpgrade | PlugUpdate | qa'
 else
     curl --create-dirs -fL -o "$PLUG_FILE" "$VIM_PLUG_URL"
-    vim -c 'PlugInstall | qa' | true
+    vim -c 'PlugInstall | qa'
 fi
 
-echo
-echo '==] Downloading nerd fonts'
+HEADER 'Nerd Fonts'
 FONTS=( \
     'Noto/Mono/complete/Noto%20Mono%20Nerd%20Font%20Complete.ttf' \
     'UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete.ttf' \
     'SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf' \
 )
 URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/"
-GOT_NEW_FONTS=0
 if [[ "$(uname)" = "Darwin" ]]; then
     DIR="$HOME/Library/Fonts"
 else
     DIR="$HOME/.local/share/fonts"
 fi
 mkdir -p "$DIR"
+
+GOT_NEW_FONTS=0
 for FONT in ${FONTS[@]}; do
     if [[ -f "$DIR/$(basename $FONT)" ]]; then
         echo "  already have $FONT"
@@ -178,81 +129,43 @@ for FONT in ${FONTS[@]}; do
     fi
 done
 
-if [[ ! -e "$HOME/.pyenv" ]]; then
-    echo
-    echo '==] Pyenv'
-    git clone --depth 1 https://github.com/pyenv/pyenv ~/.pyenv
-fi
+if [[ $(uname) == "Linux" ]]; then
 
-echo
-echo '==] Setting up npm'
-which npm && npm config set prefix "$HOME/.npm-global" || echo 'npm not installed, skipping conf'
-
-# Mac Specific
-if [[ "$(uname)" = "Darwin" ]]; then
-
-    # Homebrew
-    if [[ "$(which brew)" == "" ]]; then
-        echo
-        echo '==] Installing homebrew'
-        /usr/bin/ruby -e "$(curl -#fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-
-    # Homebrew packages
-    echo
-    echo '==] Installing homebrew packages'
-    for package in bash htop pstree tree watch bash-completion curl; do
-        brew ls --versions $package || brew install $package
-    done
-
-    #echo
-    #echo '==] Installing devel-version homebrew packages'
-    #for package in go; do
-    #    brew ls --versions $package || brew install --devel $package
-    #done
-
-    echo
-    echo '==] Installing cask homebrew packages'
-    for package in alacritty kitty; do
-        brew ls --versions $package || brew cask install $package
-    done
-
-    echo
-    echo '==] Installing HEAD-version homebrew packages'
-    for package in bash-git-prompt; do
-        brew ls --versions $package || brew install --HEAD $package
-    done
-
-    echo
-    echo '==] Installing python packages'
-    pip install --upgrade awscli
-
-    # Golang Makefile
-    echo
-    echo '==] Getting Golang Makefile from git gist'
-    curl -#sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
-
-elif [[ $(uname) == "Linux" ]]; then # Linux
-
-    echo
-    echo '==] bash git prompt'
-    BGP_DIR="$HOME/.bash-git-prompt"
-    if [[ -e $BGP_DIR ]]; then
-        echo 'already have, skipping'
-    else
-        git clone --depth 1 https://github.com/magicmonty/bash-git-prompt $BGP_DIR
-    fi
-
-    # Avoid all sudo things if don't have password yet
-    echo
-    echo '==] Rebuilding fonts'
+    HEADER 'Rebuilding Fonts'
     if [[ $GOT_NEW_FONTS == 0 ]]; then
-        echo 'skipping'
+        echo 'no new fonts, skipping rebuild'
     else
         sudo --non-interactive fc-cache -f ~/.local/share/fonts || echo '!!!!'
     fi
+fi
 
-fi # Mac Specific
+HEADER 'Pyenv'
+if [[ -e "$HOME/.pyenv" ]]; then
+    echo 'already have, skipping'
+else
+    git clone --depth 1 https://github.com/pyenv/pyenv $HOME/.pyenv
+fi
 
-echo
-echo '==] Done'
+HEADER 'Bash Git Prompt'
+BGP_DIR="$HOME/.bash-git-prompt"
+if [[ -e $BGP_DIR ]]; then
+    echo 'already have, skipping'
+else
+    git clone --depth 1 https://github.com/magicmonty/bash-git-prompt $BGP_DIR
+fi
+
+HEADER 'NPM'
+which npm && npm config set prefix "$HOME/.npm-global" || echo 'not installed, skipping conf'
+
+if [[ "$(uname)" = "Darwin" ]]; then
+
+    HEADER 'Golang Makefile'
+    if [[ -f $HOME/.golang.Makefile ]]; then
+        echo 'already have, skipping'
+    else
+        curl -#sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
+    fi
+
+fi
+
+HEADER 'Done!'
