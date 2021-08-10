@@ -5,6 +5,7 @@
 set -e
 
 ENVDIR=$(dirname $(realpath "$0"))
+ERRS=0
 
 HEADER () {
     echo
@@ -12,26 +13,55 @@ HEADER () {
     echo
 }
 
+WARN () {
+    (
+        exec 1>&2
+
+        echo
+        echo "!!!!  $*"
+        echo
+    )
+}
+
+FAIL () {
+    local ERR_TYPE=$1
+    local ERR=${2:-1}
+
+    local IGNORE_VAR="IGNORE_${ERR_TYPE}_ERRS"
+    ERRS=$(($ERRS + $ERR))
+
+    if [[ "$ERRS" && ! "${!IGNORE_VAR}" ]]; then
+        exec 1>&2
+
+        echo
+        echo '/---'
+        echo "|  Fix & re-run, or ignore by running with: $IGNORE_VAR=1 $0"
+        echo '\---------'
+        echo
+
+        exit $ERRS
+    fi
+}
+
 SYMLINK() {
     local SRC="$1"
     local DST=${2:-$HOME/$(basename $SRC)}
     local DSTDIR=$(dirname $DST)
+    local ERR_TYPE=${3:-SYMLINK}
 
     if [[ ! -d "$DSTDIR" ]]; then
-        mkdir -p "$DSTDIR"
+        mkdir -p "$DSTDIR" || FAIL "$ERR_TYPE" 1
     fi
 
     if [[ ! -L "$DST" || "$(readlink $DST)" != "$SRC" ]]; then
-        ln -svT "$SRC" "$DST"
+        ln -svT "$SRC" "$DST" || FAIL "$ERR_TYPE" 1
     else
         echo "$SRC -> $DST"
     fi
 }
 
 HEADER 'Basic Dirs'
-mkdir -pv $HOME/{src,build,bak,.mem/tmp,.mem/cache,.config,.local/bin}
-SYMLINK $HOME/.mem/tmp
-SYMLINK $HOME/.mem/cache $HOME/.cache
+mkdir -pv $HOME/{src,build,bak,tmp,.cache,.config,.local/bin} || FAIL DIR
 
 HEADER 'Configs & Scripts'
 SYMLINK $ENVDIR/scripts
@@ -49,13 +79,31 @@ for APP in $(find $ENVDIR/config -maxdepth 1 -mindepth 1 -type d | xargs basenam
     done
 done
 
+HEADER 'Ram Disks'
+CHECK_FSTAB () {
+    local MNT=$1
+    local OPT=$2
+    local ENTRY="tmpfs  $MNT  tmpfs  $OPT  0  0"
+    local CMD="mount -t tmpfs -o $OPT tmpfs $MNT"
+
+    if ! grep -q "$ENTRY" /etc/fstab; then
+        WARN "$MNT missing from /etc/fstab"
+        >&2 echo "Add to fstab: $ENTRY"
+        >&2 echo "Or manually mount: $CMD"
+        FAIL TMPFS
+    fi
+}
+CHECK_FSTAB '/tmp' 'size=5G,rw,nodev,nosuid'
+CHECK_FSTAB "$HOME/tmp" "size=10G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid,exec"
+CHECK_FSTAB "$HOME/.cache" "size=1G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid"
+
 HEADER 'Neovim & Vim'
 if [[ -f /usr/local/bin/nvim ]]; then
     SYMLINK /usr/local/bin/nvim $HOME/.local/bin/vim
     SYMLINK /usr/local/bin/vim $HOME/.local/bin/oldvim
 fi
 SYMLINK $HOME/.config/nvim $HOME/.vim
-SYMLINK $HOME/.config/nvim/init.vim $HOME/.vimrc
+SYMLINK $ENVDIR/config/nvim/init.vim $HOME/.vimrc
 
 HEADER '~/.rc Files'
 for F in $(ls $ENVDIR/dotfiles); do
@@ -64,44 +112,42 @@ done
 
 HEADER 'Dropbox Dirs'
 if [[ ! -d "$HOME/Dropbox" ]]; then
-    echo '!!!! Dropbox dir does not exist - skipping related symlinks'
+    WARN '!!!! Dropbox dir does not exist - skipping related symlinks'
 else
-    SYMLINK $HOME/Dropbox/Documents $HOME/Documents
-    SYMLINK $HOME/Dropbox/Photos $HOME/Pictures
+    SYMLINK $HOME/Dropbox/Documents $HOME/Documents DROPBOX
+    SYMLINK $HOME/Dropbox/Photos $HOME/Pictures DROPBOX
 fi
 
 HEADER 'Emoji Prompt'
 if [ -f "$HOME/src/Heewa/emoji-prompt/emoji-prompt.sh" ]; then
-    SYMLINK $HOME/src/Heewa/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh
+    SYMLINK $HOME/src/Heewa/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh EMOJI
 else
-    curl -# 'https://raw.githubusercontent.com/heewa/emoji-prompt/master/emoji-prompt.sh' > $HOME/.emoji-prompt.sh
+    curl -# 'https://raw.githubusercontent.com/heewa/emoji-prompt/master/emoji-prompt.sh' > $HOME/.emoji-prompt.sh || FAIL EMOJI
 fi
 
 HEADER 'Emoji Env Vars'
 if [ -f "$HOME/src/Heewa/bae/emoji_vars.sh" ]; then
-    SYMLINK $HOME/src/Heewa/bae/emoji_vars.sh $HOME/.emoji_vars.sh
+    SYMLINK $HOME/src/Heewa/bae/emoji_vars.sh $HOME/.emoji_vars.sh EMOJI
 else
-    curl -# 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > $HOME/.emoji_vars.sh
+    curl -# 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > $HOME/.emoji_vars.sh || FAIL EMOJI
 fi
 
 HEADER 'Tmux'
 if [[ ! -e $HOME/.tmux.gpakosz ]]; then
-    git clone --depth 1 https://github.com/gpakosz/.tmux $HOME/.tmux.gpakosz
+    git clone --depth 1 https://github.com/gpakosz/.tmux $HOME/.tmux.gpakosz || FAIL TMUX
 fi
 SYMLINK $HOME/.tmux.gpakosz/.tmux.conf $HOME/.tmux.conf
 
 if [[ ! -e $HOME/.tmux/plugins/tpm ]]; then
-    git clone --depth 1 https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    git clone --depth 1 https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm || FAIL TMUX
 fi
 
 HEADER 'VimPlug & Plugins'
 VIM_PLUG_URL='https://github.com/junegunn/vim-plug/raw/master/plug.vim'
 PLUG_FILE="$HOME/.config/nvim/autoload/plug.vim"
-if [[ -f $PLUG_FILE ]]; then
-    vim -c 'PlugUpgrade | PlugUpdate | qa'
-else
-    curl --create-dirs -fL -o "$PLUG_FILE" "$VIM_PLUG_URL"
-    vim -c 'PlugInstall | qa'
+if [[ ! -f $PLUG_FILE ]]; then
+    curl --create-dirs -fL -o "$PLUG_FILE" "$VIM_PLUG_URL" || FAIL VIM
+    vim -c 'PlugInstall | qa' || FAIL VIM
 fi
 
 HEADER 'Nerd Fonts'
@@ -116,7 +162,7 @@ if [[ "$(uname)" = "Darwin" ]]; then
 else
     DIR="$HOME/.local/share/fonts"
 fi
-mkdir -p "$DIR"
+mkdir -p "$DIR" || FAIL FONT
 
 GOT_NEW_FONTS=0
 for FONT in ${FONTS[@]}; do
@@ -124,7 +170,7 @@ for FONT in ${FONTS[@]}; do
         echo "  already have $FONT"
     else
         echo "       getting $FONT"
-        curl --output-dir "$DIR" -fOLs "$URL$FONT"
+        curl --output-dir "$DIR" -fOLs "$URL$FONT" || FAIL FONT
         GOT_NEW_FONTS=1
     fi
 done
@@ -135,7 +181,7 @@ if [[ $(uname) == "Linux" ]]; then
     if [[ $GOT_NEW_FONTS == 0 ]]; then
         echo 'no new fonts, skipping rebuild'
     else
-        sudo --non-interactive fc-cache -f ~/.local/share/fonts || echo '!!!!'
+        sudo --non-interactive fc-cache -f ~/.local/share/fonts || FAIL FONT
     fi
 fi
 
@@ -143,7 +189,7 @@ HEADER 'Pyenv'
 if [[ -e "$HOME/.pyenv" ]]; then
     echo 'already have, skipping'
 else
-    git clone --depth 1 https://github.com/pyenv/pyenv $HOME/.pyenv
+    git clone --depth 1 https://github.com/pyenv/pyenv $HOME/.pyenv || FAIL PYENV
 fi
 
 HEADER 'Bash Git Prompt'
@@ -151,11 +197,13 @@ BGP_DIR="$HOME/.bash-git-prompt"
 if [[ -e $BGP_DIR ]]; then
     echo 'already have, skipping'
 else
-    git clone --depth 1 https://github.com/magicmonty/bash-git-prompt $BGP_DIR
+    git clone --depth 1 https://github.com/magicmonty/bash-git-prompt $BGP_DIR || FAIL GITPROMPT
 fi
 
-HEADER 'NPM'
-which npm && npm config set prefix "$HOME/.npm-global" || echo 'not installed, skipping conf'
+if which npm > /dev/null; then
+    HEADER 'NPM'
+    npm config set prefix "$HOME/.npm-global" || FAIL NPM
+fi
 
 if [[ "$(uname)" = "Darwin" ]]; then
 
@@ -163,9 +211,10 @@ if [[ "$(uname)" = "Darwin" ]]; then
     if [[ -f $HOME/.golang.Makefile ]]; then
         echo 'already have, skipping'
     else
-        curl -#sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
+        curl -#sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile || FAIL GOMAKE
     fi
 
 fi
 
-HEADER 'Done!'
+HEADER "Done, with $ERRS errors!"
+exit $ERRS
