@@ -29,47 +29,25 @@ _HOMEBREW_DIR=$HOME/homebrew
 export GOPATH=$HOME/go/global
 
 # Path Prefixes, in reverse order
-export PATH=$HOME/.local/bin:$HOME/bin:$HOME/scripts:$PATH
+export PATH=$HOME/scripts:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$_HOMEBREW_DIR/bin:$_HOMEBREW_DIR/sbin:$PATH
-export PATH=$HOME/Library/Python/3.7/bin/:$PATH
 export PATH=$HOME/.rbenv/bin:$PATH
+export PATH=$HOME/.pyenv/shims:$PATH
 export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 
 # Path Postfixes, in order
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.npm-global/bin
 export PATH=$PATH:$GOPATH/bin:$HOME/go/test/bin
-export PATH=$PATH:/build/trees/bin
 
 # Mac specific conf
 if [[ $(uname) == 'Darwin' ]]; then
-
-    # On mac, there are files in /etc/paths.d/ that contain more paths. Add
-    # them manually for screen's benefit.
-    if [[ $IN_SCREEN ]]; then
-        export PATH=$PATH:$(cat /etc/paths.d/* | tr \\n : | sed 's/:\s*$//')
-    fi
 
     # AWS Tools need JAVA_HOME set to dir that contains the bin/java binary path.
     export JAVA_HOME='/usr'
 
 fi  # Darwin
-
-# Use Go 1.5 vendoring experiment
-export GO15VENDOREXPERIMENT=1
-
-# Postgres DB
-export PG_DATA_DIR=/usr/local/var/postgres
-
-# Fuck nose. Fuck python. Fuck everything.
-export NOSE_LOGFORMAT='[%(levelname)7s %(asctime)s %(filename)s:%(lineno)d %(funcName)s()]    %(message)s'
-
-# Fuck node and JS as well. Fuck all the things.
-export NODE_REPL_HISTORY_FILE=$HOME/.node_repl_history
-
-# 2U - Vault
-# export VAULT_ADDR=https://vault.prod.2u.com:8200/
-# export VAULT_CACERT=$HOME/.certs/vault-ca.pem
 
 # Ubuntu Launchpad
 export DEBFULLNAME="Heewa Barfchin"
