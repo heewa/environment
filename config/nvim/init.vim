@@ -103,6 +103,8 @@ function! s:styleSettings()
     set nofoldenable    " Disable folding
 
     set formatoptions=tcql
+
+    let g:termdebug_wide = 1
 endfunction
 
 function! s:mapEscape()
@@ -177,6 +179,17 @@ function! s:basicMaps()
     " Insert date
     noremap <silent> <Leader>id "=strftime('%Y-%m-%d')<CR>p
     command! InsertDate :normal <Leader>id<CR>
+
+    " Termdebug for GDB
+    nnoremap <A-b> :Break<CR>
+    nnoremap <A-t> :call TermDebugSendCommand('bt')<CR>
+    nnoremap <A-n> :Over<CR>  " alias for 'next'
+    nnoremap <A-s> :Step<CR>
+    nnoremap <A-a> :call TermDebugSendCommand('advance')<CR>
+    nnoremap <A-g> :Gdb<CR>
+    nnoremap <A-u> :call TermDebugSendCommand('up')<CR>
+    nnoremap <A-d> :call TermDebugSendCommand('down')<CR>
+    command Jump :call TermDebugSendCommand('jump ' . line('.'))<CR>
 endfunction
 
 function! s:filetypeMaps()
