@@ -182,6 +182,7 @@ function! s:basicMaps()
 
     " Termdebug for GDB
     nnoremap <A-b> :Break<CR>
+    nnoremap <A-c> :Clear<CR>
     nnoremap <A-t> :call TermDebugSendCommand('bt')<CR>
     nnoremap <A-n> :Over<CR>  " alias for 'next'
     nnoremap <A-s> :Step<CR>
@@ -189,7 +190,9 @@ function! s:basicMaps()
     nnoremap <A-g> :Gdb<CR>
     nnoremap <A-u> :call TermDebugSendCommand('up')<CR>
     nnoremap <A-d> :call TermDebugSendCommand('down')<CR>
-    command Jump :call TermDebugSendCommand('jump ' . line('.'))<CR>
+    command -bar Tbreak :call TermDebugSendCommand('tbreak ' . line('.'))<CR>
+    command Jump :call TermDebugSendCommand('tbreak ' . line('.')) |
+                \ call TermDebugSendCommand('jump ' . line('.'))<CR>
 endfunction
 
 function! s:filetypeMaps()
