@@ -95,7 +95,7 @@ CHECK_FSTAB () {
 }
 CHECK_FSTAB '/tmp' 'size=5G,rw,nodev,nosuid'
 CHECK_FSTAB "$HOME/tmp" "size=10G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid,exec"
-CHECK_FSTAB "$HOME/.cache" "size=1G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid"
+CHECK_FSTAB "$HOME/.cache" "size=5G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid"
 
 HEADER 'Neovim & Vim'
 if [[ -f /usr/local/bin/nvim ]]; then
