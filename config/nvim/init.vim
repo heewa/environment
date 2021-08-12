@@ -141,8 +141,11 @@ function! s:basicMaps()
     nnoremap <leader>d "_d
     vnoremap <leader>d "_d
 
-    " replace selected text with default register without yanking
-    vnoremap <leader>p "_dP
+    " replace selected text with yank register, rather than
+    " default reg, which the replaced text goes into
+    nnoremap <leader>p "0p
+    vnoremap p "0p
+    vnoremap P p
 
     " substitute word under cursor
     nnoremap <leader>s :%s/\C\<<C-r><C-w>\>/
