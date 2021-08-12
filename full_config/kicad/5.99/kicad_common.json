@@ -58,15 +58,5 @@
   },
   "session": {
     "remember_open_files": false
-  },
-  "system": {
-    "autosave_interval": 0,
-    "clear_3d_cache_interval": 30,
-    "editor_name": "vim",
-    "file_history_size": 1,
-    "language": "Default",
-    "pdf_viewer_name": "",
-    "use_system_pdf_viewer": true,
-    "working_dir": "/home/heewa"
   }
 }

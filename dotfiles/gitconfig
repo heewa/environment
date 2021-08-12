@@ -52,4 +52,4 @@
     clean = grep -v '^file[0-9]\\|MostRecentlyUsedPath\\|^WorkingDir=\\|^LibeditFrame\\(Pos\\|Size\\)'
     required
 [filter "kicadjsonconf"]
-    clean = jq 'delpaths([[\"window\"], [\"system\", \"file_history\"], [\"system\", \"open_projects\"], [\"find_replace\"]])'
+    clean = jq 'delpaths([[\"window\"], [\"system\"]])'
