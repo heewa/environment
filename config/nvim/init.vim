@@ -282,7 +282,7 @@ function! s:plugins()
       autocmd!
       autocmd BufWritePre ~/src/Heewa/**/*.py undojoin | Neoformat
       autocmd BufWritePre ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx undojoin | Neoformat
-      autocmd BufWritePost ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx *.go,*.c,*.cpp,*.h,*.py,*.js,*.jsx Neomake
+      autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx} Neomake
     augroup END
 
     " NOTE: disabling cuz can't make work at Twine
