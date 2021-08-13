@@ -71,9 +71,7 @@
     "highlight_factor": 0.5,
     "select_factor": 0.75
   },
-  "lib_tree": {
-    "column_width": 360
-  },
+  "lib_tree": {},
   "meta": {
     "filename": "fpedit.json",
     "version": 1
@@ -104,13 +102,5 @@
     "scale": 1,
     "title_block": false,
     "use_theme": false
-  },
-  "system": {
-    "first_run_shown": false,
-    "last_imperial_units": 0,
-    "last_import_export_path": "",
-    "last_metric_units": 1,
-    "max_undo_items": 0,
-    "units": 1
   }
 }

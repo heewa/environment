@@ -220,9 +220,7 @@
     "origin_x": 0,
     "origin_y": 0
   },
-  "lib_tree": {
-    "column_width": 360
-  },
+  "lib_tree": {},
   "meta": {
     "version": 0
   },
@@ -310,15 +308,6 @@
     "annotate_report_severity": 0,
     "annotate_sort_code": 0,
     "annotate_sort_on_modules": true
-  },
-  "system": {
-    "first_run_shown": true,
-    "last_footprint3d_dir": "/usr/share/kicad-nightly/3dmodels/",
-    "last_footprint_lib_dir": "",
-    "last_imperial_units": 0,
-    "last_metric_units": 1,
-    "max_undo_items": 0,
-    "units": 1
   },
   "tools": {
     "pns": {
