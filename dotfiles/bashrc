@@ -75,6 +75,16 @@ fi
 # Filename compatible, lexically ordered datestamp
 alias ds="date '+%Y-%m-%d'"
 
+if [[ "$(command -v paplay)" != "" ]]; then
+    DONE() {
+        local EC=$?
+        local GOOD="$(ls -f /usr/share/sounds/{Yaru,freedesktop}/stereo/complete.oga 2>/dev/null | head -1)"
+        local BAD="$(ls -f /usr/share/sounds/{Yaru,freedesktop}/stereo/dialog-error.oga 2>/dev/null | head -1)"
+        [[ $EC == 0 ]] && paplay $GOOD || ( paplay $BAD && paplay $BAD && paplay $BAD )
+        return $EC
+    }
+fi
+
 if [[ -f "$HOME/.emoji_vars.sh" ]]; then
     source "$HOME/.emoji_vars.sh"
 fi
