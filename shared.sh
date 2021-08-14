@@ -56,6 +56,6 @@ SYMLINK() {
     if [[ ! -L "$DST" || "$(readlink $DST)" != "$SRC" ]]; then
         ln -svT "$SRC" "$DST" || FAIL "$ERR_TYPE" 1
     else
-        echo "$SRC -> $DST"
+        echo "'$DST' -> '$SRC'"
     fi
 }
