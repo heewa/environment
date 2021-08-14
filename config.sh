@@ -121,14 +121,14 @@ fi
 HEADER 'Emoji Prompt'
 if [ -f "$HOME/src/Heewa/emoji-prompt/emoji-prompt.sh" ]; then
     SYMLINK $HOME/src/Heewa/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh EMOJI
-else
+elif [[ ! "$IGNORE_EMOJI_ERRS" ]]; then
     curl -# 'https://raw.githubusercontent.com/heewa/emoji-prompt/master/emoji-prompt.sh' > $HOME/.emoji-prompt.sh || FAIL EMOJI
 fi
 
 HEADER 'Emoji Env Vars'
 if [ -f "$HOME/src/Heewa/bae/emoji_vars.sh" ]; then
     SYMLINK $HOME/src/Heewa/bae/emoji_vars.sh $HOME/.emoji_vars.sh EMOJI
-else
+elif [[ ! "$IGNORE_EMOJI_ERRS" ]]; then
     curl -# 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > $HOME/.emoji_vars.sh || FAIL EMOJI
 fi
 
@@ -156,7 +156,7 @@ FONTS=( \
     'UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete.ttf' \
     'SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf' \
 )
-URL="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/"
+URL="https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/"
 if [[ "$(uname)" = "Darwin" ]]; then
     DIR="$HOME/Library/Fonts"
 else
@@ -168,7 +168,7 @@ GOT_NEW_FONTS=0
 for FONT in ${FONTS[@]}; do
     if [[ -f "$DIR/$(basename $FONT)" ]]; then
         echo "  already have $FONT"
-    else
+    elif [[ ! "$IGNORE_FONT_ERRS" ]]; then
         echo "       getting $FONT"
         curl --output-dir "$DIR" -fOLs "$URL$FONT" || FAIL FONT
         GOT_NEW_FONTS=1

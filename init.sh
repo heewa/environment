@@ -19,7 +19,7 @@ if [[ $(uname) == "Linux" ]]; then
 
     echo
     echo '==] Installing linux packages'
-    sudo --non-interactive apt install git curl nvim tmux xsel profile-sync-daemon jq
+    sudo --non-interactive apt install git curl neovim tmux xsel profile-sync-daemon jq
 
 elif [[ "$(uname)" = "Darwin" ]]; then
 
