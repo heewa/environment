@@ -12,8 +12,18 @@ ERRS=0
 HEADER 'Basic Dirs'
 mkdir -pv $HOME/{src,build,bak,tmp,.cache,.config,.local/bin} || FAIL DIR
 
-HEADER 'Configs & Scripts'
+HEADER 'Scripts'
 SYMLINK $ENVDIR/scripts
+
+HEADER 'Configs'
+# Only symlink the files in each app dir, so any additional ones the
+# app might create won't end up in this repo
+for APP in $(find $ENVDIR/config -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' '); do
+    for FILE in $(find $ENVDIR/config/$APP -type f | xargs basename -a | tr '\n' ' '); do
+        SYMLINK $ENVDIR/config/$APP/$FILE $HOME/.config/$APP/$FILE
+    done
+done
+
 SYMLINK $HOME/.config/FreeCAD $HOME/.FreeCAD
 
 HEADER 'Slow-sync Configs'
@@ -23,20 +33,13 @@ HEADER 'Slow-sync Configs'
     for F in $(find . -type f | cut -b3- ); do
         if [[ ! -f "$HOME/.config/$F" ]]; then
             echo $F
+            mkdir -p "$HOME/.config/$(dirname $F)"
             rsync "$F" "$HOME/.config/$F"
         else
             diff -q "$F" "$HOME/.config/$F" > /dev/null || echo "  (skipping modified: $F)"
         fi
     done
 )
-
-# Only symlink the files in each app dir, so any additional ones the
-# app might create won't end up in this repo
-for APP in $(find $ENVDIR/config -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' '); do
-    for FILE in $(find $ENVDIR/config/$APP -type f | xargs basename -a | tr '\n' ' '); do
-        SYMLINK $ENVDIR/config/$APP/$FILE $HOME/.config/$APP/$FILE
-    done
-done
 
 HEADER 'Ram Disks'
 CHECK_FSTAB () {
