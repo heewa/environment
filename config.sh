@@ -47,12 +47,14 @@ CHECK_FSTAB "$HOME/tmp" "size=10G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,s
 CHECK_FSTAB "$HOME/.cache" "size=5G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid"
 
 HEADER 'Neovim & Vim'
-if [[ -f /usr/local/bin/nvim ]]; then
-    SYMLINK /usr/local/bin/nvim $HOME/.local/bin/vim
-    SYMLINK /usr/local/bin/vim $HOME/.local/bin/oldvim
-elif [[ -f /usr/bin/nvim ]]; then
-    SYMLINK /usr/bin/nvim $HOME/.local/bin/vim
-    SYMLINK /usr/bin/vim $HOME/.local/bin/oldvim
+if [[ $(command -v vim) ]]; then
+    VIM="$(readlink -f $(command -v vim))"
+    if [[ "$(basename $VIM)" != 'nvim' ]]; then
+        SYMLINK "$VIM" $HOME/.local/bin/vim.plain
+    fi
+fi
+if [[ $(command -v nvim) ]]; then
+    SYMLINK "$(readlink -f $(command -v nvim))" $HOME/.local/bin/vim
 fi
 SYMLINK $HOME/.config/nvim $HOME/.vim
 SYMLINK $ENVDIR/config/nvim/init.vim $HOME/.vimrc
