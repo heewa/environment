@@ -15,10 +15,20 @@ mkdir -pv $HOME/{src,build,bak,tmp,.cache,.config,.local/bin} || FAIL DIR
 HEADER 'Configs & Scripts'
 SYMLINK $ENVDIR/scripts
 SYMLINK $HOME/.config/FreeCAD $HOME/.FreeCAD
-LINKED_DIRS="$(find $ENVDIR/full_config  -maxdepth 1 -mindepth 1 -type d)"
-for D in $LINKED_DIRS; do
-    SYMLINK $D $HOME/.config/$(basename $D)
-done
+
+HEADER 'Slow-sync Configs'
+(
+    cd $ENVDIR/slow_config
+
+    for F in $(find . -type f | cut -b3- ); do
+        if [[ ! -f "$HOME/.config/$F" ]]; then
+            echo $F
+            rsync "$F" "$HOME/.config/$F"
+        else
+            diff -q "$F" "$HOME/.config/$F" > /dev/null || echo "  (skipping modified: $F)"
+        fi
+    done
+)
 
 # Only symlink the files in each app dir, so any additional ones the
 # app might create won't end up in this repo
