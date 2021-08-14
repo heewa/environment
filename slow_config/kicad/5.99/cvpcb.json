@@ -76,9 +76,7 @@
     "highlight_factor": 0.5,
     "select_factor": 0.75
   },
-  "lib_tree": {
-    "column_width": 360
-  },
+  "lib_tree": {},
   "libraries_pane_width": 382,
   "meta": {
     "version": 0
@@ -91,12 +89,5 @@
     "scale": 1,
     "title_block": false,
     "use_theme": false
-  },
-  "system": {
-    "first_run_shown": false,
-    "last_imperial_units": 0,
-    "last_metric_units": 1,
-    "max_undo_items": 0,
-    "units": 1
   }
 }

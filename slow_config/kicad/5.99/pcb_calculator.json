@@ -46,9 +46,7 @@
     "select_factor": 0.75
   },
   "last_page": 0,
-  "lib_tree": {
-    "column_width": 360
-  },
+  "lib_tree": {},
   "meta": {
     "version": 0
   },
@@ -70,13 +68,6 @@
     "type": 0,
     "vout": "12",
     "vref": "3"
-  },
-  "system": {
-    "first_run_shown": false,
-    "last_imperial_units": 0,
-    "last_metric_units": 1,
-    "max_undo_items": 0,
-    "units": 1
   },
   "track_width": {
     "current": "1.0",

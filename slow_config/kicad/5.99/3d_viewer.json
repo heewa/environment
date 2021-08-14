@@ -32,9 +32,7 @@
     "highlight_factor": 0.5,
     "select_factor": 0.75
   },
-  "lib_tree": {
-    "column_width": 360
-  },
+  "lib_tree": {},
   "meta": {
     "filename": "3d_viewer.json",
     "version": 1
@@ -136,12 +134,5 @@
     "show_solderpaste": true,
     "show_zones": true,
     "subtract_mask_from_silk": false
-  },
-  "system": {
-    "first_run_shown": false,
-    "last_imperial_units": 0,
-    "last_metric_units": 1,
-    "max_undo_items": 0,
-    "units": 1
   }
 }

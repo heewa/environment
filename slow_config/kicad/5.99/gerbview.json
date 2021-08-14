@@ -91,9 +91,7 @@
     "highlight_factor": 0.5,
     "select_factor": 0.75
   },
-  "lib_tree": {
-    "column_width": 360
-  },
+  "lib_tree": {},
   "meta": {
     "version": 0
   },
@@ -105,19 +103,5 @@
     "scale": 1,
     "title_block": false,
     "use_theme": false
-  },
-  "system": {
-    "drill_file_history": [
-      "/home/heewa/src/Hardware/keyboards/kaj34/pcb/alpha/gerber/kaj34-alpha.drl"
-    ],
-    "first_run_shown": true,
-    "job_file_history": [
-      "/home/heewa/src/Hardware/keyboards/kaj34/pcb/alpha/gerber/kaj34-alpha-job.gbrjob"
-    ],
-    "last_imperial_units": 0,
-    "last_metric_units": 1,
-    "max_undo_items": 0,
-    "units": 1,
-    "zip_file_history": []
   }
 }
