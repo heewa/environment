@@ -167,11 +167,6 @@ else
     git clone --depth 1 https://github.com/magicmonty/bash-git-prompt $BGP_DIR || FAIL GITPROMPT
 fi
 
-if which npm > /dev/null; then
-    HEADER 'NPM'
-    npm config set prefix "$HOME/.npm-global" || FAIL NPM
-fi
-
 if [[ "$OS" = 'Darwin' ]]; then
 
     HEADER 'Golang Makefile'

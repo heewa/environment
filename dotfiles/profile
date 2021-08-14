@@ -38,7 +38,6 @@ export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 
 # Path Postfixes, in order
 export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$HOME/.npm-global/bin
 export PATH=$PATH:$GOPATH/bin:$HOME/go/test/bin
 
 # Mac specific conf
