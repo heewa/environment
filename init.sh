@@ -6,22 +6,28 @@
 set -e
 
 ENVDIR=$(dirname $(realpath "$0"))
+ERRS=0
+
+. $ENVDIR/shared.sh
 
 # Install some things before using curl, git, etc
 
-if [[ $(uname) == "Linux" ]]; then
+if [[ "$DISTRO" == 'ubuntu' ]]; then
 
-    echo
-    echo '==] Enabling broader ubuntu repos'
+    HEADER 'Apt Repos'
     sudo --non-interactive add-apt-repository --no-update universe
     sudo --non-interactive add-apt-repository --no-update multiverse
     sudo --non-interactive apt update
 
-    echo
-    echo '==] Installing linux packages'
+    HEADER 'Packages'
     sudo --non-interactive apt install git curl neovim tmux xsel profile-sync-daemon jq
 
-elif [[ "$(uname)" = "Darwin" ]]; then
+elif [[ "$DISTRO" == 'fedora' ]]; then
+
+    HEADER 'Packages'
+    sudo dnf install neovim tmux
+
+elif [[ "$OS" = 'Darwin' ]]; then
 
     # Homebrew
     if [[ "$(which brew)" == "" ]]; then

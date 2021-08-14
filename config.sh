@@ -7,58 +7,7 @@ set -e
 ENVDIR=$(dirname $(realpath "$0"))
 ERRS=0
 
-HEADER () {
-    echo
-    echo "   [===]  $*  [===]"
-    echo
-}
-
-WARN () {
-    (
-        exec 1>&2
-
-        echo
-        echo "!!!!  $*"
-        echo
-    )
-}
-
-FAIL () {
-    local ERR_TYPE=$1
-    local ERR=${2:-1}
-
-    local IGNORE_VAR="IGNORE_${ERR_TYPE}_ERRS"
-    ERRS=$(($ERRS + $ERR))
-
-    if [[ "$ERRS" && ! "${!IGNORE_VAR}" ]]; then
-        exec 1>&2
-
-        echo
-        echo '/---'
-        echo "|  Fix & re-run, or ignore by running with: $IGNORE_VAR=1 $0"
-        echo '\---------'
-        echo
-
-        exit $ERRS
-    fi
-}
-
-SYMLINK() {
-    local SRC="$1"
-    local DST=${2:-$HOME/$(basename $SRC)}
-    local DSTDIR=$(dirname $DST)
-    local ERR_TYPE=${3:-SYMLINK}
-
-    if [[ ! -d "$DSTDIR" ]]; then
-        mkdir -p "$DSTDIR" || FAIL "$ERR_TYPE" 1
-    fi
-
-    if [[ ! -L "$DST" || "$(readlink $DST)" != "$SRC" ]]; then
-        ln -svT "$SRC" "$DST" || FAIL "$ERR_TYPE" 1
-    else
-        echo "$SRC -> $DST"
-    fi
-}
+. $ENVDIR/shared.sh
 
 HEADER 'Basic Dirs'
 mkdir -pv $HOME/{src,build,bak,tmp,.cache,.config,.local/bin} || FAIL DIR
@@ -101,6 +50,9 @@ HEADER 'Neovim & Vim'
 if [[ -f /usr/local/bin/nvim ]]; then
     SYMLINK /usr/local/bin/nvim $HOME/.local/bin/vim
     SYMLINK /usr/local/bin/vim $HOME/.local/bin/oldvim
+elif [[ -f /usr/bin/nvim ]]; then
+    SYMLINK /usr/bin/nvim $HOME/.local/bin/vim
+    SYMLINK /usr/bin/vim $HOME/.local/bin/oldvim
 fi
 SYMLINK $HOME/.config/nvim $HOME/.vim
 SYMLINK $ENVDIR/config/nvim/init.vim $HOME/.vimrc
@@ -147,7 +99,7 @@ VIM_PLUG_URL='https://github.com/junegunn/vim-plug/raw/master/plug.vim'
 PLUG_FILE="$HOME/.config/nvim/autoload/plug.vim"
 if [[ ! -f $PLUG_FILE ]]; then
     curl --create-dirs -fL -o "$PLUG_FILE" "$VIM_PLUG_URL" || FAIL VIM
-    vim -c 'PlugInstall | qa' || FAIL VIM
+    nvim -c 'PlugInstall | qa' || FAIL VIM
 fi
 
 HEADER 'Nerd Fonts'
@@ -157,7 +109,7 @@ FONTS=( \
     'SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf' \
 )
 URL="https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/"
-if [[ "$(uname)" = "Darwin" ]]; then
+if [[ "$OS" = 'Darwin' ]]; then
     DIR="$HOME/Library/Fonts"
 else
     DIR="$HOME/.local/share/fonts"
@@ -175,7 +127,7 @@ for FONT in ${FONTS[@]}; do
     fi
 done
 
-if [[ $(uname) == "Linux" ]]; then
+if [[ "$OS" == 'Linux' ]]; then
 
     HEADER 'Rebuilding Fonts'
     if [[ $GOT_NEW_FONTS == 0 ]]; then
@@ -205,7 +157,7 @@ if which npm > /dev/null; then
     npm config set prefix "$HOME/.npm-global" || FAIL NPM
 fi
 
-if [[ "$(uname)" = "Darwin" ]]; then
+if [[ "$OS" = 'Darwin' ]]; then
 
     HEADER 'Golang Makefile'
     if [[ -f $HOME/.golang.Makefile ]]; then
