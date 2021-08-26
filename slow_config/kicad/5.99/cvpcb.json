@@ -10,7 +10,7 @@
     "center_on_items": true,
     "zoom_to_fit": true
   },
-  "filter_footprint": 4,
+  "filter_footprint": 3,
   "footprint_viewer": {
     "auto_zoom": true,
     "cursor": {

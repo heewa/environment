@@ -5,7 +5,7 @@
   },
   "aui": {
     "appearance_panel_tab": 0,
-    "right_panel_width": 180,
+    "right_panel_width": 229,
     "show_layer_manager": true
   },
   "cleanup": {
@@ -242,11 +242,11 @@
     "net_names_mode": 3,
     "origin_invert_x_axis": false,
     "origin_invert_y_axis": false,
-    "origin_mode": 0,
+    "origin_mode": 2,
     "pad_clearance": true,
     "pad_fill": true,
     "pad_numbers": true,
-    "ratsnest_curved": false,
+    "ratsnest_curved": true,
     "ratsnest_footprint": true,
     "ratsnest_global": true,
     "rotation_angle": 450,
@@ -313,7 +313,7 @@
     "pns": {
       "auto_posture": true,
       "can_violate_drc": false,
-      "corner_mode": 1,
+      "corner_mode": 3,
       "effort": 2,
       "fix_all_segments": false,
       "follow_mouse": true,
@@ -332,8 +332,8 @@
       "shove_vias": true,
       "smart_pads": true,
       "smooth_dragged_segments": true,
-      "snap_to_pads": false,
-      "snap_to_tracks": false,
+      "snap_to_pads": true,
+      "snap_to_tracks": true,
       "start_diagonal": false,
       "suggest_finish": false,
       "walkaround_hug_length_threshold": 1.5,

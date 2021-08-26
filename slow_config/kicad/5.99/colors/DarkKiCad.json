@@ -8,7 +8,8 @@
     "silkscreen_top": "rgb(230, 230, 230)",
     "soldermask_bottom": "rgba(20, 51, 36, 0.831)",
     "soldermask_top": "rgba(20, 51, 36, 0.831)",
-    "solderpaste": "rgb(128, 128, 128)"
+    "solderpaste": "rgb(128, 128, 128)",
+    "use_board_stackup_colors": true
   },
   "board": {
     "anchor": "rgb(255, 38, 226)",
@@ -165,7 +166,7 @@
   },
   "meta": {
     "name": "DarkKiCad",
-    "version": 2
+    "version": 3
   },
   "palette": [
     "rgb(200, 52, 52)",
@@ -204,7 +205,7 @@
     "label_local": "rgb(153, 195, 206)",
     "no_connect": "rgb(128, 129, 255)",
     "note": "rgb(134, 165, 154)",
-    "override_item_colors": false,
+    "override_item_colors": true,
     "pin": "rgb(155, 44, 55)",
     "pin_name": "rgb(96, 168, 200)",
     "pin_number": "rgb(179, 50, 53)",

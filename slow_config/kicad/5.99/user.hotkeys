@@ -65,8 +65,8 @@ common.Control.gridNext	N
 common.Control.gridPreset	
 common.Control.gridPrev	Shift+N
 common.Control.gridProperties	
-common.Control.gridResetOrigin	Z
-common.Control.gridSetOrigin	S
+common.Control.gridResetOrigin	
+common.Control.gridSetOrigin	
 common.Control.highContrastMode	
 common.Control.highContrastModeCycle	H
 common.Control.imperialUnits	
@@ -91,7 +91,7 @@ common.Control.save	Ctrl+S
 common.Control.saveAll	
 common.Control.saveAs	Ctrl+Shift+S
 common.Control.saveCopyAs	
-common.Control.show3DViewer	Alt+3
+common.Control.show3DViewer	Ctrl+3
 common.Control.showContextMenu	
 common.Control.showFootprintBrowser	
 common.Control.showFootprintEditor	
@@ -121,7 +121,7 @@ common.Interactive.cancel
 common.Interactive.changeEditMethod	Ctrl+Space
 common.Interactive.copy	Ctrl+C
 common.Interactive.cut	Ctrl+X
-common.Interactive.delete	Del
+common.Interactive.delete	Back
 common.Interactive.deleteTool	
 common.Interactive.duplicate	Ctrl+D
 common.Interactive.find	Ctrl+F
@@ -436,11 +436,11 @@ pcbnew.InteractiveDrawing.centerDimension
 pcbnew.InteractiveDrawing.circle	Ctrl+Shift+C
 pcbnew.InteractiveDrawing.closeOutline	
 pcbnew.InteractiveDrawing.decWidth	Ctrl+-
-pcbnew.InteractiveDrawing.deleteLastPoint	Back
+pcbnew.InteractiveDrawing.deleteLastPoint	
 pcbnew.InteractiveDrawing.graphicPolygon	Ctrl+Shift+P
 pcbnew.InteractiveDrawing.incWidth	Ctrl++
 pcbnew.InteractiveDrawing.leader	
-pcbnew.InteractiveDrawing.line	Ctrl+Shift+L
+pcbnew.InteractiveDrawing.line	Q
 pcbnew.InteractiveDrawing.line45degMode	
 pcbnew.InteractiveDrawing.orthogonalDimension	
 pcbnew.InteractiveDrawing.placeCharacteristics	
@@ -454,12 +454,12 @@ pcbnew.InteractiveDrawing.text	Ctrl+Shift+T
 pcbnew.InteractiveDrawing.via	Ctrl+Shift+V
 pcbnew.InteractiveDrawing.zone	Ctrl+Shift+Z
 pcbnew.InteractiveDrawing.zoneCutout	Shift+C
-pcbnew.InteractiveEdit.FindMove	T
+pcbnew.InteractiveEdit.FindMove	
 pcbnew.InteractiveEdit.changeTrackWidth	
 pcbnew.InteractiveEdit.createArray	Ctrl+T
-pcbnew.InteractiveEdit.deleteFull	Shift+Del
+pcbnew.InteractiveEdit.deleteFull	Ctrl+H
 pcbnew.InteractiveEdit.duplicateIncrementPads	Ctrl+Shift+D
-pcbnew.InteractiveEdit.filletTracks	
+pcbnew.InteractiveEdit.filletTracks	Shift+F
 pcbnew.InteractiveEdit.flip	F
 pcbnew.InteractiveEdit.mirror	
 pcbnew.InteractiveEdit.moveExact	Shift+M
@@ -467,11 +467,11 @@ pcbnew.InteractiveEdit.properties	E
 pcbnew.InteractiveEdit.rotateCcw	R
 pcbnew.InteractiveEdit.rotateCw	Shift+R
 pcbnew.InteractiveMove.copyWithReference	
-pcbnew.InteractiveMove.move	M
+pcbnew.InteractiveMove.move	T
 pcbnew.InteractiveMove.moveWithReference	
 pcbnew.InteractiveRouter.AutoEndRoute	F
 pcbnew.InteractiveRouter.BreakTrack	
-pcbnew.InteractiveRouter.CustomTrackViaSize	Q
+pcbnew.InteractiveRouter.CustomTrackViaSize	
 pcbnew.InteractiveRouter.DiffPair	6
 pcbnew.InteractiveRouter.DiffPairDialog	
 pcbnew.InteractiveRouter.Drag45Degree	D

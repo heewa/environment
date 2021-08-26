@@ -8,7 +8,8 @@
     "silkscreen_top": "rgb(230, 230, 230)",
     "soldermask_bottom": "rgba(20, 51, 36, 0.831)",
     "soldermask_top": "rgba(20, 51, 36, 0.831)",
-    "solderpaste": "rgb(128, 128, 128)"
+    "solderpaste": "rgb(128, 128, 128)",
+    "use_board_stackup_colors": true
   },
   "board": {
     "anchor": "rgb(0, 0, 132)",
@@ -165,7 +166,7 @@
   },
   "meta": {
     "name": "User",
-    "version": 2
+    "version": 3
   },
   "palette": [
     "rgb(200, 52, 52)",
@@ -204,7 +205,7 @@
     "label_local": "rgb(162, 62, 124)",
     "no_connect": "rgb(0, 0, 132)",
     "note": "rgb(0, 0, 194)",
-    "override_item_colors": false,
+    "override_item_colors": true,
     "pin": "rgb(48, 85, 155)",
     "pin_name": "rgb(194, 192, 116)",
     "pin_number": "rgb(99, 141, 115)",

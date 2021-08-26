@@ -2,7 +2,7 @@
   "appearance": {
     "canvas_scale": 0,
     "icon_scale": -1,
-    "icon_theme": 2,
+    "icon_theme": 1,
     "use_icons_in_menus": true
   },
   "auto_backup": {
@@ -25,8 +25,8 @@
       "KICAD_TEMPLATE_DIR": "/usr/share/kicad/template",
       "KICAD_USER_TEMPLATE_DIR": "/home/heewa/src/Hardware/resources/heewa",
       "KIGITHUB": "https://github.com/KiCad",
-      "KISYS3DMOD": "/usr/share/kicad/modules/packages3d/",
-      "KISYSMOD": "/usr/share/kicad/modules"
+      "KISYS3DMOD": "/usr/share/kicad-nightly/modules/packages3d/",
+      "KISYSMOD": "/usr/share/kicad-nightly/modules"
     }
   },
   "graphics": {
