@@ -53,3 +53,5 @@
     required
 [filter "kicadjsonconf"]
     clean = jq 'delpaths([[\"window\"], [\"system\"], [\"find_replace\"], [\"lib_tree\", \"column_width\"]])'
+[init]
+	defaultBranch = main
