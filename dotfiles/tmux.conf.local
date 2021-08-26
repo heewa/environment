@@ -7,6 +7,9 @@ bind-key C-k \
     choose-tree \
     "run-shell \"tmux choose-tree \\\"switch-client -t '%%'; kill-session -t '$(tmux display -p '#S')'\\\"\""
 
+# Status bar at top
+set-option -g status-position top
+
 # Tmux/Vim split navigation
 #set -g @plugin 'christoomey/vim-tmux-navigator'
 is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
