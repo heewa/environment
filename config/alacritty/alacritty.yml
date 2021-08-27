@@ -5,7 +5,7 @@ shell:
     program: /bin/bash
     args:
         - -lc
-        - if (( $(/usr/bin/tmux lsc | wc -l) > 0 )); then exec /usr/bin/tmux new-session; else exec /usr/bin/tmux new-session -A -t main -s main; fi
+        - if [[ $(/usr/bin/tmux lsc -t main) ]]; then exec /usr/bin/tmux new-session; else exec /usr/bin/tmux new-session -A -t main -s main; fi
 
 window:
     decorations: none
@@ -47,7 +47,7 @@ cursor:
 
 key_bindings:
     - { key: Return, mods: Super, action: ToggleFullscreen }
-    - { key: C, mods: Super, action: Copy }
+    - { key: C, mods: Super, chars: "\x00[" }
     - { key: V, mods: Super, action: Paste }
 
 #
