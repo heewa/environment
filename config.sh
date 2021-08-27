@@ -45,19 +45,20 @@ HEADER 'Ram Disks'
 CHECK_FSTAB () {
     local MNT=$1
     local OPT=$2
+    local ENTRY_PATTERN="tmpfs\\s\\+$MNT\\s\\+tmpfs\\s\\+$OPT\\s\\+0\\s\\+0"
     local ENTRY="tmpfs  $MNT  tmpfs  $OPT  0  0"
     local CMD="mount -t tmpfs -o $OPT tmpfs $MNT"
 
-    if ! grep -q "$ENTRY" /etc/fstab; then
+    if ! grep -q "$ENTRY_PATTERN" /etc/fstab; then
         WARN "$MNT missing from /etc/fstab"
         >&2 echo "Add to fstab: $ENTRY"
         >&2 echo "Or manually mount: $CMD"
         FAIL TMPFS
     fi
 }
-CHECK_FSTAB '/tmp' 'size=5G,rw,nodev,nosuid'
-CHECK_FSTAB "$HOME/tmp" "size=10G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid,exec"
-CHECK_FSTAB "$HOME/.cache" "size=5G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid"
+CHECK_FSTAB '/tmp' 'size=[0-9]*G,rw,nodev,nosuid'
+CHECK_FSTAB "$HOME/tmp" "size=[0-9]*G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid,exec"
+CHECK_FSTAB "$HOME/.cache" "size=[0-9]*G,rw,nodev,uid=$(id -u),gid=$(id -g),mode=1750,suid"
 
 HEADER 'Neovim & Vim'
 if [[ $(command -v vim) ]]; then
