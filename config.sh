@@ -100,15 +100,24 @@ elif [[ ! "$IGNORE_EMOJI_ERRS" ]]; then
     curl -# 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > $HOME/.emoji_vars.sh || FAIL EMOJI
 fi
 
-HEADER 'Tmux'
-if [[ ! -e $HOME/.tmux.gpakosz ]]; then
-    git clone --depth 1 https://github.com/gpakosz/.tmux $HOME/.tmux.gpakosz || FAIL TMUX
-fi
-SYMLINK $HOME/.tmux.gpakosz/.tmux.conf $HOME/.tmux.conf
+HEADER 'Tmux & Plugins'
 
-if [[ ! -e $HOME/.tmux/plugins/tpm ]]; then
-    git clone --depth 1 https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm || FAIL TMUX
-fi
+GET_TMUX_PLUGIN() {
+    DIR="$HOME/.tmux/$1"
+    REPO="$2"
+
+    if [[ ! -d "$DIR" ]]; then
+        mkdir -p "$DIR"
+        git clone --depth=1 "$REPO" "$DIR" || FAIL TMUX
+    else
+        cd "$DIR"
+        git pull --depth=1 || FAIL TMUX
+    fi
+}
+
+GET_TMUX_PLUGIN 'plugins/tmux-sensible' 'https://github.com/tmux-plugins/tmux-sensible'
+GET_TMUX_PLUGIN 'gpakosz' 'https://github.com/gpakosz/.tmux'
+SYMLINK $HOME/.tmux/gpakosz/.tmux.conf $HOME/.tmux.conf TMUX
 
 HEADER 'VimPlug & Plugins'
 VIM_PLUG_URL='https://github.com/junegunn/vim-plug/raw/master/plug.vim'
