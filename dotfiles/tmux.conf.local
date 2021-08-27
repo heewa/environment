@@ -50,6 +50,10 @@ run -b 'tmux bind -T copy-mode-vi H send -X top-line 2> /dev/null || true'
 run -b 'tmux bind -t vi-copy L bottom-line 2> /dev/null || true'
 run -b 'tmux bind -T copy-mode-vi L send -X bottom-line 2> /dev/null || true'
 
+# Faster copy/paste
+bind-key -n M-Up copy-mode
+bind-key -n M-Down paste-buffer
+
 set-option -g mouse on
 
 set-option -g aggressive-resize on
