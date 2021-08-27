@@ -20,7 +20,7 @@ if [[ "$DISTRO" == 'ubuntu' ]]; then
     sudo --non-interactive apt update
 
     HEADER 'Packages'
-    sudo --non-interactive apt install git curl neovim tmux xsel profile-sync-daemon jq
+    sudo --non-interactive apt install git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq
 
 elif [[ "$DISTRO" == 'fedora' ]]; then
 
