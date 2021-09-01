@@ -111,7 +111,7 @@ GET_TMUX_PLUGIN() {
         git clone --depth=1 "$REPO" "$DIR" || FAIL TMUX
     else
         cd "$DIR"
-        git pull --depth=1 || FAIL TMUX
+        git fetch --depth=1 && git reset --hard origin || FAIL TMUX
     fi
 }
 
@@ -164,17 +164,21 @@ fi
 
 HEADER 'Pyenv'
 if [[ -e "$HOME/.pyenv" ]]; then
-    echo 'already have, skipping'
+    cd $HOME/.pyenv
+    git fetch --depth=1
+    git reset --hard origin
 else
-    git clone --depth 1 https://github.com/pyenv/pyenv $HOME/.pyenv || FAIL PYENV
+    git clone --depth=1 https://github.com/pyenv/pyenv $HOME/.pyenv || FAIL PYENV
 fi
 
 HEADER 'Bash Git Prompt'
 BGP_DIR="$HOME/.bash-git-prompt"
 if [[ -e $BGP_DIR ]]; then
-    echo 'already have, skipping'
+    cd $BGP_DIR
+    git fetch --depth=1
+    git reset --hard origin
 else
-    git clone --depth 1 https://github.com/magicmonty/bash-git-prompt $BGP_DIR || FAIL GITPROMPT
+    git clone --depth=1 https://github.com/magicmonty/bash-git-prompt $BGP_DIR || FAIL GITPROMPT
 fi
 
 if [[ "$OS" = 'Darwin' ]]; then
