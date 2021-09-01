@@ -59,3 +59,20 @@ SYMLINK() {
         echo "'$DST' -> '$SRC'"
     fi
 }
+
+GIT_SHALLOW() {
+    local DIR="$1"
+    local REPO="$2"
+    local ERR_TYPE=${3:-GIT}
+
+    (
+        if [[ ! -d "$DIR" ]]; then
+            mkdir -p $HOME/build
+            git clone --depth=1 "$REPO" "$DIR"
+        else
+            cd "$DIR"
+            git fetch --depth=1
+            git reset --hard origin
+        fi
+    ) || FAIL "$ERR_TYPE"
+}

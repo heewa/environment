@@ -90,33 +90,21 @@ HEADER 'Emoji Prompt'
 if [ -f "$HOME/src/Heewa/emoji-prompt/emoji-prompt.sh" ]; then
     SYMLINK $HOME/src/Heewa/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh EMOJI
 elif [[ ! "$IGNORE_EMOJI_ERRS" ]]; then
-    curl -# 'https://raw.githubusercontent.com/heewa/emoji-prompt/master/emoji-prompt.sh' > $HOME/.emoji-prompt.sh || FAIL EMOJI
+    GIT_SHALLOW "$HOME/build/emoji-prompt" 'https://github.com/heewa/emoji-prompt' EMOJI
+    SYMLINK $HOME/build/emoji-prompt/emoji-prompt.sh $HOME/.emoji-prompt.sh EMOJI
 fi
 
 HEADER 'Emoji Env Vars'
 if [ -f "$HOME/src/Heewa/bae/emoji_vars.sh" ]; then
     SYMLINK $HOME/src/Heewa/bae/emoji_vars.sh $HOME/.emoji_vars.sh EMOJI
 elif [[ ! "$IGNORE_EMOJI_ERRS" ]]; then
-    curl -# 'https://raw.githubusercontent.com/heewa/bae/master/emoji_vars.sh' > $HOME/.emoji_vars.sh || FAIL EMOJI
+    GIT_SHALLOW "$HOME/build/bae" 'https://github.com/heewa/bae' EMOJI
+    SYMLINK $HOME/build/bae/emoji_vars.sh $HOME/.emoji_vars.sh EMOJI
 fi
 
 HEADER 'Tmux & Plugins'
-
-GET_TMUX_PLUGIN() {
-    DIR="$HOME/.tmux/$1"
-    REPO="$2"
-
-    if [[ ! -d "$DIR" ]]; then
-        mkdir -p "$DIR"
-        git clone --depth=1 "$REPO" "$DIR" || FAIL TMUX
-    else
-        cd "$DIR"
-        git fetch --depth=1 && git reset --hard origin || FAIL TMUX
-    fi
-}
-
-GET_TMUX_PLUGIN 'plugins/tmux-sensible' 'https://github.com/tmux-plugins/tmux-sensible'
-GET_TMUX_PLUGIN 'gpakosz' 'https://github.com/gpakosz/.tmux'
+GIT_SHALLOW "$HOME/.tmux/plugins/tmux-sensible" 'https://github.com/tmux-plugins/tmux-sensible' TMUX
+GIT_SHALLOW "$HOME/.tmux/gpakosz" 'https://github.com/gpakosz/.tmux' TMUX
 SYMLINK $HOME/.tmux/gpakosz/.tmux.conf $HOME/.tmux.conf TMUX
 
 HEADER 'VimPlug & Plugins'
@@ -163,32 +151,21 @@ if [[ "$OS" == 'Linux' ]]; then
 fi
 
 HEADER 'Pyenv'
-if [[ -e "$HOME/.pyenv" ]]; then
-    cd $HOME/.pyenv
-    git fetch --depth=1
-    git reset --hard origin
-else
-    git clone --depth=1 https://github.com/pyenv/pyenv $HOME/.pyenv || FAIL PYENV
-fi
+GIT_SHALLOW "$HOME/.pyenv" 'https://github.com/pyenv/pyenv' PYENV
 
 HEADER 'Bash Git Prompt'
-BGP_DIR="$HOME/.bash-git-prompt"
-if [[ -e $BGP_DIR ]]; then
-    cd $BGP_DIR
-    git fetch --depth=1
-    git reset --hard origin
-else
-    git clone --depth=1 https://github.com/magicmonty/bash-git-prompt $BGP_DIR || FAIL GITPROMPT
-fi
+GIT_SHALLOW "$HOME/.bash-git-prompt" 'https://github.com/magicmonty/bash-git-prompt' GITPROMPT
 
 if [[ "$OS" = 'Darwin' ]]; then
 
     HEADER 'Golang Makefile'
-    if [[ -f $HOME/.golang.Makefile ]]; then
-        echo 'already have, skipping'
-    else
-        curl -#sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile || FAIL GOMAKE
-    fi
+    (
+        if [[ -f $HOME/.golang.Makefile ]]; then
+            echo 'already have, skipping'
+        else
+            curl -#sL 'https://gist.githubusercontent.com/heewa/0562f16846aefda88225/raw/Makefile' > $HOME/.golang.Makefile
+        fi
+    ) || FAIL GOMAKE
 
 fi
 
