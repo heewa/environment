@@ -22,6 +22,8 @@ function! s:applyConfig()
 
     call plug#begin()
         call s:plugins()
+        call s:languagePlugins()
+        call s:lastPlugins()
     call plug#end()
 
     call s:postPlugins()
@@ -68,8 +70,16 @@ function! s:indentSettings()
     set nocindent
 
     autocmd FileType html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd FileType javascript,json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType javascript,javascriptreact,jsx,json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+
+    " Autoformatting
+    augroup heewa
+      autocmd!
+      autocmd BufWritePre ~/src/Heewa/**/*.py undojoin | Neoformat
+      autocmd BufWritePre ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx undojoin | Neoformat
+      autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx} Neomake
+    augroup END
 endfunction
 
 function! s:filetypeSettings()
@@ -233,12 +243,6 @@ function! s:postPlugins()
 endfunction
 
 function! s:plugins()
-    " Go development
-    if has('nvim')
-        Plug 'fatih/vim-go'
-        let g:go_autodetect_gopath = 0 " Don't fuck with GOPATH
-    endif
-
     " Git +/-/~ in gutter
     "Plug 'airblade/vim-gitgutter'
     Plug 'mhinz/vim-signify'
@@ -257,12 +261,6 @@ function! s:plugins()
 
     Plug 'tpope/vim-vinegar'
 
-    "Plug 'Valloric/YouCompleteMe'
-
-    " Disabled: slow startup
-    "Plug 'majutsushi/tagbar'
-    "nnoremap <F8> :TagbarToggle<CR>
-
     " Vim Unit Testing
     Plug 'junegunn/vader.vim'
 
@@ -277,28 +275,7 @@ function! s:plugins()
     let g:neoformat_enabled_python = ['black']
     let g:neoformat_enabled_javascript = ['prettier-eslint', 'prettier']
 
-    " Autoformatting
-    augroup heewa
-      autocmd!
-      autocmd BufWritePre ~/src/Heewa/**/*.py undojoin | Neoformat
-      autocmd BufWritePre ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx undojoin | Neoformat
-      autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx} Neomake
-    augroup END
-
-    " NOTE: disabling cuz can't make work at Twine
-    "Plug 'ternjs/tern_for_vim'
-
-    " Javascript
-    Plug 'maxmellon/vim-jsx-pretty'
-    Plug 'benjie/local-npm-bin.vim'
-    Plug 'pangloss/vim-javascript'
-    Plug 'othree/javascript-libraries-syntax.vim'
-    Plug 'othree/html5-syntax.vim'
-    Plug 'digitaltoad/vim-pug'
-    Plug 'kchmck/vim-coffee-script'
-    Plug 'tpope/vim-surround'
-
-    " Colors, yay!
+    " Colors
     Plug 'tssm/fairyfloss.vim'
     Plug 'romainl/flattened'
     Plug 'morhetz/gruvbox'
@@ -355,11 +332,30 @@ function! s:plugins()
         \ 'V'  : 'V:L',
         \ '' : 'V:B',
         \ }
+endfunction
+
+function! s:languagePlugins()
+    " Go development
+    if has('nvim')
+        Plug 'fatih/vim-go'
+        let g:go_autodetect_gopath = 0 " Don't fuck with GOPATH
+    endif
+
+    " Javascript
+    Plug 'maxmellon/vim-jsx-pretty'
+    Plug 'benjie/local-npm-bin.vim'
+    Plug 'pangloss/vim-javascript'
+    Plug 'othree/javascript-libraries-syntax.vim'
+    Plug 'othree/html5-syntax.vim'
+    Plug 'digitaltoad/vim-pug'
+    Plug 'kchmck/vim-coffee-script'
+    Plug 'tpope/vim-surround'
 
     Plug 'heewa/vim-blist'
+endfunction
 
-    " Load the icons plugin last, so it picks up other plugins to know what
-    " settings to use
+" Plugins that should load after most others
+function! s:lastPlugins()
     Plug 'ryanoasis/vim-devicons'
 endfunction
 
