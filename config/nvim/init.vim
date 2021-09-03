@@ -351,6 +351,8 @@ function! s:languagePlugins()
     Plug 'kchmck/vim-coffee-script'
     Plug 'tpope/vim-surround'
 
+    Plug 'https://github.com/sirtaj/vim-openscad.git'
+
     Plug 'heewa/vim-blist'
 endfunction
 
