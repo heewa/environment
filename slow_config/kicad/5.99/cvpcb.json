@@ -10,7 +10,7 @@
     "center_on_items": true,
     "zoom_to_fit": true
   },
-  "filter_footprint": 3,
+  "filter_footprint": 6,
   "footprint_viewer": {
     "auto_zoom": true,
     "cursor": {
@@ -62,11 +62,11 @@
     "pad_fill": true,
     "pad_numbers": true,
     "perspective": "layout2|name=InfoBar;caption=;state=131454;dir=1;layer=1;row=0;pos=0;prop=100000;bestw=20;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=644;besth=40;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=410;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=383;besth=141;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=40|dock_size(4,3,0)=34|dock_size(5,0,0)=384|dock_size(3,6,0)=34|",
-    "pos_x": 640,
-    "pos_y": 359,
+    "pos_x": 268,
+    "pos_y": 227,
     "size_x": 1280,
-    "size_y": 684,
-    "zoom": 33.12198439858013,
+    "size_y": 648,
+    "zoom": 11.82008454769964,
     "zoom_factors": []
   },
   "footprints_pane_width": 382,

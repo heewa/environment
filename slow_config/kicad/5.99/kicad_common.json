@@ -21,11 +21,12 @@
   "environment": {
     "show_warning_dialog": true,
     "vars": {
+      "KICAD6_3DMODEL_DIR": "/usr/lib/kicad-nightly/share/kicad/3dmodels",
       "KICAD_SYMBOL_DIR": "/usr/share/kicad/library",
       "KICAD_TEMPLATE_DIR": "/usr/share/kicad/template",
-      "KICAD_USER_TEMPLATE_DIR": "/home/heewa/src/Hardware/resources/heewa",
+      "KICAD_USER_TEMPLATE_DIR": "/home/heewa/src/Hardware/keyboards/resources",
       "KIGITHUB": "https://github.com/KiCad",
-      "KISYS3DMOD": "/usr/share/kicad-nightly/modules/packages3d/",
+      "KISYS3DMOD": "/usr/lib/kicad-nightly/share/kicad/3dmodels",
       "KISYSMOD": "/usr/share/kicad-nightly/modules"
     }
   },

@@ -5,7 +5,7 @@
   },
   "aui": {
     "appearance_panel_tab": 0,
-    "right_panel_width": 229,
+    "right_panel_width": 230,
     "show_layer_manager": true
   },
   "cleanup": {
@@ -25,10 +25,10 @@
     "zoom_to_fit": true
   },
   "drc_dialog": {
-    "refill_zones": false,
-    "severities": 24,
-    "test_all_track_errors": false,
-    "test_footprints": false
+    "refill_zones": true,
+    "severities": 26,
+    "test_all_track_errors": true,
+    "test_footprints": true
   },
   "editing": {
     "allow_free_pads": false,
@@ -78,10 +78,10 @@
     "use_relative_paths": false
   },
   "footprint_chooser": {
-    "height": -1,
-    "sash_h": -1,
-    "sash_v": -1,
-    "width": -1
+    "height": 1042,
+    "sash_h": 1101,
+    "sash_v": 656,
+    "width": 1735
   },
   "footprint_viewer": {
     "auto_zoom": true,
@@ -129,12 +129,12 @@
     },
     "maximized": false,
     "mru_path": "/home/heewa",
-    "perspective": "layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=779;besth=38;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Libraries;caption=;state=1020;dir=4;layer=2;row=0;pos=0;prop=100000;bestw=200;besth=-1;minw=100;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Footprints;caption=;state=1020;dir=4;layer=1;row=0;pos=0;prop=100000;bestw=300;besth=-1;minw=100;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1022;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=387;besth=144;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrameGal;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=1231;besth=1040;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=38|dock_size(3,6,0)=34|dock_size(4,2,0)=202|dock_size(4,1,0)=302|dock_size(5,0,0)=373|",
-    "pos_x": 38,
-    "pos_y": 27,
+    "perspective": "layout2|name=MainToolbar;caption=;state=139632;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=749;besth=40;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=410;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Libraries;caption=;state=1020;dir=4;layer=2;row=0;pos=0;prop=100000;bestw=200;besth=-1;minw=100;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Footprints;caption=;state=1020;dir=4;layer=1;row=0;pos=0;prop=100000;bestw=300;besth=-1;minw=100;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=383;besth=141;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=40|dock_size(4,3,0)=34|dock_size(3,6,0)=34|dock_size(4,2,0)=202|dock_size(4,1,0)=302|dock_size(5,0,0)=373|",
+    "pos_x": 338,
+    "pos_y": 38,
     "size_x": 1244,
-    "size_y": 1053,
-    "zoom": 5.74283,
+    "size_y": 1006,
+    "zoom": 5.060315596567855,
     "zoom_factors": []
   },
   "footprint_wizard": {
@@ -195,12 +195,12 @@
   },
   "gen_drill": {
     "drill_file_type": 0,
-    "map_file_type": 1,
-    "merge_pth_npth": true,
+    "map_file_type": 2,
+    "merge_pth_npth": false,
     "minimal_header": false,
     "mirror": false,
-    "unit_drill_is_inch": true,
-    "use_route_for_oval_holes": true,
+    "unit_drill_is_inch": false,
+    "use_route_for_oval_holes": false,
     "zeros_format": 0
   },
   "graphics": {
@@ -270,23 +270,18 @@
     "fine_scale_x": 1,
     "fine_scale_y": 1,
     "line_width": 0.1,
-    "mirror": false,
-    "pads_drill_mode": 2,
+    "mirror": true,
+    "pads_drill_mode": 0,
     "ps_fine_width_adjust": 0
   },
   "printing": {
     "background": false,
     "color_theme": "",
     "layers": [
-      0,
       31,
       38,
-      39,
-      40,
       44,
-      45,
-      46,
-      47
+      45
     ],
     "monochrome": true,
     "scale": 1,
@@ -313,11 +308,11 @@
     "pns": {
       "auto_posture": true,
       "can_violate_drc": false,
-      "corner_mode": 3,
+      "corner_mode": 1,
       "effort": 2,
       "fix_all_segments": false,
       "follow_mouse": true,
-      "free_angle_mode": true,
+      "free_angle_mode": false,
       "inline_drag": false,
       "jump_over_obstacles": false,
       "meta": {
@@ -344,7 +339,7 @@
     "clearance": 20,
     "hatching_style": 2,
     "min_thickness": 10,
-    "net_sort_mode": -1,
+    "net_sort_mode": 1,
     "thermal_relief_copper_width": 20,
     "thermal_relief_gap": 20
   }

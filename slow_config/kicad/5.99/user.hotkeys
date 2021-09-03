@@ -1,4 +1,5 @@
 3DViewer.Control	
+3DViewer.Control.attributesOther	V
 3DViewer.Control.attributesSMD	S
 3DViewer.Control.attributesTHT	T
 3DViewer.Control.attributesVirtual	V
@@ -59,15 +60,15 @@ common.Control.cursorRight	Right
 common.Control.cursorRightFast	Ctrl+Right
 common.Control.cursorUp	Up
 common.Control.cursorUpFast	Ctrl+Up
-common.Control.gridFast1	Alt+1
-common.Control.gridFast2	Alt+2
+common.Control.gridFast1	Ctrl+1
+common.Control.gridFast2	Ctrl+2
 common.Control.gridNext	N
 common.Control.gridPreset	
 common.Control.gridPrev	Shift+N
 common.Control.gridProperties	
 common.Control.gridResetOrigin	
 common.Control.gridSetOrigin	
-common.Control.highContrastMode	
+common.Control.highContrastMode	W
 common.Control.highContrastModeCycle	H
 common.Control.imperialUnits	
 common.Control.metricUnits	
@@ -460,7 +461,7 @@ pcbnew.InteractiveEdit.createArray	Ctrl+T
 pcbnew.InteractiveEdit.deleteFull	Ctrl+H
 pcbnew.InteractiveEdit.duplicateIncrementPads	Ctrl+Shift+D
 pcbnew.InteractiveEdit.filletTracks	Shift+F
-pcbnew.InteractiveEdit.flip	F
+pcbnew.InteractiveEdit.flip	
 pcbnew.InteractiveEdit.mirror	
 pcbnew.InteractiveEdit.moveExact	Shift+M
 pcbnew.InteractiveEdit.properties	E
@@ -499,7 +500,7 @@ pcbnew.InteractiveSelection.Clear
 pcbnew.InteractiveSelection.Cursor	
 pcbnew.InteractiveSelection.DeselectNet	
 pcbnew.InteractiveSelection.FilterSelection	
-pcbnew.InteractiveSelection.SelectConnection	U
+pcbnew.InteractiveSelection.SelectConnection	Z
 pcbnew.InteractiveSelection.SelectItem	
 pcbnew.InteractiveSelection.SelectItems	
 pcbnew.InteractiveSelection.SelectNet	
@@ -553,6 +554,6 @@ pcbnew.ReannotateTool.ShowReannotateDialog
 pcbnew.ScriptingTool.pluginsReload	
 pcbnew.ScriptingTool.pluginsShowFolder	
 pcbnew.ZoneFiller.zoneFill	
-pcbnew.ZoneFiller.zoneFillAll	B
+pcbnew.ZoneFiller.zoneFillAll	F
 pcbnew.ZoneFiller.zoneUnfill	
 pcbnew.ZoneFiller.zoneUnfillAll	Ctrl+B
