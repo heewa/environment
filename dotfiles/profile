@@ -54,3 +54,6 @@ export DEBEMAIL="heewa.b@gmail.com"
 
 # Slightly nicer ninja build status
 export NINJA_STATUS='[%u/%r/%f]'
+
+# Use gtk style with QT apps. Needs 'qt5-style-plugins' package
+export QT_QPA_PLATFORMTHEME=gtk2
