@@ -77,8 +77,8 @@ function! s:indentSettings()
     augroup heewa
       autocmd!
       autocmd BufWritePre ~/src/Heewa/**/*.py undojoin | Neoformat
-      autocmd BufWritePre ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx undojoin | Neoformat
-      autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx} Neomake
+      autocmd BufWritePre ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx,~/src/Heewa/**/*.ts,~/src/Heewa/**/*.tsx undojoin | Neoformat
+      autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx\|ts\|tsx} Neomake
     augroup END
 endfunction
 
