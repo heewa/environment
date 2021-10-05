@@ -269,6 +269,10 @@ function! s:plugins()
     Plug 'benekastah/neomake'
     let g:neomake_python_enabled_makers = ['flake8', 'pyflakes']
     let g:neomake_javascript_enabled_makers = ['eslint']
+    let g:neomake_typescript_enabled_makers = ['eslint']
+    let g:neomake_typescriptreact_enabled_makers = ['eslint']
+    let g:neomake_eslint_exe = './node_modules/.bin/eslint'
+    let g:neomake_eslint_cwd = ''
 
     Plug 'sbdchd/neoformat'
     let g:neoformat_only_msg_on_error = 1
@@ -350,6 +354,8 @@ function! s:languagePlugins()
     Plug 'digitaltoad/vim-pug'
     Plug 'kchmck/vim-coffee-script'
     Plug 'tpope/vim-surround'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'peitalin/vim-jsx-typescript'
 
     Plug 'https://github.com/sirtaj/vim-openscad.git'
 
