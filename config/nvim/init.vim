@@ -69,16 +69,14 @@ function! s:indentSettings()
     set shiftwidth=4   " How much to indent by with stuff like <<, >>, etc
     set nocindent
 
-    autocmd FileType html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd FileType javascript,javascriptreact,jsx,json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType javascript,javascriptreact,jsx,json,yaml,yml,css,html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 
     " Autoformatting
     augroup heewa
       autocmd!
-      autocmd BufWritePre ~/src/Heewa/**/*.py undojoin | Neoformat
-      autocmd BufWritePre ~/src/Heewa/**/*.js,~/src/Heewa/**/*.jsx,~/src/Heewa/**/*.ts,~/src/Heewa/**/*.tsx undojoin | Neoformat
-      autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx\|ts\|tsx} Neomake
+      autocmd BufWritePre ~/src/Heewa/**/*.{py\|js\|jsx\|ts\|tsx\|yaml\|json\|css} undojoin | Neoformat
+      autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx\|ts\|tsx\|yaml\|json\|css} Neomake
     augroup END
 endfunction
 
