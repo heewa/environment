@@ -274,8 +274,9 @@ function! s:plugins()
 
     Plug 'sbdchd/neoformat'
     let g:neoformat_only_msg_on_error = 1
+    let g:neoformat_try_node_exe = 1
     let g:neoformat_enabled_python = ['black']
-    let g:neoformat_enabled_javascript = ['prettier-eslint', 'prettier']
+    let g:neoformat_enabled_javascript = ['prettier']
 
     " Colors
     Plug 'tssm/fairyfloss.vim'
