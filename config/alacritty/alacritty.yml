@@ -10,8 +10,8 @@ shell:
 window:
     decorations: none
     dimensions:
-        columns: 84
-        lines: 24
+        columns: 164
+        lines: 48
     padding:
         x: 0
         y: 0
