@@ -69,7 +69,7 @@ function! s:indentSettings()
     set shiftwidth=4   " How much to indent by with stuff like <<, >>, etc
     set nocindent
 
-    autocmd FileType javascript,javascriptreact,jsx,json,yaml,yml,css,html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType javascript,javascriptreact,jsx,json,typescript,typescriptreact,yaml,yml,css,html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 
     " Autoformatting
@@ -267,16 +267,21 @@ function! s:plugins()
     Plug 'benekastah/neomake'
     let g:neomake_python_enabled_makers = ['flake8', 'pyflakes']
     let g:neomake_javascript_enabled_makers = ['eslint']
+    let g:neomake_javascriptreact_enabled_makers = ['eslint']
     let g:neomake_typescript_enabled_makers = ['eslint']
     let g:neomake_typescriptreact_enabled_makers = ['eslint']
     let g:neomake_eslint_exe = './node_modules/.bin/eslint'
     let g:neomake_eslint_cwd = ''
 
     Plug 'sbdchd/neoformat'
+    let g:neoformat_try_node_exe = 1
     let g:neoformat_only_msg_on_error = 1
     let g:neoformat_try_node_exe = 1
     let g:neoformat_enabled_python = ['black']
     let g:neoformat_enabled_javascript = ['prettier']
+    let g:neoformat_enabled_javascriptreact = ['prettier']
+    let g:neoformat_enabled_typescript = ['prettier']
+    let g:neoformat_enabled_typescriptreact = ['prettier']
 
     " Colors
     Plug 'tssm/fairyfloss.vim'
