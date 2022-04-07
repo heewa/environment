@@ -76,3 +76,7 @@ bind browser,pager              \Ce next-line
 bind browser,pager              \Cy previous-line
 bind index                      \Ce next-line
 bind index                      \Cy previous-line
+bind browser,pager              j next-line
+bind browser,pager              k previous-line
+bind browser,pager              <down> next-line
+bind browser,pager              <up> previous-line
