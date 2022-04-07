@@ -30,6 +30,11 @@ bind index,pager L noop
 # Index / Pager
 #
 
+# Avoid escaping all the way out
+bind index q noop
+bind index x noop
+bind index Q exit
+
 bind index <tab> sync-mailbox
 bind index,pager '!' flag-message
 bind index,pager D delete-message
