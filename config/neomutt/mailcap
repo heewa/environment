@@ -1,0 +1,3 @@
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+text/*; vim %s
+image/*; display %s; test=test -n "$DISPLAY"

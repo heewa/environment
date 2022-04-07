@@ -1,0 +1,8 @@
+# vim: filetype=muttrc
+
+source ~/.config/neomutt/conf
+source ~/.config/neomutt/mappings
+source ~/.config/neomutt/mutt-colors-solarized-dark-256.muttrc
+
+source ~/.config/neomutt/heewa.b.gmail
+folder-hook $folder 'source ~/.config/neomutt/heewa.b.gmail'

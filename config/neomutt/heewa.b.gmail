@@ -1,0 +1,35 @@
+# vim: filetype=muttrc
+
+# Identity
+set realname = 'Heewa Barfchin'
+set from = 'heewa.b@gmail.com'
+set hostname = 'gmail.com'
+set reverse_name
+set use_from = yes
+set envelope_from = yes
+
+set imap_user = 'heewa.b@gmail.com'
+set imap_pass = `gpg --batch -q --decrypt ~/.config/neomutt/heewa.b.gmail.gpg`
+
+set smtp_url = 'smtps://heewa.b@smtp.gmail.com:465/'
+set smtp_pass = $imap_pass
+set smtp_authenticators = 'gssapi:login'
+
+set folder = 'imaps://imap.gmail.com:993/'
+set spoolfile = '+INBOX'
+set postponed = '+[Gmail]/Drafts'
+unset record  # Gmail handles storing sent mail
+unset trash  # Gmail handles deleting/archiving
+mailboxes =INBOX =[Gmail]/Sent\ Mail =[Gmail]/Drafts
+
+set imap_check_subscribed
+unset imap_passive
+set imap_keepalive = 300
+set mail_check = 120
+
+set ssl_starttls = yes
+set ssl_force_tls = yes
+set ssl_use_sslv3 = no
+set ssl_use_tlsv1 = no
+set ssl_verify_dates = yes
+set ssl_verify_host = yes
