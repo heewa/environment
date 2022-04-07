@@ -87,6 +87,10 @@ endfunction
 function! s:filetypeSettings()
     autocmd BufRead *.java,*.c,*.h,*.cc setlocal
         \ formatoptions=ctroq cindent comments=sr:/**,mb:*,elx:*/,sr:/*,mb:*,elx:*/,://
+
+    autocmd BufNewFile,BufRead neomutt-* setf mail
+    autocmd BufNewFile,BufRead neomutt-* setlocal
+        \ tw=72 fo=awq comments+=nb:>
 endfunction
 
 function! s:styleSettings()
