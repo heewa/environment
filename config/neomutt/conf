@@ -14,7 +14,7 @@ set timeout = 3  # limit waiting for user input, so other things can be done
 
 set edit_headers  # include headers when composing
 set fast_reply  # skip to compose when replying
-set askcc  # ask for CC:
+#set askcc  # ask for CC:
 set fcc_attach  # save attachments with the body
 set attribution = "On %d, %n wrote:"  # format of quoting header
 set include  # inclue message being replied to
