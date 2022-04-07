@@ -22,7 +22,7 @@ bind index,pager O noop
 bind index,pager h noop
 bind pager j noop
 bind pager k noop
-bind index,pager l noop
+bind pager l noop
 bind index,pager H noop
 bind index,pager L noop
 
@@ -48,6 +48,17 @@ bind index,pager M mail
 bind index <space> collapse-thread
 bind index,pager o change-folder
 bind index,pager O change-folder-readonly
+
+bind index g first-entry
+bind index G last-entry
+bind pager g top
+bind pager G bottom
+
+bind pager N noop
+macro pager N ":set resolve=no\n<set-flag>N:set resolve=yes\n" "mark unread without resolving"
+
+bind pager V noop
+macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>" "view html"
 
 #
 # Misc

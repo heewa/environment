@@ -1,3 +1,6 @@
-text/html; w3m -I %{charset} -T text/html; copiousoutput;
+text/html; firefox --private-window %s; nametemplate=%s.html; test=pgrep firefox
+text/html; elinks -default-mime-type text/htm %s; nametemplate=%s.html
+text/html; elinks -dump -default-mime-type text/htm %s; copiousoutput; nametemplate=%s.html
+#text/html; w3m -I %{charset} -T text/html -o auto_image=true; copiousoutput; nametemplate=%s.html
 text/*; vim %s
 image/*; display %s; test=test -n "$DISPLAY"

@@ -6,7 +6,7 @@ set realname = 'Heewa Barfchin'
 set beep = no
 
 auto_view = text/html
-#alternative_order text/plain text/enriched text/html
+alternative_order  text/html text/plain text/enriched text
 
 unset mark_old
 
@@ -29,7 +29,7 @@ unset mime_forward
 set sort = threads
 set sort_aux = reverse-last-date-received
 
-set mailcap_path = ~/.config/neomutt/mailcap
+set mailcap_path = ~/.config/neomutt/mailcap:/etc/mailcap
 
 set charset = 'utf-8'
 set send_charset = 'utf-8:iso-8859-1:us-ascii'
