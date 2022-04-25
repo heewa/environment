@@ -199,6 +199,9 @@ function! s:basicMaps()
     noremap <silent> <Leader>id "=strftime('%Y-%m-%d')<CR>p
     command! InsertDate :normal <Leader>id<CR>
 
+    " Open firefox on url inside parens (markdown syntax)
+    nnoremap <silent> gu yi(:silent !firefox '<C-R>"'<CR>
+
     " Termdebug for GDB
     nnoremap <A-b> :Break<CR>
     nnoremap <A-c> :Clear<CR>
