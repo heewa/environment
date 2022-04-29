@@ -18,11 +18,16 @@ SYMLINK $ENVDIR/scripts
 HEADER 'Configs'
 # Only symlink the files in each app dir, so any additional ones the
 # app might create won't end up in this repo
-for APP in $(find $ENVDIR/config -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' '); do
-    for FILE in $(find $ENVDIR/config/$APP -type f | xargs basename -a | tr '\n' ' '); do
-        SYMLINK $ENVDIR/config/$APP/$FILE $HOME/.config/$APP/$FILE
+(
+    # Change dirs so find gives relative paths
+    cd $ENVDIR/config
+
+    for APP in $(find . -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' '); do
+        for FILE in $(find $APP -type f); do
+            SYMLINK $ENVDIR/config/$FILE $HOME/.config/$FILE
+        done
     done
-done
+)
 
 SYMLINK $HOME/.config/FreeCAD $HOME/.FreeCAD
 
