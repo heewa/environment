@@ -26,6 +26,9 @@ bind pager l noop
 bind index,pager H noop
 bind index,pager L noop
 
+bind index,pager g noop
+bind index f noop
+
 #
 # Index / Pager
 #
@@ -38,7 +41,10 @@ bind index X noop
 macro index Q "<sync-mailbox><exit>" "sync & exit"
 bind index X exit
 
-bind index <tab> sync-mailbox
+bind index,pager <tab> sync-mailbox
+macro index,pager S '<shell-escape>mbsync -a; notmuch new<enter>' 'sync email'
+macro index f "<enter-command>unset wait_key<enter><shell-escape>read -p 'Search with notmuch: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;s/\^id:// for@a;$,=\"|\";print@a' | perl -le '@a=<>; chomp@a; s/\\+/\\\\+/ for@a;print@a' \`\"<enter>" "search with notmuch"
+macro index // '<vfolder-from-query>'
 bind index,pager '!' flag-message
 bind index,pager D delete-message
 bind index,pager '@' compose-to-sender
@@ -52,9 +58,9 @@ bind index <space> collapse-thread
 bind index,pager o change-folder
 bind index,pager O change-folder-readonly
 
-bind index g first-entry
+bind index gg first-entry
 bind index G last-entry
-bind pager g top
+bind pager gg top
 bind pager G bottom
 
 bind pager N noop
@@ -77,6 +83,16 @@ bind index,pager <left> sidebar-toggle-visible
 bind index,pager <down> sidebar-next
 bind index,pager <up> sidebar-prev
 bind index,pager <right> sidebar-open
+
+#
+# Changing Folders
+#
+
+macro index gi '<change-folder>=Inbox<enter>' 'go to inbox'
+macro index gs '<change-folder>=[Gmail]/Sent Mail<enter>' 'go to sent mail'
+macro index gd '<change-folder>=[Gmail]/Drafts<enter>' 'go to drafts'
+macro index gI '<change-folder>Important<enter>' 'go to important'
+macro index gU '<change-folder>Unread<enter>' 'go to Unread'
 
 #
 # Scrolling

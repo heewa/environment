@@ -1,0 +1,38 @@
+IMAPAccount heewab
+# Address to connect to
+Host imap.gmail.com
+User heewa.b@gmail.com
+# To store the password in an encrypted file use PassCmd instead of Pass
+# PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+PassCmd "gpg -q --decrypt ~/.config/neomutt/heewa.b.gmail.gpg"
+#
+# Use SSL
+SSLType IMAPS
+# The following line should work. If you get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+#CertificateFile ~/.cert/imap.gmail.com.pem
+#CertificateFile ~/.cert/Equifax_Secure_CA.pem
+
+IMAPStore heewab-remote
+Account heewab
+
+MaildirStore heewab-local
+SubFolders Verbatim
+# The trailing "/" is important
+Path ~/.mail/heewab/
+Inbox ~/.mail/heewab/Inbox
+
+Channel heewab
+Far :heewab-remote:
+Near :heewab-local:
+# Exclude everything under the internal [Gmail] folder, except the interesting folders
+#Patterns * ![Gmail]* "[Gmail]Drafts" "[Gmail]/Sent Mail" "[Gmail]/Starred"
+Patterns INBOX "[Gmail]/Drafts" "[Gmail]/Sent Mail" "[Gmail]/Starred"
+# Or include everything
+#Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Sync the movement of messages between folders and deletions, add after making sure the sync works
+Expunge Both
+# Save the synchronization state files in the relevant directory
+SyncState *
