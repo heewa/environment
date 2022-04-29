@@ -13,7 +13,8 @@ set mbox_type = Maildir
 set folder = '~/.mail/heewab'
 
 set smtp_url = 'smtps://heewa.b@smtp.gmail.com:465/'
-set smtp_pass = `gpg --batch -q --decrypt ~/.config/neomutt/heewa.b.gmail.gpg`
+#set smtp_pass = `gpg --batch -q --decrypt ~/.config/neomutt/heewa.b.gmail.gpg`
+set smtp_pass = `secret-tool lookup Login heewa.b@gmail.com`
 set smtp_authenticators = 'gssapi:login'
 
 set spoolfile = '+Inbox'

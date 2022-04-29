@@ -20,7 +20,7 @@ if [[ "$DISTRO" == 'ubuntu' ]]; then
     sudo apt update
 
     HEADER 'Packages'
-    sudo apt install golang-go git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq qt5-style-plugins neomutt isync notmuch
+    sudo apt install golang-go git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq qt5-style-plugins neomutt isync notmuch libsecret-tools
 
 elif [[ "$DISTRO" == 'fedora' ]]; then
 
