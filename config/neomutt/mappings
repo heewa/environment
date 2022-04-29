@@ -33,18 +33,9 @@ bind index f noop
 # Index / Pager
 #
 
-# Avoid escaping all the way out
-bind index q noop
-bind index Q noop
-bind index x noop
-bind index X noop
-macro index Q "<sync-mailbox><exit>" "sync & exit"
-bind index X exit
-
 bind index,pager <tab> sync-mailbox
 macro index,pager S '<shell-escape>mbsync -a; notmuch new<enter>' 'sync email'
-macro index f "<enter-command>unset wait_key<enter><shell-escape>read -p 'Search with notmuch: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;s/\^id:// for@a;$,=\"|\";print@a' | perl -le '@a=<>; chomp@a; s/\\+/\\\\+/ for@a;print@a' \`\"<enter>" "search with notmuch"
-macro index // '<vfolder-from-query>'
+macro index s <vfolder-from-query> 'search'
 bind index,pager '!' flag-message
 bind index,pager D delete-message
 bind index,pager '@' compose-to-sender
@@ -57,17 +48,27 @@ bind index,pager M mail
 bind index <space> collapse-thread
 bind index,pager o change-folder
 bind index,pager O change-folder-readonly
+bind index N search-opposite
 
 bind index gg first-entry
 bind index G last-entry
 bind pager gg top
 bind pager G bottom
 
-bind pager N noop
-macro pager N ":set resolve=no\n<set-flag>N:set resolve=yes\n" "mark unread without resolving"
+bind index,pager U noop
+macro index,pager U ":set resolve=no\n<set-flag>N:set resolve=yes\n" "mark unread without resolving"
 
 bind pager V noop
 macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>" "view html"
+
+bind index x noop
+bind index q noop
+bind index Q quit
+
+bind index z noop
+bind index zt current-top
+bind index zz current-middle
+bind index zb current-bottom
 
 #
 # Misc
