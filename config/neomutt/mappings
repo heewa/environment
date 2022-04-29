@@ -61,8 +61,11 @@ macro index,pager U ":set resolve=no\n<set-flag>N:set resolve=yes\n" "mark unrea
 bind pager V noop
 macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>" "view html"
 
+macro pager,attach,compose \Co "<enter-command>unset wait_key<enter><pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
 bind index x noop
 bind index q noop
+bind pager Q noop
 bind index Q quit
 
 bind index z noop
