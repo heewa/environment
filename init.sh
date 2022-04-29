@@ -22,6 +22,14 @@ if [[ "$DISTRO" == 'ubuntu' ]]; then
     HEADER 'Packages'
     sudo apt install golang-go git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq qt5-style-plugins neomutt isync notmuch libsecret-tools
 
+    HEADER 'Services'
+    systemctl --user enable mbsync.service
+    systemctl --user enable mbsync.timer
+    systemctl --user enable goimapnotify@heewab.service
+    systemctl --user start mbsync.service
+    systemctl --user start mbsync.timer
+    systemctl --user start goimapnotify@heewab.service
+
 elif [[ "$DISTRO" == 'fedora' ]]; then
 
     HEADER 'Packages'
