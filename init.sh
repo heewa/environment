@@ -15,17 +15,17 @@ ERRS=0
 if [[ "$DISTRO" == 'ubuntu' ]]; then
 
     HEADER 'Apt Repos'
-    sudo --non-interactive add-apt-repository --no-update universe
-    sudo --non-interactive add-apt-repository --no-update multiverse
-    sudo --non-interactive apt update
+    sudo add-apt-repository --no-update universe
+    sudo add-apt-repository --no-update multiverse
+    sudo apt update
 
     HEADER 'Packages'
-    sudo --non-interactive apt install git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq qt5-style-plugins
+    sudo apt install golang-go git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq qt5-style-plugins neomutt isync notmuch
 
 elif [[ "$DISTRO" == 'fedora' ]]; then
 
     HEADER 'Packages'
-    sudo dnf install neovim tmux
+    sudo dnf install neovim tmux neomutt isync notmuch
 
 elif [[ "$OS" = 'Darwin' ]]; then
 
@@ -55,3 +55,5 @@ elif [[ "$OS" = 'Darwin' ]]; then
     pip install --upgrade awscli
 
 fi
+
+go install gitlab.com/shackra/goimapnotify@latest
