@@ -31,6 +31,9 @@ set sort_aux = reverse-last-date-received
 
 set mailcap_path = ~/.config/neomutt/mailcap:/etc/mailcap
 
+set query_command = "echo '' && notmuch address from:/%s/"
+set query_format="%4c %t %-70.70a %-70.70n %?e?(%e)?"
+
 set charset = 'utf-8'
 set send_charset = 'utf-8:iso-8859-1:us-ascii'
 
