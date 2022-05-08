@@ -58,6 +58,9 @@ bind pager G bottom
 bind index,pager U noop
 macro index,pager U ":set resolve=no\n<set-flag>N:set resolve=yes\n" "mark unread without resolving"
 
+bind index,pager \Cr noop
+macro index,pager \Cr ":set resolve=no\n<clear-flag>N:set resolve=yes\n" "mark read without resolving"
+
 bind pager V noop
 macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>" "view html"
 
