@@ -97,6 +97,7 @@ macro index gs '<change-folder>=[Gmail]/Sent Mail<enter>' 'go to sent mail'
 macro index gd '<change-folder>=[Gmail]/Drafts<enter>' 'go to drafts'
 macro index gI '<change-folder>Important<enter>' 'go to important'
 macro index gU '<change-folder>Unread<enter>' 'go to Unread'
+macro index gT '<change-folder>ToDo<enter>' 'go to ToDo'
 
 #
 # Scrolling

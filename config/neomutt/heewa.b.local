@@ -26,6 +26,7 @@ mailboxes =Inbox =[Gmail]/Sent\ Mail =[Gmail]/Drafts =[Gmail]/Starred
 set nm_default_uri = "notmuch:///home/heewa/.mail"
 virtual-mailboxes "Important" "notmuch://?query=tag:flagged"
 virtual-mailboxes "Unread" "notmuch://?query=tag:unread"
+virtual-mailboxes "ToDo" "notmuch://?query=from:heewa.b%40gmail.com%20to:heewa.b%40gmail.com"
 
 set mail_check = 120
 
