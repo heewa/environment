@@ -26,9 +26,9 @@ mailboxes =Inbox =[Gmail]/Drafts =[Gmail]/Sent\ Mail
 # Virtual Folders
 set mail_check_stats = yes  # update counts of virtual mailboxes
 set nm_default_uri = "notmuch:///home/heewa/.mail"
-named-mailboxes "Unread" "notmuch://?query=tag:inbox tag:unread"
-named-mailboxes "Important" "notmuch://?query=tag:inbox tag:flagged"
-named-mailboxes "ToDo" "notmuch://?query=tag:inbox from:heewa.b@gmail.com to:heewa.b@gmail.com"
+named-mailboxes "Unread" "notmuch://?query=tag:unread"
+named-mailboxes "Important" "notmuch://?query=tag:flagged"
+named-mailboxes "ToDo" "notmuch://?query=from:heewa.b@gmail.com to:heewa.b@gmail.com"
 
 set mail_check = 60
 
