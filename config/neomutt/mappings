@@ -29,6 +29,10 @@ bind index,pager L noop
 bind index,pager g noop
 bind index f noop
 
+# Completing addresses, reverse normal bindings
+bind editor <Tab> complete-query
+bind editor \Ct complete
+
 #
 # Index / Pager
 #

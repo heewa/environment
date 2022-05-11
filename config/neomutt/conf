@@ -28,6 +28,7 @@ unset mime_forward
 
 set sort = threads
 set sort_aux = reverse-last-date-received
+set strict_threads  # don't thread based on subject string matching
 
 set mailcap_path = ~/.config/neomutt/mailcap:/etc/mailcap
 
@@ -36,17 +37,19 @@ set query_format="%4c %t %-70.70a %-70.70n %?e?(%e)?"
 
 set charset = 'utf-8'
 set send_charset = 'utf-8:iso-8859-1:us-ascii'
+set assumed_charset = 'iso-8859-1'
 
 # Caching
 # keep it in a permanent place, since mailboxes can be huge
 set message_cachedir = "~/.permcache/neomutt/messages/"
 set header_cache = "~/.permcache/neomutt/headers/"
+set header_cache_backend = tokyocabinet
 
 set tmpdir = '/tmp/neomutt'
 
 # status bar, date format, finding stuff etc.
-set status_chars = " *%A"
-set status_format = "[ Folder: %f ] [%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>─%?p?( %p postponed )?"
+set status_chars = "─*%A"
+set status_format = "─[ %f ]─%r─[ %u unread / %m%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)? ]%>─[ %l ]─"
 set date_format = "%Y-%m-%d %H:%M"
 set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %s"
 set uncollapse_jump
@@ -56,7 +59,7 @@ set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 
 # Pager View Options
 set pager_index_lines = 5  # show some of index in pager
-set pager_context = 3
+set pager_context = 5
 set pager_stop  # don't move to next email after scrolling past end of one
 set menu_scroll  # scroll better
 set tilde  # show ~ after body on empty lines
@@ -71,7 +74,7 @@ hdr_order from: to: cc: bcc: date: subject:
 # sidebar patch config
 #set sidebar_visible
 set sidebar_short_path
-set sidebar_folder_indent
+unset sidebar_folder_indent
 set sidebar_width = 25
 set sidebar_divider_char = ' | '
 set sidebar_indent_string = '  '

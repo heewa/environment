@@ -3,6 +3,7 @@
 # Identity
 set realname = 'Heewa Barfchin'
 set from = 'heewa.b@gmail.com'
+alternates '^heewab@gmail.com$|^heewa@heewa.net$'
 
 set hostname = 'gmail.com'
 set reverse_name
@@ -29,6 +30,9 @@ set nm_default_uri = "notmuch:///home/heewa/.mail"
 named-mailboxes "Unread" "notmuch://?query=tag:unread"
 named-mailboxes "Important" "notmuch://?query=tag:flagged"
 named-mailboxes "ToDo" "notmuch://?query=from:heewa.b@gmail.com to:heewa.b@gmail.com"
+
+# Don't cache messages, since they're local already
+unset message_cachedir
 
 set mail_check = 60
 
