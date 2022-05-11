@@ -57,10 +57,20 @@ color index         color98         color238        "~v~(~F)"                   
 color index         color207        color238        "~v(~(~F)~(~U|~N))"         # collapsed thread w flagged & unread/new
 color index         color136        color160        "~v~(~D)"                   # collapsed thread with deleted
 
+# Messages being worked on:
+color index         color221        color234        "~T"                        # tagged messages
 color index         color235        color160        "~D"                        # deleted messages
 
 # Date portion of line always grey
 color index_date     color240        color234
+
+# status bar -----------------------------------------------------------
+color status        color180        color235
+color status        color37         color235        "[1-9][0-9]* unread"
+color status        color197        color235        "\\([0-9]+ to delete\\)"
+color status        color221        color235        "\\([0-9]+ tagged\\)"
+color status        color98         color235        "[1-9][0-9]* flagged"
+color status        color207        color235        "\\([0-9]+ postponed\\)"
 
 # message headers ------------------------------------------------------
 

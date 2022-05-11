@@ -49,7 +49,7 @@ set tmpdir = '/tmp/neomutt'
 
 # status bar, date format, finding stuff etc.
 set status_chars = "─*%A"
-set status_format = "─[ %f ]─%r─[ %u unread / %m%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)? ]%>─[ %l ]─"
+set status_format = "─[ %f ]─%r─[ %u unread / %F flagged / %m total%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)? ]%>─[ %l ]─"
 set date_format = "%Y-%m-%d %H:%M"
 set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %s"
 set uncollapse_jump
