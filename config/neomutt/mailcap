@@ -1,7 +1,7 @@
 text/html; /usr/bin/firefox --private-window %s; nametemplate=%s.html; test=pgrep firefox
-text/html; /usr/bin/elinks -default-mime-type text/htm %s; nametemplate=%s.html
-text/html; /usr/bin/elinks -dump -default-mime-type text/htm %s; copiousoutput; nametemplate=%s.html
-#text/html; /usr/bin/w3m -I %{charset} -T text/html -o auto_image=true; copiousoutput; nametemplate=%s.html
+text/html; /usr/bin/elinks -force-html %s; nametemplate=%s.html
+#text/html; /usr/bin/elinks -dump -force-html -localhost -no-references %s; copiousoutput; nametemplate=%s.html
+text/html; /usr/bin/w3m -I %{charset} -T text/html -o auto_image=TRUE -o display_link_number=1; copiousoutput; nametemplate=%s.html
 text/*; vim %s
 image/*; /usr/bin/display %s; test=test -n "$DISPLAY"
 application/pdf; /usr/bin/evince %s; copiousoutput; nametemplate=%s.pdf
