@@ -4,7 +4,6 @@
 # Unbinds
 #
 
-bind index,pager '#' noop
 bind index,pager '!' noop
 bind index,pager b noop
 bind index,pager d noop

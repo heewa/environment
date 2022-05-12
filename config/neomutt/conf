@@ -28,7 +28,8 @@ unset mime_forward
 
 set sort = threads
 set sort_aux = reverse-last-date-received
-set strict_threads  # don't thread based on subject string matching
+unset sort_re  # only thread by subject if it starts with the configured prefixes
+#set strict_threads  # don't thread based on subject string matching
 
 set mailcap_path = ~/.config/neomutt/mailcap:/etc/mailcap
 
