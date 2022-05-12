@@ -51,7 +51,7 @@ set tmpdir = '/tmp/neomutt'
 set status_chars = "─*%A"
 set status_format = "─[ %f ]─%r─[ %u unread / %F flagged / %m total%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)? ]%>─[ %l ]─"
 set date_format = "%Y-%m-%d %H:%M"
-set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %s"
+set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %?M?(%M) ?%s"
 set uncollapse_jump
 set sort_re
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
@@ -67,9 +67,9 @@ unset markers  # show + on wrapped lines
 
 # email headers and attachments
 ignore *
-unignore from: to: cc: bcc: date: subject:
+unignore from: to: cc: bcc: date: subject: X-Mailer:
 unhdr_order *
-hdr_order from: to: cc: bcc: date: subject:
+hdr_order from: to: cc: bcc: date: X-Mailer: subject:
 
 # sidebar patch config
 #set sidebar_visible

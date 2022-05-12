@@ -3,7 +3,7 @@
 # Identity
 set realname = 'Heewa Barfchin'
 set from = 'heewa.b@gmail.com'
-alternates '^heewab@gmail.com$|^heewa@heewa.net$'
+alternates '^heewab@gmail.com$|^(heewa|barfchin)@heewa.net$'
 
 set hostname = 'gmail.com'
 set reverse_name
