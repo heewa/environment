@@ -18,7 +18,7 @@ bind index,pager O noop
 bind index,pager '$' noop
 bind index,pager O noop
 
-bind index,pager h noop
+bind index h noop
 bind pager j noop
 bind pager k noop
 bind pager l noop

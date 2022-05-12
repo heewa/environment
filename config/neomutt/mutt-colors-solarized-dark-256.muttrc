@@ -40,8 +40,11 @@ mono  error         bold
 
 color index         color160        color234        "~A"                        # all messages
 color index         color240        color234        "~R"                        # read messages
-color index         color243        color234        "~p"                        # messages to me
 color index         color109        color234        "~P"                        # messages from me
+
+# particular kinds of emails (before status coloring)
+color index         color239        color234        "~h \"^List-I[Dd]:\""       # mailing lists
+color index         color24         color234        "%f known"                  # from 'known' group
 
 color index         color23         color234        "~(~U|~N)"                  # thread w unread/new
 color index         color60         color234        "~(~F)"                     # thread w flagged

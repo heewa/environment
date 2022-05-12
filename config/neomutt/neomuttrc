@@ -1,6 +1,7 @@
 # vim: filetype=muttrc
 
 source ~/.config/neomutt/conf
+source ~/.config/neomutt/groups
 source ~/.config/neomutt/mappings
 source ~/.config/neomutt/mutt-colors-solarized-dark-256.muttrc
 
