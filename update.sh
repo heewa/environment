@@ -46,6 +46,15 @@ HEADER 'Slow-sync Configs'
     done
 )
 
+HEADER 'Synced Configs'
+(
+    cd $HOME/Sync/config
+
+    for F in $(find . -type f | cut -b3- ); do
+        SYMLINK $HOME/Sync/config/$F $HOME/.config/$F
+    done
+)
+
 HEADER 'Ram Disks'
 CHECK_FSTAB () {
     local MNT=$1
