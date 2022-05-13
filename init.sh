@@ -20,7 +20,7 @@ if [[ "$DISTRO" == 'ubuntu' ]]; then
     sudo apt update
 
     HEADER 'Packages'
-    sudo apt install golang-go git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq qt5-style-plugins isync notmuch libsecret-tools
+    sudo apt install golang-go git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq qt5-style-plugins isync notmuch libsecret-tools caca-utils khal
 
     HEADER 'Services'
     systemctl --user enable mbsync.service
