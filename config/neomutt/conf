@@ -44,7 +44,7 @@ set assumed_charset = 'iso-8859-1'
 # keep it in a permanent place, since mailboxes can be huge
 set message_cachedir = "~/.permcache/neomutt/messages/"
 set header_cache = "~/.permcache/neomutt/headers/"
-set header_cache_backend = tokyocabinet
+set header_cache_backend = lmdb
 
 set tmpdir = '/tmp/neomutt'
 
