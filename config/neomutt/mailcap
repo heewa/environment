@@ -1,7 +1,8 @@
 text/html; /usr/bin/firefox --private-window %s; nametemplate=%s.html; test=pgrep firefox
 text/html; /usr/bin/elinks -force-html %s; nametemplate=%s.html
 #text/html; /usr/bin/elinks -dump -force-html -localhost -no-references %s; copiousoutput; nametemplate=%s.html
-text/html; /usr/bin/w3m -I %{charset} -T text/html -o auto_image=TRUE -o display_link_number=1 %s; copiousoutput; nametemplate=%s.html
+text/html; /usr/bin/w3m -I %{charset} %s; copiousoutput; nametemplate=%s.html
+#text/html; /usr/bin/w3m -I %{charset} -o display_link_number=1 %s | /usr/bin/awk '{if ($0 == "References:") {exit} {print}}'; copiousoutput; nametemplate=%s.html
 text/*; vim %s
 image/*; /usr/bin/display %s
 #image/*; anytopnm %s | pnmscale -xsize 80 -ysize 50 | ppmtopgm | pgmtopbm | pbmtoascii; copiousoutput
@@ -13,3 +14,5 @@ application/postscript; /usr/bin/ps2ascii %s; copiousoutput
 application/postscript; /usr/bin/evince %s; nametemplate=%s.pdf
 application/x-gunzip; /usr/bin/gunzip -lc %s; copiousoutput
 application/x-tar-gz; /usr/bin/tar -ztf %s; copiousoutput
+application/ics; $HOME/scripts/printics.sh %s; copiousoutput
+text/calendar; $HOME/scripts/printics.sh %s; copiousoutput
