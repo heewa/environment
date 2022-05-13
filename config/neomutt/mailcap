@@ -1,7 +1,10 @@
 text/html; /usr/bin/firefox --private-window %s; nametemplate=%s.html; test=pgrep firefox
+text/x-amp-html; /usr/bin/firefox --private-window %s; nametemplate=%s.html; test=pgrep firefox
 text/html; /usr/bin/elinks -force-html %s; nametemplate=%s.html
+text/x-amp-html; /usr/bin/elinks -force-html %s; nametemplate=%s.html
 #text/html; /usr/bin/elinks -dump -force-html -localhost -no-references %s; copiousoutput; nametemplate=%s.html
 text/html; /usr/bin/w3m -I %{charset} %s; copiousoutput; nametemplate=%s.html
+text/x-amp-html; /usr/bin/w3m -I %{charset} %s; copiousoutput; nametemplate=%s.html
 #text/html; /usr/bin/w3m -I %{charset} -o display_link_number=1 %s | /usr/bin/awk '{if ($0 == "References:") {exit} {print}}'; copiousoutput; nametemplate=%s.html
 text/*; vim %s
 image/*; /usr/bin/display %s
