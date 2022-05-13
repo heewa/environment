@@ -28,7 +28,13 @@ font:
         #family: SauceCodePro Nerd Font
         #family: Noto Mono Nerd Font Complete
         family: UbuntuMono Nerd Font
-    size: 11.0
+    italic:
+        style: Bold
+        family: Ubuntu Mono
+    bold_italic:
+        style: Bold Italic
+        family: Ubuntu Mono
+    size: 12.0
 
 visual_bell:
     animation: EaseOutExpo
