@@ -82,7 +82,9 @@ bind index zb current-bottom
 # Misc
 #
 
-bind attach <space> view-mailcap
+bind attach <space> view-pager
+bind attach p view-pager
+bind attach P print-entry
 
 #
 # Sidebar

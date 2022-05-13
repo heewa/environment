@@ -5,8 +5,8 @@ set realname = 'Heewa Barfchin'
 #set sleep_time = 0  # avoid pausing to display messages/transitions
 set beep = no
 
-auto_view = text/html
-alternative_order  text/html text/plain text/enriched text
+auto_view = text/html image/* application/postscript application/pdf application/x-gunzip application/x-tar-gz
+alternative_order text/html text/enriched text/plain text
 
 unset mark_old
 

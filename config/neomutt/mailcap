@@ -1,7 +1,15 @@
 text/html; /usr/bin/firefox --private-window %s; nametemplate=%s.html; test=pgrep firefox
 text/html; /usr/bin/elinks -force-html %s; nametemplate=%s.html
 #text/html; /usr/bin/elinks -dump -force-html -localhost -no-references %s; copiousoutput; nametemplate=%s.html
-text/html; /usr/bin/w3m -I %{charset} -T text/html -o auto_image=TRUE -o display_link_number=1; copiousoutput; nametemplate=%s.html
+text/html; /usr/bin/w3m -I %{charset} -T text/html -o auto_image=TRUE -o display_link_number=1 %s; copiousoutput; nametemplate=%s.html
 text/*; vim %s
-image/*; /usr/bin/display %s; test=test -n "$DISPLAY"
-application/pdf; /usr/bin/evince %s; copiousoutput; nametemplate=%s.pdf
+image/*; /usr/bin/display %s
+#image/*; anytopnm %s | pnmscale -xsize 80 -ysize 50 | ppmtopgm | pgmtopbm | pbmtoascii; copiousoutput
+#image/*; /usr/bin/asciiview %s; copiousoutput
+image/*; /usr/bin/img2txt -f utf8 %s; copiousoutput
+application/pdf; /usr/bin/evince %s; nametemplate=%s.pdf
+application/pdf; /usr/bin/pdftotext -layout %s -; copiousoutput; nametemplate=%s.pdf
+application/postscript; /usr/bin/ps2ascii %s; copiousoutput
+application/postscript; /usr/bin/evince %s; nametemplate=%s.pdf
+application/x-gunzip; /usr/bin/gunzip -lc %s; copiousoutput
+application/x-tar-gz; /usr/bin/tar -ztf %s; copiousoutput
