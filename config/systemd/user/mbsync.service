@@ -4,7 +4,7 @@ Description=Mailbox synchronization service
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/mbsync -Va
-ExecStartPost=/usr/bin/notmuch new
+ExecStartPost=/home/heewa/.config/neomutt/post_sync_mail.sh
 
 [Install]
 WantedBy=default.target

@@ -10,26 +10,27 @@ set reverse_name
 set use_from = yes
 set envelope_from = yes
 
-set mbox_type = Maildir
-set folder = '~/.mail/heewab'
-
 set smtp_url = 'smtps://heewa.b@smtp.gmail.com:465/'
 #set smtp_pass = `gpg --batch -q --decrypt ~/.config/neomutt/heewa.b.gmail.gpg`
 set smtp_pass = `secret-tool lookup Login heewa.b@gmail.com`
 set smtp_authenticators = 'gssapi:login'
 
-set spoolfile = '+Inbox'
-set postponed = '+[Gmail]/Drafts'
+set mbox_type = Maildir
+set folder = '~/.mail/heewab'
+set spoolfile = '+/Inbox'
+set postponed = '+/[Gmail]/Drafts'
 unset record  # Gmail handles storing sent mail
 unset trash  # Gmail handles deleting/archiving
-mailboxes =Inbox =[Gmail]/Drafts =[Gmail]/Sent\ Mail
+mailboxes =[Gmail]/Drafts =[Gmail]/Sent\ Mail
 
 # Virtual Folders
 set mail_check_stats = yes  # update counts of virtual mailboxes
-set nm_default_uri = "notmuch:///home/heewa/.mail"
+set nm_default_url = "notmuch:///home/heewa/.mail"
+named-mailboxes "Inbox" "notmuch://?query=tag:inbox"
 named-mailboxes "Unread" "notmuch://?query=tag:unread"
 named-mailboxes "Important" "notmuch://?query=tag:flagged"
 named-mailboxes "ToDo" "notmuch://?query=from:heewa.b@gmail.com to:heewa.b@gmail.com"
+set virtual_spool_file
 
 # Don't cache messages, since they're local already
 unset message_cachedir

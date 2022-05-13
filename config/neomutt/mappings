@@ -68,6 +68,8 @@ macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>" 
 
 macro pager,attach,compose \Co "<enter-command>unset wait_key<enter><pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
+bind index y modify-labels
+
 bind index x entire-thread
 
 bind index q noop
@@ -100,7 +102,7 @@ bind index,pager <right> sidebar-open
 # Changing Folders
 #
 
-macro index gi '<change-folder>=Inbox<enter>' 'go to inbox'
+macro index gi '<change-folder>Inbox<enter>' 'go to inbox'
 macro index gs '<change-folder>=[Gmail]/Sent Mail<enter>' 'go to sent mail'
 macro index gd '<change-folder>=[Gmail]/Drafts<enter>' 'go to drafts'
 macro index gI '<change-folder>Important<enter>' 'go to important'

@@ -52,7 +52,7 @@ set tmpdir = '/tmp/neomutt'
 set status_chars = "─*%A"
 set status_format = "─[ %f ]─%r─[ %u unread / %F flagged / %m total%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)? ]%>─[ %l ]─"
 set date_format = "%Y-%m-%d %H:%M"
-set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %?M?(%M) ?%s"
+set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %?M?(%M) ?%?Y?[%Y] ?%?J?[%J] ?%s"
 set uncollapse_jump
 set sort_re
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
@@ -80,3 +80,5 @@ set sidebar_width = 25
 set sidebar_divider_char = ' | '
 set sidebar_indent_string = '  '
 set sidebar_format = "%D %* [%?N?%N / ?%S]"
+
+set hidden_tags = "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
