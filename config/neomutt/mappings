@@ -68,13 +68,12 @@ macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>" 
 
 macro pager,attach,compose \Co "<enter-command>unset wait_key<enter><pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
-bind index y modify-labels
+bind index,pager L modify-labels
 
 bind index x entire-thread
 
 bind index q noop
-bind pager Q noop
-bind index Q quit
+bind index,pager Q quit
 
 bind index z noop
 bind index zt current-top

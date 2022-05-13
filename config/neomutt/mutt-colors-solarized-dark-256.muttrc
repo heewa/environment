@@ -33,14 +33,14 @@ color index         color23         color234        "~(~U|~N)"                  
 color index         color60         color234        "~(~F)"                     # thread w flagged
 color index         color96         color234        "~(~F(~U|~N))"              # thread w flagged & unread/new
 
-color index         color37         color234        "(~U|~N)"                   # unread/new messages
+color index    bold color37         color234        "(~U|~N)"                   # unread/new messages
 color index         color98         color234        "~F"                        # flagged messages
-color index         color207        color234        "~(~F)(~U|~N)"              # unread/new in thread w flagged
+color index    bold color207        color234        "(~F)(~U|~N)"               # flagged & unread/new
 
 color index         color245        color238        "~v"                        # collapsed thread
-color index         color37         color238        "~v~(~U|~N)"                # collapsed thread w unread/new
+color index    bold color37         color238        "~v~(~U|~N)"                # collapsed thread w unread/new
 color index         color98         color238        "~v~(~F)"                   # collapsed thread w flagged
-color index         color207        color238        "~v(~(~F)~(~U|~N))"         # collapsed thread w flagged & unread/new
+color index    bold color207        color238        "~v(~(~F)~(~U|~N))"         # collapsed thread w flagged & unread/new
 color index         color136        color160        "~v~(~D)"                   # collapsed thread with deleted
 
 # Messages being worked on:
@@ -55,11 +55,11 @@ color index_tags    color25         color234
 
 # status bar -----------------------------------------------------------
 color status        color180        color235
-color status        color37         color235        "[1-9][0-9]* unread"
-color status        color197        color235        "\\([0-9]+ to delete\\)"
-color status        color221        color235        "\\([0-9]+ tagged\\)"
+color status   bold color37         color235        "[1-9][0-9]* unread"
+color status   bold color197        color235        "\\([0-9]+ to delete\\)"
+color status   bold color221        color235        "\\([0-9]+ tagged\\)"
 color status        color98         color235        "[1-9][0-9]* flagged"
-color status        color207        color235        "\\([0-9]+ postponed\\)"
+color status   bold color207        color235        "\\([0-9]+ postponed\\)"
 
 
 # message headers ------------------------------------------------------
@@ -67,7 +67,7 @@ color status        color207        color235        "\\([0-9]+ postponed\\)"
 color hdrdefault    color245        color234
 color header        color245        color234        "^"
 color header        color123        color234        "^From:"
-color header        color80         color234        "^Subject:"
+color header   bold color80         color234        "^Subject:"
 color header        color78         color234        "^X-Label:"
 
 

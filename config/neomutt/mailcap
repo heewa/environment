@@ -7,7 +7,7 @@ text/*; vim %s
 image/*; /usr/bin/display %s
 #image/*; anytopnm %s | pnmscale -xsize 80 -ysize 50 | ppmtopgm | pgmtopbm | pbmtoascii; copiousoutput
 #image/*; /usr/bin/asciiview %s; copiousoutput
-image/*; /usr/bin/img2txt -f utf8 %s; copiousoutput
+image/*; /usr/bin/img2txt -f utf8 %s; copiousoutput; x-neomutt-nowrap
 application/pdf; /usr/bin/evince %s; nametemplate=%s.pdf
 application/pdf; /usr/bin/pdftotext -layout %s -; copiousoutput; nametemplate=%s.pdf
 application/postscript; /usr/bin/ps2ascii %s; copiousoutput
