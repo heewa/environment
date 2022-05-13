@@ -1,23 +1,5 @@
 # vim: filetype=muttrc
 
-# custom body highlights -----------------------------------------------
-# highlight my name and other personally relevant strings
-#color body          color136        color234        "(ethan|schoonover)"
-# custom index highlights ----------------------------------------------
-# messages which mention my name in the body
-#color index         color136        color234        "~b \"phil(_g|\!| gregory| gold)|pgregory\" !~N !~T !~F !~p !~P"
-#color index         J_cream         color230        "~b \"phil(_g|\!| gregory| gold)|pgregory\" ~N !~T !~F !~p !~P"
-#color index         color136        color37         "~b \"phil(_g|\!| gregory| gold)|pgregory\" ~T !~F !~p !~P"
-#color index         color136        J_magent        "~b \"phil(_g|\!| gregory| gold)|pgregory\" ~F !~p !~P"
-## messages which are in reference to my mails
-#color index         J_magent        color234        "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" !~N !~T !~F !~p !~P"
-#color index         J_magent        color230        "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" ~N !~T !~F !~p !~P"
-#color index         J_magent        color37         "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" ~T !~F !~p !~P"
-#color index         J_magent        color160        "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" ~F !~p !~P"
-
-# for background in 16 color terminal, valid background colors include:
-# base03, bg, black, any of the non brights
-
 # basic colors ---------------------------------------------------------
 color normal        color241        color234
 color error         color160        color234
@@ -25,7 +7,7 @@ color tilde         color235        color234
 color message       color37         color234
 color markers       color160        color254
 color attachment    color254        color234
-color search        color61         color234
+color search        color233        color221
 color status        color241        color235
 color indicator     color234        color209
 color tree          color131        color234
@@ -36,11 +18,12 @@ mono  underline     underline
 mono  indicator     reverse
 mono  error         bold
 
+
 # index ----------------------------------------------------------------
 
 color index         color160        color234        "~A"                        # all messages
 color index         color240        color234        "~R"                        # read messages
-color index         color109        color234        "~P"                        # messages from me
+color index         color30         color234        "~P"                        # messages from me
 
 # particular kinds of emails (before status coloring)
 color index         color239        color234        "~h \"^List-I[Dd]:\""       # mailing lists
@@ -64,8 +47,11 @@ color index         color136        color160        "~v~(~D)"                   
 color index         color221        color234        "~T"                        # tagged messages
 color index         color235        color160        "~D"                        # deleted messages
 
-# Date portion of line always grey
-color index_date     color240        color234
+# Portions of the index line
+color index_date    color240        color234
+color index_label   color26         color234
+color index_tags    color25         color234
+
 
 # status bar -----------------------------------------------------------
 color status        color180        color235
@@ -75,6 +61,7 @@ color status        color221        color235        "\\([0-9]+ tagged\\)"
 color status        color98         color235        "[1-9][0-9]* flagged"
 color status        color207        color235        "\\([0-9]+ postponed\\)"
 
+
 # message headers ------------------------------------------------------
 
 color hdrdefault    color245        color234
@@ -82,6 +69,7 @@ color header        color245        color234        "^"
 color header        color123        color234        "^From:"
 color header        color80         color234        "^Subject:"
 color header        color78         color234        "^X-Label:"
+
 
 # body -----------------------------------------------------------------
 
@@ -95,17 +83,8 @@ color signature     color240        color234
 color bold          color235        color234
 color underline     color235        color234
 color normal        color248        color234
-#
-color body          color245        color234        "[;:][-o][)/(|]"    # emoticons
-color body          color245        color234        "[;:][)(|]"         # emoticons
-color body          color245        color234        "[*]?((N)?ACK|CU|LOL|SCNR|BRB|BTW|CWYL|\
-                                                     |FWIW|vbg|GD&R|HTH|HTHBE|IMHO|IMNSHO|\
-                                                     |IRL|RTFM|ROTFL|ROFL|YMMV)[*]?"
-color body          color245        color234        "[ ][*][^*]*[*][ ]?" # more emoticon?
-color body          color245        color234        "[ ]?[*][^*]*[*][ ]" # more emoticon?
 
-## pgp
-
+# pgp
 color body          color160        color234        "(BAD signature)"
 color body          color37         color234        "(Good signature)"
 color body          color234        color234        "^gpg: Good signature .*"
@@ -114,21 +93,42 @@ color body          color241        color160        "^gpg: BAD signature from.*"
 mono  body          bold                            "^gpg: Good signature"
 mono  body          bold                            "^gpg: BAD signature from.*"
 
-# Quotes
-color body          color253        color234        "^\\s*On\\s.*\\swrote:\\s*$"
-color body          color253        color234        "^\\s*---+\\sForwarded message\\s---+\\s*$"
+# Quotes, including ones that are line wrapped
+color body          color23         color234        "^(\\s|>)*On\\s.*\\swrote:\\s*$"
+color body          color23         color234        "^(\\s|>)*On\\s.*(\\sat|,)\\s[0-9]{1,2}:[0-9]{2}(\\s+[AaPp][Mm])?(\\s|,).*"
+color body          color23         color234        "^(\\s|>)*---+\\sForwarded message\\s---+\\s*$"
 
-# Links from html rendering
-color body          color209        color234        "\\[[0-9]+\\]"
+#
+# Content nicities
+#
 
-# Slightly simplified URL regex
-color body          color209        color234        "https?://(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-z0-9@:%_\\+.~#()?&//=]*"
+# links from html rendering
+color body          color131        color234        "\\[[0-9]+\\]"
 
-# Basic email regex
-color body          color209        color234        "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}"
+# slightly simplified url regex
+color body          color131        color234        "https?://(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[A-Za-z]{2,6}\\b[-A-Za-z0-9@:%_\\+.~#()?&//=]*"
 
-# Smilies
-color body          color178        color234        "(^|\\s)[;:]-?[})>{(<|]"
+# basic email regex
+color body          color131        color234        "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}"
 
-# Hearts
+# smilies
+color body          color173        color234        "(^|\\s)[;:]-?[})>{(<|]"
+
+# hearts
 color body          color141        color234        "(^|\\s)(<3(\\s|!|$))+"
+
+# emphasis
+color body          color111        color234        "(^|\\s)\\*{1,4}\\s?\\S+\\s?\\*{1,4}(\\s|[.,?!]|$)"
+color body          color111        color234        "(^|\\s)_\\S+_+(\\s|[.,?!]|$)"
+
+
+# attachment headers in pager ------------------------------------------
+
+color attach_headers color241       color234        "^\\[-- Autoview using .*"
+color attach_headers color241       color234        "^\\[-- Attachment #[0-9]+:?"
+color attach_headers color241       color234        "^\\[-- "
+color attach_headers color241       color234        " --\\]$"
+color attach_headers color131       color234        "Type: [a-z]+/[a-z0-9\-]+"
+color attach_headers color241       color234        ", Encoding: [^,]+, "
+color attach_headers color131       color234        "Size: [0-9.]+[A-Za-z]{0,3}"
+color attach_headers color203       color234        "[A-Za-z0-9/]+ is unsupported ([^)]+)"
