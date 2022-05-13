@@ -46,6 +46,8 @@ set message_cachedir = "~/.permcache/neomutt/messages/"
 set header_cache = "~/.permcache/neomutt/headers/"
 set header_cache_backend = lmdb
 
+unset thorough_search  # faster index patterns, like for coloring
+
 set tmpdir = '/tmp/neomutt'
 
 # status bar, date format, finding stuff etc.
