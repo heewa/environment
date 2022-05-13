@@ -37,7 +37,7 @@ bind editor \Ct complete
 #
 
 bind index,pager <tab> sync-mailbox
-macro index,pager S '<shell-escape>mbsync -a; notmuch new<enter>' 'sync email'
+macro index,pager S '<shell-escape>/usr/bin/mbsync -a; ~/.config/neomutt/post_sync_mail.sh<enter>' 'sync email'
 macro index s <vfolder-from-query> 'search'
 bind index,pager '!' flag-message
 bind index D delete-message
