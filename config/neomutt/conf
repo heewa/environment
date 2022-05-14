@@ -1,16 +1,91 @@
 # vim: filetype=muttrc
 
-set realname = 'Heewa Barfchin'
+#-------------- System Behavior
+
+# keep cache in a permanent place, since mailboxes can be huge
+set message_cachedir = "~/.permcache/neomutt/messages/"
+set header_cache = "~/.permcache/neomutt/headers/"
+set header_cache_backend = lmdb
+
+set tmpdir = '/tmp/neomutt'
+
+set mailcap_path = ~/.config/neomutt/mailcap:/etc/mailcap
 
 #set sleep_time = 0  # avoid pausing to display messages/transitions
 set beep = no
+set timeout = 3  # limit waiting for user input, so other things can be done
+
+#-------------- General Behavior
+
+set charset = 'utf-8'
+set send_charset = 'utf-8:iso-8859-1:us-ascii'
+set assumed_charset = 'iso-8859-1'
+
+unset thorough_search  # faster index patterns, like for coloring
+
+set query_command = "echo '' && notmuch address from:/%s/"
+set query_format="%4c %t %-70.70a %-70.70n %?e?(%e)?"
+
+unset mark_old
+
+#-------------- Index
+
+set sort = threads
+set sort_aux = reverse-last-date-received
+unset sort_re  # only thread by subject if it starts with the configured prefixes
+#set strict_threads  # don't thread based on subject string matching
+
+set date_format = "%Y-%m-%d %H:%M"
+set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %?M?(%M) ?%?Y?[%Y] ?%?J?[%J] ?%s"
+
+set hidden_tags = "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
+
+#-------------- Status Bar
+
+set status_chars = "─*%A"
+set status_format = "─[ %f ]─%r─[ %u unread / %F flagged / %m total%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)? ]%>─[ %l ]─"
+
+#-------------- Pager
 
 auto_view = text/html image/gif application/postscript application/pdf application/x-gunzip application/x-tar-gz application/ics text/calendar
 alternative_order text/html text/enriched text/plain text
 
-unset mark_old
+set pager_index_lines = 5  # show some of index in pager
+set pager_context = 5
+set pager_stop  # don't move to next email after scrolling past end of one
+set menu_scroll  # scroll better
+set tilde  # show ~ after body on empty lines
+unset markers  # show + on wrapped lines
 
-set timeout = 3  # limit waiting for user input, so other things can be done
+#-------------- Headers
+
+ignore *
+unignore from: to: cc: bcc: date: subject: X-Mailer:
+unhdr_order *
+hdr_order from: to: cc: bcc: date: X-Mailer: subject:
+
+#-------------- Threads
+
+set sort_re
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+
+set collapse_all  # collapse threads when entering folder
+set uncollapse_jump  # jump to unread when uncollapsing
+
+#-------------- Sidebar
+
+unset sidebar_visible
+set sidebar_short_path
+unset sidebar_folder_indent
+set sidebar_width = 25
+set sidebar_divider_char = ' | '
+set sidebar_indent_string = '  '
+set sidebar_format = "%D %* [%?N?%N / ?%S]"
+
+#-------------- Composing
+
+set realname = 'Heewa Barfchin'
 
 set edit_headers  # include headers when composing
 set fast_reply  # skip to compose when replying
@@ -25,62 +100,3 @@ set forward_decode
 set forward_quote
 set text_flowed
 unset mime_forward
-
-set sort = threads
-set sort_aux = reverse-last-date-received
-unset sort_re  # only thread by subject if it starts with the configured prefixes
-#set strict_threads  # don't thread based on subject string matching
-
-set mailcap_path = ~/.config/neomutt/mailcap:/etc/mailcap
-
-set query_command = "echo '' && notmuch address from:/%s/"
-set query_format="%4c %t %-70.70a %-70.70n %?e?(%e)?"
-
-set charset = 'utf-8'
-set send_charset = 'utf-8:iso-8859-1:us-ascii'
-set assumed_charset = 'iso-8859-1'
-
-# Caching
-# keep it in a permanent place, since mailboxes can be huge
-set message_cachedir = "~/.permcache/neomutt/messages/"
-set header_cache = "~/.permcache/neomutt/headers/"
-set header_cache_backend = lmdb
-
-unset thorough_search  # faster index patterns, like for coloring
-
-set tmpdir = '/tmp/neomutt'
-
-# status bar, date format, finding stuff etc.
-set status_chars = "─*%A"
-set status_format = "─[ %f ]─%r─[ %u unread / %F flagged / %m total%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)? ]%>─[ %l ]─"
-set date_format = "%Y-%m-%d %H:%M"
-set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %?M?(%M) ?%?Y?[%Y] ?%?J?[%J] ?%s"
-set uncollapse_jump
-set sort_re
-set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
-set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
-
-# Pager View Options
-set pager_index_lines = 5  # show some of index in pager
-set pager_context = 5
-set pager_stop  # don't move to next email after scrolling past end of one
-set menu_scroll  # scroll better
-set tilde  # show ~ after body on empty lines
-unset markers  # show + on wrapped lines
-
-# email headers and attachments
-ignore *
-unignore from: to: cc: bcc: date: subject: X-Mailer:
-unhdr_order *
-hdr_order from: to: cc: bcc: date: X-Mailer: subject:
-
-# sidebar patch config
-#set sidebar_visible
-set sidebar_short_path
-unset sidebar_folder_indent
-set sidebar_width = 25
-set sidebar_divider_char = ' | '
-set sidebar_indent_string = '  '
-set sidebar_format = "%D %* [%?N?%N / ?%S]"
-
-set hidden_tags = "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
