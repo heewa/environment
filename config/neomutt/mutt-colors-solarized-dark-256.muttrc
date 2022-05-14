@@ -39,34 +39,44 @@ color index         color24         color234        "~v~(%f known)"             
 color index    bold color37         color234        "~v~(~U|~N)"                # collapsed thread w unread/new
 color index         color98         color234        "~v~(~F)"                   # collapsed thread w flagged
 color index    bold color207        color234        "~v(~(~F)~(~U|~N))"         # collapsed thread w flagged & unread/new
-color index         color136        color160        "~v~(~D)"                   # collapsed thread with deleted
+color index         brightblack     color125        "~v~(~D)"                   # collapsed thread with deleted
 
 # Messages being worked on:
 color index         color221        color234        "~T"                        # tagged messages
-color index         color235        color160        "~D"                        # deleted messages
+color index         brightblack     color197        "~D"                        # deleted messages
 
 # Portions of the index line
+color index_flags   color240        color234 ".*"
 color index_date    color240        color234
 color index_label   color26         color234
+color index_tag     color240        color234 "replied"
+color index_tag     color240        color234 "attachment"
 color index_tags    color25         color234
 
 
 # status bar -----------------------------------------------------------
 color status        color180        color235
-color status   bold color37         color235        "[1-9][0-9]* unread"
-color status   bold color197        color235        "\\([0-9]+ to delete\\)"
-color status   bold color221        color235        "\\([0-9]+ tagged\\)"
-color status        color98         color235        "[1-9][0-9]* flagged"
-color status   bold color207        color235        "\\([0-9]+ postponed\\)"
+color status        brightblack     color179        " [0-9]+:[0-9]{2} [AP]M.*"
+color status        brightblack     color179        " [0-9]+[MK]? *$"
+color status        brightblack     color179        "^([^]*)[]" 1
+color status        color179        default         "(|)"
+color status        color179        default         "(|)"
+color status        color201        default         " "
+color status        color37         default         "\s* [0-9]+\s*"
+color status   bold color37         default         "[1-9][0-9]* unread"
+color status        color197        default         "\s* [0-9]+\s*"
+color status   bold color197        default         "\\([0-9]+ to delete\\)"
+color status        color221        default         "\s* [0-9]+\s*"
+color status   bold color221        default         "\\([0-9]+ tagged\\)"
+color status        color98         default         "\s* [0-9]+\s*"
+color status        color98         default         "[1-9][0-9]* flagged"
+color status        color207        default         "\s* [0-9]+\s*"
+color status   bold color207        default         "\\([0-9]+ postponed\\)"
 
 
 # message headers ------------------------------------------------------
 
 color hdrdefault    color245        color234
-color header        color245        color234        "^"
-color header        color123        color234        "^From:"
-color header   bold color80         color234        "^Subject:"
-color header        color78         color234        "^X-Label:"
 
 
 # body -----------------------------------------------------------------

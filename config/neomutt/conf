@@ -28,6 +28,18 @@ set query_format="%4c %t %-70.70a %-70.70n %?e?(%e)?"
 
 unset mark_old
 
+#-------------- Tags
+
+set hidden_tags = "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
+
+tag-transforms "replied" "↻ " \
+               "attachment" "" \
+               "git" ""
+
+tag-formats "replied" "GR" \
+            "attachment" "GA" \
+            "git" "GG"
+
 #-------------- Index
 
 set sort = threads
@@ -36,14 +48,23 @@ unset sort_re  # only thread by subject if it starts with the configured prefixe
 #set strict_threads  # don't thread based on subject string matching
 
 set date_format = "%Y-%m-%d %H:%M"
-set index_format = "[%Z] %?X?A&-? %<[y?%<[m?%<[d?%[%-2I:%M %p]&%[  %a %-2d]>&%[ %-3b  %-2d]>&%[%-y/%2m/%2d]> %-20.20F  %?M?+%-2M&   ? %?J?[%J] ?%s"
+#set index_format  = "%<[y?%<[m?%<[d?%[%-2I:%M %p]&%[  %a %-2d]>&%[ %-3b  %-2d]>&%[%-y/%2m/%2d]> "
+set index_format  = "%<[y?%<[d?%[%-2I:%M %p]&%[  %-3b %-2d]>&%[%-y/%2m/%2d]> "
+set index_format += "%T %-20.20F "
+set index_format += "%?M?+%-2M&   ? %?GA?%GA& ?%zc "
+set index_format += "%?J?[%J] ?%s"
 
-set hidden_tags = "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
+set to_chars = ""
+set crypt_chars = " "
+set flag_chars = "      "
 
 #-------------- Status Bar
 
 set status_chars = "─*%A"
 set status_format = "─[ %f ]─%r─[ %u unread / %F flagged / %m total%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)? ]%>─[ %l ]─"
+
+set status_chars = " "
+set status_format = " %f  %?r?%r &  ?  %u   %F   %m  %?d? %d  ?%?t? %t  ?%?p? %p  ? %>   %l "
 
 #-------------- Pager
 
@@ -56,6 +77,8 @@ set pager_stop  # don't move to next email after scrolling past end of one
 set menu_scroll  # scroll better
 set tilde  # show ~ after body on empty lines
 unset markers  # show + on wrapped lines
+
+set pager_format = " %?GA?%GA& ?%?zc?%zc& ?%T %n  %s%*   %[%-I:%M %p %a %-d %b %Y] "
 
 #-------------- Headers
 
