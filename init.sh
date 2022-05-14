@@ -20,15 +20,19 @@ if [[ "$DISTRO" == 'ubuntu' ]]; then
     sudo apt update
 
     HEADER 'Packages'
-    sudo apt install golang-go git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq qt5-style-plugins isync notmuch libsecret-tools caca-utils khal
+    sudo apt install golang-go git curl neovim tmux xsel wl-clipboard profile-sync-daemon jq qt5-style-plugins isync notmuch libsecret-tools caca-utils
 
     HEADER 'Services'
     systemctl --user enable mbsync.service
     systemctl --user enable mbsync.timer
     systemctl --user enable goimapnotify@heewab.service
+    systemctl --user enable vdirsyncer.service
+    systemctl --user enable vdirsyncer.timer
     systemctl --user start mbsync.service
     systemctl --user start mbsync.timer
     systemctl --user start goimapnotify@heewab.service
+    systemctl --user start vdirsyncer.service
+    systemctl --user start vdirsyncer.timer
 
 elif [[ "$DISTRO" == 'fedora' ]]; then
 
@@ -63,5 +67,8 @@ elif [[ "$OS" = 'Darwin' ]]; then
     pip install --upgrade awscli
 
 fi
+
+pip install pipx
+pipx install vdirsyncer[google] khal
 
 go install gitlab.com/shackra/goimapnotify@latest

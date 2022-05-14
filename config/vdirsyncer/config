@@ -1,0 +1,34 @@
+[general]
+status_path = "~/.local/state/vdirsyncer/status"
+
+[pair heewab_gmail_cal]
+a = "heewab_gmail_cal_local"
+b = "heewab_gmail_cal_remote"
+collections = ["from a", "from b"]
+metadata = ["displayname", "color"]
+conflict_resolution = ["command", "vimdiff"]
+
+[storage heewab_gmail_cal_local]
+type = "filesystem"
+path = "~/.var/calendars/heewab_gmail"
+fileext = ".ics"
+
+[storage heewab_gmail_cal_remote]
+type = "google_calendar"
+token_file = "~/.local/state/vdirsyncer/heewab_gmail_cal.tokens"
+client_id.fetch = ["command", "keyring", "get", "heewab_gmail_cal", "clientid"]
+client_secret.fetch = ["command", "keyring", "get", "heewab_gmail_cal", "clientsecret"]
+
+[pair meetups]
+a = "meetups_remote"
+b = "meetups_local"
+collections = null
+
+[storage meetups_remote]
+type = "http"
+url = "https://www.meetup.com/events/ical/7549220/419764125ea2af458b9a1a826faf11ab66e4857c/going"
+
+[storage meetups_local]
+type = "filesystem"
+path = "~/.var/calendars/meetups"
+fileext = ".ics"

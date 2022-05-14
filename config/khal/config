@@ -1,0 +1,38 @@
+[calendars]
+
+  [[heewa.b]]
+    path = ~/.var/calendars/heewab_gmail/heewa.b@gmail.com
+    color = 38
+    priority = 20
+
+  [[Meetups]]
+    path = ~/.var/calendars/meetups
+    priority = 9
+    color = 42
+    readonly = True
+
+  [[TWC]]
+    path = ~/.var/calendars/heewab_gmail/techworkerscoalitionnyc@gmail.com
+    priority = 8
+    readonly = True
+
+  [[TWC Members]]
+    path = ~/.var/calendars/heewab_gmail/rmfemtav6d9a61ue5d80e8ebno@group.calendar.google.com
+    priority = 8
+    readonly = True
+
+  [[Holidays]]
+    path = ~/.var/calendars/heewab_gmail/cln2stbjc4hmgrrcd5i62ua0ctp6utbg5pr2sor1dhimsp31e8n6errfctm6abj3dtmg@virtual
+    priority = 5
+    readonly = True
+
+[default]
+  default_calendar = heewa.b
+
+[locale]
+  firstweekday = 0
+  timeformat = %I:%M %p
+  dateformat = %Y-%m-%d
+  longdateformat = %Y-%m-%d
+  datetimeformat = %Y-%m-%d %I:%M %p
+  longdatetimeformat = %Y-%m-%d %I:%M %p

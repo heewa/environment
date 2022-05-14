@@ -1,0 +1,10 @@
+[Unit]
+Description=Calendar synchronization service
+
+[Service]
+Type=oneshot
+ExecStart=/home/heewa/.local/bin/vdirsyncer sync
+ExecStartPost=/home/heewa/.local/bin/khal at
+
+[Install]
+WantedBy=default.target
