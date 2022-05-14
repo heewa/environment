@@ -23,10 +23,7 @@ mono  error         bold
 
 color index         color160        color234        "~A"                        # all messages
 color index         color240        color234        "~R"                        # read messages
-color index         color30         color234        "~P"                        # messages from me
-
-# particular kinds of emails (before status coloring)
-color index         color239        color234        "~h \"^List-I[Dd]:\""       # mailing lists
+color index         color243        color234        "~P"                        # messages from me
 color index         color24         color234        "%f known"                  # from 'known' group
 
 color index         color23         color234        "~(~U|~N)"                  # thread w unread/new
@@ -37,10 +34,11 @@ color index    bold color37         color234        "(~U|~N)"                   
 color index         color98         color234        "~F"                        # flagged messages
 color index    bold color207        color234        "(~F)(~U|~N)"               # flagged & unread/new
 
-color index         color245        color238        "~v"                        # collapsed thread
-color index    bold color37         color238        "~v~(~U|~N)"                # collapsed thread w unread/new
-color index         color98         color238        "~v~(~F)"                   # collapsed thread w flagged
-color index    bold color207        color238        "~v(~(~F)~(~U|~N))"         # collapsed thread w flagged & unread/new
+color index         color240        color234        "~v"                        # collapsed thread
+color index         color24         color234        "~v~(%f known)"             # collapsed thread with mail from 'known' group
+color index    bold color37         color234        "~v~(~U|~N)"                # collapsed thread w unread/new
+color index         color98         color234        "~v~(~F)"                   # collapsed thread w flagged
+color index    bold color207        color234        "~v(~(~F)~(~U|~N))"         # collapsed thread w flagged & unread/new
 color index         color136        color160        "~v~(~D)"                   # collapsed thread with deleted
 
 # Messages being worked on:

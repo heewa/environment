@@ -36,7 +36,7 @@ unset sort_re  # only thread by subject if it starts with the configured prefixe
 #set strict_threads  # don't thread based on subject string matching
 
 set date_format = "%Y-%m-%d %H:%M"
-set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %?M?(%M) ?%?Y?[%Y] ?%?J?[%J] ?%s"
+set index_format = "[%Z] %?X?A&-? %<[y?%<[m?%<[d?%[%-2I:%M %p]&%[  %a %-2d]>&%[ %-3b  %-2d]>&%[%-y/%2m/%2d]> %-20.20F  %?M?+%-2M&   ? %?J?[%J] ?%s"
 
 set hidden_tags = "inbox,unread,draft,flagged,passed,replied,signed,encrypted,attachment"
 
