@@ -9,7 +9,7 @@ color markers       color160        color254
 color attachment    color254        color234
 color search        color233        color221
 color status        color241        color235
-color indicator     color234        color209
+color indicator     default         color237
 color tree          color131        color234
 
 # basic monocolor screen
