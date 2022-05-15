@@ -35,7 +35,15 @@ HEADER 'Configs'
     done
 )
 
-SYMLINK $HOME/.config/FreeCAD $HOME/.FreeCAD
+HEADER 'Extra Config Symlinks'
+(
+    SYMLINK $HOME/.config/nvim $HOME/.vim
+    SYMLINK $ENVDIR/config/nvim/init.vim $HOME/.vimrc
+
+    SYMLINK $ENVDIR/config/ansible/ansible.cfg $HOME/.ansible.cfg
+
+    SYMLINK $HOME/.config/FreeCAD $HOME/.FreeCAD
+)
 
 HEADER 'Slow-sync Configs'
 (
@@ -94,8 +102,6 @@ fi
 if [[ $(command -v nvim) ]]; then
     SYMLINK "$(readlink -f $(command -v nvim))" $HOME/.local/bin/vim
 fi
-SYMLINK $HOME/.config/nvim $HOME/.vim
-SYMLINK $ENVDIR/config/nvim/init.vim $HOME/.vimrc
 
 HEADER '~/.rc Files'
 (
