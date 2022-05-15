@@ -98,9 +98,12 @@ SYMLINK $HOME/.config/nvim $HOME/.vim
 SYMLINK $ENVDIR/config/nvim/init.vim $HOME/.vimrc
 
 HEADER '~/.rc Files'
-for F in $(ls $ENVDIR/dotfiles); do
-    SYMLINK $ENVDIR/dotfiles/$F $HOME/.$F
-done
+(
+    cd $ENVDIR/dotfiles
+    for F in $(find . -type f | cut -sd/ -f2-); do
+        SYMLINK $ENVDIR/dotfiles/$F $HOME/.$F
+    done
+)
 
 if [[ "$ENVTYPE" != 'minimal' ]]; then
 
