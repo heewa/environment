@@ -49,7 +49,7 @@ unset sort_re  # only thread by subject if it starts with the configured prefixe
 
 set date_format = "%Y-%m-%d %H:%M"
 #set index_format  = "%<[y?%<[m?%<[d?%[%-2I:%M %p]&%[  %a %-2d]>&%[ %-3b  %-2d]>&%[%-y/%2m/%2d]> "
-set index_format  = "%<[y?%<[d?%[%-2I:%M %p]&%[  %-3b %-2d]>&%[%-y/%2m/%2d]> "
+set index_format  = "%<[y?%<[d?%[%-2I:%M %p]&%[  %-3b %-2d]>&%[%2y/%2m/%2d]> "
 set index_format += "%T %-20.20F "
 set index_format += "%?M?+%-2M&   ? %?GA?%GA& ?%zc "
 set index_format += "%?J?[%J] ?%s"
