@@ -26,7 +26,7 @@ HEADER 'Configs'
 # app might create won't end up in this repo
 (
     # Change dirs so find gives relative paths
-    cd $ENVDIR/config
+    cd $ENVDIR/config || FAIL
 
     for APP in $(find . -maxdepth 1 -mindepth 1 -type d | xargs basename -a | tr '\n' ' '); do
         for FILE in $(find $APP -type f); do
@@ -47,7 +47,7 @@ HEADER 'Extra Config Symlinks'
 
 HEADER 'Slow-sync Configs'
 (
-    cd $ENVDIR/slow_config
+    cd $ENVDIR/slow_config || FAIL
 
     for F in $(find . -type f | cut -b3- ); do
         if [[ ! -f "$HOME/.config/$F" ]]; then
@@ -62,12 +62,12 @@ HEADER 'Slow-sync Configs'
 
 HEADER 'Synced Configs'
 (
-    cd $HOME/Sync/config
+    cd $HOME/Sync/config || FAIL
 
     for F in $(find . -type f | cut -b3- ); do
         SYMLINK $HOME/Sync/config/$F $HOME/.config/$F
     done
-)
+) || FAIL SYNCDIR
 
 if [[ "$ENVTYPE" == 'home' && "$OS" == 'Linux' ]]; then
 
@@ -105,7 +105,7 @@ fi
 
 HEADER '~/.rc Files'
 (
-    cd $ENVDIR/dotfiles
+    cd $ENVDIR/dotfiles || FAIL
     for F in $(find . -type f | cut -sd/ -f2-); do
         SYMLINK $ENVDIR/dotfiles/$F $HOME/.$F
     done

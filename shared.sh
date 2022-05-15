@@ -30,7 +30,9 @@ FAIL () {
     local IGNORE_VAR="IGNORE_${ERR_TYPE}_ERRS"
     ERRS=$(($ERRS + $ERR))
 
-    if [[ "$ERRS" && ! "${!IGNORE_VAR}" ]]; then
+    if [[ ! "$ERR_TYPE" ]]; then
+        exit $ERRS
+    elif [[ "$ERRS" && ! "${!IGNORE_VAR}" ]]; then
         exec 1>&2
 
         echo
