@@ -70,7 +70,13 @@ elif [[ "$OS" = 'Darwin' ]]; then
 
 fi
 
+if [[ "$ENVTYPE" == 'home' ]]; then
+    pip install --user ansible paramiko
+fi
+
 if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
+    pip install argcomplete
+    activate-global-python-argcomplete --user
 
     pip install pipx
     pipx list | grep vdirsyncer || pipx install vdirsyncer[google]
