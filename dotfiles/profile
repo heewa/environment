@@ -57,3 +57,7 @@ export NINJA_STATUS='[%u/%r/%f]'
 
 # Use gtk style with QT apps. Needs 'qt5-style-plugins' package
 export QT_QPA_PLATFORMTHEME=gtk2
+
+if [ -f "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
