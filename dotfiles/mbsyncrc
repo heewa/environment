@@ -28,7 +28,7 @@ Far :heewab-remote:
 Near :heewab-local:
 # Exclude everything under the internal [Gmail] folder, except the interesting folders
 #Patterns * ![Gmail]* "[Gmail]Drafts" "[Gmail]/Sent Mail" "[Gmail]/Starred"
-Patterns INBOX "[Gmail]/Drafts" "[Gmail]/Sent Mail" "[Gmail]/Starred"
+Patterns INBOX "[Gmail]/Drafts" "[Gmail]/Sent Mail" "[Gmail]/Starred" "Reference/*"
 # Or include everything
 #Patterns *
 # Automatically create missing mailboxes, both locally and on the server

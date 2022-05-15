@@ -26,11 +26,19 @@ mailboxes =[Gmail]/Drafts =[Gmail]/Sent\ Mail
 # Virtual Folders
 set mail_check_stats = yes  # update counts of virtual mailboxes
 set nm_default_url = "notmuch:///home/heewa/.mail"
+set virtual_spool_file
+
 named-mailboxes "Inbox" "notmuch://?query=tag:inbox"
 named-mailboxes "Unread" "notmuch://?query=tag:unread"
 named-mailboxes "Important" "notmuch://?query=tag:flagged"
 named-mailboxes "ToDo" "notmuch://?query=from:heewa.b@gmail.com to:heewa.b@gmail.com"
-set virtual_spool_file
+named-mailboxes "Ref/Tax" "notmuch://?query=folder:heewab/Reference/Tax"
+named-mailboxes "Ref/Documents" "notmuch://?query=folder:heewab/Reference/Documents"
+named-mailboxes "Ref/Employment" "notmuch://?query=folder:heewab/Reference/Employment"
+named-mailboxes "Ref/Health" "notmuch://?query=folder:heewab/Reference/Health"
+named-mailboxes "Ref/JobSearch" "notmuch://?query=folder:heewab/Reference/JobSearch"
+named-mailboxes "Ref/Receipts" "notmuch://?query=folder:heewab/Reference/Receipts"
+named-mailboxes "Ref/Records" "notmuch://?query=folder:heewab/Reference/Records"
 
 # Don't cache messages, since they're local already
 unset message_cachedir
