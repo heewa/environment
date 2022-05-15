@@ -76,3 +76,11 @@ GIT_SHALLOW() {
         fi
     ) || FAIL "$ERR_TYPE"
 }
+
+
+CHECK_ENVTYPE () {
+    if [[ "$ENVTYPE" != 'home' && "$ENVTYPE" != 'work' && "$ENVTYPE" != 'server' && "$ENVTYPE" != 'minimal' ]]; then
+        echo "Unknown ENVTYPE '$ENVTYPE'" >&2
+        exit -1
+    fi
+}
