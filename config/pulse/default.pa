@@ -1,0 +1,4 @@
+.include /etc/pulse/default.pa
+
+# Disable auto-switching headset to HFP
+load-module module-bluetooth-policy auto_switch=false
