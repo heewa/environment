@@ -25,6 +25,7 @@ color index         color160        color234        "~A"                        
 color index         color240        color234        "~R"                        # read messages
 color index         color243        color234        "~P"                        # messages from me
 color index         color24         color234        "%f known"                  # from 'known' group
+color index         color25         color234        "~P %t known"               # messages from me to 'known' group
 
 color index         color23         color234        "~(~U|~N)"                  # thread w unread/new
 color index         color60         color234        "~(~F)"                     # thread w flagged
