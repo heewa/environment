@@ -71,6 +71,11 @@ HEADER 'Synced Configs'
 
 if [[ "$ENVTYPE" == 'home' && "$OS" == 'Linux' ]]; then
 
+    HEADER 'Sudoers'
+    for F in $(ls misc/sudoers.d); do
+        diff -u $PWD/misc/sudoers.d/$F /etc/sudoers.d/$F || FAIL SUDOERS
+    done
+
     HEADER 'Ram Disks'
     CHECK_FSTAB () {
         local MNT=$1
