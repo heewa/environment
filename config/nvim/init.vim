@@ -90,7 +90,8 @@ function! s:filetypeSettings()
 
     autocmd BufNewFile,BufRead neomutt-* setf mail
     autocmd BufNewFile,BufRead neomutt-* setlocal
-        \ tw=0 wm=0 fo=wq spell comments+=nb:>
+
+    autocmd BufNewFile,BufRead *.blist setlocal spell
 endfunction
 
 function! s:styleSettings()
