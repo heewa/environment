@@ -361,6 +361,9 @@ function! s:languagePlugins()
         let g:go_autodetect_gopath = 0 " Don't fuck with GOPATH
     endif
 
+    " Spellcheck dictionary for programming
+    Plug 'psliwka/vim-dirtytalk', { 'do': ':let &rtp = &rtp \| DirtytalkUpdate' }
+
     " Javascript
     Plug 'maxmellon/vim-jsx-pretty'
     Plug 'benjie/local-npm-bin.vim'
