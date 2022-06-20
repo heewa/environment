@@ -71,18 +71,21 @@ elif [[ "$OS" = 'Darwin' ]]; then
 fi
 
 if [[ "$ENVTYPE" == 'home' ]]; then
-    pip install --user ansible paramiko
+    pip install --user ansible paramiko || FAIL PIP
 fi
 
 if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
-    pip install argcomplete
-    activate-global-python-argcomplete --user
+    HEADER 'Python Packages'
+    (
+        pip install argcomplete
+        activate-global-python-argcomplete --user
 
-    pip install pipx
-    pipx list | grep vdirsyncer || pipx install vdirsyncer[google]
-    pipx list | grep khal || pipx install khal
+        pip install pipx
+        pipx list | grep vdirsyncer || pipx install vdirsyncer[google]
+        pipx list | grep khal || pipx install khal
+    ) || FAIL PIP
 
-    go install gitlab.com/shackra/goimapnotify@latest
+    go install gitlab.com/shackra/goimapnotify@latest || FAIL GO
 
     if [[ "$DISTRO" == 'ubuntu' ]]; then
 

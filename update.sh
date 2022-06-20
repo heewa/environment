@@ -62,18 +62,18 @@ HEADER 'Slow-sync Configs'
 
 HEADER 'Synced Configs'
 (
-    cd $HOME/Sync/config || FAIL
+    cd $HOME/Sync/config || FAIL SYNCDIR
 
     for F in $(find . -type f | cut -b3- ); do
-        SYMLINK $HOME/Sync/config/$F $HOME/.config/$F
+        SYMLINK $HOME/Sync/config/$F $HOME/.config/$F SYNCDIR
     done
-) || FAIL SYNCDIR
+)
 
 if [[ "$ENVTYPE" == 'home' && "$OS" == 'Linux' ]]; then
 
     HEADER 'Sudoers'
     for F in $(ls misc/sudoers.d); do
-        diff -u $PWD/misc/sudoers.d/$F /etc/sudoers.d/$F || FAIL SUDOERS
+        sudo diff -u $PWD/misc/sudoers.d/$F /etc/sudoers.d/$F || FAIL SUDOERS
     done
 
     HEADER 'Ram Disks'
