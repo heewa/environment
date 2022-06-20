@@ -8,6 +8,7 @@ shell:
         - if [[ $(/usr/bin/tmux lsc -t main) ]]; then exec /usr/bin/tmux new-session; else exec /usr/bin/tmux new-session -A -s main; fi
 
 window:
+    opacity: 0.90
     decorations: none
     dimensions:
         columns: 164
@@ -15,8 +16,6 @@ window:
     padding:
         x: 0
         y: 0
-
-background_opacity: 0.90
 
 mouse:
     hide_when_typing: true
