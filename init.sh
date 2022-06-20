@@ -41,6 +41,9 @@ elif [[ "$DISTRO" == 'fedora' ]]; then
     if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
         PKGS="$PKGS isync notmuch"
     fi
+    if [[ "$ENVTYPE" == 'home' ]]; then
+        PKGS="$PKGS syncthing"
+    fi
 
     sudo dnf install $PKGS
 
@@ -93,10 +96,14 @@ if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
 
         SERVICES='mbsync.service mbsync.timer goimapnotify@heewab.service vdirsyncer.service vdirsyncer.timer'
 
+        if [[ "$ENVTYPE" == 'home' ]]; then
+            SERVICES="$SERVICES syncthing.service"
+        fi
+
         echo 'Enabling:'
         for SERVICE in $SERVICES; do
             echo $SERVICE
-            systemctl --user enable $SERVICE
+            systemctl --user enable --now $SERVICE
         done
 
         echo
