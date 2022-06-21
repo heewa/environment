@@ -37,9 +37,11 @@ elif [[ "$DISTRO" == 'fedora' ]]; then
 
     HEADER 'Packages'
 
-    PKGS='neovim tmux'
+    PKGS='neovim tmux python3-pip neovim'
     if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
-        PKGS="$PKGS isync notmuch"
+	sudo dnf copr enable flatcap/neomutt
+
+        PKGS="$PKGS isync notmuch neomutt golang"
     fi
     if [[ "$ENVTYPE" == 'home' ]]; then
         PKGS="$PKGS syncthing"
