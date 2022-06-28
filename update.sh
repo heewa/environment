@@ -16,9 +16,6 @@ if [[ "$ENVTYPE" != 'server' ]]; then
     HEADER 'Basic Dirs'
     mkdir -pv $HOME/{src,build,bak,tmp,.cache,.config,.permcache,.local/bin} || FAIL DIR
 
-    HEADER 'Scripts'
-    SYMLINK $ENVDIR/scripts
-
 fi
 
 HEADER 'Configs'
@@ -66,6 +63,21 @@ HEADER 'Synced Configs'
 
     for F in $(find . -type f | cut -b3- ); do
         SYMLINK $HOME/Sync/config/$F $HOME/.config/$F SYNCDIR
+    done
+)
+
+HEADER 'Scripts'
+(
+    mkdir -p $HOME/scripts || FAIL SCRIPTS
+
+    cd $ENVDIR/scripts || FAIL SCRIPTS
+    for F in $(find . -type f | cut -b3- ); do
+        SYMLINK $ENVDIR/scripts/$F $HOME/scripts/$F SCRIPTS
+    done
+
+    cd $HOME/Sync/scripts || FAIL SYNCDIR
+    for F in $(find . -type f | cut -b3- ); do
+        SYMLINK $HOME/Sync/scripts/$F $HOME/scripts/$F SYNCDIR
     done
 )
 
