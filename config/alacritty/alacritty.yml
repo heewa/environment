@@ -54,6 +54,7 @@ key_bindings:
     - { key: Return, mods: Super, action: ToggleFullscreen }
     - { key: C, mods: Super, chars: "\x00[" }
     - { key: V, mods: Super, action: Paste }
+    - { key: Plus, mods: Control|Shift, action: IncreaseFontSize }
 
 #
 # Colors
