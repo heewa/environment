@@ -313,13 +313,18 @@ function! s:plugins()
     let g:neoformat_enabled_typescriptreact = ['prettier']
 
     " Colors
-    Plug 'tssm/fairyfloss.vim'
-    Plug 'romainl/flattened'
-    Plug 'morhetz/gruvbox'
-    Plug 'icymind/NeoSolarized'
-    Plug 'flazz/vim-colorschemes'
-    Plug 'chriskempson/base16-vim'
-    Plug 'reedes/vim-colors-pencil'
+    "Plug 'tssm/fairyfloss.vim'
+    "Plug 'romainl/flattened'
+    "Plug 'morhetz/gruvbox'
+    "Plug 'icymind/NeoSolarized'
+    "Plug 'flazz/vim-colorschemes'
+    "Plug 'reedes/vim-colors-pencil'
+
+    if has('nvim')
+        Plug 'rrethy/nvim-base16'
+    else
+        Plug 'chriskempson/base16-vim'
+    endif
 
     " Load local .lvimrc files from root up to current dir
     Plug 'embear/vim-localvimrc'
