@@ -250,12 +250,29 @@ function! s:postPlugins()
     " Regardless of colorscheme, let vim know we're using a dark background
     set background=dark
     colorscheme base16-tomorrow-night
+
+    if has('nvim')
+        try
+            call luaeval("require('gitsigns').setup()")
+        catch /^Vim(call):E5108:/
+        endtry
+
+        try
+            call luaeval("require('neogit').setup({ kind='split', sections = { stashes = { folded = false }, recent = { folded = false } } })")
+        catch /^Vim(call):E5108:/
+        endtry
+    endif
 endfunction
 
 function! s:plugins()
+    " Dependency for some lua plugins
+    Plug 'nvim-lua/plenary.nvim'
+
     " Git +/-/~ in gutter
     "Plug 'airblade/vim-gitgutter'
-    Plug 'mhinz/vim-signify'
+    Plug 'mhinz/vim-signify' ", has('nvim') ? {'on': []} : {}
+    "Plug 'lewis6991/gitsigns.nvim', has('nvim') ? {} : {'on': []}
+    Plug 'TimUntersberger/neogit', has('nvim') ? {} : {'on': []}
 
     " Git commands, like Gblame
     Plug 'tpope/vim-fugitive'
