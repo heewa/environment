@@ -88,6 +88,11 @@ if [[ "$ENVTYPE" == 'home' && "$OS" == 'Linux' ]]; then
         sudo diff -u $PWD/misc/sudoers.d/$F /etc/sudoers.d/$F || FAIL SUDOERS
     done
 
+    HEADER 'DNS'
+    for F in $(ls misc/resolved.conf.d); do
+        sudo diff -u $PWD/misc/resolved.conf.d/$F /etc/systemd/resolved.conf.d/$F || FAIL DNS
+    done
+
     HEADER 'Ram Disks'
     CHECK_FSTAB () {
         local MNT=$1
