@@ -24,23 +24,28 @@ mono  error         bold
 color index         color160        color234        "~A"                        # all messages
 color index         color240        color234        "~R"                        # read messages
 color index         color243        color234        "~P"                        # messages from me
-color index         color24         color234        "%f known"                  # from 'known' group
 color index         color25         color234        "~P %t known"               # messages from me to 'known' group
+color index         color89         color234        "~F"                        # flagged messages
 
 color index         color23         color234        "~(~U|~N)"                  # thread w unread/new
-color index         color60         color234        "~(~F)"                     # thread w flagged
+color index         color89         color234        "~(~F)"                     # thread w flagged
 color index         color96         color234        "~(~F(~U|~N))"              # thread w flagged & unread/new
 
 color index    bold color37         color234        "(~U|~N)"                   # unread/new messages
-color index         color98         color234        "~F"                        # flagged messages
-color index    bold color207        color234        "(~F)(~U|~N)"               # flagged & unread/new
+color index    bold color204        color234        "(~F)(~U|~N)"               # flagged & unread/new
 
 color index         color240        color234        "~v"                        # collapsed thread
-color index         color24         color234        "~v~(%f known)"             # collapsed thread with mail from 'known' group
 color index    bold color37         color234        "~v~(~U|~N)"                # collapsed thread w unread/new
 color index         color98         color234        "~v~(~F)"                   # collapsed thread w flagged
 color index    bold color207        color234        "~v(~(~F)~(~U|~N))"         # collapsed thread w flagged & unread/new
 color index         brightblack     color125        "~v~(~D)"                   # collapsed thread with deleted
+
+# From 'known' group
+color index         color24         color234        "%f known"                  # from 'known' group
+color index         color161        color234        "~F(%f known)"              # known flagged
+color index         color69         color234        "(~U|~N)(%f known)"         # known unread
+color index         color198        color234        "~F(~U|~N)(%f known)"       # known flagged unread
+color index         color24         color234        "~v~(%f known)"             # known collapsed thread
 
 # Messages being worked on:
 color index         color221        color234        "~T"                        # tagged messages
