@@ -39,9 +39,6 @@ function! s:basicSettings()
 
     set mouse=a
     set mousemodel=popup_setpos
-    if has("unix") && system("uname") == "Darwin\n"
-        set ttymouse=xterm2
-    endif
 
     " Completion options
     "   * show menu for more than 1 option
