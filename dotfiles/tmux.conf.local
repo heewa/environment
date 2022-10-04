@@ -1,3 +1,5 @@
+if '[ -e /opt/homebrew/bin/bash ]' 'set -g default-command /opt/homebrew/bin/bash'
+
 # Switch session & kill existing if nothing else attached
 bind-key C-k \
   if-shell "(($(tmux display -p '#{session_many_attached}') > 0))" \

@@ -65,7 +65,7 @@ elif [[ "$OS" = 'Darwin' ]]; then
 
     HEADER 'Homebrew Casks'
     for package in alacritty kitty; do
-        brew ls --versions $package || brew cask install $package
+        brew ls --versions $package || brew install --cask $package
     done
 
     HEADER 'Homebrew HEAD Packages'
