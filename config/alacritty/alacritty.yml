@@ -5,7 +5,7 @@ shell:
     program: /bin/bash
     args:
         - -lc
-        - if [[ $(/usr/bin/tmux lsc -t main) ]]; then exec /usr/bin/tmux new-session; else exec /usr/bin/tmux new-session -A -s main; fi
+        - if [[ $(/usr/bin/env tmux lsc -t main) ]]; then exec /usr/bin/env tmux new-session; else exec /usr/bin/env tmux new-session -A -s main; fi
 
 window:
     opacity: 0.90
@@ -29,10 +29,8 @@ font:
         family: UbuntuMono Nerd Font
     italic:
         style: Bold
-        family: Ubuntu Mono
     bold_italic:
         style: Bold Italic
-        family: Ubuntu Mono
     size: 12.0
 
 visual_bell:
@@ -55,6 +53,12 @@ key_bindings:
     - { key: C, mods: Super, chars: "\x00[" }
     - { key: V, mods: Super, action: Paste }
     - { key: Plus, mods: Control|Shift, action: IncreaseFontSize }
+    - { key: H, mods: Alt, chars: "\x1bh" }
+    - { key: J, mods: Alt, chars: "\x1bj" }
+    - { key: K, mods: Alt, chars: "\x1bk" }
+    - { key: L, mods: Alt, chars: "\x1bl" }
+    - { key: F, mods: Alt, chars: "\x1bf" }
+    - { key: B, mods: Alt, chars: "\x1bb" }
 
 #
 # Colors
