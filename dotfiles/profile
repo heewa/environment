@@ -11,13 +11,6 @@
 # This file must be compatible with non-bash things, like other shells and
 # other non-shell programs that check it for settings.
 
-#
-# Include private defs (not in main file cuz this one's in my public github).
-#
-if [ -f $HOME/.private_profile ]; then
-    source $HOME/.private_profile
-fi
-
 # Set based on work/home/personal-server/etc, for use in branching in rc files
 export HB_ENV='HOME'
 
@@ -60,4 +53,11 @@ export QT_QPA_PLATFORMTHEME=gtk2
 
 if [ -f "$HOME/.cargo/env" ]; then
     source "$HOME/.cargo/env"
+fi
+
+#
+# Include private defs
+#
+if [ -f $HOME/.private_profile ]; then
+    source $HOME/.private_profile
 fi
