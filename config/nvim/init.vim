@@ -249,6 +249,9 @@ function! s:postPlugins()
     colorscheme base16-tomorrow-night
 
     if has('nvim')
+        call luaeval("require('lspconfig').tsserver.setup{ cmd = { '/usr/bin/env', 'typescript-language-server', '--stdio' };  }")
+        "call luaeval("vim.lsp.set_log_level('debug')")
+
         try
             call luaeval("require('gitsigns').setup()")
         catch /^Vim(call):E5108:/
@@ -374,6 +377,8 @@ function! s:plugins()
 endfunction
 
 function! s:languagePlugins()
+    Plug 'neovim/nvim-lspconfig'
+
     " Go development
     if has('nvim')
         Plug 'fatih/vim-go'
