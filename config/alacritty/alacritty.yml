@@ -9,7 +9,7 @@ shell:
 
 window:
     opacity: 0.90
-    decorations: none
+    #decorations: none
     dimensions:
         columns: 164
         lines: 48
@@ -53,6 +53,7 @@ key_bindings:
     - { key: C, mods: Super, chars: "\x00[" }
     - { key: V, mods: Super, action: Paste }
     - { key: Plus, mods: Control|Shift, action: IncreaseFontSize }
+    - { key: N, mods: Super, action: SpawnNewInstance }
     - { key: A, mods: Alt, chars: "\x1ba" }
     - { key: B, mods: Alt, chars: "\x1bb" }
     - { key: C, mods: Alt, chars: "\x1bc" }
