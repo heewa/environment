@@ -11,9 +11,6 @@
 # This file must be compatible with non-bash things, like other shells and
 # other non-shell programs that check it for settings.
 
-# Set based on work/home/personal-server/etc, for use in branching in rc files
-export HB_ENV='HOME'
-
 export EDITOR=vim
 export VISUAL=vim
 export TZ=/usr/share/zoneinfo/America/New_York

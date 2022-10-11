@@ -8,6 +8,10 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+if [[ "$ENVTYPE" != 'home' && "$ENVTYPE" != 'work' && "$ENVTYPE" != 'server' ]]; then
+    echo "!!!! Unknown ENVTYPE '$ENVTYPE'. Set in ~/.private_profile" >&2
+fi
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -115,7 +119,7 @@ if [[ "$(command -v pyenv)" != "" ]]; then
     }
 fi
 
-if [[ "$HB_ENV" == 'HOME' ]]; then
+if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
     _GIT_PROMPT_DIR=''
     if [[ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]]; then
         _GIT_PROMPT_DIR="$HOME/.bash-git-prompt"
