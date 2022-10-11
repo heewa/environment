@@ -99,14 +99,22 @@ if [[ -f "$HOME/.emoji_vars.sh" ]]; then
     source "$HOME/.emoji_vars.sh"
 fi
 
-# Loading nvm slows down bash startup, so load it on demand
 export NVM_DIR="$HOME/.nvm"
-function nvm {
-    unset -f nvm
+function _load_nvm {
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-    nvm $@
 }
+
+if [[ ! -z "${SHOULD_LOAD_NVM:+set}" ]]; then
+    _load_nvm
+else
+    # Loading nvm slows down bash startup, so load it on demand
+    function nvm {
+        unset -f nvm
+        _load_nvm
+        nvm $@
+    }
+fi
 
 # Loading pyenv slows down bash startup, so load it on demand
 export PYENV_ROOT="$HOME/.pyenv"
