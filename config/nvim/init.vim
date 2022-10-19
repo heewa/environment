@@ -189,6 +189,8 @@ function! s:basicMaps()
     nnoremap <F5> :cprev<CR>
     nnoremap <F6> :cnext<CR>
 
+    nnoremap <Leader>c :cclose\|lclose<CR>
+
     " Search highlighting
     set nohlsearch
     nnoremap <F2> :set hlsearch<CR>*``
