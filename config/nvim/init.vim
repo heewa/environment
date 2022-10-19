@@ -66,7 +66,7 @@ function! s:indentSettings()
     set shiftwidth=4   " How much to indent by with stuff like <<, >>, etc
     set nocindent
 
-    autocmd FileType javascript,javascriptreact,jsx,json,typescript,typescriptreact,yaml,yml,css,html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType javascript,javascriptreact,jsx,json,typescript,typescriptreact,yaml,yml,css,scss,html setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 
     " Have vim write to original file instead of replacing with a new one, for
