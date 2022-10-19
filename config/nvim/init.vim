@@ -210,8 +210,8 @@ function! s:basicMaps()
     nnoremap <A-g> :Gdb<CR>
     nnoremap <A-u> :call TermDebugSendCommand('up')<CR>
     nnoremap <A-d> :call TermDebugSendCommand('down')<CR>
-    command -bar Tbreak :call TermDebugSendCommand('tbreak ' . line('.'))<CR>
-    command Jump :call TermDebugSendCommand('tbreak ' . line('.')) |
+    command! -bar Tbreak :call TermDebugSendCommand('tbreak ' . line('.'))<CR>
+    command! Jump :call TermDebugSendCommand('tbreak ' . line('.')) |
                 \ call TermDebugSendCommand('jump ' . line('.'))<CR>
 endfunction
 
