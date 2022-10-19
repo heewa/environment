@@ -245,26 +245,6 @@ function! s:mapWindowNavigation()
     endfor
 endfunction
 
-function! HeewaOnLspAttach(client, bufnr)
-    nnoremap gd <Cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap gD <Cmd>lua vim.lsp.buf.declaration()<CR>
-    nnoremap gi <Cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap gr <Cmd>lua vim.lsp.buf.references()<CR>
-
-    nnoremap K <Cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <C-k> <Cmd>lua vim.lsp.buf.signature_help()<CR>
-    nnoremap <space>D <Cmd>lua vim.lsp.buf.type_definition()<CR>
-
-    nnoremap <space>wl <Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
-    nnoremap <space>wa <Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>
-    nnoremap <space>wr <Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>
-
-    nnoremap <space>e <Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-    nnoremap [d <Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-    nnoremap ]d <Cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-    nnoremap <space>q <Cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-endfunction
-
 function! s:postPlugins()
     " Regardless of colorscheme, let vim know we're using a dark background
     set background=dark
@@ -461,6 +441,27 @@ function! s:sourceIfExists(file)
   if filereadable(expand(a:file))
     exe 'source' a:file
   endif
+endfunction
+
+function! HeewaOnLspAttach(client, bufnr)
+lua << EOF
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wl', function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+EOF
 endfunction
 
 "
