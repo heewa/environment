@@ -11,6 +11,10 @@ if has("multi_byte")
 endif
 
 function! s:applyConfig()
+    if has('nvim')
+        call luaeval("require('main_conf')")
+    endif
+
     call s:basicSettings()
     call s:styleSettings()
     call s:indentSettings()
@@ -251,18 +255,7 @@ function! s:postPlugins()
     colorscheme base16-tomorrow-night
 
     if has('nvim')
-        call luaeval("require('lspconfig').tsserver.setup{ on_attach = vim.fn.HeewaOnLspAttach }")
-        "call luaeval("vim.lsp.set_log_level('debug')")
-
-        try
-            call luaeval("require('gitsigns').setup()")
-        catch /^Vim(call):E5108:/
-        endtry
-
-        try
-            call luaeval("require('neogit').setup({ kind='split', sections = { stashes = { folded = false }, recent = { folded = false } } })")
-        catch /^Vim(call):E5108:/
-        endtry
+        call v:lua.HeewaConf_PostPlugins()
     endif
 endfunction
 
@@ -441,27 +434,6 @@ function! s:sourceIfExists(file)
   if filereadable(expand(a:file))
     exe 'source' a:file
   endif
-endfunction
-
-function! HeewaOnLspAttach(client, bufnr)
-lua << EOF
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wl', function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-EOF
 endfunction
 
 "
