@@ -15,6 +15,8 @@ function! s:applyConfig()
         call luaeval("require('main_conf')")
     endif
 
+    call s:sourceIfExists('~/.private_vimrc')
+
     call s:basicSettings()
     call s:styleSettings()
     call s:indentSettings()
@@ -60,6 +62,10 @@ function! s:basicSettings()
     if has('persistent_undo')
         set undofile
     endif
+
+    if exists('*Heewa_BasicSettings')
+        call Heewa_BasicSettings()
+    endif
 endfunction
 
 function! s:indentSettings()
@@ -83,6 +89,10 @@ function! s:indentSettings()
       autocmd BufWritePre ~/src/Heewa/**/*.{py\|js\|jsx\|ts\|tsx\|yaml\|json\|css} undojoin | Neoformat
       autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx\|ts\|tsx\|yaml\|json\|css} Neomake
     augroup END
+
+    if exists('*Heewa_IndentSettings')
+        call Heewa_IndentSettings()
+    endif
 endfunction
 
 function! s:filetypeSettings()
@@ -93,6 +103,10 @@ function! s:filetypeSettings()
     autocmd BufNewFile,BufRead neomutt-* setlocal
 
     autocmd BufNewFile,BufRead *.blist setlocal spell
+
+    if exists('*Heewa_FiletypeSettings')
+        call Heewa_FiletypeSettings()
+    endif
 endfunction
 
 function! s:styleSettings()
@@ -123,6 +137,10 @@ function! s:styleSettings()
     set formatoptions=tcql
 
     let g:termdebug_wide = 1
+
+    if exists('*Heewa_StyleSettings')
+        call Heewa_StyleSettings()
+    endif
 endfunction
 
 function! s:mapEscape()
@@ -219,11 +237,19 @@ function! s:basicMaps()
     command! -bar Tbreak :call TermDebugSendCommand('tbreak ' . line('.'))<CR>
     command! Jump :call TermDebugSendCommand('tbreak ' . line('.')) |
                 \ call TermDebugSendCommand('jump ' . line('.'))<CR>
+
+    if exists('*Heewa_BasicMaps')
+        call Heewa_BasicMaps()
+    endif
 endfunction
 
 function! s:filetypeMaps()
     autocmd FileType go noremap gsd <Plug>(go-def-split)
     autocmd FileType go noremap gvd <Plug>(go-def-vertical)
+
+    if exists('*Heewa_FiletypeMaps')
+        call Heewa_FiletypeMaps()
+    endif
 endfunction
 
 " Map <alt>+{h,j,k,l} to move splits in most modes
@@ -256,6 +282,10 @@ function! s:postPlugins()
 
     if has('nvim')
         call v:lua.HeewaConf_PostPlugins()
+    endif
+
+    if exists('*Heewa_PostPlugins')
+        call Heewa_PostPlugins()
     endif
 endfunction
 
@@ -369,6 +399,10 @@ function! s:plugins()
         \ 'V'  : 'V:L',
         \ '' : 'V:B',
         \ }
+
+    if exists('*Heewa_Plugins')
+        call Heewa_Plugins()
+    endif
 endfunction
 
 function! s:languagePlugins()
@@ -398,11 +432,19 @@ function! s:languagePlugins()
     Plug 'https://github.com/sirtaj/vim-openscad.git'
 
     Plug 'heewa/vim-blist'
+
+    if exists('*Heewa_LanguagePlugins')
+        call Heewa_LanguagePlugins()
+    endif
 endfunction
 
 " Plugins that should load after most others
 function! s:lastPlugins()
     Plug 'ryanoasis/vim-devicons'
+
+    if exists('*Heewa_LastPlugins')
+        call Heewa_LastPlugins()
+    endif
 endfunction
 
 "
