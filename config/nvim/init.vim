@@ -294,8 +294,6 @@ function! s:plugins()
     let g:neomake_javascriptreact_enabled_makers = ['eslint']
     let g:neomake_typescript_enabled_makers = ['eslint']
     let g:neomake_typescriptreact_enabled_makers = ['eslint']
-    let g:neomake_eslint_exe = './node_modules/.bin/eslint'
-    let g:neomake_eslint_cwd = ''
 
     Plug 'sbdchd/neoformat'
     let g:neoformat_try_node_exe = 1
@@ -306,6 +304,8 @@ function! s:plugins()
     let g:neoformat_enabled_javascriptreact = ['prettier']
     let g:neoformat_enabled_typescript = ['prettier']
     let g:neoformat_enabled_typescriptreact = ['prettier']
+
+    Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 
     " Colors
     "Plug 'tssm/fairyfloss.vim'
