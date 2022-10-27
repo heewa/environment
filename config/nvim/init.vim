@@ -104,6 +104,10 @@ function! s:filetypeSettings()
 
     autocmd BufNewFile,BufRead *.blist setlocal spell
 
+    " Switch between type/javascript and s/css files
+    autocmd FileType javascript,javascriptreact,jsx,typescript,typescriptreact nnoremap <silent> <Leader>a :args %:r.scss %:r.css<CR>
+    autocmd FileType css,scss nnoremap <silent> <Leader>a :args %:r.[tj]sx %:r.[tj]s<CR>
+
     if exists('*Heewa_FiletypeSettings')
         call Heewa_FiletypeSettings()
     endif
