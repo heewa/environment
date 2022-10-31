@@ -204,6 +204,10 @@ function! s:basicMaps()
     nnoremap <leader>k :call SwapSplits('k')<CR>
     nnoremap <leader>l :call SwapSplits('l')<CR>
 
+    nnoremap <Leader>m :call MarkWindow()<CR>
+    nnoremap <Leader>o :exe g:markedBuffer . 'buf'<CR>
+    nnoremap <Leader>s :call SwapMarkedWindow()<CR>
+
     " Quick explore
     nnoremap - :Explore<CR>
 
@@ -475,6 +479,25 @@ function! SwapSplits(dir)
 
     " Move back to dst window, so we end up in final location
     exe 'wincmd p'
+endfunction
+
+function! MarkWindow()
+    let g:markedWindow = winnr()
+    let g:markedBuffer = winbufnr(0)
+endfunction
+
+function! SwapMarkedWindow()
+    let swappedWindow = winnr()
+    let swappedBuffer = winbufnr(0)
+
+    exe g:markedBuffer . 'buf'
+
+    exe 'wincmd ' . g:markedWindow . ' w'
+    exe swappedBuffer . 'buf'
+
+    exe 'wincmd p'
+
+    let g:markedBuffer = swappedBuffer
 endfunction
 
 function! s:sourceIfExists(file)
