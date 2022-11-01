@@ -224,7 +224,7 @@ function! s:basicMaps()
     " Search highlighting
     set nohlsearch
     "nnoremap <F2> :set hlsearch<CR>*``
-    nnoremap <silent><expr> <F2> (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
+    nnoremap <silent><expr> <F2> (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
 
     " Insert date
     noremap <silent> <Leader>id "=strftime('%Y-%m-%d')<CR>p
