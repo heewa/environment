@@ -254,6 +254,11 @@ function! s:searchMaps()
     " Search highlighting
     set nohlsearch
     nnoremap <silent><expr> <F2> (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
+
+    " Highlight without jumping to next occurrence
+    "   word under cursor
+    nnoremap <silent> <Leader>h* :let @/ = '<C-r><C-w>' \| set hlsearch<CR>
+    nnoremap <silent> <Leader>H* :let @/ = '\C\<<C-r><C-w>\>' \| set hlsearch<CR>
 endfunction
 
 function! s:filetypeMaps()
