@@ -321,7 +321,7 @@ function! s:plugins()
     Plug 'tpope/vim-fugitive'
 
     Plug 'liuchengxu/vim-which-key', {'on': ['WhichKey', 'WhichKey!']}
-    nnoremap <silent> <Leader> :WhichKey '<Leader>'<CR>
+    "nnoremap <silent> <Leader> :WhichKey '<Leader>'<CR>
     set timeoutlen=500
 
     Plug 'mbbill/undotree'
