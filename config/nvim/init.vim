@@ -23,6 +23,7 @@ function! s:applyConfig()
     call s:filetypeSettings()
 
     call s:basicMaps()
+    call s:searchMaps()
     call s:mapEscape()
     call s:filetypeMaps()
 
@@ -187,22 +188,10 @@ function! s:basicMaps()
     vnoremap p "0p
     vnoremap P p
 
-    " substitute word under cursor
-    nnoremap <leader>s :%s/\C\<<C-r><C-w>\>/
-    vnoremap <leader>s :s/\C\<<C-r><C-w>\>/
-
-    " substitute yanked word
-    nnoremap <leader>sy :%s/\C\<<C-r>0\>/
-    vnoremap <leader>sy :s/\C\<<C-r>0\>/
-
-    " Search for last yanked text
-    nnoremap <silent> <nowait> <Leader>* /\C\<<C-r>0\><CR>
-    nnoremap <Leader><Leader>* :vimgrep /\C\<<C-r><C-w>\>/ **
-
-    nnoremap <leader>h :call SwapSplits('h')<CR>
-    nnoremap <leader>j :call SwapSplits('j')<CR>
-    nnoremap <leader>k :call SwapSplits('k')<CR>
-    nnoremap <leader>l :call SwapSplits('l')<CR>
+    nnoremap <leader>Sh :call SwapSplits('h')<CR>
+    nnoremap <leader>Sj :call SwapSplits('j')<CR>
+    nnoremap <leader>Sk :call SwapSplits('k')<CR>
+    nnoremap <leader>Sl :call SwapSplits('l')<CR>
 
     nnoremap <Leader>m :call MarkWindow()<CR>
     nnoremap <Leader>o :exe g:markedBuffer . 'buf'<CR>
@@ -220,11 +209,6 @@ function! s:basicMaps()
     nnoremap <F6> :cnext<CR>
 
     nnoremap <Leader>c :cclose\|lclose<CR>
-
-    " Search highlighting
-    set nohlsearch
-    "nnoremap <F2> :set hlsearch<CR>*``
-    nnoremap <silent><expr> <F2> (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
 
     " Insert date
     noremap <silent> <Leader>id "=strftime('%Y-%m-%d')<CR>p
@@ -250,6 +234,26 @@ function! s:basicMaps()
     if exists('*Heewa_BasicMaps')
         call Heewa_BasicMaps()
     endif
+endfunction
+
+function! s:searchMaps()
+    " substitute word under cursor
+    nnoremap <leader>s* :%s/\C\<<C-r><C-w>\>/
+    vnoremap <leader>s* :s/\C\<<C-r><C-w>\>/
+
+    " substitute yanked word
+    nnoremap <leader>sy :%s/\C\<<C-r>0\>/
+    vnoremap <leader>sy :s/\C\<<C-r>0\>/
+
+    " Search for last yanked text
+    "   in document
+    nnoremap <silent> <nowait> <Leader>** /\C\<<C-r>0\><CR>
+    "   grep
+    nnoremap <Leader>*g :vimgrep /\C\<<C-r><C-w>\>/ **
+
+    " Search highlighting
+    set nohlsearch
+    nnoremap <silent><expr> <F2> (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
 endfunction
 
 function! s:filetypeMaps()
