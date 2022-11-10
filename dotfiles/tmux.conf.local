@@ -76,11 +76,12 @@ set-option -g detach-on-destroy on
 #set -g mode-keys vi
 
 # Prefix
-set -g prefix C-space
-set -gu prefix2
 unbind C-b
 unbind C-a
+set -g prefix C-space
+set -g prefix2 C-b
 bind C-space send-prefix
+bind C-b send-keys C-b
 
 # Remove some default bindings
 unbind -n C-l
