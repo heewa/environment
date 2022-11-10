@@ -226,6 +226,7 @@ function! s:basicMaps()
     if has('macunix')
         nnoremap <silent> gu yi(:silent !/usr/bin/open -u '<C-R>"'<CR>
         nnoremap <silent> gn yi(:silent !/usr/bin/open -a Notion '<C-R>"'<CR>
+        nnoremap <silent> go yi(:silent !/usr/bin/open '<C-R>"'<CR>
     else
         nnoremap <silent> gu yi(:silent !firefox '<C-R>"'<CR>
     endif
