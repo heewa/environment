@@ -222,8 +222,13 @@ function! s:basicMaps()
     noremap <silent> <Leader>id "=strftime('%Y-%m-%d')<CR>p
     command! InsertDate :normal <Leader>id<CR>
 
-    " Open firefox on url inside parens (markdown syntax)
-    nnoremap <silent> gu yi(:silent !firefox '<C-R>"'<CR>
+    " Open browser on url inside parens (markdown syntax)
+    if has('macunix')
+        nnoremap <silent> gu yi(:silent !/usr/bin/open -u '<C-R>"'<CR>
+        nnoremap <silent> gn yi(:silent !/usr/bin/open -a Notion '<C-R>"'<CR>
+    else
+        nnoremap <silent> gu yi(:silent !firefox '<C-R>"'<CR>
+    endif
 
     " Termdebug for GDB
     nnoremap <A-b> :Break<CR>
