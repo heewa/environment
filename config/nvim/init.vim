@@ -178,6 +178,14 @@ endfunction
 function! s:basicMaps()
     let g:mapleader = ' '
 
+    " Command Mode editing
+    cnoremap <C-a> <Home>
+    cnoremap <C-f> <Right>
+    cnoremap <C-b> <Left>
+    cnoremap <C-k> <C-e><C-u>
+    cnoremap <Esc>b <S-Left>
+    cnoremap <Esc>f <S-Right>
+
     " delete without yanking
     nnoremap <leader>d "_d
     vnoremap <leader>d "_d
