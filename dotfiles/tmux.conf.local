@@ -79,9 +79,9 @@ set-option -g detach-on-destroy on
 unbind C-b
 unbind C-a
 set -g prefix C-space
-set -g prefix2 C-b
+set -g prefix2 C-q
 bind C-space send-prefix
-bind C-b send-keys C-b
+bind C-q send-keys C-q
 
 # Remove some default bindings
 unbind -n C-l
@@ -407,7 +407,7 @@ tmux_conf_theme_clock_style='12'
 #   - false (default)
 # on macOS, this requires installing reattach-to-user-namespace, see README.md
 # on Linux, this requires xsel or xclip
-tmux_conf_copy_to_os_clipboard=true
+tmux_conf_copy_to_os_clipboard=false
 
 # Initialize TMUX plugins
 run-shell ~/.tmux/plugins/tmux-sensible/sensible.tmux
