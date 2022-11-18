@@ -103,7 +103,10 @@ function! s:filetypeSettings()
     autocmd BufNewFile,BufRead neomutt-* setf mail
     autocmd BufNewFile,BufRead neomutt-* setlocal
 
-    autocmd BufNewFile,BufRead *.blist setlocal spell
+    "autocmd filetype blist,vim syn match capitalWords /\<[A-Z]\K*\>/ contains=@NoSpell transparent | syn cluster Spell add=capitalWords | setlocal spell
+    autocmd filetype blist,vim setlocal spell
+
+    autocmd BufNewFile,BufRead *.sls set filetype=yaml
 
     " Switch between type/javascript and s/css files
     autocmd FileType javascript,javascriptreact,jsx,typescript,typescriptreact nnoremap <silent> <Leader>a :args %:r.scss %:r.css<CR>
@@ -314,6 +317,28 @@ function! s:postPlugins()
 
     if has('nvim')
         call v:lua.HeewaConf_PostPlugins()
+
+        try
+            call luaeval("require('neogit').setup({ kind='split', sections = { stashes = { folded = false }, recent = { folded = false } } })")
+        catch /^Vim(call):E5108:/
+        endtry
+
+        try
+            call luaeval("require'lspconfig'.cmake.setup{}")
+        catch /^Vim(call):E5108:/
+        endtry
+    endif
+
+    if executable('cmake-language-server')
+        au User lsp_setup call lsp#register_server({
+        \ 'name': 'cmake',
+        \ 'cmd': {server_info->['cmake-language-server']},
+        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'build/'))},
+        \ 'whitelist': ['cmake'],
+        \ 'initialization_options': {
+        \   'buildDirectory': 'build',
+        \ }
+        \})
     endif
 
     if exists('*Heewa_PostPlugins')
