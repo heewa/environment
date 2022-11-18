@@ -88,6 +88,8 @@ if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
         pip install pipx
         pipx list | grep vdirsyncer || pipx install vdirsyncer[google]
         pipx list | grep khal || pipx install khal
+
+        pip install cmake-language-server
     ) || FAIL PIP
 
     go install gitlab.com/shackra/goimapnotify@latest || FAIL GO
