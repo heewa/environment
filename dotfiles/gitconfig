@@ -2,6 +2,7 @@
     cached = diff --cached
     ls = log --color --graph --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --date=relative
     ll = log --color --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat --date=relative
+    last = log -n 1 --pretty=format:%h
     lstags = log --date-order --graph --tags --simplify-by-decoration --pretty=format:'%ai %h %d'
     stat = status -sb
     push-new = "!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
