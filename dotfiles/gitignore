@@ -2,6 +2,9 @@
 /notes.blist
 /todo
 
+# Vim error file (bookmarks)
+/errors.err
+
 # Temp files
 *.DS_Store
 .*.swp

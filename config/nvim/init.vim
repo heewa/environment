@@ -234,6 +234,14 @@ function! s:basicMaps()
         nnoremap <silent> gu yi(:silent !firefox '<C-R>"'<CR>
     endif
 
+    " Bookmarks - using &errorfile (errors.err by default)
+    "   read bookmarks from &errorfile into quickfix
+    nnoremap <silent> <Leader>bo :set errorformat& \| cfile<CR>
+    "   add entry to errorfile for current file:line
+    nnoremap <silent> <Leader>ba :call writefile([expand("%") .. ":" .. line(".") ..  ":" .. getline(".")], &errorfile, 'a')<CR>
+    "   yank quickfix formatted entry for current file:line
+    nnoremap <silent> <Leader>by :let @" = expand("%") .. ":" .. line(".") ..  ":" .. getline(".")<CR>
+
     " Termdebug for GDB
     nnoremap <A-b> :Break<CR>
     nnoremap <A-c> :Clear<CR>
@@ -262,11 +270,8 @@ function! s:searchMaps()
     nnoremap <leader>sy :%s/\C\<<C-r>0\>/
     vnoremap <leader>sy :s/\C\<<C-r>0\>/
 
-    " Search for last yanked text
-    "   in document
-    nnoremap <silent> <nowait> <Leader>** /\C\<<C-r>0\><CR>
-    "   grep
-    nnoremap <Leader>*g :vimgrep /\C\<<C-r><C-w>\>/ **
+    " Grep for word under cursor
+    nnoremap <Leader>g* :vimgrep /\C\<<C-r><C-w>\>/ **
 
     " Search highlighting
     set nohlsearch
