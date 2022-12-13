@@ -281,6 +281,10 @@ function! s:searchMaps()
     "   word under cursor
     nnoremap <silent> <Leader>h* :let @/ = '<C-r><C-w>' \| set hlsearch<CR>
     nnoremap <silent> <Leader>H* :let @/ = '\C\<<C-r><C-w>\>' \| set hlsearch<CR>
+
+    " Search for git conflict markers. Only need to call first time, then can
+    " use n/N to jump around
+    nnoremap <silent> <Leader>sc /^[<\\|=>]\{5,\}<CR>
 endfunction
 
 function! s:filetypeMaps()
