@@ -180,6 +180,7 @@ endfunction
 
 function! s:basicMaps()
     let g:mapleader = ' '
+    nnoremap <Space> <Nop>
 
     " Command Mode editing
     cnoremap <C-a> <Home>
@@ -204,9 +205,9 @@ function! s:basicMaps()
     nnoremap <leader>Sk :call SwapSplits('k')<CR>
     nnoremap <leader>Sl :call SwapSplits('l')<CR>
 
-    nnoremap <Leader>m :call MarkWindow()<CR>
-    nnoremap <Leader>o :exe g:markedBuffer . 'buf'<CR>
-    nnoremap <Leader>s :call SwapMarkedWindow()<CR>
+    nnoremap <Leader>wm :call MarkWindow()<CR>
+    nnoremap <Leader>wo :exe g:markedBuffer . 'buf'<CR>
+    nnoremap <Leader>ws :call SwapMarkedWindow()<CR>
 
     " Quick explore
     nnoremap - :Explore<CR>
