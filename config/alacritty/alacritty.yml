@@ -9,7 +9,7 @@ shell:
 
 window:
     opacity: 0.90
-    #decorations: none
+    decorations: none
     dimensions:
         columns: 164
         lines: 48
