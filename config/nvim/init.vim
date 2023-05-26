@@ -337,6 +337,11 @@ function! s:postPlugins()
             call luaeval("require'lspconfig'.cmake.setup{}")
         catch /^Vim(call):E5108:/
         endtry
+
+        try
+            call luaeval("require'lspconfig'.rust_analyzer.setup({})")
+        catch /^Vim(call):E5108:/
+        endtry
     endif
 
     if executable('cmake-language-server')
@@ -359,6 +364,7 @@ endfunction
 function! s:plugins()
     " Dependency for some lua plugins
     Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-lua/popup.nvim'
 
     " Git +/-/~ in gutter
     "Plug 'airblade/vim-gitgutter'
@@ -474,6 +480,9 @@ endfunction
 
 function! s:languagePlugins()
     Plug 'neovim/nvim-lspconfig'
+
+    " Rust
+    Plug 'simrat39/rust-tools.nvim'
 
     " Go development
     if has('nvim')
