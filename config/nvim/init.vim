@@ -87,8 +87,8 @@ function! s:indentSettings()
     " Autoformatting
     augroup heewa
       autocmd!
-      autocmd BufWritePre ~/src/Heewa/**/*.{py\|js\|jsx\|ts\|tsx\|yaml\|json\|css} undojoin | Neoformat
-      autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx\|ts\|tsx\|yaml\|json\|css} Neomake
+      autocmd BufWritePre ~/src/Heewa/**/*.{py\|js\|jsx\|ts\|tsx\|yaml\|json\|css\|rs} undojoin | Neoformat
+      autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx\|ts\|tsx\|yaml\|json\|css\|rs} Neomake
     augroup END
 
     if exists('*Heewa_IndentSettings')
