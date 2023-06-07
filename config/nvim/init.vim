@@ -481,6 +481,9 @@ endfunction
 function! s:languagePlugins()
     Plug 'neovim/nvim-lspconfig'
 
+    " Zig
+    Plug 'ziglang/zig.vim'
+
     " Rust
     Plug 'simrat39/rust-tools.nvim'
 
