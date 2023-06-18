@@ -133,6 +133,15 @@ HEADER '~/.rc Files'
     done
 )
 
+HEADER 'Zig'
+(
+    ZIG_DIR="$HOME/build/zig"
+    UPDATE_ZIG="update_zig.sh"
+    mkdir -p "$ZIG_DIR"
+    SYMLINK "$ENVDIR/misc/$UPDATE_ZIG" "$ZIG_DIR/$UPDATE_ZIG"
+    SYMLINK "$ZIG_DIR/latest/zig" "$HOME/.local/bin/zig"
+)
+
 if [[ "$ENVTYPE" != 'minimal' ]]; then
 
     HEADER 'Emoji Prompt'
