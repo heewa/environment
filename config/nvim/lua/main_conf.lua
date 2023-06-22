@@ -41,6 +41,11 @@ function HeewaConf_PostPlugins()
         end
     end
 
+    local ret, lsp_progress = pcall(require, 'lsp-progress')
+    if ret then
+        lsp_progress.setup()
+    end
+
     local ret, gitsigns = pcall(require, 'gitsigns')
     if ret then
         gitsigns.setup({

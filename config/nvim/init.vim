@@ -362,9 +362,14 @@ function! s:postPlugins()
 endfunction
 
 function! s:plugins()
-    " Dependency for some lua plugins
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-lua/popup.nvim'
+    if has('nvim')
+        " Dependency for some lua plugins
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'nvim-lua/popup.nvim'
+
+        " LSP Progress
+        Plug 'linrongbin16/lsp-progress.nvim'
+    endif
 
     " Git +/-/~ in gutter
     "Plug 'airblade/vim-gitgutter'
