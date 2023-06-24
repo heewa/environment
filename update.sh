@@ -136,10 +136,16 @@ HEADER '~/.rc Files'
 HEADER 'Zig'
 (
     ZIG_DIR="$HOME/build/zig"
-    UPDATE_ZIG="update_zig.sh"
+    ZIG_ENV="$ENVDIR/misc/zig"
+
+    cd $ZIG_ENV|| FAIL
     mkdir -p "$ZIG_DIR"
-    SYMLINK "$ENVDIR/misc/$UPDATE_ZIG" "$ZIG_DIR/$UPDATE_ZIG"
-    SYMLINK "$ZIG_DIR/latest/zig" "$HOME/.local/bin/zig"
+    for F in $(find . -type f | cut -sd/ -f2-); do
+        SYMLINK $ZIG_ENV/$F $ZIG_DIR/$F
+    done
+
+    UPDATE_ZIG="update_zig.sh"
+    SYMLINK "$ENVDIR/misc/zig/$UPDATE_ZIG" "$ZIG_DIR/$UPDATE_ZIG"
 )
 
 if [[ "$ENVTYPE" != 'minimal' ]]; then
