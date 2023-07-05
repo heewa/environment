@@ -87,7 +87,7 @@ function! s:indentSettings()
     " Autoformatting
     augroup heewa
       autocmd!
-      autocmd BufWritePre ~/src/Heewa/**/*.{py\|js\|jsx\|ts\|tsx\|yaml\|json\|css\|rs} undojoin | Neoformat
+      autocmd BufWritePre ~/src/Heewa/**/*.{py\|js\|jsx\|ts\|tsx\|yaml\|json\|css\|rs} Neoformat
       autocmd BufWritePost ~/src/Heewa/**/*.{go\|c\|cpp\|h\|py\|js\|jsx\|ts\|tsx\|yaml\|json\|css\|rs} Neomake
     augroup END
 
@@ -397,21 +397,31 @@ function! s:plugins()
     Plug 'editorconfig/editorconfig-vim'
 
     Plug 'benekastah/neomake'
-    let g:neomake_python_enabled_makers = ['flake8', 'pyflakes']
-    let g:neomake_javascript_enabled_makers = ['eslint']
-    let g:neomake_javascriptreact_enabled_makers = ['eslint']
-    let g:neomake_typescript_enabled_makers = ['eslint']
-    let g:neomake_typescriptreact_enabled_makers = ['eslint']
+    if executable('ruff-lsp')
+        let g:neomake_python_enabled_makers = []
+    elseif executable('flake8')
+        let g:neomake_python_enabled_makers = ['flake8']
+    endif
+    if executable('eslint')
+        let g:neomake_javascript_enabled_makers = ['eslint']
+        let g:neomake_javascriptreact_enabled_makers = ['eslint']
+        let g:neomake_typescript_enabled_makers = ['eslint']
+        let g:neomake_typescriptreact_enabled_makers = ['eslint']
+    endif
 
     Plug 'sbdchd/neoformat'
     let g:neoformat_try_node_exe = 1
     let g:neoformat_only_msg_on_error = 1
     let g:neoformat_try_node_exe = 1
-    let g:neoformat_enabled_python = ['black']
-    let g:neoformat_enabled_javascript = ['prettier']
-    let g:neoformat_enabled_javascriptreact = ['prettier']
-    let g:neoformat_enabled_typescript = ['prettier']
-    let g:neoformat_enabled_typescriptreact = ['prettier']
+    if executable('black')
+        let g:neoformat_enabled_python = ['black']
+    endif
+    if executable('prettier')
+        let g:neoformat_enabled_javascript = ['prettier']
+        let g:neoformat_enabled_javascriptreact = ['prettier']
+        let g:neoformat_enabled_typescript = ['prettier']
+        let g:neoformat_enabled_typescriptreact = ['prettier']
+    endif
 
     Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 
