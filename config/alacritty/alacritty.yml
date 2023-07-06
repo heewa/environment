@@ -20,15 +20,13 @@ mouse:
 font:
     normal:
         style: Regular
-        #family: FuraCode Nerd Font
-        #family: SauceCodePro Nerd Font
-        #family: Noto Mono Nerd Font Complete
-        family: UbuntuMono Nerd Font
+        #family: SauceCodePro Nerd Font Mono
+        family: UbuntuMono Nerd Font Mono
     italic:
         style: Bold
     bold_italic:
         style: Bold Italic
-    size: 12.0
+    size: 11.0
 
 visual_bell:
     animation: EaseOutExpo

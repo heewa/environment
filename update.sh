@@ -189,11 +189,12 @@ if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
 
     HEADER 'Nerd Fonts'
     FONTS=( \
-        'Noto/Mono/complete/Noto%20Mono%20Nerd%20Font%20Complete.ttf' \
-        'UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete.ttf' \
-        'SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf' \
+        'UbuntuMono/Regular/UbuntuMonoNerdFontMono-Regular.ttf' \
+        'UbuntuMono/Regular/UbuntuMonoNerdFont-Regular.ttf' \
+        'SourceCodePro/Regular/SauceCodeProNerdFontMono-Regular.ttf' \
+        'SourceCodePro/Regular/SauceCodeProNerdFont-Regular.ttf' \
     )
-    URL="https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/"
+    URL="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/"
     if [[ "$OS" = 'Darwin' ]]; then
         DIR="$HOME/Library/Fonts"
     else
@@ -218,7 +219,7 @@ if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
         if [[ $GOT_NEW_FONTS == 0 ]]; then
             echo 'no new fonts, skipping rebuild'
         else
-            sudo --non-interactive fc-cache -f ~/.local/share/fonts || FAIL FONT
+            sudo fc-cache -f ~/.local/share/fonts || FAIL FONT
         fi
     fi
 

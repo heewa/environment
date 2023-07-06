@@ -302,8 +302,8 @@ tmux_conf_theme_right_separator_sub='\ue0b7'   # Circle
 #     - #{username}
 #     - #{username_ssh}
 #tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,} '
-#tmux_conf_theme_status_left=' \ufb8a #S | \uf0e7 #{loadavg} '
-tmux_conf_theme_status_left=' #{?@keys_off,#[fg=#a89984]\uf8e3,\ufb8a} #S | #{?@keys_off,#[fg=#a89984],}#{?battery_status, #{battery_status},\uf004} #{?battery_bar, #{battery_vbar},} '
+#tmux_conf_theme_status_left=' \Uf068c #S | \uf0e7 #{loadavg} '
+tmux_conf_theme_status_left=' #{?@keys_off,#[fg=#a89984]\uf8e3,\Uf068c} #S | #{?@keys_off,#[fg=#a89984],}#{?battery_status, #{battery_status},\uf004} #{?battery_bar, #{battery_vbar},} '
 #tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_hbar},}#{?battery_percentage, #{battery_percentage},} , %I:%M , %a %b %d | #{username}#{root} | #{hostname} '
 tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} \ue266  #{loadavg} , #{username}#{root} , #{hostname} | %a %b %d | %I:%M '
 
