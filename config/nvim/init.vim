@@ -375,7 +375,7 @@ function! s:plugins()
     "Plug 'airblade/vim-gitgutter'
     Plug 'mhinz/vim-signify' ", has('nvim') ? {'on': []} : {}
     "Plug 'lewis6991/gitsigns.nvim', has('nvim') ? {} : {'on': []}
-    Plug 'TimUntersberger/neogit', has('nvim') ? {} : {'on': []}
+    Plug 'NeogitOrg/neogit', has('nvim') ? {} : {'on': []}
 
     " Git commands, like Gblame
     Plug 'tpope/vim-fugitive'
