@@ -4,18 +4,18 @@ override_git_prompt_colors() {
   # Nerd Font Symbols
   NF_X=$'\uf00d'
   NF_CHECK=$'\uf00c'
-  NF_PLUS=$'\uf914'
-  NF_PLUS_CIRCLED=$'\uf916'
-  NF_FLAG=$'\uf73f'
-  NF_BOOKMARK=$'\uf5bf'
-  NF_PIN=$'\uf902'
-  NF_MENU=$'\uf85b'
-  NF_PENCIL=$'\ufb4e'
+  NF_PLUS=$'\uf44d'
+  NF_PLUS_CIRCLED=$'\uf055'
+  NF_FLAG=$'\Uf0240'
+  NF_BOOKMARK=$'\uf02e'
+  NF_PIN=$'\Uf0403'
+  NF_MENU=$'\ueb94'
+  NF_PENCIL=$'\Uf064f'
   NF_QUESTION=$'\uf128'
-  NF_COMMIT_LOCAL=$'\ufc19'
+  NF_COMMIT_LOCAL=$'\Uf071b'
   NF_LINK=$'\uf0c1'
   NF_BROKEN_LINK=$'\uf127'
-  NF_BRANCH=$'\ufb2b'
+  NF_BRANCH=$'\Uf062c'
   NF_CURVED_OPEN=$'\ue0b7'
   NF_CURVED_CLOSE=$'\ue0b5'
   NF_ANGLED_OPEN=$'\ue0b3'
@@ -66,8 +66,8 @@ override_git_prompt_colors() {
   GIT_PROMPT_END_ROOT="${Red}#${ResetColor} "
 
   ## Please do not add colors to these symbols
-  GIT_PROMPT_SYMBOLS_AHEAD="${Yellow}${NF_UP}"             # The symbol for "n versions ahead of origin"
-  GIT_PROMPT_SYMBOLS_BEHIND="${Blue}${NF_DOWN}"            # The symbol for "n versions behind of origin"
+  GIT_PROMPT_SYMBOLS_AHEAD="${NF_UP}"             # The symbol for "n versions ahead of origin"
+  GIT_PROMPT_SYMBOLS_BEHIND="${NF_DOWN}"            # The symbol for "n versions behind of origin"
   # GIT_PROMPT_SYMBOLS_PREHASH=":"            # Written before hash of commit, if no name could be found
   GIT_PROMPT_SYMBOLS_NO_REMOTE_TRACKING="${NF_BROKEN_LINK} " # This symbol is written after the branch, if the branch is not tracked 
 }
