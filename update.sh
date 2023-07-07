@@ -83,11 +83,6 @@ HEADER 'Scripts'
 
 if [[ "$ENVTYPE" == 'home' && "$OS" == 'Linux' ]]; then
 
-    HEADER 'Sudoers'
-    for F in $(ls misc/sudoers.d); do
-        sudo diff -u $PWD/misc/sudoers.d/$F /etc/sudoers.d/$F || FAIL SUDOERS
-    done
-
     HEADER 'DNS'
     for F in $(ls misc/resolved.conf.d); do
         diff -u $PWD/misc/resolved.conf.d/$F /etc/systemd/resolved.conf.d/$F || FAIL DNS
