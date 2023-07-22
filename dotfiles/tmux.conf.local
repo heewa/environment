@@ -303,7 +303,7 @@ tmux_conf_theme_right_separator_sub='\ue0b7'   # Circle
 #     - #{username_ssh}
 #tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,} '
 #tmux_conf_theme_status_left=' \Uf068c #S | \uf0e7 #{loadavg} '
-tmux_conf_theme_status_left=' #{?@keys_off,#[fg=#a89984]\uf8e3,\Uf068c} #S | #{?@keys_off,#[fg=#a89984],}#{?battery_status, #{battery_status},\uf004} #{?battery_bar, #{battery_vbar},} '
+tmux_conf_theme_status_left=' #{?@keys_off,#[fg=#a89984]\uf04c,\Uf068c} #S | #{?@keys_off,#[fg=#a89984],}#{?battery_status, #{battery_status},\uf004} #{?battery_bar, #{battery_vbar},} '
 #tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_hbar},}#{?battery_percentage, #{battery_percentage},} , %I:%M , %a %b %d | #{username}#{root} | #{hostname} '
 tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} \ue266  #{loadavg} , #{username}#{root} , #{hostname} | %a %b %d | %I:%M '
 
@@ -322,7 +322,7 @@ tmux_conf_theme_status_right_bg='#282828,#ebdbb2,#cc281d' # dark gray, white, re
 tmux_conf_theme_status_right_attr='none,none,bold'
 
 # pairing indicator
-tmux_conf_theme_pairing='\uf707'
+tmux_conf_theme_pairing='\Uf0208'
 tmux_conf_theme_pairing_fg='none'
 tmux_conf_theme_pairing_bg='none'
 tmux_conf_theme_pairing_attr='none'
@@ -356,7 +356,7 @@ tmux_conf_theme_synchronized_attr='none'
 #tmux_conf_battery_bar_symbol_full='\uf240'  # full battery
 #tmux_conf_battery_bar_symbol_empty='\uf244' # empty battery
 tmux_conf_battery_bar_symbol_full='\uf004'  # full heart
-tmux_conf_battery_bar_symbol_empty='\uf7d4' # empty heart
+tmux_conf_battery_bar_symbol_empty='\Uf18a0' # empty heart
 
 # battery bar length (in number of symbols), possible values are:
 #   - auto
