@@ -413,8 +413,12 @@ function! s:plugins()
     let g:neoformat_try_node_exe = 1
     let g:neoformat_only_msg_on_error = 1
     let g:neoformat_try_node_exe = 1
+    let g:neoformat_enabled_python = []
     if executable('black')
         let g:neoformat_enabled_python = ['black']
+    endif
+    if executable('isort')
+        let g:neoformat_enabled_python = ['isort']
     endif
     if executable('prettier')
         let g:neoformat_enabled_javascript = ['prettier']
