@@ -31,7 +31,7 @@ function HeewaConf_OnLspAttach(client, bufnr)
 end
 
 function HeewaConf_PostPlugins()
-    local lsp_servers = {'tsserver', 'zls', 'ruff_lsp'}
+    local lsp_servers = {'tsserver', 'zls', 'ruff_lsp', 'pylsp'}
     local ret, lspconfig = pcall(require, 'lspconfig')
     if ret then
         for _, lsp_server in ipairs(lsp_servers) do
