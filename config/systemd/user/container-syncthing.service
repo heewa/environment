@@ -28,10 +28,11 @@ ExecStart=/usr/bin/podman run \
 	-p 22000:22000/tcp \
 	-p 22000:22000/udp \
 	-p 21027:21027/udp \
-	-v %h/.config/syncthing:/config:Z \
+	-v %h/.config/syncthing:/var/syncthing:Z \
 	-v %h/Documents:/Documents:Z \
 	-v %h/Sync:/Sync:Z \
-	-v %h/Pictures:/Pictures:Z lscr.io/linuxserver/syncthing:latest
+	-v %h/Pictures:/Pictures:Z \
+	docker.io/syncthing/syncthing
 ExecStop=/usr/bin/podman stop \
 	--ignore -t 10 \
 	--cidfile=%t/%n.ctr-id
