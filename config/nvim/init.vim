@@ -323,7 +323,19 @@ endfunction
 function! s:postPlugins()
     " Regardless of colorscheme, let vim know we're using a dark background
     set background=dark
-    colorscheme base16-tomorrow-night
+    "colorscheme base16-tomorrow-night
+    "colorscheme base16-classic-dark
+    "colorscheme base16-irblack
+    "colorscheme base16-da-one-black
+    "colorscheme base16-primer-dark
+    colorscheme base16-seti
+    "colorscheme base16-helios
+
+    " Override background to be full black
+    hi Normal ctermbg=16 guibg=#000000
+    hi LineNr ctermbg=16 guibg=#000000
+    hi ErrorMsg ctermbg=16 guibg=#000000
+    hi Conceal ctermbg=16 guibg=#000000
 
     if has('nvim')
         call v:lua.HeewaConf_PostPlugins()
