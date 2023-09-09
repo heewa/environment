@@ -32,6 +32,9 @@ ExecStart=/usr/bin/podman run \
 	-v %h/Documents:/Documents:Z \
 	-v %h/Sync:/Sync:Z \
 	-v %h/Pictures:/Pictures:Z \
+	-v %h/Games/Retro/saves:/RetroArch/saves:Z \
+	-v %h/Games/Retro/screenshots:/RetroArch/screenshots:Z \
+	-v %h/Games/Retro/states:/RetroArch/states:Z \
 	docker.io/syncthing/syncthing
 ExecStop=/usr/bin/podman stop \
 	--ignore -t 10 \
