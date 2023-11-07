@@ -16,7 +16,7 @@ export VISUAL=vim
 export TZ=/usr/share/zoneinfo/America/New_York
 
 _HOMEBREW_DIR=/opt/homebrew
-export GOPATH=$HOME/go/global
+export GOPATH=$HOME/go
 
 # Path Prefixes, in reverse order
 export PATH=$HOME/scripts:$PATH
