@@ -35,7 +35,7 @@
 	ui = true
 [user]
 	name = Heewa Barfchin
-	email = heewa.b@gmail.com
+	email = heewa@barfch.in
 [merge]
 	conflictstyle = diff3
 [push]
