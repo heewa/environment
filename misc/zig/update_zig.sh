@@ -13,4 +13,4 @@ if [[ ! -d "$LATEST_DIR" ]]; then
 else
     echo "Already have $LATEST_VER"
 fi
-ln -sf "$LATEST_DIR" "$NIGHTLY_DIR/latest"
+ln -sf --no-target-directory "$LATEST_DIR" "$NIGHTLY_DIR/latest"

@@ -4,7 +4,7 @@
 
 * auto-download (if necessary) and link latest nightly: `cd nightly && ./update_zig.sh`
 * manually clean up old versions
-* link: `ln -s $PWD/nightly/latest/bin/zig $HOME/.local/bin/`
+* link: `ln -s $PWD/nightly/latest/zig $HOME/.local/bin/`
 
 ## Build from source
 
