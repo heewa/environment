@@ -65,6 +65,10 @@ elif [[ "$OS" = 'Linux' ]]; then
 
     alias ls='ls --color=auto'
 
+    if [[ "$DISTRO" = 'fedora' ]]; then
+        alias t='toolbox run'
+    fi
+
 fi
 
 # Take in all the custom completions too.
