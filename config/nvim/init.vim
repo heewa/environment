@@ -378,16 +378,20 @@ function! s:plugins()
         " Dependency for some lua plugins
         Plug 'nvim-lua/plenary.nvim'
         Plug 'nvim-lua/popup.nvim'
+    endif
 
+    if has('nvim-0.8')
         " LSP Progress
         Plug 'linrongbin16/lsp-progress.nvim'
+
+        Plug 'NeogitOrg/neogit', has('nvim') ? {} : {'on': []}
     endif
 
     " Git +/-/~ in gutter
     "Plug 'airblade/vim-gitgutter'
     Plug 'mhinz/vim-signify' ", has('nvim') ? {'on': []} : {}
     "Plug 'lewis6991/gitsigns.nvim', has('nvim') ? {} : {'on': []}
-    Plug 'NeogitOrg/neogit', has('nvim') ? {} : {'on': []}
+
 
     " Git commands, like Gblame
     Plug 'tpope/vim-fugitive'
@@ -449,7 +453,7 @@ function! s:plugins()
     "Plug 'flazz/vim-colorschemes'
     "Plug 'reedes/vim-colors-pencil'
 
-    if has('nvim')
+    if has('nvim-0.8')
         Plug 'rrethy/nvim-base16'
     else
         Plug 'chriskempson/base16-vim'
