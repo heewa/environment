@@ -131,7 +131,7 @@ if [[ "$(command -v pyenv)" != "" ]]; then
     }
 fi
 
-if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
+#if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
     _GIT_PROMPT_DIR=''
     if [[ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]]; then
         _GIT_PROMPT_DIR="$HOME/.bash-git-prompt"
@@ -149,7 +149,7 @@ if [[ "$ENVTYPE" == 'home' || "$ENVTYPE" == 'work' ]]; then
         declare -f _scm_prompt > /dev/null && _scm='$(_scm_prompt) ' || _scm=' '
         export PS1="$_where$_scm\$ "
     fi
-fi
+#fi
 
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
