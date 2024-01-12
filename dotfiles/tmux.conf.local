@@ -73,8 +73,8 @@ set-option -g detach-on-destroy on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
-#set -g status-keys vi
-#set -g mode-keys vi
+set -g status-keys vi
+set -g mode-keys vi
 
 # Prefix
 unbind C-b
