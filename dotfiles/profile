@@ -11,8 +11,8 @@
 # This file must be compatible with non-bash things, like other shells and
 # other non-shell programs that check it for settings.
 
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=/usr/bin/nvim
+export VISUAL=/usr/bin/nvim
 export TZ=/usr/share/zoneinfo/America/New_York
 
 _HOMEBREW_DIR=/opt/homebrew
