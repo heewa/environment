@@ -1,0 +1,372 @@
+{
+  "appearance": {
+    "color_theme": "_builtin_default"
+  },
+  "attenuators": {
+    "att_bridge": {
+      "attenuation": 6,
+      "zin": 50,
+      "zout": 50
+    },
+    "att_pi": {
+      "attenuation": 6,
+      "zin": 50,
+      "zout": 50
+    },
+    "att_splitter": {
+      "attenuation": 6,
+      "zin": 50,
+      "zout": 50
+    },
+    "att_tee": {
+      "attenuation": 6,
+      "zin": 50,
+      "zout": 50
+    },
+    "type": 0
+  },
+  "board_class_units": 0,
+  "color_code_tolerance": 1,
+  "color_picker": {
+    "default_tab": 0
+  },
+  "cross_probing": {
+    "auto_highlight": true,
+    "center_on_items": true,
+    "zoom_to_fit": true
+  },
+  "electrical": {
+    "spacing_units": 0,
+    "spacing_voltage": "500"
+  },
+  "graphics": {
+    "canvas_type": 2,
+    "high_contrast_factor": 0.3499999940395355,
+    "highlight_factor": 0.5,
+    "select_factor": 0.75
+  },
+  "last_page": 0,
+  "lib_tree": {},
+  "meta": {
+    "version": 0
+  },
+  "printing": {
+    "background": false,
+    "color_theme": "",
+    "layers": [],
+    "monochrome": true,
+    "scale": 1,
+    "title_block": false,
+    "use_theme": false
+  },
+  "regulators": {
+    "data_file": "",
+    "last_param": 0,
+    "r1": "10",
+    "r2": "10",
+    "selected_regulator": "",
+    "type": 0,
+    "vout": "12",
+    "vref": "3"
+  },
+  "track_width": {
+    "current": "1.0",
+    "delta_tc": "10.0",
+    "ext_track_thickness": "0.035",
+    "ext_track_thickness_units": 0,
+    "ext_track_width": "0.300387",
+    "ext_track_width_units": 0,
+    "int_track_thickness": "0.035",
+    "int_track_thickness_units": 0,
+    "int_track_width": "0.781437",
+    "int_track_width_units": 0,
+    "resistivity": "1.72e-08",
+    "track_len": "20",
+    "track_len_units": 0
+  },
+  "trans_line": {
+    "CoPlanar": {
+      "units": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 0,
+        "Frequency": 0,
+        "H": 0,
+        "L": 0,
+        "Rho": 0,
+        "S": 0,
+        "T": 0,
+        "TanD": 0,
+        "W": 0,
+        "Z0": 0,
+        "mu Rel C": 0
+      },
+      "values": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 4.6,
+        "Frequency": 1,
+        "H": 0.2,
+        "L": 50,
+        "Rho": 1.72e-08,
+        "S": 0.2,
+        "T": 0.035,
+        "TanD": 0.02,
+        "W": 0.2,
+        "Z0": 50,
+        "mu Rel C": 1
+      }
+    },
+    "Coax": {
+      "units": {
+        "": 0,
+        "Ang_l": 0,
+        "Din": 0,
+        "Dout": 0,
+        "Er": 0,
+        "Frequency": 0,
+        "L": 0,
+        "Rho": 0,
+        "TanD": 0,
+        "Z0": 0,
+        "mu Rel C": 0,
+        "mu Rel I": 0
+      },
+      "values": {
+        "": 0,
+        "Ang_l": 0,
+        "Din": 1,
+        "Dout": 8,
+        "Er": 4.6,
+        "Frequency": 1,
+        "L": 50,
+        "Rho": 1.72e-08,
+        "TanD": 0.02,
+        "Z0": 50,
+        "mu Rel C": 1,
+        "mu Rel I": 1
+      }
+    },
+    "Coupled_MicroStrip": {
+      "units": {
+        "Ang_l": 0,
+        "Er": 0,
+        "Frequency": 0,
+        "H": 0,
+        "H_t": 0,
+        "L": 0,
+        "Rho": 0,
+        "Rough": 0,
+        "S": 0,
+        "T": 0,
+        "TanD": 0,
+        "W": 0,
+        "Zeven": 0,
+        "Zodd": 0,
+        "mu rel C": 0
+      },
+      "values": {
+        "Ang_l": 0,
+        "Er": 4.6,
+        "Frequency": 1,
+        "H": 0.2,
+        "H_t": 1e+20,
+        "L": 50,
+        "Rho": 1.72e-08,
+        "Rough": 0,
+        "S": 0.2,
+        "T": 0.035,
+        "TanD": 0.02,
+        "W": 0.2,
+        "Zeven": 50,
+        "Zodd": 50,
+        "mu rel C": 1
+      }
+    },
+    "GrCoPlanar": {
+      "units": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 0,
+        "Frequency": 0,
+        "H": 0,
+        "L": 0,
+        "Rho": 0,
+        "S": 0,
+        "T": 0,
+        "TanD": 0,
+        "W": 0,
+        "Z0": 0,
+        "mu Rel C": 0
+      },
+      "values": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 4.6,
+        "Frequency": 1,
+        "H": 0.2,
+        "L": 50,
+        "Rho": 1.72e-08,
+        "S": 0.2,
+        "T": 0.035,
+        "TanD": 0.02,
+        "W": 0.2,
+        "Z0": 50,
+        "mu Rel C": 1
+      }
+    },
+    "MicroStrip": {
+      "units": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 0,
+        "Frequency": 0,
+        "H": 0,
+        "H_t": 0,
+        "L": 0,
+        "Rho": 0,
+        "Rough": 0,
+        "T": 0,
+        "TanD": 0,
+        "W": 0,
+        "Z0": 0,
+        "mu Rel C": 0,
+        "mu Rel S": 0
+      },
+      "values": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 4.6,
+        "Frequency": 1,
+        "H": 0.2,
+        "H_t": 1e+20,
+        "L": 50,
+        "Rho": 1.72e-08,
+        "Rough": 0,
+        "T": 0.035,
+        "TanD": 0.02,
+        "W": 0.2,
+        "Z0": 50,
+        "mu Rel C": 1,
+        "mu Rel S": 1
+      }
+    },
+    "RectWaveGuide": {
+      "units": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 0,
+        "Frequency": 0,
+        "L": 0,
+        "Rho": 0,
+        "TanD": 0,
+        "Z0": 0,
+        "a": 0,
+        "b": 0,
+        "mu Rel C": 0,
+        "mu Rel I": 0
+      },
+      "values": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 4.6,
+        "Frequency": 1,
+        "L": 50,
+        "Rho": 1.72e-08,
+        "TanD": 0.02,
+        "Z0": 50,
+        "a": 10,
+        "b": 5,
+        "mu Rel C": 1,
+        "mu Rel I": 1
+      }
+    },
+    "StripLine": {
+      "units": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 0,
+        "Frequency": 0,
+        "H": 0,
+        "L": 0,
+        "Rho": 0,
+        "T": 0,
+        "TanD": 0,
+        "W": 0,
+        "Z0": 0,
+        "a": 0,
+        "mu Rel C": 0
+      },
+      "values": {
+        "": 0,
+        "Ang_l": 0,
+        "Er": 4.6,
+        "Frequency": 1,
+        "H": 0.2,
+        "L": 50,
+        "Rho": 1.72e-08,
+        "T": 0.035,
+        "TanD": 0.02,
+        "W": 0.2,
+        "Z0": 50,
+        "a": 0.2,
+        "mu Rel C": 1
+      }
+    },
+    "TwistedPair": {
+      "units": {
+        "": 0,
+        "Ang_l": 0,
+        "Din": 0,
+        "Dout": 0,
+        "Er": 0,
+        "ErEnv": 0,
+        "Frequency": 0,
+        "L": 0,
+        "Rho": 0,
+        "TanD": 0,
+        "Twists": 0,
+        "Z0": 0,
+        "mu Rel C": 0
+      },
+      "values": {
+        "": 0,
+        "Ang_l": 0,
+        "Din": 1,
+        "Dout": 8,
+        "Er": 4.6,
+        "ErEnv": 1,
+        "Frequency": 1,
+        "L": 50,
+        "Rho": 1.72e-08,
+        "TanD": 0.02,
+        "Twists": 0,
+        "Z0": 50,
+        "mu Rel C": 1
+      }
+    },
+    "selection": 0
+  },
+  "translines": {
+    "type": 0
+  },
+  "via_size": {
+    "applied_current": "1",
+    "characteristic_impedance": "50",
+    "characteristic_impedance_units": 0,
+    "clearance_diameter": "1.0",
+    "clearance_diameter_units": 0,
+    "hole_diameter": "0.4",
+    "hole_diameter_units": 0,
+    "length": "1.6",
+    "length_units": 0,
+    "pad_diameter": "0.6",
+    "pad_diameter_units": 0,
+    "permittivity": "4.5",
+    "plating_resistivity": "1.72e-8",
+    "pulse_rise_time": "1",
+    "temp_rise": "10",
+    "thickness": "0.035",
+    "thickness_units": 0
+  }
+}

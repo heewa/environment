@@ -1,0 +1,172 @@
+{
+  "appearance": {
+    "color_theme": "_builtin_default"
+  },
+  "color_picker": {
+    "default_tab": 0
+  },
+  "cross_probing": {
+    "auto_highlight": true,
+    "center_on_items": true,
+    "on_selection": true,
+    "zoom_to_fit": true
+  },
+  "filter_footprint": 6,
+  "filter_footprint_text": "",
+  "find_replace": {
+    "find_history": [],
+    "find_string": "",
+    "match_case": false,
+    "match_mode": 0,
+    "replace_history": [],
+    "replace_string": "",
+    "search_and_replace": false
+  },
+  "footprint_viewer": {
+    "auto_zoom": true,
+    "autozoom": true,
+    "cursor": {
+      "always_show_cursor": true,
+      "fullscreen_cursor": false
+    },
+    "display": 0,
+    "footprint_text_fill": true,
+    "graphic_items_fill": true,
+    "grid": {
+      "axes_enabled": true,
+      "fast_grid_1": 0,
+      "fast_grid_2": 0,
+      "last_size": 1,
+      "line_width": 1.0,
+      "min_spacing": 10.0,
+      "show": true,
+      "sizes": [
+        "1000 mil",
+        "500 mil",
+        "250 mil",
+        "200 mil",
+        "100 mil",
+        "50 mil",
+        "25 mil",
+        "20 mil",
+        "10 mil",
+        "5 mil",
+        "2 mil",
+        "1 mil",
+        "5.0 mm",
+        "2.5 mm",
+        "1.0 mm",
+        "0.5 mm",
+        "0.25 mm",
+        "0.2 mm",
+        "0.1 mm",
+        "0.05 mm",
+        "0.025 mm",
+        "0.01 mm"
+      ],
+      "snap": 0,
+      "style": 0,
+      "user_grid_x": "10 mil",
+      "user_grid_y": "10 mil"
+    },
+    "maximized": false,
+    "mru_path": "/home/heewa",
+    "pad_fill": true,
+    "pad_numbers": true,
+    "perspective": "layout2|name=InfoBar;caption=;state=131454;dir=1;layer=1;row=0;pos=0;prop=100000;bestw=20;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=644;besth=40;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=OptToolbar;caption=;state=139596;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=34;besth=410;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=383;besth=141;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=40|dock_size(4,3,0)=34|dock_size(5,0,0)=384|dock_size(3,6,0)=34|",
+    "pos_x": 268,
+    "pos_y": 227,
+    "show_graphic_fill": true,
+    "show_pad_fill": true,
+    "show_pad_number": true,
+    "show_text_fill": true,
+    "size_x": 1280,
+    "size_y": 648,
+    "zoom": 11.82008454769964,
+    "zoom_factors": []
+  },
+  "footprints_pane_width": 382,
+  "graphics": {
+    "canvas_type": 2,
+    "high_contrast_factor": 0.3499999940395355,
+    "highlight_factor": 0.5,
+    "select_factor": 0.75
+  },
+  "lib_tree": {
+    "column_widths": null,
+    "columns": []
+  },
+  "libraries_pane_width": 382,
+  "meta": {
+    "version": 0
+  },
+  "printing": {
+    "background": false,
+    "color_theme": "",
+    "layers": [],
+    "monochrome": true,
+    "scale": 1.0,
+    "title_block": false,
+    "use_theme": false
+  },
+  "system": {
+    "file_history": [],
+    "first_run_shown": false,
+    "last_imperial_units": 0,
+    "last_metric_units": 1,
+    "max_undo_items": 0,
+    "units": 1
+  },
+  "window": {
+    "cursor": {
+      "always_show_cursor": true,
+      "fullscreen_cursor": false
+    },
+    "display": 0,
+    "grid": {
+      "axes_enabled": false,
+      "fast_grid_1": 4,
+      "fast_grid_2": 5,
+      "last_size": 4,
+      "line_width": 1.0,
+      "min_spacing": 10.0,
+      "show": true,
+      "sizes": [
+        "1000 mil",
+        "500 mil",
+        "250 mil",
+        "200 mil",
+        "100 mil",
+        "50 mil",
+        "25 mil",
+        "20 mil",
+        "10 mil",
+        "5 mil",
+        "2 mil",
+        "1 mil",
+        "5.0 mm",
+        "2.5 mm",
+        "1.0 mm",
+        "0.5 mm",
+        "0.25 mm",
+        "0.2 mm",
+        "0.1 mm",
+        "0.05 mm",
+        "0.025 mm",
+        "0.01 mm"
+      ],
+      "snap": 0,
+      "style": 0,
+      "user_grid_x": "10 mil",
+      "user_grid_y": "10 mil"
+    },
+    "maximized": false,
+    "mru_path": "",
+    "perspective": "",
+    "pos_x": 0,
+    "pos_y": 0,
+    "size_x": 0,
+    "size_y": 0,
+    "zoom_factors": []
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "annotation": {
+    "automatic": true,
+    "messages_filter": 15,
+    "method": 0,
+    "options": 0,
+    "recursive": true,
+    "scope": 0,
+    "sort_order": 1
+  },
+  "appearance": {
+    "color_theme": "DarkKiCad",
+    "default_font": "KiCad Font",
+    "edit_component_visible_columns": "0 1 2 3 4 5 6 7",
+    "edit_label_height": -1,
+    "edit_label_visible_columns": "0 1 2 3 4 5 6 7",
+    "edit_label_width": -1,
+    "edit_sheet_height": -1,
+    "edit_sheet_visible_columns": "0 1 2 3 4 5 6 7",
+    "edit_sheet_width": -1,
+    "edit_symbol_height": 597,
+    "edit_symbol_visible_columns": "0 1 2 3 4 5 6 7",
+    "edit_symbol_width": 1116,
+    "erc_severities": 24,
+    "footprint_preview": false,
+    "navigator_stays_open": false,
+    "print_sheet_reference": true,
+    "show_erc_errors": true,
+    "show_erc_exclusions": false,
+    "show_erc_warnings": true,
+    "show_hidden_fields": false,
+    "show_hidden_pins": false,
+    "show_illegal_symbol_lib_dialog": true,
+    "show_page_limits": true,
+    "show_sexpr_file_convert_warning": true,
+    "show_sheet_filename_case_sensitivity_dialog": true
+  },
+  "aui": {
+    "hierarchy_panel_docked_width": 200,
+    "hierarchy_panel_float_height": 200,
+    "hierarchy_panel_float_width": 200,
+    "schematic_hierarchy_float": false,
+    "show_schematic_hierarchy": true
+  },
+  "autoplace_fields": {
+    "align_to_grid": false,
+    "allow_rejustify": true,
+    "enable": true
+  },
+  "bom": {
+    "plugins": [
+      {
+        "command": "/usr/bin/python3 \"/usr/share/kicad-nightly/plugins/bom_csv_grouped_by_value.py\" \"%I\" \"%O.csv\"",
+        "name": "bom_csv_grouped_by_value",
+        "path": "bom_csv_grouped_by_value.py"
+      },
+      {
+        "command": "/usr/bin/python3 \"/usr/share/kicad-nightly/plugins/bom_csv_grouped_by_value_with_fp.py\" \"%I\" \"%O.csv\"",
+        "name": "bom_csv_grouped_by_value_with_fp",
+        "path": "bom_csv_grouped_by_value_with_fp.py"
+      },
+      {
+        "command": "xsltproc -o \"%O\" \"/usr/share/kicad/plugins/netlist_form_cadstar-RINF.xsl\" \"%I\"",
+        "name": "netlist_form_cadstar-RINF",
+        "path": "/usr/share/kicad/plugins/netlist_form_cadstar-RINF.xsl"
+      },
+      {
+        "command": "python \"/usr/share/kicad/plugins/kicad_netlist_reader.py\" \"%I\" \"%O\"",
+        "name": "kicad_netlist_reader",
+        "path": "/usr/share/kicad/plugins/kicad_netlist_reader.py"
+      },
+      {
+        "command": "python \"/usr/share/kicad/plugins/bom_csv_grouped_by_value_with_fp.py\" \"%I\" \"%O\"",
+        "name": "bom_csv_grouped_by_value_with_fp",
+        "path": "/usr/share/kicad/plugins/bom_csv_grouped_by_value_with_fp.py"
+      },
+      {
+        "command": "xsltproc -o \"%O\" \"/usr/share/kicad/plugins/netlist_form_OrcadPcb2.xsl\" \"%I\"",
+        "name": "netlist_form_OrcadPcb2",
+        "path": "/usr/share/kicad/plugins/netlist_form_OrcadPcb2.xsl"
+      },
+      {
+        "command": "python \"/usr/share/kicad/plugins/bom_csv_grouped_by_value.py\" \"%I\" \"%O\"",
+        "name": "bom_csv_grouped_by_value",
+        "path": "/usr/share/kicad/plugins/bom_csv_grouped_by_value.py"
+      },
+      {
+        "command": "xsltproc -o \"%O\" \"/usr/share/kicad/plugins/bom_with_title_block_2_csv.xsl\" \"%I\"",
+        "name": "bom_with_title_block_2_csv",
+        "path": "/usr/share/kicad/plugins/bom_with_title_block_2_csv.xsl"
+      },
+      {
+        "command": "python \"/usr/share/kicad/plugins/bom_sorted_by_ref.py\" \"%I\" \"%O\"",
+        "name": "bom_sorted_by_ref",
+        "path": "/usr/share/kicad/plugins/bom_sorted_by_ref.py"
+      },
+      {
+        "command": "python \"/usr/share/kicad/plugins/bom_csv_sorted_by_ref.py\" \"%I\" \"%O\"",
+        "name": "bom_csv_sorted_by_ref",
+        "path": "/usr/share/kicad/plugins/bom_csv_sorted_by_ref.py"
+      },
+      {
+        "command": "xsltproc -o \"%O\" \"/usr/share/kicad/plugins/bom2csv.xsl\" \"%I\"",
+        "name": "bom2csv",
+        "path": "/usr/share/kicad/plugins/bom2csv.xsl"
+      },
+      {
+        "command": "xsltproc -o \"%O\" \"/usr/share/kicad/plugins/netlist_form_cadstar.xsl\" \"%I\"",
+        "name": "netlist_form_cadstar",
+        "path": "/usr/share/kicad/plugins/netlist_form_cadstar.xsl"
+      },
+      {
+        "command": "python \"/usr/share/kicad/plugins/bom_html_with_advanced_grouping.py\" \"%I\" \"%O\"",
+        "name": "bom_html_with_advanced_grouping",
+        "path": "/usr/share/kicad/plugins/bom_html_with_advanced_grouping.py"
+      },
+      {
+        "command": "python \"/usr/share/kicad/plugins/bom_html_grouped_by_value.py\" \"%I\" \"%O\"",
+        "name": "bom_html_grouped_by_value",
+        "path": "/usr/share/kicad/plugins/bom_html_grouped_by_value.py"
+      },
+      {
+        "command": "xsltproc -o \"%O\" \"/usr/share/kicad/plugins/netlist_form_pads-pcb.asc.xsl\" \"%I\"",
+        "name": "netlist_form_pads-pcb.asc",
+        "path": "/usr/share/kicad/plugins/netlist_form_pads-pcb.asc.xsl"
+      },
+      {
+        "command": "xsltproc -o \"%O\" \"/usr/share/kicad/plugins/bom2grouped_csv.xsl\" \"%I\"",
+        "name": "bom2grouped_csv",
+        "path": "/usr/share/kicad/plugins/bom2grouped_csv.xsl"
+      }
+    ],
+    "selected_plugin": "bom_html_with_advanced_grouping"
+  },
+  "color_picker": {
+    "default_tab": 0
+  },
+  "cross_probing": {
+    "auto_highlight": true,
+    "center_on_items": true,
+    "on_selection": true,
+    "zoom_to_fit": true
+  },
+  "drawing": {
+    "auto_start_wires": true,
+    "default_bus_thickness": 12,
+    "default_junction_size": 40,
+    "default_line_thickness": 6,
+    "default_repeat_offset_x": 0,
+    "default_repeat_offset_y": 100,
+    "default_sheet_background_color": "rgba(0, 0, 0, 0.000)",
+    "default_sheet_border_color": "rgba(0, 0, 0, 0.000)",
+    "default_text_size": 50,
+    "default_wire_thickness": 6,
+    "field_names": "(templatefields)",
+    "hv_lines_only": true,
+    "junction_size_choice": 3,
+    "junction_size_mult": 4,
+    "junction_size_mult_list": [
+      0.0,
+      1.7,
+      4.0,
+      6.0,
+      9.0,
+      12.0
+    ],
+    "line_mode": 1,
+    "pin_symbol_size": 25,
+    "repeat_label_increment": 1,
+    "text_offset_ratio": 0.08
+  },
+  "edit_sch_component": {
+    "visible_columns": "0 1 2 3 4 5 6 7"
+  },
+  "field_editor": {
+    "column_widths": {},
+    "fields_group_by": {
+      "Reference": true
+    },
+    "fields_show": {
+      "Reference": true
+    }
+  },
+  "find_replace": {
+    "find_history": [],
+    "find_string": "",
+    "match_case": false,
+    "match_mode": 0,
+    "replace_history": [],
+    "replace_references": false,
+    "replace_string": "",
+    "search_all_fields": false,
+    "search_all_pins": false,
+    "search_and_replace": false,
+    "search_current_sheet_only": false
+  },
+  "graphics": {
+    "canvas_type": 1,
+    "high_contrast_factor": 0.3499999940395355,
+    "highlight_factor": 0.5,
+    "select_factor": 0.75
+  },
+  "input": {
+    "drag_is_move": true,
+    "esc_clears_net_highlight": true
+  },
+  "lib_tree": {
+    "column_widths": null,
+    "columns": []
+  },
+  "lib_view": {
+    "cmp_list_width": 260,
+    "grid": {
+      "last_size": 5,
+      "show": true
+    },
+    "lib_list_width": 211,
+    "show_pin_electrical_type": true,
+    "window": {
+      "display": 0,
+      "maximized": true,
+      "mru_path": "/home/heewa",
+      "perspective": "layout2|name=MainToolbar;caption=;state=139644;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=588;besth=38;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Libraries;caption=;state=1020;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=211;besth=-1;minw=80;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=Symbols;caption=;state=1020;dir=4;layer=1;row=0;pos=0;prop=100000;bestw=260;besth=-1;minw=80;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=387;besth=144;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=38|dock_size(3,6,0)=34|dock_size(4,3,0)=213|dock_size(4,1,0)=262|dock_size(5,0,0)=389|",
+      "pos_x": 0,
+      "pos_y": 27,
+      "size_x": 1920,
+      "size_y": 1053
+    }
+  },
+  "meta": {
+    "version": 3
+  },
+  "netlist": {
+    "custom_command_paths": [],
+    "custom_command_titles": [],
+    "plugins": []
+  },
+  "page_settings": {
+    "export_comment1": false,
+    "export_comment2": false,
+    "export_comment3": false,
+    "export_comment4": false,
+    "export_comment5": false,
+    "export_comment6": false,
+    "export_comment7": false,
+    "export_comment8": false,
+    "export_comment9": false,
+    "export_company": false,
+    "export_date": false,
+    "export_paper": false,
+    "export_revision": false,
+    "export_title": false
+  },
+  "plot": {
+    "background_color": false,
+    "color": true,
+    "color_theme": "user",
+    "format": 0,
+    "frame_reference": true,
+    "hpgl_origin": 0,
+    "hpgl_paper_size": 0,
+    "hpgl_pen_size": 0.5,
+    "other_open_file_after_plot": false
+  },
+  "printing": {
+    "background": false,
+    "color_theme": "",
+    "layers": [],
+    "monochrome": true,
+    "scale": 1.0,
+    "title_block": false,
+    "use_theme": false
+  },
+  "selection": {
+    "draw_selected_children": true,
+    "fill_shapes": false,
+    "highlight_thickness": 2,
+    "select_pin_selects_symbol": true,
+    "text_as_box": false,
+    "thickness": 3
+  },
+  "simulator": {
+    "cursors_panel_height": 211,
+    "mru_path": "/home/heewa",
+    "plot_panel_height": 470,
+    "plot_panel_width": 757,
+    "signal_panel_height": 144,
+    "white_background": false,
+    "window": {
+      "display": 0,
+      "maximized": false,
+      "perspective": "layout2|",
+      "pos_x": 298,
+      "pos_y": 154,
+      "size_x": 1077,
+      "size_y": 754
+    }
+  },
+  "symbol_chooser": {
+    "height": 771,
+    "keep_symbol": false,
+    "place_all_units": true,
+    "sash_pos_h": 948,
+    "sash_pos_v": 549,
+    "width": 1411
+  },
+  "system": {
+    "file_history": [
+      "/var/home/heewa/src/Hardware/keyboards/kaj34/pcb/kaj34-half.kicad_sch"
+    ],
+    "first_run_shown": false,
+    "last_imperial_units": 0,
+    "last_metric_units": 1,
+    "last_symbol_lib_dir": "",
+    "max_undo_items": 0,
+    "never_show_rescue_dialog": false,
+    "units": 1
+  },
+  "window": {
+    "cursor": {
+      "always_show_cursor": true,
+      "fullscreen_cursor": false
+    },
+    "display": 0,
+    "grid": {
+      "axes_enabled": false,
+      "fast_grid_1": 1,
+      "fast_grid_2": 2,
+      "last_size": 1,
+      "line_width": 1.0,
+      "min_spacing": 10.0,
+      "show": true,
+      "snap": 0,
+      "style": 0,
+      "user_grid_x": "10 mil",
+      "user_grid_y": "10 mil"
+    },
+    "maximized": true,
+    "mru_path": "",
+    "perspective": "layout2|name=InfoBar;caption=;state=131454;dir=1;layer=1;row=0;pos=0;prop=100000;bestw=20;besth=30;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MainToolbar;caption=;state=139632;dir=1;layer=6;row=0;pos=0;prop=100000;bestw=1204;besth=34;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=MsgPanel;caption=;state=131452;dir=3;layer=6;row=0;pos=0;prop=100000;bestw=400;besth=38;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=SchematicHierarchy;caption=Schematic Hierarchy;state=2099148;dir=4;layer=3;row=0;pos=0;prop=100000;bestw=200;besth=200;minw=120;minh=60;maxw=-1;maxh=-1;floatx=296;floaty=157;floatw=200;floath=200|name=OptToolbar;caption=;state=139596;dir=4;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=396;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=ToolsToolbar;caption=;state=139596;dir=2;layer=2;row=0;pos=0;prop=100000;bestw=34;besth=762;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|name=DrawFrame;caption=;state=1020;dir=5;layer=0;row=0;pos=0;prop=100000;bestw=400;besth=151;minw=-1;minh=-1;maxw=-1;maxh=-1;floatx=-1;floaty=-1;floatw=-1;floath=-1|dock_size(1,6,0)=34|dock_size(3,6,0)=38|dock_size(4,2,0)=34|dock_size(2,2,0)=34|dock_size(5,0,0)=384|dock_size(4,3,0)=202|",
+    "pos_x": 0,
+    "pos_y": 32,
+    "size_x": 1280,
+    "size_y": 720,
+    "zoom_factors": [
+      0.05,
+      0.07,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.5,
+      0.7,
+      1.0,
+      1.5,
+      2.0,
+      3.0,
+      4.5,
+      6.5,
+      10.0,
+      15.0,
+      20.0,
+      30.0,
+      45.0,
+      65.0,
+      100.0
+    ]
+  }
+}
